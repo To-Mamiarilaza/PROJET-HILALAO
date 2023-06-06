@@ -12,7 +12,6 @@
 	<div class="container box">
 		<div class="row">
 			<h1 class="box__title">Log <span class="box__title--span">in</span></h1>
-			<h5><i>Client login</i></h5>
 			{{-- 		{{ route('name') }}		 --}}
 			<form action="" method="POST" class="col-md-12 form-content">
 				@csrf
