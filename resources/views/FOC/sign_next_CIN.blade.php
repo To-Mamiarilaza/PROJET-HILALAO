@@ -30,12 +30,12 @@
                         {{-- <div class="input_pictures"> --}}
                             <div class="row">
                                 <div class="col-md-6">
-                                        <h5 class="card-title">Uploader une image</h5>
+                                        <h5 class="card-title">CIN recto</h5>
                                         <input type="file" id="image-upload" style="display: none;">
                                         <label for="image-upload" class="btn btn-primary btn-block">Sélectionner une image</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <h5 class="card-title">Uploader une image</h5>
+                                    <h5 class="card-title">CIN verso</h5>
                                     <input type="file" id="image-upload" style="display: none;">
                                     <label for="image-upload" class="btn btn-primary btn-block">Sélectionner une image</label>
                                 </div>
