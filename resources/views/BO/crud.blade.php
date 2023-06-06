@@ -9,18 +9,9 @@
     <title>Document</title>
 </head>
 <body>
-    <header>
-        <h1>Mon site</h1>
-    </header>
+    @include('BO/header') 
 
-    <nav>
-        <ul>
-            <li><a href="#">Statistique</a></li>
-            <li><a href="#">Abonnement</a></li>
-            <li><a href="#">Publicitaire</a></li>
-            <li><a href="#">Caracteristique</a></li>
-        </ul>
-    </nav>
+    @include('BO/nav')
 
     <form action="" method="post">
         <h2>{{$ref}}</h2>
