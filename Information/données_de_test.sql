@@ -103,3 +103,19 @@ INSERT INTO direct_reservation VALUES
 (DEFAULT, 'Feno', '0331854735', '2023-06-12', '08:00:00', 1, 1),
 (DEFAULT, 'Zoky andry', '0328254518', '2023-06-10', '18:30:00', 1, 3);
 
+insert into account_admin(first_name, last_name, mail, phone_number, pwd) 
+values
+('John', 'Doe', 'john@gmail.com', '+261 34 50 200 40', 'password123'),
+('Jane', 'Smith', 'jane@gmail.com', '+261 33 80 741 51', 'password456'),
+('Bob', 'Johnson', 'bob@gmail.com', '+261 32 87 540 52', 'password789');
+
+insert into subscription_state(subscription_state)
+values
+('Payer');
+
+insert into subscription(id_field, subscription_date, start_date, duration, id_subscription_state)
+values
+(1, DEFAULT, 06-06-2023, 1, 1),
+(2, DEFAULT, 06-06-2023, 2, 1),
+(3, DEFAULT, 06-06-2023, 1, 1),
+(4, DEFAULT, 06-06-2023, 1, 1);
