@@ -12,9 +12,8 @@
 	<div class="container box">
 		<div class="row">
 			<h1 class="box__title">Log <span class="box__title--span">in</span></h1>
-			<h5><i>Client login</i></h5>
 			{{-- 		{{ route('name') }}		 --}}
-			<form action="{{ route('SignIn') }}" method="POST" class="col-md-12 form-content">
+			<form action="" method="POST" class="col-md-12 form-content">
 				@csrf
 				<div class="row">
 					<div class="col-md-3">
@@ -40,7 +39,7 @@
 			</form>
 				
 		</div>
-		<p>Don't have an account? <a href="{{-- {{ route('SignInAccount') }} --}}">Sign up</a></p>
+		<p>Don't have an account? <a href="{{ route('SignIn') }}">Sign up</a></p>
 	</div>
 </body>
 

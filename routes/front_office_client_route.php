@@ -15,11 +15,11 @@ Route::get('/', function () {
     return view('FOC/login');
 });
 
+Route::get('/SignIn', [LoginController::class, 'signin'])
+->name('SignIn');
 
-Route::get('/setting', function () {
-    return view('FOC/deconnection');
-})->name('setting');
+Route::post('/CIN-Client', [LoginController::class, 'nextSignin'])
+->name('signinnext');
 
- 
-Route::GET('/deconnect', [CustomerController::class,
-    'deconnect'])->name('deconnect');
+Route::post('/Login', [LoginController::class, 'login'])
+->name('login');
