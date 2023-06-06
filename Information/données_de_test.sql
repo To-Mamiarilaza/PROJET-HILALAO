@@ -113,9 +113,9 @@ insert into subscription_state(subscription_state)
 values
 ('Payer');
 
-insert into subscription(id_field, subscription_date, start_date, duration, id_subscription_state)
+insert into subscription(id_field, start_date, duration, id_subscription_state)
 values
-(1, DEFAULT, 06-06-2023, 1, 1),
-(2, DEFAULT, 06-06-2023, 2, 1),
-(3, DEFAULT, 06-06-2023, 1, 1),
-(4, DEFAULT, 06-06-2023, 1, 1);
+(1, '06-06-2023', 1, 1),
+(2, '06-06-2023', 2, 1),
+(3, '06-06-2023', 1, 1),
+(4, '06-06-2023', 1, 1);
