@@ -2,22 +2,26 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FOC\LoginController;
 use App\Http\Controllers\FOC\CustomerController;
-use App\Http\Controllers\FOC\InscriptionController;
+
+Route::POST('/SignIn', [LoginController::class,
+    'login'])->name('SignIn');
+
+
+Route::GET('/SignInAccount', [LoginController::class,
+'signup'])->name('SignInAccount');
+
 
 Route::get('/', function () {
-	return view('FOC/login');
+    return view('FOC/login');
 });
 
-/// pour la page Sign In
-Route::get('/SignIn', [LoginController::class, 'signin'])
-->name('SignIn');
+Route::get('/signUp', [LoginController::class, 'signUp'])
+->name('signUp');
 
-/// pour la page suivante de Sign In : insert CIN
-Route::post('/CIN-Client', [LoginController::class, 'nextSignin'])
-->name('signinnext');
+Route::post('/signUpCin', [LoginController::class, 'signUpCin'])
+->name('signUpCin');
 
-/// pour la page Login
-Route::get('/Login', [LoginController::class, 'login'])
+Route::POST('/login', [LoginController::class, 'login'])
 ->name('login');
 
 /// pour la page Profil
