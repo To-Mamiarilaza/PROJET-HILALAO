@@ -241,3 +241,17 @@ CREATE  TABLE "public".dispo_and_price (
 	CONSTRAINT fk_dispo_and_price_day FOREIGN KEY ( id_day ) REFERENCES "public"."day"( id_day )   ,
 	CONSTRAINT fk_dispo_and_price_field FOREIGN KEY ( id_field ) REFERENCES "public".field( id_field )   
  );
+
+--FO Sprint1 (Liste Terrain)
+
+--Vue pour la liste de tous les terrains,
+create view ListField as 
+select 
+	field.id_field,
+	picture.picture,
+	field.name,
+	field.address,
+	field.description
+from field 
+	join picture on picture.id_field = field.id_field
+where picture.id_type_picture=1;
