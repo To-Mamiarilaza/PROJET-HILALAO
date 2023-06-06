@@ -2,6 +2,8 @@
 
 namespace App\Models\FOC\GestionClient;
 use Illuminate\Support\Facades\DB;
+use Exception;
+use App\Exceptions\ClientExceptionHandler;
 
 class Client
 {
@@ -193,18 +195,21 @@ class Client
 
     public static function login($pwd, $mail) 
     {
-        $req = "SELECT * FROM client WHERE pwd = '%s' AND mail = '%s'";
-        $req = sprintf($req,$pwd,$mail);
-        $results = DB::select($req);
-        $i = 0;
-        if($results) {
-            foreach ($results as $row) {
-                return new Client($row->id_client, $row->first_name, $row->last_name, $row->phone_number, $row->mail, $row->address, $row->birth_date, $row->pwd, $row->id_status, $row->sign_up_date, $row->id_cin);
-            }    
+        try {
+            $req = "SELECT * FROM client WHERE pwd = '%s' AND mail = '%s'";
+            $req = sprintf($req,$pwd,$mail);
+            $results = DB::select($req);
+            $i = 0;
+            if($results) {
+                foreach ($results as $row) {
+                    return new Client($row->id_client, $row->first_name, $row->last_name, $row->phone_number, $row->mail, $row->address, $row->birth_date, $row->pwd, $row->id_status, $row->sign_up_date, $row->id_cin);
+                }
+            }
+            throw new Exception("Veuillez ressayer");
+                
+        } catch(Exception $e) {
+
         }
-        
-        return null;
-        //throw Exception("Customer not found");
     }
     
 }
