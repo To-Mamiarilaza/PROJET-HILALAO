@@ -22,9 +22,14 @@ class LoginController extends Controller
         echo "erreur";
     }
 
-    public function signup(Request $request)
-    {
-        return view('FOC/sign');
-    }
+	public function nextSignin(Request $request)
+	{
+		return view('FOC/sign_next_CIN');
+	}
+
+	public function profilClient(Request $request)
+	{
+		return view('FOC/profilClient');
+	}
 }
 ?>
