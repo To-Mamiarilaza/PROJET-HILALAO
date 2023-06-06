@@ -21,5 +21,5 @@ Route::get('/SignIn', [LoginController::class, 'signin'])
 Route::post('/CIN-Client', [LoginController::class, 'nextSignin'])
 ->name('signinnext');
 
-Route::post('/Login', [LoginController::class, 'login'])
+Route::get('/Login', [LoginController::class, 'login'])
 ->name('login');
