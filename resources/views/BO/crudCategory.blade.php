@@ -22,15 +22,6 @@
                 <th>Prix</th>
                 <th>Actions</th>
             </tr>
-            <tr>
-
-                <td>Categorie A</td>
-                <td>1000 Ar</td>
-                <td>
-                    <input type="button" value="Modifier">
-                    <input type="button" value="Supprimer">
-                </td>
-            </tr>
             @foreach ($all as $crud)
             <tr>
                 <td>{{ $crud->category }}</td>

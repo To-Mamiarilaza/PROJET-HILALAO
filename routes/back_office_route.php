@@ -31,7 +31,7 @@ Route::get('/sign', function () {
 Route::get('/Sign', [LoginController::class,
     'saveAll'])->name('Sign');
 
-Route::post('/Crud', [CrudController::class,
-'all'])->name('crud');
+Route::get('/all/{variable}', [CrudController::class, 'all'])->name('crud');
+
 
 ?>
