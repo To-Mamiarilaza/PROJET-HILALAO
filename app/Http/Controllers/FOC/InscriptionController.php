@@ -1,7 +1,7 @@
 <?php
     namespace App\Http\Controllers\FOC;
 
-    use App\Models\FOC\GestionClient\Customer;
+    use App\Models\FOC\GestionClient\Client;
     use Illuminate\Http\Request;
     use App\Http\Controllers\Controller;
 
@@ -34,10 +34,11 @@
 
             echo $profile_picture;
             
-            $name = $request->input('name');
+            $firstname = $request->input('firstname');
+            $lastname = $request->input('lastname');
+            $phone_number = $request->input('phoneNumber');
             $email = $request->input('email');
             $adress = $request->input('address');
-            $phone_numbers = $request->input('phoneNumber');
             $password = $request->input('password');
             $confirmed_password = $request->input('confirmed_password');
             $card_number = $request->input('idCard');

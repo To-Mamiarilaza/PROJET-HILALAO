@@ -19,7 +19,7 @@
 						<label for="email" class="control-label"><b>First name</b></label>
 					</div>
 					<div class="col-md-9">
-						<input class="form-content__input form-content__input--log" type="text" aria-label=".form-control-lg" name="name">
+						<input class="form-content__input form-content__input--log" type="text" aria-label=".form-control-lg" name="firstname">
 					</div>
 				</div>
 				<div class="row">
@@ -67,7 +67,7 @@
 						<label for="password" class="control-label"><b>Confirm your password</b></label>
 					</div>
 					<div class="col-md-9">
-						<input class="form-content__input form-content__input--log" type="password" aria-label=".form-control-lg" id="password" name="password">
+						<input class="form-content__input form-content__input--log" type="password" aria-label=".form-control-lg" id="password" name="confirmed_password">
 					</div>
 				</div>
 				{{-- <div class="form-content__checkbox">

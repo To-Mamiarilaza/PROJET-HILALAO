@@ -7,10 +7,10 @@ Route::get('/', function () {
 	return view('FOC/login');
 });
 
-Route::get('/SignIn', [LoginController::class, 'signin'])
+Route::get('/SignIn', [LoginController::class, 'signup'])
 ->name('SignIn');
 
-Route::post('/CIN-Client', [LoginController::class, 'nextSignin'])
+Route::post('/CIN-Client', [LoginController::class, 'nextSignup'])
 ->name('signinnext');
 
 Route::get('/Login', [LoginController::class, 'login'])
