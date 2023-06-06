@@ -4,25 +4,15 @@ use App\Http\Controllers\FOC\LoginController;
 use App\Http\Controllers\FOC\CustomerController;
 use App\Http\Controllers\FOC\InscriptionController;
 
-Route::POST('/SignIn', [LoginController::class,
-    'login'])->name('SignIn');
-
-
-Route::GET('/SignInAccount', [LoginController::class,
-'signup'])->name('SignInAccount');
-
-Route::post('/inscription', [InscriptionController::class,
-    'insertCustomer'])->name('insertCustomer');
-
 Route::get('/', function () {
-    return view('FOC/login');
+	return view('FOC/login');
 });
 
+Route::get('/SignIn', [LoginController::class, 'signin'])
+->name('SignIn');
 
-Route::get('/setting', function () {
-    return view('FOC/deconnection');
-})->name('setting');
+Route::post('/CIN-Client', [LoginController::class, 'nextSignin'])
+->name('signinnext');
 
- 
-Route::GET('/deconnect', [CustomerController::class,
-    'deconnect'])->name('deconnect');
+Route::get('/Login', [LoginController::class, 'login'])
+->name('login');
