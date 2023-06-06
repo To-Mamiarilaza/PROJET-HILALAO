@@ -199,7 +199,7 @@ class Client
         $i = 0;
         if($results) {
             foreach ($results as $row) {
-                return new Client($row->id_client, $row->first_name, $row->last_name, $row->phone_number, $row->mail, $row->address, $row->birth_date, $row->pwd, $row->status, $row->sign_up_date, $row->cin);
+                return new Client($row->id_client, $row->first_name, $row->last_name, $row->phone_number, $row->mail, $row->address, $row->birth_date, $row->pwd, $row->id_status, $row->sign_up_date, $row->id_cin);
             }    
         }
         

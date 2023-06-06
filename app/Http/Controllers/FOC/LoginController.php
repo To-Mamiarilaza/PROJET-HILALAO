@@ -13,18 +13,22 @@ class LoginController extends Controller
         $email = $request->input('email');
         $password = $request->input('password');
         $client = Client::login($password, $email);
-
         if($client != null) {
-            session()->put('customerConnected', $client);
-            $value = session()->get('customerConnected');
-            return view('FOC/welcome')->with('customer', $value);
+            session()->put('clientConnected', $client);
+            $value = session()->get('clientConnected');
+            return view('FOC/welcome')->with('client', $value);
         }      
         echo "erreur";
     }
 
-    public function signup(Request $request)
+    public function signUp(Request $request)
     {
-        return view('FOC/sign');
+        return view('FOC/signUp');
+    }
+
+    public function signUpCin(Request $request)
+    {
+        return view('FOC/signUpCin');
     }
 }
 ?>

@@ -12,7 +12,7 @@
 	<div class="container box">
 		<div class="row sign_box">
 			<h1 class="box__title">Sign <span class="box__title--span">up</span></h1>
-			<form enctype="multipart/form-data" action="{{ route('signinnext') }}" method="POST" class="col-md-12 form-content">
+			<form enctype="multipart/form-data" action="{{ route('signUpCin') }}" method="POST" class="col-md-12 form-content">
 				@csrf
 				<div class="row">
 					<div class="col-md-3">
