@@ -11,9 +11,6 @@
 <body>
 	<div class="container box">
 		<div class="row">
-			@isset($error)
-    			<p style="color: red">{{ $error }}</p>
-			@endisset
 			<h1 class="box__title">Log <span class="box__title--span">in</span></h1>
 			<form action="{{ route('login') }}" method="POST" class="col-md-12 form-content">
 				@csrf
@@ -36,6 +33,11 @@
 							<label for="form-content__label--showing-password">Show Password</label>
 						</div>
 					</div>
+					@isset($error)
+					<div class="error">
+						<p style="color: red">{{ $error }}</p>
+					</div>
+					@endisset
 				</div>
 				<button type="submit" class="form-content__input--submit">LOG IN</button>
 			</form>
