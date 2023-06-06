@@ -115,7 +115,7 @@ values
 
 insert into subscription(id_field, subscription_date, start_date, duration, id_subscription_state)
 values
-(1, DEFAULT, 06-06-2023, 1, 1),
-(2, DEFAULT, 06-06-2023, 2, 1),
-(3, DEFAULT, 06-06-2023, 1, 1),
-(4, DEFAULT, 06-06-2023, 1, 1);
+(1, DEFAULT, '06-06-2023', 1, 1),
+(2, DEFAULT, '06-06-2023', 2, 1),
+(3, DEFAULT, '06-06-2023', 1, 1),
+(4, DEFAULT, '06-06-2023', 1, 1);
