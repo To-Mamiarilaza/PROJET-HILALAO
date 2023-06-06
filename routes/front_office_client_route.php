@@ -8,7 +8,11 @@ Route::get('/', function () {
 	return view('FOC/login');
 });
 
-Route::post('/SignIn', [LoginController::class, 'signin'])
+Route::get('/SignIn', [LoginController::class, 'signin'])
 ->name('SignIn');
 
+Route::post('/CIN-Client', [LoginController::class, 'nextSignin'])
+->name('signinnext');
 
+Route::post('/Login', [LoginController::class, 'login'])
+->name('login');
