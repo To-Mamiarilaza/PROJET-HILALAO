@@ -12,30 +12,33 @@ use Illuminate\Http\Request;
 class CrudController extends Controller
 {
     private function getSelected($selected){
-        if($selected == "category"){
+        if($selected == 'category'){
             $model = new Category();
-            return $model->getAllCategory();
+            $all = $model->getAllCategory();
+            return view('BO.crudCategory', ['all' => $all,'ref' => $selected]);
         }
         if($selected == "subscription_state"){
             $model = new SubscriptionState();
-            return $model->getAllSubscriptionState();
+            $all = $model->getAllSubscriptionState();
+            return view('BO.crudSubscriptionState', ['all' => $all,'ref' => $selected]);
         }else{
             $model = new FieldType();
-            return $model->getAllFieldType();
+            $all = $model->getAllFieldType();
+            return view('BO.crudFieldType', ['all' => $all,'ref' => $selected]);
         }
         return null;
     }
 
-    public function all(Request $request)
+    public function all($variable)
     {
         try {
-            $selected = $request->input('crud');
-            $all = $this->getSelected($selected);
-            return view('BO.crud', ['all' => $all,'ref' => $selected]);
+            $result = $this->getSelected($variable);
+            return $result; // Renvoyer la valeur retournée par la méthode getSelected()
         } catch (\Throwable $th) {
             dd($th->getMessage());
         }
     }
+
     
     // public function saveAll(Request $request)
     // {

@@ -5,18 +5,13 @@
     </head>
     <body>
     <h1>Compte Back Office</h1>
-
+    <ul>
+        <li><a href="{{ route('crud', ['variable' => 'category']) }}"> Category</a> </li>
+        <li><a href="{{ route('crud', ['variable' => 'subscription_state']) }}"> Subscription_state</a> </li>
+        <li><a href="{{ route('crud', ['variable' => 'field_type']) }}"> Field Type</a> </li>
+    </ul>
         <ul>
             <li>{{ $account->first_name }} {{ $account->last_name }}</li>
         </ul>
-    
-        <form action="{{ route('crud') }}" method="POST">
-            @csrf
-            <select name="crud">
-                <option value="category">Category</option>
-                <option value="field_type">Field Type</option>
-                <option value="subscription_state">Subscription State</option>
-            </select>
-            <button type="submit">Soumettre</button></form>
     </body>
 </html>
