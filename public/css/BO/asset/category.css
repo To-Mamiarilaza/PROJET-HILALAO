@@ -52,4 +52,19 @@ input[type=text]:focus,
 input[type=number]:focus {
   outline: none;
   box-shadow: 0 0 5px #ccc;
+}
+
+header {
+  border: solid 1px;
+}
+
+nav {
+  width: 20%;
+  float: left;
+  text-align: center;
+}
+
+form {
+  float: right;
+  width: 80%;
 }/*# sourceMappingURL=category.css.map */

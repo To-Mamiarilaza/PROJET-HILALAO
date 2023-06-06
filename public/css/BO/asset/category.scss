@@ -39,7 +39,7 @@ table {
 
 input[type="button"], 
 input[type="submit"] 
- {
+{
     background-color: $button-primary-color;
     color: #ffffff;
     border: none;
@@ -59,7 +59,7 @@ $input-padding: 8px 12px;
 $input-border-radius: 4px;
 input[type="text"],
 input[type="number"]
- {
+{
     border: 1px solid $input-border-color;
     background-color: $input-background-color;
     color: $input-color;
@@ -70,5 +70,18 @@ input[type="number"]
       outline: none;
       box-shadow: 0 0 5px $input-border-color;
     }
-  }
+}
   
+header{
+    border: solid 1px;
+}
+nav{
+    width: 20%;
+    float: left;
+    text-align: center;
+}
+
+form{
+    float: right;
+    width: 80%;
+}
