@@ -12,8 +12,7 @@
     <div class="container box">
         <div class="row sign_box">
             <h1 class="box__title">Next  <span class="box__title--span">Sign up</span></h1>
-            <h5><i>Client account</i></h5>
-            <form enctype="multipart/form-data" action="" method="post" class="col-md-12 form-content">
+            <form enctype="multipart/form-data" action="{{ route('profilClient') }}" method="post" class="col-md-12 form-content">
                 @csrf
                 <div class="row">
                     <div class="col-md-3">
