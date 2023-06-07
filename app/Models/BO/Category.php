@@ -54,11 +54,38 @@ class Category
         return $res;
     }
 
+    public function getCategoryById($id)
+    {
+        $req = sprintf("SELECT * FROM category WHERE id_category = %s", $id);
+        $category = DB::select($req);
+        
+        if (count($category) > 0) {
+            $result = $category[0];
+            $temp = new Category();
+            $temp->setId_category($result->id_category);
+            $temp->setCategory($result->category);
+            $temp->setSubscribing_price($result->subscribing_price);
+            return $temp;
+        }
+        
+        return null;
+    }
+
+
     public function save(){
         $req = "INSERT INTO category(category,subscribing_price) VALUES ('%s',%s)";
         $category = $this->category;
         $subscribing_price = $this->subscribing_price;
         $req = sprintf($req,$category,$subscribing_price);
         DB::insert($req);
+    }
+
+    public function update(){
+        $req = "update category set category='%s' , subscribing_price ='%s'  where id_category = %s ";
+        $id_category = $this->id_category;
+        $category = $this->category;
+        $subscribing_price = $this->subscribing_price;
+        $req = sprintf($req,$category,$subscribing_price,$id_category);
+        DB::update($req);
     }
 }

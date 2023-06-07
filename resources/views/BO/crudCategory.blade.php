@@ -1,19 +1,10 @@
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ asset('css/BO/asset/category.css') }}">
-    <title>Document</title>
-</head>
-<body>
     @include('BO/header') 
 
     @include('BO/nav')
 
-    <form action="" method="post">
+    <form action="{{ route('insert')}}" method="post">
+        @csrf
         <h2>{{$ref}}</h2>
         <h3>Listes des categories</h3>
         <table border="1">
@@ -27,12 +18,13 @@
                 <td>{{ $crud->category }}</td>
                 <td>{{ $crud->subscribing_price }}</td>
                 <td>
-                    <input type="button" value="Modifier">
-                    <input type="button" value="Supprimer">
+                    <a href= "{{ route('update' , ['variable' => $ref,'id' => $crud->id_category])}}"><input type="button" value="Modifier"></a>
+                    <a href= "{{ route('delete' , ['variable' => $ref,'id' => $crud->id_category])}}"><input type="button" value="Supprimer"></a>
                 </td>
             </tr>
             @endforeach
         </table>
+        <input type="hidden" name="variable" value="{{ $ref }}">
         <p>Ajouter une catégorie : <input type="text" name="category">
         Ajouter le prix de l'abonnement : <input type="number" name="subscribing_price"> Ar</p>
         <input type="submit" value="Ajouter">

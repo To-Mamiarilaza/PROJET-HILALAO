@@ -1,28 +1,9 @@
+@include('BO/header') 
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ asset('css/BO/asset/category.css') }}">
-    <title>Document</title>
-</head>
-<body>
-    <header>
-        <h1>Mon site</h1>
-    </header>
+@include('BO/nav')
 
-    <nav>
-        <ul>
-            <li><a href="#">Statistique</a></li>
-            <li><a href="#">Abonnement</a></li>
-            <li><a href="#">Publicitaire</a></li>
-            <li><a href="#">Caracteristique</a></li>
-        </ul>
-    </nav>
-
-    <form action="" method="post">
+    <form action="{{ route('insert')}}" method="post">
+        @csrf
         <h2>{{$ref}}</h2>
         <h3>Listes des types de terrain existant</h3>
         <table border="1">
@@ -33,13 +14,14 @@
             <tr>
                 <td>{{ $crud->field_type }}</td>
                 <td>
-                    <input type="button" value="Modifier">
-                    <input type="button" value="Supprimer">
+                    <a href= "{{ route('update' , ['variable' => $ref,'id' => $crud->id_field_type])}}"><input type="button" value="Modifier"></a>
+                    <a href= "{{ route('delete' , ['variable' => $ref,'id' => $crud->id_field_type])}}"><input type="button" value="Supprimer"></a>
                 </td>
             </tr>
             @endforeach
         </table>
-        <p>Ajouter un type de terrain : <input type="text" name="subscription_state">
+        <input type="hidden" name="variable" value="{{ $ref }}">
+        <p>Ajouter un type de terrain : <input type="text" name="field_type">
         <input type="submit" value="Ajouter">
     </form>
 </body>

@@ -42,11 +42,35 @@ class SubscriptionState
         }
         return $res;
     }
+    
+    public function getSubscriptionStateById($id)
+    {
+        $req = sprintf("SELECT * FROM SubscriptionState WHERE id_subscription_state = %s", $id);
+        $res = DB::select($req);
+        
+        if (count($res) > 0) {
+            $result = $res[0];
+            $temp = new SubscriptionState();
+            $temp->setId_subscription_state($result->id_subscription_state);
+            $temp->setSubscription_state($result->subscription_state);
+            return $temp;
+        }
+        
+        return null;
+    }
 
     public function save(){
         $req = "INSERT INTO subscription_state(subscription_state) VALUES ('%s')";
         $subscription_state = $this->subscription_state;
         $req = sprintf($req,$subscription_state);
         DB::insert($req);
+    }
+
+    public function update(){
+        $req = "update subscription_state set subscription_state='%s' where id_subscription_state = %s";
+        $id_subscription_state = $this->id_subscription_state;
+        $subscription_state = $this->subscription_state;
+        $req = sprintf($req,$subscription_state,$id_subscription_state);
+        DB::update($req);
     }
 }

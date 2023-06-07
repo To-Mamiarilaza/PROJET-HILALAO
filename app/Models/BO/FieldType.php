@@ -43,10 +43,35 @@ class FieldType
         return $res;
     }
 
+    public function getFieldTypeById($id)
+    {
+        $req = sprintf("SELECT * FROM FieldType WHERE id_field_type = %s", $id);
+        $res = DB::select($req);
+        
+        if (count($res) > 0) {
+            $result = $res[0];
+            $temp = new FieldType();
+            $temp->setId_field_type($result->id_field_type);
+            $temp->setField_type($result->field_type);
+            return $temp;
+        }
+        
+        return null;
+    }
+
+
     public function save(){
-        $req = "INSERT INTO category(field_type) VALUES ('%s')";
+        $req = "INSERT INTO field_type(field_type) VALUES ('%s')";
         $field_type = $this->field_type;
         $req = sprintf($req,$field_type);
         DB::insert($req);
+    }
+
+    public function update(){
+        $req = "update field_type set field_type='%s' where id_field_type = %s";
+        $id_field_type = $this->id_field_type;
+        $field_type = $this->field_type;
+        $req = sprintf($req,$field_type,$id_field_type);
+        DB::update($req);
     }
 }

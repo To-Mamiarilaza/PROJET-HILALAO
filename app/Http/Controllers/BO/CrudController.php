@@ -29,6 +29,49 @@ class CrudController extends Controller
         return null;
     }
 
+    public function update(Request $request){
+        try {
+            $selected = $request->input('variable');
+            if($selected == 'category'){
+                $model = new Category();
+                $model->setId_category($request->input('id_category'));
+                $model->setCategory($request->input('category'));
+                $model->setSubscribing_price($request->input('subscribing_price'));
+                $model->update();   
+            }
+            if($selected == "subscription_state"){
+                $model = new SubscriptionState();
+                $model->setId_subscription_state($request->input('id_subscription_state'));
+                $model->setSubscription_state($request->input('subscription_state'));
+                $model->update(); 
+            }else{
+                $model = new FieldType();
+                $model->setId_field_type($request->input('id_field_type'));
+                $model->setField_type($request->input('field_type'));
+                $model->update();
+            }
+            return $this->all($selected);
+        } catch (\Throwable $th) {
+            dd($th->getMessage());
+        }
+    }
+
+    public function getViewUpdate($selected,$id){
+        try {
+
+            if($selected == 'category'){
+                return view('BO.crudUpdateCategory', ['id'=>$id,'ref' => $selected]);    
+            }
+            if($selected == "subscription_state"){
+                return view('BO.crudUpdateSubscription', ['id'=>$id,'ref' => $selected]);   
+            }else{
+                return view('BO.crudUpdateFieldType', ['id'=>$id,'ref' => $selected]);   
+            }
+        } catch (\Throwable $th) {
+            dd($th->getMessage());
+        }
+    }
+
     public function all($variable)
     {
         try {
@@ -39,20 +82,31 @@ class CrudController extends Controller
         }
     }
 
-    
-    // public function saveAll(Request $request)
-    // {
-    //     $model = new AccountAdmin();
+    public function save(Request $request)
+    {
+        try {
+            $ref = $request->input('variable');
+            
+            if ($ref == 'category') {
+                $model = new Category();
+                $model->setCategory($request->input('category'));
+                $model->setSubscribing_price($request->input('subscribing_price'));
+                $model->save();
+            } elseif ($ref == "subscription_state") {
+                $model = new SubscriptionState();
+                $model->setSubscription_state($request->input('subscription_state'));
+                $model->save();
+            } else {
+                $model = new FieldType();
+                $model->setField_type($request->input('field_type'));
+                $model->save();
+            }
+            
+            return $this->all($ref);
+        } catch (\Throwable $th) {
+            dd($th->getMessage());
+        }
+    }
 
-    //     $model -> setName($request->input('nom'));
-    //     $model ->setFirstname($request->input('prenom'));
-    //     $model ->setTelephoneNumber($request->input('tel'));
-    //     $model->setMail($request->input('mail'));
-    //     $model->setPassword($request->input('pwd'));
-
-    //     $model-> save();
-        
-    //     return view('BO/login');
-    // }
 }
 ?>

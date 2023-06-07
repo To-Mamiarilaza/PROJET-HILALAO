@@ -33,5 +33,15 @@ Route::get('/Sign', [LoginController::class,
 
 Route::get('/all/{variable}', [CrudController::class, 'all'])->name('crud');
 
+Route::get('/update/{variable}/{id}', [CrudController::class, 
+    'getViewUpdate'])->name('update');
+
+Route::get('/updateByid', [CrudController::class, 
+    'update'])->name('updateByid');
+Route::get('/delete/{variable}/{id}', [CrudController::class,
+    'all'])->name('delete');
+    
+Route::post('/insert', [CrudController::class, 
+    'save'])->name('insert');
 
 ?>
