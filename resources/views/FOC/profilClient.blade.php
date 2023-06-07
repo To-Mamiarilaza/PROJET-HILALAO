@@ -15,11 +15,23 @@
             <h1 class="box__title">Profil <span class="box__title--span">Client</span></h1>
 			<form action="" method="get">
 				<div class="row">
-					<div class="col-md-4 input_pictures profil">
-						<h5 class="card-title">Upload Picture Profil</h5>
+					<div class="col-md-3 input_pictures profil">
+						<h5 class="card-title">Picture Profil</h5>
 						<input type="file" id="image-upload" style="display: none;">
-						<label for="image-upload" class="btn btn-primary btn-block">Sélectionner une image</label>
+						<label for="image-upload" class="btn btn-primary btn-block">Upload picture</label>
 					</div>
+					<div class="col-md-4 cinPdp">
+						<h5 class="card-title">CIN recto</h5>
+						<a href="#" class="thumbnail">
+							<img src="..." alt="...">
+						</a>
+					</div>
+					<div class="col-md-4 cinPdp">
+						<h5 class="card-title">CIN verso</h5>
+						<a href="#" class="thumbnail">
+							<img src="..." alt="...">
+						</a>
+					</div>		
 				</div>
 			</form>
 		</div>
