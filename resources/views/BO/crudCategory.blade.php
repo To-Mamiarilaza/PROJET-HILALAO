@@ -1,8 +1,8 @@
 
-    @include('BO/header') 
+@include('BO/header') 
 
-    @include('BO/nav')
-
+@include('BO/nav')
+<div class="contenu">
     <form action="{{ route('insert')}}" method="post">
         @csrf
         <h2>{{$ref}}</h2>
@@ -29,6 +29,7 @@
         Ajouter le prix de l'abonnement : <input type="number" name="subscribing_price"> Ar</p>
         <input type="submit" value="Ajouter">
     </form>
+</div>
 </body>
 </html>
 
