@@ -1,7 +1,7 @@
 @include('BO/header') 
 
 @include('BO/nav')
-
+<div class="contenu">
     <form action="{{ route('insert')}}" method="post">
         @csrf
         <h2>{{$ref}}</h2>
@@ -24,5 +24,6 @@
         <p>Ajouter un type de terrain : <input type="text" name="field_type">
         <input type="submit" value="Ajouter">
     </form>
+</div>
 </body>
 </html>

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\BO\Category;
 use App\Models\BO\FieldType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 
 class CrudController extends Controller
@@ -109,6 +110,14 @@ class CrudController extends Controller
         } catch (\Throwable $th) {
             dd($th->getMessage());
         }
+    }
+
+    public function statitique(){
+        if (Session::has('id_account_admin')) {
+            // La variable existe dans la session
+            return view('BO.statistique');
+        } 
+        
     }
 
 }

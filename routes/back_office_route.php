@@ -21,7 +21,11 @@ Route::get('/', function () {
 
 Route::get('/Check', [LoginController::class,
         'checkAccount']
-)->name('login');;
+)->name('login');
+
+Route::get('/Statistique', [LoginController::class,
+        'statistique']
+)->name('statistique');;
 
 Route::get('/sign', function () {
     return view('BO/sign');

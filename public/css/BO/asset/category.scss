@@ -73,15 +73,56 @@ input[type="number"]
 }
   
 header{
-    border: solid 1px;
+    box-shadow: 0 0 7px rgb(240, 240, 240);
+    border: solid #2A1F1D;
+    float: right;
+    width: 80%;
+    height: 70px;
+    background-color: #2A1F1D;
 }
+
+#Logo{
+    width: 250px;
+    height: 70px;
+    float: left;
+}
+#Logo img{
+    width: 150px;
+    height: 70px;
+}
+// .fa-align-justify{
+//     float: right;
+//     margin-top: 5px;
+//     color: white;
+// }
+// .fa-align-justify:hover{
+//     color: #e17b36;
+// }
+
+.fa-bell{
+    float: right;
+    margin-top: 17px;
+    margin-right: 100px;
+    color: white;
+    
+}
+          
+.fa-bell:hover {
+    color: #e17b36;
+}
+  
+
+body{
+    margin: 0;
+}
+
 nav{
     width: 20%;
     float: left;
     text-align: center;
 }
 
-form{
+.contenu{
     float: right;
     width: 80%;
 }

@@ -32,7 +32,7 @@ class LoginController extends Controller
             Session::save();
         
             // Faites ce que vous voulez avec les données récupérées
-            return view('BO.resultats', ['account'=>$account]);
+            return view('BO.statistique', ['account'=>$account]);
         } catch (Exception $e) {
             $errorMessage = $e->getMessage();
             // $errorMessage = "Incorrect";
@@ -40,6 +40,8 @@ class LoginController extends Controller
             // Passer le message d'erreur à la vue
         }
     }
+
+    
     
     public function saveAll(Request $request)
     {

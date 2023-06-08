@@ -1,7 +1,7 @@
 @include('BO/header') 
 @include('BO/nav')
 
-<div>
+<div class="contenu">
 
     <h1>Compte Back Office</h1>
 </div>   
