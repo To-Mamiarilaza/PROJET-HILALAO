@@ -1,0 +1,42 @@
+.accueil-text {
+  color: #33658A;
+  font-size: 25px;
+}
+
+.filtre-text {
+  color: #33658A;
+}
+
+.valider-button {
+  display: flex;
+  align-items: end;
+  margin-left: 20px;
+}
+
+.lien-terrain {
+  text-decoration: none;
+}
+
+.terrain {
+  cursor: pointer;
+  transition: 0.5s;
+}
+.terrain__img {
+  width: 100%;
+  height: 200px;
+}
+.terrain__h6 {
+  color: #E17B36;
+}
+.terrain:hover {
+  box-shadow: 3px 3px 5px #E17B36;
+}
+.terrain__categorie {
+  font-size: 10px;
+  color: #33658A;
+  margin: 0;
+}
+
+.star {
+  color: #E17B36;
+}/*# sourceMappingURL=list-field.css.map */

@@ -1,0 +1,32 @@
+.div__form {
+  margin-top: 20px;
+}
+.div__form__p {
+  color: #33658A;
+  font-weight: 600;
+}
+.div__ul {
+  list-style: none;
+  margin-top: 30px;
+  padding: 0;
+  line-height: 35px;
+}
+.div__ul__li {
+  color: #2A1F1D;
+}
+.div__ul__li__span {
+  font-weight: 600;
+  font-size: 18px;
+}
+.div__ul__li__span--titre {
+  margin-right: 10px;
+}
+.div__ul__li__span--argent {
+  color: #33658A;
+  font-weight: 500;
+}
+
+.chart-container {
+  height: 350px;
+  box-shadow: 3px 3px 5px rgba(42, 31, 29, 0.5960784314);
+}/*# sourceMappingURL=board.css.map */

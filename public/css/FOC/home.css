@@ -1,25 +1,4 @@
-.menu {
-  box-shadow: 3px 3px 5px rgba(42, 31, 29, 0.231372549);
-}
 
-.navbar-links {
-  margin-left: 5%;
-}
-.navbar-links ul li {
-  margin-left: 20px;
-  margin-right: 20px;
-  font-weight: 600;
-}
-.navbar-links ul li a:hover {
-  color: #E17B36 !important;
-}
-
-.titre {
-  font-size: 23px;
-  font-weight: 700;
-  letter-spacing: 5px;
-  color: #E17B36 !important;
-}
 
 .home-text {
   font-size: 16px;
@@ -32,12 +11,9 @@
   height: 100%;
 }
 
-.service {
-  padding: 1% 3%;
-}
 .service .image-service img {
   width: 100%;
-  height: 195px;
+  height: 215px;
 }
 .service h3 {
   font-size: 18px;
@@ -46,4 +22,15 @@
 
 h1 {
   color: #2A1F1D;
+}
+
+.fonction-list {
+  text-align: center;
+}
+.fonction-list h1 {
+  color: #33658A;
+}
+.fonction-list p {
+  text-align: left;
+  height: 120px;
 }/*# sourceMappingURL=home.css.map */

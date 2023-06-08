@@ -12,42 +12,7 @@
 </head>
 
 <body>
-    <section class="menu">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-                <a class="navbar-brand mx-5 titre" href="#">HILALAO</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse navbar-links" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Accueil</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Tableau de Bord</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Mes Terrains</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Mon compte</a>
-                        </li>
-                    </ul>
-                    <div class="option-block d-flex mx-5">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#"><i class="fas fa-bell"></i></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#"><i class="fas fa-power-off"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </section>
+    @include('FOC/header');
 
     <section>
         <div class="container mt-5">
@@ -69,42 +34,52 @@
             </div>
             <div class="fonction-list">
                 <h1>Nos services</h1>
-                <div class="row mt-3">
-                    <div class="col-md-4 service">
-                        <div class="image-service">
-                            <img src="{{ asset('image/publicité.jpg') }}" alt="Image de publicité">
+                <div class="container px-4">
+                    <div class="row mt-4 gx-5">
+                        <div class="col-md-4 service">
+                            <div class="border p-4">
+                                <div class="image-service">
+                                    <img src="{{ asset('image/publicité.jpg') }}" alt="Image de publicité">
+                                </div>
+                                <h3 class="mt-2">Ameliorer la visibilité de votre terrain</h3>
+                                <p>
+                                    Vous bénéficiez d'une exposition optimale pour votre terrain.
+                                    Grâce à notre site fréquenté par de nombreux utilisateurs, vous avez la garantie de
+                                    toucher une audience étendue et qualifiée.
+                                </p>
+                            </div>
                         </div>
-                        <h3 class="mt-2">Ameliorer la visibilité de votre terrain</h3>
-                        <p>
-                            Vous bénéficiez d'une exposition optimale pour votre terrain.
-                            Grâce à notre site fréquenté par de nombreux utilisateurs, vous avez la garantie de
-                            toucher une audience étendue et qualifiée.
-                        </p>
+
+                        <div class="col-md-4 service">
+                            <div class="border p-4">
+                                <div class="image-service">
+                                    <img src="{{ asset('image/gestion.jpg') }}" alt="Image de publicité">
+                                </div>
+                                <h3 class="mt-2">Meilleur gestion du réservation</h3>
+                                <p>
+                                    Nous nous engageons à vous offrir la meilleure gestion des réservations possible,
+                                    vous permettant ainsi de gérer efficacement et sans tracas toutes les réservations liées à votre terrain.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 service">
+                            <div class="border p-4">
+                                <div class="image-service">
+                                    <img src="{{ asset('image/meilleur_prix.jpg') }}" alt="Image de publicité">
+                                </div>
+                                <h3 class="mt-2">Abonnement abordable</h3>
+                                <p>
+                                    L'abonnement est conçu pour ne pas causé des frustrations. Par rapport au bénéfice obtenue
+                                    ce n'est rien du tout.
+                                </p>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="col-md-4 service">
-                        <div class="image-service">
-                            <img src="{{ asset('image/gestion.jpg') }}" alt="Image de publicité">
-                        </div>
-                        <h3 class="mt-2">Meilleur gestion du réservation</h3>
-                        <p>
-                            Nous nous engageons à vous offrir la meilleure gestion des réservations possible,
-                            vous permettant ainsi de gérer efficacement et sans tracas toutes les réservations liées à votre terrain.
-                        </p>
-                    </div>
-
-                    <div class="col-md-4 service">
-                        <div class="image-service">
-                            <img src="{{ asset('image/gestion.jpg') }}" alt="Image de publicité">
-                        </div>
-                        <h3 class="mt-2">Abonnement abordable</h3>
-                        <p>
-                            Nous nous engageons à vous offrir la meilleure gestion des réservations possible,
-                            vous permettant ainsi de gérer efficacement et sans tracas toutes les réservations liées à votre terrain.
-                        </p>
-                    </div>
                 </div>
             </div>
+
         </div>
     </section>
     <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
