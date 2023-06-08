@@ -16,6 +16,4 @@
         <!-- <i class="fa fa-align-justify fa-3x"> </i> -->
     </div>
     <i class="fa fa-bell fa-2x"> </i>
-    
-
 </header>

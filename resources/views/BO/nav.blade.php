@@ -1,4 +1,5 @@
 <nav>
+
     <ul>
         <li><a href="{{ route('statistique') }}">Statistique</a></li>
         <li><a href="#">Abonnement</a></li>
