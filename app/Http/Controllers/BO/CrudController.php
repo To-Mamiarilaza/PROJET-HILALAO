@@ -16,8 +16,7 @@ class CrudController extends Controller
             $model = new Category();
             $all = $model->getAllCategory();
             return view('BO.crudCategory', ['all' => $all,'ref' => $selected]);
-        }
-        if($selected == "subscription_state"){
+        }else if($selected == "subscription_state"){
             $model = new SubscriptionState();
             $all = $model->getAllSubscriptionState();
             return view('BO.crudSubscriptionState', ['all' => $all,'ref' => $selected]);
@@ -32,14 +31,13 @@ class CrudController extends Controller
     public function update(Request $request){
         try {
             $selected = $request->input('variable');
-            if($selected == 'category'){
+            if($selected == "category"){
                 $model = new Category();
                 $model->setId_category($request->input('id_category'));
                 $model->setCategory($request->input('category'));
                 $model->setSubscribing_price($request->input('subscribing_price'));
                 $model->update();   
-            }
-            if($selected == "subscription_state"){
+            }else if($selected == "subscription_state"){
                 $model = new SubscriptionState();
                 $model->setId_subscription_state($request->input('id_subscription_state'));
                 $model->setSubscription_state($request->input('subscription_state'));
@@ -59,13 +57,18 @@ class CrudController extends Controller
     public function getViewUpdate($selected,$id){
         try {
 
-            if($selected == 'category'){
-                return view('BO.crudUpdateCategory', ['id'=>$id,'ref' => $selected]);    
-            }
-            if($selected == "subscription_state"){
-                return view('BO.crudUpdateSubscription', ['id'=>$id,'ref' => $selected]);   
+            if($selected == "category"){
+                $model = new Category();
+                $model = $model->getCategoryById($id);
+                return view('BO.crudUpdateCategory', ['model'=>$model,'ref' => $selected]);    
+            }else if($selected == "subscription_state"){
+                $model = new SubscriptionState();
+                $model = $model->getSubscriptionStateById($id);
+                return view('BO.crudUpdateSubscription', ['model'=>$model,'ref' => $selected]);   
             }else{
-                return view('BO.crudUpdateFieldType', ['id'=>$id,'ref' => $selected]);   
+                $model = new FieldType();
+                $model = $model->getFieldTypeById($id);
+                return view('BO.crudUpdateFieldType', ['model'=>$model,'ref' => $selected]);   
             }
         } catch (\Throwable $th) {
             dd($th->getMessage());
@@ -87,7 +90,7 @@ class CrudController extends Controller
         try {
             $ref = $request->input('variable');
             
-            if ($ref == 'category') {
+            if ($ref == "category") {
                 $model = new Category();
                 $model->setCategory($request->input('category'));
                 $model->setSubscribing_price($request->input('subscribing_price'));

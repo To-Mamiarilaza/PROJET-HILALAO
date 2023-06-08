@@ -38,6 +38,7 @@ Route::get('/update/{variable}/{id}', [CrudController::class,
 
 Route::get('/updateByid', [CrudController::class, 
     'update'])->name('updateByid');
+    
 Route::get('/delete/{variable}/{id}', [CrudController::class,
     'all'])->name('delete');
     
