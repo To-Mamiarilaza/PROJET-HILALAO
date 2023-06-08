@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BO\LoginController;
 use App\Http\Controllers\BO\CrudController;
+use App\Http\Controllers\BO\StatistiqueController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +24,7 @@ Route::get('/Check', [LoginController::class,
         'checkAccount']
 )->name('login');
 
-Route::get('/Statistique', [LoginController::class,
+Route::get('/Statistique', [StatistiqueController::class,
         'statistique']
 )->name('statistique');;
 

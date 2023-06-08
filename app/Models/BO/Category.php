@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models\BO;
+use Exception;
 use Illuminate\Support\Facades\DB;
 
 class Category
@@ -42,16 +43,20 @@ class Category
 
     public function getAllCategory()
     {
-        $category = DB::select('SELECT * FROM category ');
-        $res = array();
-        foreach ($category as $result) {
-            $temp = new Category();
-            $temp->setId_category($result->id_category);
-            $temp->setCategory($result->category);
-            $temp->setSubscribing_price($result->subscribing_price);
-            $res[] = $temp;
+        try{
+            $category = DB::select('SELECT * FROM category ');
+            $res = array();
+            foreach ($category as $result) {
+                $temp = new Category();
+                $temp->setId_category($result->id_category);
+                $temp->setCategory($result->category);
+                $temp->setSubscribing_price($result->subscribing_price);
+                $res[] = $temp;
+            }
+            return $res;
+        }catch(Exception $e){
+            throw new Exception("Impossible d'avoir ");
         }
-        return $res;
     }
 
     public function getCategoryById($id)

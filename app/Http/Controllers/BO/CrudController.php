@@ -112,13 +112,5 @@ class CrudController extends Controller
         }
     }
 
-    public function statitique(){
-        if (Session::has('id_account_admin')) {
-            // La variable existe dans la session
-            return view('BO.statistique');
-        } 
-        
-    }
-
 }
 ?>
