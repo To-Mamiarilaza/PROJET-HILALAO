@@ -1,7 +1,7 @@
 <nav>
 
     <div>
-        
+
     </div>
 
     <p><a href="#">Statistique</a></p>
@@ -25,8 +25,4 @@
             }
         });
     </script>
-
-    {{-- <p><a href="{{ route('crud', ['variable' => 'category']) }}"> Category</a></p>
-    <p><a href="{{ route('crud', ['variable' => 'subscription_state']) }}"> Subscription_state</a></p>
-    <p><a href="{{ route('crud', ['variable' => 'field_type']) }}"> Field Type</a></p> --}}
 </nav>
