@@ -10,4 +10,5 @@
 <body>
 <header>
     <h1>Mon site</h1>
+    <img src="">
 </header>
