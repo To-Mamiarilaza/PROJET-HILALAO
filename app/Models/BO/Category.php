@@ -81,11 +81,12 @@ class Category
     }
 
     public function update(){
-        $req = "update category set category='%s' , subscribing_price ='%s'  where id_category = %s ";
+        $req = "update category set category='%s' , subscribing_price =%s  where id_category = %s ";
         $id_category = $this->id_category;
         $category = $this->category;
         $subscribing_price = $this->subscribing_price;
         $req = sprintf($req,$category,$subscribing_price,$id_category);
+        print($req);
         DB::update($req);
     }
 }
