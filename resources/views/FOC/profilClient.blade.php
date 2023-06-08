@@ -14,23 +14,25 @@
 		<div class="row justify-content-center">
 			<h1 class="box__title">Profil <span class="box__title--span">Client</span></h1>
 			<div class="row">
-				<div class="col-md-3 input_pictures profil">
+				<div class="col-md-3 client-picture profil">
 					<h5 class="card-title">Picture Profil</h5>
 					<input type="file" id="image-upload" style="display: none;">
 					<label for="image-upload" class="btn btn-primary btn-block">Upload picture</label>
 				</div>
-				<div class="col-md-3 cinPdp">
-					<h5 class="card-title">CIN recto</h5>
-					<a href="#" class="thumbnail">
-						<img src="..." alt="...">
-					</a>
-				</div>
-				<div class="col-md-3 cinPdp">
-					<h5 class="card-title">CIN verso</h5>
-					<a href="#" class="thumbnail">
-						<img src="..." alt="...">
-					</a>
-				</div>
+				{{-- <div class="col-md-8 champ-CIN"> --}}
+					<div class="col-md-4 cinPdp">
+						<h5 class="card-title">CIN recto</h5>
+						<a href="#" class="thumbnail">
+							<img src="..." alt="...">
+						</a>
+					</div>
+					<div class="col-md-4 cinPdp">
+						<h5 class="card-title">CIN verso</h5>
+						<a href="#" class="thumbnail">
+							<img src="..." alt="...">
+						</a>
+					</div>
+				{{-- </div> --}}
 			</div>
 			<div class="card mt-5">
 				<div class="form-group infoProfil">
