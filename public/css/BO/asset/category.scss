@@ -14,6 +14,7 @@ h2{
 
 body {
     font-family: Arial, sans-serif;
+    margin: 0;
 }
 
 table {
@@ -73,12 +74,21 @@ input[type="number"]
 }
   
 header{
-    border: solid 1px;
+    width: 80%;
+    float: right;
+    background-color: #ccc;
 }
 nav{
     width: 20%;
     float: left;
     text-align: center;
+    background-color: rgb(70, 70, 70);
+    color: white;
+    height: 745px;
+}
+nav a{
+    color: white;
+    text-decoration: none;
 }
 
 form{
