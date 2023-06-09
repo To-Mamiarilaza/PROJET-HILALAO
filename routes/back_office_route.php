@@ -3,7 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BO\LoginController;
 use App\Http\Controllers\BO\CrudController;
-
+use App\Http\Controllers\BO\StatistiqueController;
+use App\Http\Controllers\BO\AbonnementController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,7 +26,11 @@ Route::get('/Check', [LoginController::class,
 
 Route::get('/Statistique', [LoginController::class,
         'statistique']
-)->name('statistique');;
+)->name('statistique');
+
+Route::get('/Abonnemnt', [AbonnementController::class,
+    'abonnement']
+)->name('abonnement');
 
 Route::get('/sign', function () {
     return view('BO/sign');
