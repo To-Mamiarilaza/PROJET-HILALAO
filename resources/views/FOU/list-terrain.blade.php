@@ -77,6 +77,10 @@
                                     </div>
                                     <div class="col-md-4">
                                         <a href="" class=""><button class="field__box--button-dispo">Voir les disponibilités</button></a>
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <a href="/infoTerrain/{{$listField->id_field}}" class=""><button class="field__box--button-dispo">information sur le terrain</button></a>
                                     </div>
                                 </div>
                                 <p class="field__box--description">
