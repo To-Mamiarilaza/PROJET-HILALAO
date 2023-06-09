@@ -13,8 +13,9 @@ h2{
 }
 
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
+    font-family: cursive;
+    margin: 150px;
+    text-align: center;
 }
 
 table {
@@ -39,7 +40,7 @@ table {
 }
 
 input[type="button"], 
-input[type="submit"] 
+input[type="submit"]
 {
     background-color: $button-primary-color;
     color: #ffffff;
@@ -59,13 +60,15 @@ $input-color: #333;
 $input-padding: 8px 12px;
 $input-border-radius: 4px;
 input[type="text"],
-input[type="number"]
+input[type="number"],
+select
 {
     border: 1px solid $input-border-color;
     background-color: $input-background-color;
     color: $input-color;
     padding: $input-padding;
     border-radius: $input-border-radius;
+    margin-bottom: 20px;
   
     &:focus {
       outline: none;
@@ -79,6 +82,7 @@ header{
     width: 80%;
     height: 70px;
     background-color: #2A1F1D;
+
 }
 
 #Logo{
@@ -87,8 +91,9 @@ header{
     float: left;
 }
 #Logo img{
-    width: 150px;
+    width: 100px;
     height: 70px;
+    margin-right: 150px;
 }
 // .fa-align-justify{
 //     float: right;
@@ -116,20 +121,54 @@ body{
     margin: 0;
 }
 
-nav{
+nav {
     width: 20%;
     float: left;
     text-align: center;
-    background-color: rgb(70, 70, 70);
+    background-color: #2A1F1D;
     color: white;
     height: 745px;
-}
-nav a{
-    color: white;
-    text-decoration: none;
+    padding-top: 2.5%;
+
+    a {
+        color: #FFF;
+        text-decoration: none;
+    }
+
+    #user i {
+        font-size: 100px;
+    }
+
+    #toggleList i {
+        font-size: 25px;
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+        margin-top: 10px;
+
+        li {
+            a {
+                display: flex;
+                align-items: center;
+                color: #FFF;
+                margin-left: 75px;
+
+                i {
+                    margin-right: 10px;
+                    color: #45a049;
+                }
+            }
+        }
+    }
+
+    #list i{
+        font-size: 20px;
+    }
 }
 
-.contenu{
+.contenu {
     float: right;
     width: 80%;
 }
