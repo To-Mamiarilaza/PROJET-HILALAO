@@ -71,8 +71,6 @@ class ListField extends Model
     }
 
    
-
-
     function getListFields()
     {
         // Define the SQL query
