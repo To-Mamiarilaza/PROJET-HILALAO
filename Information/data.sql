@@ -244,3 +244,9 @@ CREATE  TABLE "public".dispo_and_price (
 	CONSTRAINT fk_dispo_and_price_day FOREIGN KEY ( id_day ) REFERENCES "public"."day"( id_day )   ,
 	CONSTRAINT fk_dispo_and_price_field FOREIGN KEY ( id_field ) REFERENCES "public".field( id_field )   
  );
+
+--vue cin client
+CREATE or replace view v_clientCin as 
+	select c.id_client,c.first_name,c.last_name,c.address,c.phone_number,c.mail,c.birth_date,ci.id_cin,ci.cin_number,ci.first_picture,ci.second_picture from client c
+	join cin as ci
+	on c.id_cin = ci.id_cin;

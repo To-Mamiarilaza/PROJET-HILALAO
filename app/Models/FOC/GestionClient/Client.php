@@ -13,23 +13,21 @@ class Client
     private $address;
     private $birth_date;
     private $pwd;
-    private $status;
+    private $id_status;
     private $sign_up_date;
     private $cin;
 
-    public function __construct($id_client, $first_name, $last_name, $phone_number, $mail, $address, $birth_date, $pwd, $status, $sign_up_date, $cin)
+    public function __construct($first_name, $last_name, $phone_number, $mail, $address, $birth_date, $pwd, $status, $cin)
     {
-        $this->id_client = $id_client;
-        $this->first_name = $first_name;
-        $this->last_name = $last_name;
-        $this->phone_number = $phone_number;
-        $this->mail = $mail;
-        $this->address = $address;
-        $this->birth_date = $birth_date;
-        $this->pwd = $pwd;
-        $this->status = $status;
-        $this->sign_up_date = $sign_up_date;
-        $this->cin = $cin;
+        $this->setFirstName($first_name);
+        $this->setLastName($last_name);
+        $this->setPhone_number($phone_number);
+        $this->setMail($mail);
+        $this->setAddress($address);
+        $this->setBirthDate($birth_date);
+        $this->setPwd($pwd);
+        $this->setidStatus($status);
+        $this->setCin($cin);
     }
 
 ///Encapsulation
@@ -46,6 +44,7 @@ class Client
     public function setFirstName($first_name = "")
     {
         $this->first_name = $first_name;
+        if($first_name == "" || $first_name == null) throw new \Exception("Nom ivalide ou vide");
     }
 
     public function getLastName()
@@ -56,6 +55,7 @@ class Client
     public function setLastName($last_name = "")
     {
         $this->last_name = $last_name;
+        if($last_name == "" || $last_name == null) throw new \Exception("Prenom ivalide ou vide");
     }
 
     public function getPhoneNumber()
@@ -66,6 +66,7 @@ class Client
     public function setPhone_number($phone_number = "")
     {
         $this->phone_number = $phone_number;
+        if($phone_number == "" || $phone_number == null) throw new \Exception("Numero telephone ivalide ou vide");
     }
 
     public function getMail()
@@ -76,19 +77,21 @@ class Client
     public function setMail($mail = "")
     {
         $this->mail = $mail;
+        if($mail == "" || $mail == null) throw new \Exception("Mail ivalide ou vide");
     }
 
     public function getAdress()
     {
         return $this->address;
     }
-
-    public function setAdress($adress = "")
+    
+    public function setAddress($address = "")
     {
-        $this->address = $adress;
+        $this->address = $address;
+        if ($address == "" || $address == null) throw new \Exception("Adresse invalide ou vide");
     }
 
-    public function getBirhDate()
+    public function getBirthDate()
     {
         return $this->birth_date;
     }
@@ -96,6 +99,7 @@ class Client
     public function setBirthDate($birth_date)
     {
         $this->birth_date = $birth_date;
+        if($birth_date == "" || $birth_date == null) throw new \Exception("Date de naissance ivalide ou vide");
     }
 
     public function getPwd()
@@ -106,21 +110,23 @@ class Client
     public function setPwd($pwd = "")
     {
         $this->pwd = $pwd;
+        if($pwd == "" || $pwd == null) throw new \Exception("Mot de passe ivalide ou vide");
     }
 
     public function getStatus()
     {
-        return $this->status;
+        return $this->id_status;
     }
 
-    public function setStatus($status)
+    public function setidStatus($status)
     {
-        $this->status = $status;
+        $this->id_status = $status;
+        if($status == "" || $status == null) throw new \Exception("Status ivalide ou vide");
     }
 
     public function getSignUpDate()
     {
-        return $this->address;
+        return $this->sign_up_date;
     }
 
     public function getCin()
@@ -131,6 +137,14 @@ class Client
     public function setCin($cin)
     {
         $this->cin = $cin;
+        if($cin == "" || $cin == null) throw new \Exception("Cin invalide ou vide");
+    }
+
+    public static function lastClientId()
+    {
+        $result = DB::table('client')->orderBy('id_client', 'desc')->value('id_client');
+    
+        return $result ? $result : null;
     }
 
     //Recuperer toutes les clients
@@ -158,11 +172,17 @@ class Client
     //Sauvegarder un client dans la base
     public function create()
     {
-        $req = "INSERT INTO client VALUES ( default, '%s', '%s', '%s', '%s', '%s', '%s', '%s', %d, '%s', %d)";
-        $req = sprintf($req,$this->first_name,$this->last_name,$this->phone_number,$this->mail,$this->adress,$this->birth_date,$this->pwd,$this->status->id_status,$this->sign_up_date,$this->cin->id_cin);
-        //echo $req;  
-        DB::insert($req);
+        try {
+            $formattedBirthDate = date('Y-m-d', strtotime($this->birth_date));
+        
+            $req = "INSERT INTO client VALUES (DEFAULT, '%s', '%s', '%s', '%s', '%s', '%s', '%s', %d, DEFAULT, %d)";
+            $req = sprintf($req, $this->first_name, $this->last_name, $this->phone_number, $this->mail, $this->address, $formattedBirthDate, $this->pwd, $this->id_status, $this->cin);
+            DB::insert($req);
+        } catch (\Exception $e) {
+            throw new \Exception("Erreur lors de la création du client : " . $e->getMessage());
+        }
     }
+    
 
     //Mettre a jour un client
     public function update()

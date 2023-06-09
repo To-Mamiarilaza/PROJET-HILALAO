@@ -53,13 +53,16 @@ body {
 }/*# sourceMappingURL=sign.css.map */
 
 .caption {
-  margin-left: -72%;
+  margin-left: -35%;
 }
-/* .input_pictures{
-  width: 80%;
-  margin-left: 10%;
-  padding-top: 19%;
-  padding-bottom: 19%;
-  background-color: #a7969382;
+.CIN_pictures {
+  margin-top: 5%;
+}
+.input_pictures{
+  height: 180px;
+  margin-left: 11%;
+  padding-top: 5%;
+  /* padding-bottom: 19%; */
+  background-color: #f2ebea82;
   border-radius: 10px;
-} */
+}

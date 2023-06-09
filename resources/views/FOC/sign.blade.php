@@ -10,9 +10,18 @@
 </head>
 <body>
 	<div class="container box">
+	@if($errors->any())
+    	<div class="alert alert-danger">
+        	<ul>
+            	@foreach($errors->all() as $error)
+                	<li>{{ $error }}</li>
+            	@endforeach
+        	</ul>
+    	</div>
+	@endif
 		<div class="row sign_box">
 			<h1 class="box__title">Sign <span class="box__title--span">up</span></h1>
-			<form enctype="multipart/form-data" action="{{ route('signinnext') }}" method="POST" class="col-md-12 form-content">
+			<form enctype="multipart/form-data" action="{{ route('signin') }}" method="POST" class="col-md-12 form-content">
 				@csrf
 				<div class="row">
 					<div class="col-md-3">
@@ -52,6 +61,14 @@
 					</div>
 					<div class="col-md-9">
 						<input class="form-content__input form-content__input--log" type="text" aria-label=".form-control-lg" name="address">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-3">
+						<label for="address" class="control-label"><b> Birth date </b></label>
+					</div>
+					<div class="col-md-9">
+						<input class="form-content__input form-content__input--log" type="date" aria-label=".form-control-lg" name="birth_date">
 					</div>
 				</div>
 				<div class="row">
