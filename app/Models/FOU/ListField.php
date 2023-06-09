@@ -73,29 +73,28 @@ class ListField extends Model
    
 
 
-function getListFields()
-{
-    // Define the SQL query
-    $query = "SELECT id_field, picture, name, address, description FROM ListField";
+    function getListFields()
+    {
+        // Define the SQL query
+        $query = "SELECT id_field, picture, name, address, description FROM ListField";
 
-    // Execute the query and retrieve the results
-    $results = DB::select($query);
+        // Execute the query and retrieve the results
+        $results = DB::select($query);
 
-    // Create a collection to hold the ListField objects
-    $listFields = collect();
+        // Create a collection to hold the ListField objects
+        $listFields = collect();
 
-    // Iterate through the query results and create ListField objects
-    foreach ($results as $result) {
-        $listField = new ListField();
-        $listField->id_field = $result->id_field;
-        $listField->picture = $result->picture;
-        $listField->name = $result->name;
-        $listField->address = $result->address;
-        $listField->description = $result->description;
+        // Iterate through the query results and create ListField objects
+        foreach ($results as $result) {
+            $listField = new ListField();
+            $listField->id_field = $result->id_field;
+            $listField->picture = $result->picture;
+            $listField->name = $result->name;
+            $listField->address = $result->address;
+            $listField->description = $result->description;
 
-        $listFields->push($listField);
+            $listFields->push($listField);
+        }
+        return $listFields;
     }
-    return $listFields;
-}
-
 }
