@@ -28,6 +28,9 @@ Route::POST('/login', [LoginController::class, 'login'])
 Route::post('/ClientProfil', [LoginController::class, 'profilClient'])
 ->name('profilClient');
 
+Route::get('/addTerrain',function() {
+    return view('FOC/addTerrain');
+});
 
 Route::get('/home-client', function() {
     return view('FOC/home');
