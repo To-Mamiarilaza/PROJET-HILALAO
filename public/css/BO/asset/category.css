@@ -4,7 +4,9 @@ h2 {
 }
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: cursive;
+  margin: 150px;
+  text-align: center;
 }
 
 table {
@@ -41,22 +43,24 @@ input[type=submit]:hover {
 }
 
 input[type=text],
-input[type=number] {
+input[type=number],
+select {
   border: 1px solid #ccc;
   background-color: #f2f2f2;
   color: #333;
   padding: 8px 12px;
   border-radius: 4px;
+  margin-bottom: 20px;
 }
 input[type=text]:focus,
-input[type=number]:focus {
+input[type=number]:focus,
+select:focus {
   outline: none;
   box-shadow: 0 0 5px #ccc;
 }
 
 header {
   box-shadow: 0 0 7px rgb(240, 240, 240);
-  border: solid #2A1F1D;
   float: right;
   width: 80%;
   height: 70px;
@@ -70,8 +74,9 @@ header {
 }
 
 #Logo img {
-  width: 150px;
+  width: 100px;
   height: 70px;
+  margin-right: 150px;
 }
 
 .fa-bell {
@@ -93,6 +98,38 @@ nav {
   width: 20%;
   float: left;
   text-align: center;
+  background-color: #2A1F1D;
+  color: white;
+  height: 745px;
+  padding-top: 2.5%;
+}
+nav a {
+  color: #FFF;
+  text-decoration: none;
+}
+nav #user i {
+  font-size: 100px;
+}
+nav #toggleList i {
+  font-size: 25px;
+}
+nav ul {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 10px;
+}
+nav ul li a {
+  display: flex;
+  align-items: center;
+  color: #FFF;
+  margin-left: 75px;
+}
+nav ul li a i {
+  margin-right: 10px;
+  color: #45a049;
+}
+nav #list i {
+  font-size: 20px;
 }
 
 .contenu {
