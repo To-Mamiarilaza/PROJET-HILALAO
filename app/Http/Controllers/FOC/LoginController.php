@@ -40,5 +40,14 @@ class LoginController extends Controller
     {
         return view('FOC/signUpCin');
     }
+	public function nextSignin(Request $request)
+	{
+		return view('FOC/sign_next_CIN');
+	}
+
+	public function profilClient(Request $request)
+	{
+		return view('FOC/profilClient');
+	}
 }
 ?>
