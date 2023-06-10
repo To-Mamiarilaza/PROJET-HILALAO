@@ -1,0 +1,40 @@
+form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+form label {
+  width: 80px;
+  text-align: right;
+  margin-right: 10px;
+  padding-left: 20px;
+}
+form select,
+form input[type=text] {
+  flex: 1;
+  margin-bottom: 10px;
+  padding: 5px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  width: 50px;
+}
+
+.form-group input[type=text],
+.form-group select {
+  width: 200px;
+  padding: 5px;
+}
+
+#Statistique {
+  width: auto;
+  border: solid 1px;
+  text-align: center;
+}
+
+.par {
+  float: left;
+  width: 200px;
+  height: auto;
+  margin-left: 12%;
+  border: solid 2px;
+}/*# sourceMappingURL=statistique.css.map */

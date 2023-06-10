@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BO\LoginController;
 use App\Http\Controllers\BO\CrudController;
 use App\Http\Controllers\BO\StatistiqueController;
+use App\Models\BO\Statistique;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,5 +51,18 @@ Route::get('/delete/{variable}/{id}', [CrudController::class,
     
 Route::post('/insert', [CrudController::class, 
     'save'])->name('insert');
+
+
+Route::post('/clients', function (Request $request) {
+    $category = $request->input('category');
+    $mois = $request->input('mois');
+    $annee = $request->input('annee');
+
+    // Appeler la méthode countClientsMonth du modèle Client avec les paramètres appropriés
+    $clientsData = Statistique::countClientsMonth($annee);
+    // Retourner les données en format JSON
+    return response()->json($clientsData);
+});
+
 
 ?>
