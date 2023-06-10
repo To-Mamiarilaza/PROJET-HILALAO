@@ -1,7 +1,6 @@
-
-@include('BO/header') 
-
+@include('BO/header')
 @include('BO/nav')
+
 <div class="contenu">
     <form action="{{ route('insert')}}" method="post">
         @csrf
