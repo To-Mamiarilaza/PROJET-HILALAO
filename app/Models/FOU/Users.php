@@ -12,8 +12,8 @@ class Users {
     private $sign_up_date;
     private $pwd;
 
-    public static function findById($id) {
-        $sql = 'SELECT id_users, first_name, last_name, birth_date, phone_number, mail, sign_up_date, pwd FROM users WHERE id_cin=%s';
+    public static function SfindById($id) {
+        $sql = 'SELECT id_users, first_name, last_name, birth_date, phone_number, mail, sign_up_date, pwd FROM users WHERE id_users=%s';
         $sql = sprintf($sql, $id);
         $users_db = DB::select($sql);
         $user = new Users();
@@ -29,6 +29,23 @@ class Users {
         }
         return $user;
     }
+
+    public function findById($id) {
+        $sql = 'SELECT id_users, first_name, last_name, birth_date, phone_number, mail, sign_up_date, pwd FROM users WHERE id_users=%s';
+        $sql = sprintf($sql, $id);
+        $users_db = DB::select($sql);
+        if (count($users_db)!=0) {
+            $this->setIdUsers($users_db[0]->id_users);
+            $this->setFirstName($users_db[0]->first_name);
+            $this->setLastName($users_db[0]->last_name);
+            $this->setBirthDate($users_db[0]->birth_date);
+            $this->setPhoneNumber($users_db[0]->phone_number);
+            $this->setMail($users_db[0]->mail);
+            $this->setSignUpDate($users_db[0]->sign_up_date);
+            $this->setPwd($users_db[0]->pwd);
+        }
+    }
+
 
 
     public function getIdUsers() {

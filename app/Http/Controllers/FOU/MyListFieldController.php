@@ -11,7 +11,7 @@ class MyListFieldController extends Controller
     {
         $listFieldInstance = new ListField();
         $listFields = $listFieldInstance->getListFields();
-        
+
 
         return view('FOU\list-terrain', ['listFields' => $listFields]);
     }
