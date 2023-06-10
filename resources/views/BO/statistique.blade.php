@@ -71,7 +71,8 @@
         var selectedValueCategory = selectElementCategory.value;
         var selectedFieldsElement = document.getElementById("selectedFields");
         
-        selectedFieldsElement.innerHTML = "";
+        selectedFieldsElement.innerHTML = "";// Appel de la fonction getClientsData et affichage des données sur la page
+        
         // Ajouter le champ sélectionné
         if (selectedValueCategory) {
             var selectedField = document.createElement("p");
@@ -83,77 +84,87 @@
         updateChart(selectedValueCategory, selectedValueMois, selectedValueAnnee);
     }
 
+    var clientsData;var utilisateursData;var terrainsData;
+
     function updateChart(category, mois, annee) {
         if (myChart) {
             myChart.destroy(); // Supprimer l'instance du graphique précédent
         }
 
         var labels = getLabels(mois);
-        var clientsData = getClientsData(category, mois, annee);
-        var utilisateursData = getUtilisateursData(category, mois, annee);
-        var terrainsData = getTerrainsData(category, mois, annee);
-        
-        myChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: labels,
-                datasets: [
-                    {
-                        label: 'Clients',
-                        data: clientsData,
-                        borderColor: 'rgba(255, 99, 132, 1)',
-                        borderWidth: 1
-                    },
-                    {
-                        label: 'Utilisateurs',
-                        data: utilisateursData,
-                        borderColor: 'rgba(54, 162, 235, 1)',
-                        borderWidth: 1
-                    },
-                    {
-                        label: 'Terrains',
-                        data: terrainsData,
-                        borderColor: 'green',
-                        borderWidth: 1
-                    }
-                ]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
+
+        getUtilisateursData(category, mois, annee)
+            .then(function(dataU) {
+                getClientsData(category, mois, annee)
+                    .then(function(dataC) {
+                        getTerrainsData(category, mois, annee)
+                            .then(function(dataT) {
+                        clientsData = dataC;
+                        console.log(clientsData);
+                        utilisateursData = dataU;
+                        terrainsData = dataT;
+
+                        myChart = new Chart(ctx, {
+                            type: 'line',
+                            data: {
+                                labels: labels,
+                                datasets: [
+                                    {
+                                        label: 'Clients',
+                                        data: clientsData,
+                                        borderColor: 'rgba(255, 99, 132, 1)',
+                                        borderWidth: 1
+                                    },
+                                    {
+                                        label: 'Utilisateurs',
+                                        data: utilisateursData,
+                                        borderColor: 'rgba(54, 162, 235, 1)',
+                                        borderWidth: 1
+                                    },
+                                    {
+                                        label: 'Terrains',
+                                        data: terrainsData,
+                                        borderColor: 'green',
+                                        borderWidth: 1
+                                    }
+                                ]
+                            },
+                            options: {
+                                scales: {
+                                    y: {
+                                        beginAtZero: true
+                                    }
+                                }
+                            }
+                        });
+                    });
+                });
+            })
+            .catch(function(error) {
+                console.error(error);
+            });
     }
 
     function getLabels(mois) {
         var defaultLabels = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31];
-        
+
         if (mois === '00') {
             // Retourner des labels personnalisés pour le mois sélectionné
-            return ['Jan', 'Fev', 'Mars','Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            return ['Jan', 'Fev', 'Mars', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
         } else {
             // Utiliser les labels par défaut
             return defaultLabels;
         }
     }
 
-    function getClientsData(category, mois, annee) {
+    function getUtilisateursData(category, mois, annee) {
         return new Promise(function(resolve, reject) {
             $.ajax({
-                url: "/clients",
+                url: "/users?annee="+annee+"&mois="+mois+"&category="+category, // URL de votre endpoint pour récupérer les données des clients
                 method: "GET",
-                data: {
-                    category: category,
-                    mois: mois,
-                    annee: annee
-                },
                 success: function(response) {
-                    var data = JSON.parse(response);
-                    print(data);
-                    resolve(data); // Résoudre la promesse avec les nouvelles données
+                    clientsData = response;
+                    resolve(response);
                 },
                 error: function(xhr, status, error) {
                     reject(error); // Rejeter la promesse en cas d'erreur
@@ -163,72 +174,38 @@
     }
 
 
-    function getUtilisateursData(category, mois, annee) {
-        // Obtenir les données des utilisateurs en fonction des sélections
-        // Retourner les données appropriées sous forme de tableau
-        // Remplacez cette partie avec votre logique de récupération des données des utilisateurs
-        return [5, 2, 8, 4, 9, 11, 6, 3, 7];
+
+    function getClientsData(category, mois, annee) {
+        return new Promise(function(resolve, reject) {
+            $.ajax({
+                url: "/clients?annee="+annee+"&mois="+mois+"&category="+category, // URL de votre endpoint pour récupérer les données des clients
+                method: "GET",
+                success: function(response) {
+                    clientsData = response;
+                    resolve(response);
+                },
+                error: function(xhr, status, error) {
+                    reject(error); // Rejeter la promesse en cas d'erreur
+                }
+            });
+        });
     }
 
     function getTerrainsData(category, mois, annee) {
-        // Obtenir les données des terrains en fonction des sélections
-        // Retourner les données appropriées sous forme de tableau
-        // Remplacez cette partie avec votre logique de récupération des données des terrains
-        return [2, 7, 9, 12, 5, 1, 7, 13, 7];
+        return new Promise(function(resolve, reject) {
+            $.ajax({
+                url: "/terrains?annee="+annee+"&mois="+mois+"&category="+category, // URL de votre endpoint pour récupérer les données des clients
+                method: "GET",
+                success: function(response) {
+                    clientsData = response;
+                    resolve(response);
+                },
+                error: function(xhr, status, error) {
+                    reject(error); // Rejeter la promesse en cas d'erreur
+                }
+            });
+        });
     }
-
-    $(document).ready(function() {
-  // Événement de changement de la sélection de catégorie
-  $("#category").change(function() {
-    var selectedCategory = $(this).val();
-    var selectedMonth = $("#mois").val();
-    var selectedYear = $("#annee").val();
-
-    getClientsData(selectedCategory, selectedMonth, selectedYear)
-      .then(function(data) {
-        // Mettez à jour les données du graphique avec les nouvelles données
-        updateChartData(data);
-      })
-      .catch(function(error) {
-        // Gestion des erreurs
-        console.error(error);
-      });
-  });
-
-  // Événement de changement de la sélection de mois
-  $("#mois").change(function() {
-    var selectedCategory = $("#category").val();
-    var selectedMonth = $(this).val();
-    var selectedYear = $("#annee").val();
-
-    getClientsData(selectedCategory, selectedMonth, selectedYear)
-      .then(function(data) {
-        // Mettez à jour les données du graphique avec les nouvelles données
-        updateChartData(data);
-      })
-      .catch(function(error) {
-        // Gestion des erreurs
-        console.error(error);
-      });
-  });
-
-  // Événement de changement de la sélection d'année
-  $("#annee").change(function() {
-    var selectedCategory = $("#category").val();
-    var selectedMonth = $("#mois").val();
-    var selectedYear = $(this).val();
-
-    getClientsData(selectedCategory, selectedMonth, selectedYear)
-      .then(function(data) {
-        // Mettez à jour les données du graphique avec les nouvelles données
-        updateChartData(data);
-      })
-      .catch(function(error) {
-        // Gestion des erreurs
-        console.error(error);
-      });
-  });
-});
 
 </script>
 

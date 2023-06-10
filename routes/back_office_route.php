@@ -60,16 +60,83 @@ Route::post('/insert', [CrudController::class,
     'save'])->name('insert');
 
 
-Route::post('/clients', function (Request $request) {
-    $category = $request->input('category');
-    $mois = $request->input('mois');
-    $annee = $request->input('annee');
-
+Route::get('/users', function () {
     // Appeler la méthode countClientsMonth du modèle Client avec les paramètres appropriés
-    $clientsData = Statistique::countClientsMonth($annee);
+    $annee = $_GET['annee'];
+    $mois = $_GET['mois'];
+    $category = $_GET['annee'];
+    $usersData = [];
+    $ref=0;
+    if($mois == '00'){
+        $usersData = Statistique::getDataUsersYear($annee);
+    }else{
+        $usersData = Statistique::getDataUsersMonth($mois,$annee);
+        $ref =2;
+    }
+    $data = Statistique::getDonneeNb($usersData);
+    if($data == null){
+        if($ref == 2 ){
+            $data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+        }else{
+            $data = [0,0,0,0,0,0,0,0,0,0];
+        }
+    }
     // Retourner les données en format JSON
-    return response()->json($clientsData);
+    return response()->json($data);
 });
+Route::get('/clients', function () {
+    // Appeler la méthode countClientsMonth du modèle Client avec les paramètres appropriés
+    $annee = $_GET['annee'];
+    $mois = $_GET['mois'];
+    $category = $_GET['annee'];
+    $clientsData = [];
+    $ref =0;
+    if($mois == '00'){
+        $clientsData = Statistique::getDataClientsYear($annee);
+    }else{
+        $clientsData = Statistique::getDataClientsMonth($mois,$annee);
+        $ref = 2;
+    }
+    $data = Statistique::getDonneeNb($clientsData);
+    if($data == null){
+        if($ref == 2 ){
+            $data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+        }else{
+            $data = [0,0,0,0,0,0,0,0,0,0];
+        }
+    }
+    // Retourner les données en format JSON
+    return response()->json($data);
+});
+Route::get('/terrains', function () {
+    // Appeler la méthode countClientsMonth du modèle Client avec les paramètres appropriés
+    $annee = $_GET['annee'];
+    $mois = $_GET['mois'];
+    $category = $_GET['annee'];
+    $terrainsData = [];
+    $ref = 0;
+    if($mois == '00'){
+        $terrainsData = Statistique::getDataTerrainsYear($annee);
+        $ref = 1;
+    }else{
+        $terrainsData = Statistique::getDataTerrainsMonth($mois,$annee);
+        $ref=2;
+    }
+    $data = Statistique::getDonneeNb($terrainsData);
+    if($data == null){
+        if($ref == 2 ){
+            $data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+        }else{
+            $data = [0,0,0,0,0,0,0,0,0,0];
+        }
+    }
+    
+    // Retourner les données en format JSON
+    return response()->json($data);
+});
+
+Route::get('/filtrer', [StatistiqueController::class, 
+'filtrer'])->name('filtrer');
 
 
 ?>
