@@ -1,0 +1,141 @@
+$principal-color: #E17B36;
+$secondar-color: #2A1F1D;
+$other-color-1: #33658A;
+$other-color-2: #EBF8B8;
+
+.dispo-titre {
+    font-size: 30px;
+    color: $other-color-1;
+    letter-spacing: 4px;
+}
+
+.dispo-p {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.hidden-form {
+    display: none;
+}
+
+.listes-parametres {
+    overflow-y: auto;
+    max-height: 300px;
+
+    .param-group {
+        width: 90%;
+
+
+        ul {
+            display: flex;
+            justify-content: space-around;
+            padding: 0;
+            list-style: none;
+            margin-bottom: 0;
+        }
+
+        .jour {
+            background-color: none;
+            color: $principal-color;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 100%;
+            border: solid 2px $principal-color;
+        }
+
+        .jour--checked {
+            background-color: $principal-color;
+            color: white;
+        }
+
+        .hour {
+            display: flex;
+            align-items: center;
+
+            span {
+                margin: 0px 20px;
+                color: $other-color-1;
+            }
+        }
+
+        .price {
+            display: flex;
+            align-items: center;
+            color: $principal-color;
+            font-weight: 600;
+        }
+
+        .delete {
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+
+            i {
+                color: rgb(218, 52, 52);
+            }
+        }
+    }
+}
+
+.parameter-insert {
+    width: 90%;
+
+    ul {
+        display: flex;
+        justify-content: space-around;
+        padding: 0;
+        list-style: none;
+        margin-bottom: 0;
+    }
+
+    .jour {
+        background-color: none;
+        color: $principal-color;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 100%;
+        cursor: pointer;
+        border: solid 2px $principal-color;
+
+        &:hover {
+            background-color: #e17a36c2;
+            color: white;
+        }
+    }
+
+    .jour--checked {
+        background-color: $principal-color;
+        color: white;
+        &:hover {
+            background-color: #e17a36c2;
+            color: white;
+        }
+    }
+
+    .parameter-title {
+        color: $other-color-1;
+        font-size: 14px;
+        font-weight: 500;
+        margin-left: 10px;
+    }
+
+    .formulaire {
+        width: 40%;
+        padding: 15px;
+    }
+
+    .ajout-button {
+        color: white;
+
+        i {
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+    }
+}
