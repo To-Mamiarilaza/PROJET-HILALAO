@@ -142,7 +142,7 @@ class Client
         $datas = array();
         $i = 0;
         foreach ($results as $row) {
-            $datas[$i] = new Client($row->id_client, $row->first_name, $row->last_name, $row->phone_number, $row->mail, $row->address, $row->birth_date, $row->pwd, $row->status, $row->sign_up_date, $row->cin);
+            $datas[$i] = new Client($row->id_client, $row->first_name, $row->last_name, $row->phone_number, $row->mail, $row->address, $row->birth_date, $row->pwd, Status::findById($row->id_status), $row->sign_up_date, Cin::findById($row->id_cin));
             $i++;
         }
         
@@ -154,7 +154,7 @@ class Client
     {
         $results = DB::table('client')->where('id_client', $id)->first();
         
-        return  new Client($results->id_client, $results->first_name, $results->last_name, $results->phone_number, $results->mail, $results->address, $results->birth_date, $results->pwd, $results->status, $results->sign_up_date, $results->cin);
+        return  new Client($results->id_client, $results->first_name, $results->last_name, $results->phone_number, $results->mail, $results->address, $results->birth_date, $results->pwd,Status::findById($results->id_status), $results->sign_up_date, Cin::findById($results->id_cin));
     }
 
     //Sauvegarder un client dans la base
