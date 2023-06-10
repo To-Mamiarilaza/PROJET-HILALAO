@@ -28,7 +28,7 @@ Route::get('/Statistique', [LoginController::class,
         'statistique']
 )->name('statistique');
 
-Route::get('/Abonnemnt', [AbonnementController::class,
+Route::get('/Abonnement', [AbonnementController::class,
     'abonnement']
 )->name('abonnement');
 
