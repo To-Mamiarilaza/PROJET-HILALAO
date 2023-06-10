@@ -255,3 +255,10 @@ select
 from field
 	join picture on picture.id_field = field.id_field
 where picture.id_type_picture=1;
+
+--Vue info terrain
+CREATE OR REPLACE VIEW v_info_field AS 
+	SELECT field.id_field, field.name, category.category, field_type.field_type, infrastructure.infrastructure, light.light, field.address, field.longitude, field.latitude, field.description
+	FROM field JOIN category ON field.id_category = category.id_category JOIN field_type ON field.id_field_type = field_type.id_field_type 
+	JOIN infrastructure ON field.id_infrastructure = infrastructure.id_infrastructure JOIN light ON field.id_light = light.id_light
+; 
