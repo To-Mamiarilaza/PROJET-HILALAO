@@ -45,7 +45,7 @@ function insertHTMLParameter(parametre) {
     end.value = parametre[2];
     price.value = parametre[3];
 
-    var paramsContainer = document.getElementById("hidden-form");
+    var paramsContainer = document.getElementById("send-form");
     paramsContainer.appendChild(input);
 }
 
@@ -67,16 +67,13 @@ function addNewParameter() {
         parameters.push([element + 1, begin, end, price]);
     }
 
-    if (!checkNewParameter([begin, end, price], getExistParameter())) {       // Vérifie si c'est un nouveau paramètre ou non
-        return;
-    }
-
     for (let index = 0; index < parameters.length; index++) {
         const element = parameters[index];
         insertHTMLParameter(element);
     }
 
-    displayParameter();
+    const formulaire = document.getElementById("send-form");
+    formulaire.submit();
 }
 
 function changeState(element) {

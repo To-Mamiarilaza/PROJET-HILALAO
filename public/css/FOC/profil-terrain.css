@@ -112,4 +112,15 @@
   color: #33658A;
   margin-left: 20px;
   margin-right: 20px;
+}
+
+.error {
+  font-size: 12px;
+  margin: 0;
+  color: #d32222;
+  margin-top: 15px;
+}
+
+.updatePhoto img {
+  width: 100%;
 }/*# sourceMappingURL=profil-terrain.css.map */

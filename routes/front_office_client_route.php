@@ -1,6 +1,6 @@
 <?php 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/disponibility', function() {
-    return view('FOC/disponibility');
+Route::get('/reservation', function() {
+    return view('FOC/reservation');
 });

@@ -18,18 +18,26 @@
         <div class="row gx-5">
             <div class="col-md-4">
                 <div class="principale">
-                    <img class="principale__img" src="{{ asset('image/elgeco.jpg') }}" alt="Image du terrain principale">
+                    <a href="" data-bs-toggle="modal" data-bs-target="#updatePhoto" onclick="updatePhoto(this)">
+                        <img class="principale__img img" src="{{ asset('image/elgeco.jpg') }}" alt="Image du terrain principale">
+                    </a>
                 </div>
                 <div class="second-list mt-3">
                     <div class="row">
                         <div class="col-md-4 second">
-                            <img class="second-list__second__img" src="{{ asset('image/elgeco-plus.jpg') }}" alt="">
+                            <a href="" data-bs-toggle="modal" data-bs-target="#updatePhoto" onclick="updatePhoto(this)">
+                                <img class="second-list__second__img img" src="{{ asset('image/elgeco-plus.jpg') }}" alt="">
+                            </a>
                         </div>
                         <div class="col-md-4 second">
-                            <img class="second-list__second__img" src="{{ asset('image/elgeco-plus.jpg') }}" alt="">
+                            <a href="" data-bs-toggle="modal" data-bs-target="#updatePhoto" onclick="updatePhoto(this)">
+                                <img class="second-list__second__img img" src="{{ asset('image/elgeco-plus.jpg') }}" alt="">
+                            </a>
                         </div>
-                        <div class="col-md-4">
-                            <img class="second-list__second__img" src="{{ asset('image/elgeco-plus.jpg') }}" alt="">
+                        <div class="col-md-4 second">
+                            <a href="" data-bs-toggle="modal" data-bs-target="#updatePhoto" onclick="updatePhoto(this)">
+                                <img class="second-list__second__img img" src="{{ asset('image/elgeco-plus.jpg') }}" alt="">
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -97,7 +105,7 @@
                 </p>
 
                 <div class="row parametrage mb-4">
-                    <div class="col-md-5">
+                    <div class="col-md-5 my-2">
                         <div class="border p-3">
                             <a href="">
                                 <i class="fas fa-cog mx-3"></i>
@@ -105,7 +113,31 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-5 my-2">
+                        <div class="border p-3">
+                            <a href="">
+                                <i class="fas fa-calendar-alt mx-3"></i>
+                                Suivie de réservation
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-5 my-2">
+                        <div class="border p-3">
+                            <a href="">
+                                <i class="fas fa-credit-card mx-3"></i>
+                                Abonnement
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-5 my-2">
+                        <div class="border p-3">
+                            <a href="">
+                                <i class="fas fa-chart-line mx-3"></i>
+                                Statistique
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-5 my-2">
                         <div class="border p-3">
                             <a href="" data-bs-toggle="modal" data-bs-target="#add-remise">
                                 <i class="fas fa-donate mx-3"></i>
@@ -113,19 +145,17 @@
                             </a>
                         </div>
                     </div>
+                    <div class="col-md-5 my-2">
+                        <div class="border p-3">
+                            <a href="" data-bs-toggle="modal" data-bs-target="#list-unavailability">
+                                <i class="fas fa-calendar-times mx-3"></i>
+                                Indisponibilité
+                            </a>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="action row my-3">
-                    <div class="col-md-5 suivie__label">Pour suivre les réservations du terrain :</div>
-                    <div class="col-md-5"><a href="" class="btn btn-warning">Suivie de réservation</a></div>
-                </div>
-
-                <div class="action row my-3">
-                    <div class="col-md-5 suivie__label">Pour voir les Indisponibilités :</div>
-                    <div class="col-md-5"><a href="" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#list-unavailability">Voir les indisponibilités</a></div>
-                </div>
-
-                <p class="supprimer__label mt-5 text-danger">
+                <p class="supprimer__label mt-3 text-danger">
                     Effacer le terrain de l'application : <br>
                     <a class="btn btn-danger mt-3" data-bs-toggle="modal" data-bs-target="#suppression"> Supprimer le terrain</a>
                 </p>
@@ -154,6 +184,36 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal pour changer les photos du terrain -->
+    <form action="" method="" class="updatePhoto">
+        <div class="modal fade" id="updatePhoto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Changer les photos du terrain</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <img id="recentPhoto" src="{{ asset('image/elgeco.jpg') }}" alt="Image à changer">
+                            </div>
+                            <div class="col-md-7">
+                                <label for="file" class="form-label">Choisir l'image pour remplacer l'existant</label>
+                                <input type="file" id="file" class="form-control">
+                                <p class="error"><i class="fas fa-info-circle mx-2"></i> Afficher l'erreur ici</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Valider</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 
     <!-- Modal pour afficher les unavailability -->
     <div class="modal fade" id="list-unavailability" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -223,6 +283,7 @@
                                 <label for="new-date" class="form-label">Date Fin</label>
                                 <input type="date" class="form-control" id="date-fin">
                             </div>
+                            <p class="error"><i class="fas fa-info-circle mx-2"></i> Afficher l'erreur ici</p>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -263,9 +324,11 @@
                                 <label for="new-date" class="form-label">Remise</label>
                                 <input type="number" class="form-control" id="new-date" placeholder="Remise">
                             </div>
+                            <p class="error"><i class="fas fa-info-circle mx-2"></i> Afficher l'erreur ici</p>
                             <div class="my-3">
                                 <a href="" class="link my-3" data-bs-toggle="modal" data-bs-target="#list-remise" data-bs-dismiss="modal">Voir listes des remises</a>
                             </div>
+
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -307,6 +370,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <p class="error"><i class="fas fa-info-circle mx-2"></i> Afficher l'erreur ici</p>
                             <div class="my-3">
                                 <a href="" class="link my-3" data-bs-toggle="modal" data-bs-target="#long-unavailability" data-bs-dismiss="modal">Indisponibilités à longue durée</a>
                             </div>
@@ -322,6 +386,14 @@
     </form>
 
     <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
+    <script>
+        // Fonction pour mettre à jour l'image à modifier
+        function updatePhoto(element) {
+            var image = element.getElementsByClassName("img")[0];
+            var imageContainer = document.getElementById("recentPhoto");
+            imageContainer.src = image.src;
+        }
+    </script>
 </body>
 
 </html>

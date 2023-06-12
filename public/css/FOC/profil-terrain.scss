@@ -139,5 +139,17 @@ $other-color-2: #EBF8B8;
         margin-left: 20px;
         margin-right: 20px;
     }
+}
 
+.error {
+    font-size: 12px;
+    margin: 0;
+    color: #d32222;
+    margin-top: 15px;
+}
+
+.updatePhoto {
+    img {
+        width: 100%;
+    }
 }

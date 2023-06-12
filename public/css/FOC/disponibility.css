@@ -115,4 +115,10 @@
 .parameter-insert .ajout-button i {
   margin-left: 10px;
   margin-right: 10px;
+}
+.parameter-insert .error {
+  font-size: 12px;
+  margin: 0;
+  color: #d32222;
+  margin-top: 10px;
 }/*# sourceMappingURL=disponibility.css.map */
