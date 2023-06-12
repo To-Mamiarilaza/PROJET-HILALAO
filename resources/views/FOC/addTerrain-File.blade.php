@@ -20,14 +20,33 @@
 					<img src="{{ asset('image/documents.png') }}" alt="Upload file" srcset="">
                 </div>
                 <div class="col-md-6">
-                    <h1>Uploader ici les fichiers necessaires</h1>
-                    <p class="mt-4">
-                        Pour nous aider à confirmer votre terrain, veuillez remplir ces dossiers 
-                        enzipper dans un fichier. L'uploade de fichier est 
-                    </p>
+                    <div class="row">
+                        <h1>Uploader ici les fichiers necessaires</h1>
+                        <p class="mt-4">
+                            Pour nous aider à confirmer votre terrain, veuillez remplir ces dossiers 
+                            enzipper dans un fichier. L'uploade de fichier est 
+                        </p>
+                    </div>
+                    <div class="row">
+                        <h3>Importer les documents ici</h3>
+                        <div class="col-md-12 contenu-terrain">
+                            <form action="" method="get" class="col-md-12 form-content">
+                                <div class="row info-terrain">
+                                    <div class="col-md-6">
+                                        <label for="dossierTerrain" class="control-label"><b>Dossier a fournir</b></label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="file" id="image-upload" style="display: none;">
+                                        <label for="image-upload" class="btn btn-primary btn-block btn-edited">Dossier</label>
+                                    </div>
+                                </div><br>
+                                <input class="btn btn-success" type="submit" value="Ajouter">
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="row justify-content-center fonction-list">
+            {{-- <div class="row justify-content-center fonction-list">
                 <h1>Importer les documents ici</h1>
                 <div class="col-md-8 contenu-terrain">
                     <form action="" method="get" class="col-md-12 form-content">
@@ -37,13 +56,13 @@
                             </div>
                             <div class="col-md-4">
                                 <input type="file" id="image-upload" style="display: none;">
-                                <label for="image-upload" class="btn btn-primary btn-block">Dossier</label>
+                                <label for="image-upload" class="btn btn-primary btn-block btn-edited">Dossier</label>
                             </div>
-                        </div>
+                        </div><br>
 						<input class="btn btn-success" type="submit" value="Ajouter">
                     </form>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </section>
 </body>
