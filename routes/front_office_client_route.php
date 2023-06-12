@@ -32,6 +32,10 @@ Route::get('/addTerrain',function() {
     return view('FOC/addTerrain');
 });
 
+Route::get('/addTerrain-File', function() {
+    return view('FOC/addTerrain-File');
+});
+
 Route::get('/home-client', function() {
     return view('FOC/home');
 });

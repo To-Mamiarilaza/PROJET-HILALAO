@@ -31,7 +31,7 @@
 			<div class="row justify-content-center fonction-list">
                 <h1>Formulaire d'ajout de terrain</h1>
 				<div class="col-md-12 contenu-terrain">
-					<form>
+					<form action="" method="get" class="col-md-12 form-content">
 						<div class="row info-terrain">
 							<div class="col-md-2">
 								<label for="nom" class="control-label"><b>Nom</b></label>
@@ -103,17 +103,8 @@
 								</div>
 							</div>
 						</div>
-						<div class="row info-terrain">
-							<div class="col-md-2">
-								<label for="dossierTerrain" class="control-label"><b>Dossier a fournir</b></label>
-							</div>
-							<div class="col-md-2">
-								<input type="file" id="image-upload" style="display: none;">
-								<label for="image-upload" class="btn btn-primary btn-block">Dossier</label>
-							</div>
-						</div>
+						<input class="btn btn-success" type="submit" value="Ajouter">
 					</div>
-					<input class="btn btn-success" type="submit" value="Ajouter">
 				</form>
 			</div>
 		</div>

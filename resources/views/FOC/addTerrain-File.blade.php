@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('fontawesome-5/css/all.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/FOC/home.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/FOC/add-field.css') }}">
     <title>HILALAO | TERRAIN - UPLOAD FILE</title>
 </head>
 <body>
@@ -21,6 +25,23 @@
                         Pour nous aider à confirmer votre terrain, veuillez remplir ces dossiers 
                         enzipper dans un fichier. L'uploade de fichier est 
                     </p>
+                </div>
+            </div>
+            <div class="row justify-content-center fonction-list">
+                <h1>Importer les documents ici</h1>
+                <div class="col-md-8 contenu-terrain">
+                    <form action="" method="get" class="col-md-12 form-content">
+                        <div class="row info-terrain">
+                            <div class="col-md-4">
+                                <label for="dossierTerrain" class="control-label"><b>Dossier a fournir</b></label>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="file" id="image-upload" style="display: none;">
+                                <label for="image-upload" class="btn btn-primary btn-block">Dossier</label>
+                            </div>
+                        </div>
+						<input class="btn btn-success" type="submit" value="Ajouter">
+                    </form>
                 </div>
             </div>
         </div>
