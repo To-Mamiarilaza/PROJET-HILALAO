@@ -67,8 +67,42 @@
 						</div>
 						<div class="row payement-sub-fact justify-content-center fonction-list">
 							<h1>Payement</h1>
-							<div class="row">
-								
+							<div class="row contenu-sub-fact">
+								<form action="" method="get" class="col-md-8 form-content">
+									<div class="row">
+										<div class="col-md-10">
+											<div class="row info-payement">
+												<form>
+													<div class="col-md-2">
+														<label for="mois" class="control-label mt-2"><b>Mois</b></label>
+													</div>
+													<div class="col-md-6">
+														<select id="mois" class="form-control" required>
+															<option value="">Selectionner le mois</option>
+															<option value="1">Jan</option>
+															<option value="2">Fev</option>
+															<option value="3">Mar</option>
+														</select>
+													</div>
+												</form>
+											</div>				
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-10">
+											<div class="row info-payement">
+												<form>
+													<div class="col-md-2">
+														<label for="montants" class="control-label mt-2"><b>Montants</b></label>
+													</div>
+													<div class="col-md-6">
+														<input type="number" name="montants" id="montants">
+													</div>
+												</form>
+											</div>				
+										</div>
+									</div>
+								</form>
 							</div>
 						</div>
 					</div>
