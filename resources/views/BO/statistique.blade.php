@@ -47,13 +47,13 @@
     </form>
     <div id="Statistique">
         <div id="Nombreclient" class="par">
-        <h3>{{$NbUsers}}  Clients  </h3>
+        <h3>  Clients  </h3>
         </div>
         <div id="Nombreutilisateur" class="par">
-            <h3> <a href="#"> Utilisateurs </a> </h3>
+            <h3> Utilisateurs </h3>
         </div>
         <div id="Nombreterrain" class="par">
-            <h3> <a href="#"> Terrains </a> </h3>
+            <h3> Terrains  </h3>
         </div>
     </div>
     <div id="selectedFields">  </div>
@@ -61,7 +61,44 @@
 
 <script>
     var ctx = document.getElementById('myChart').getContext('2d');
-    var myChart;
+    var clientsData = {!! $NbClients !!};
+    var usersData = {!! $NbUsers !!};
+    var terrainsData = {!! $NbTerrains !!};
+    // Utilisez les variables clientsData, usersData et terrainsData dans votre script
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: getLabels('00'),
+            datasets: [
+                {
+                    label: 'Clients',
+                    data: clientsData,
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Utilisateurs',
+                    data: usersData,
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Terrains',
+                    data: terrainsData,
+                    borderColor: 'green',
+                    borderWidth: 1
+                }
+            ]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
 
     function updateSelectedFields() {
         var selectElementAnnee = document.getElementById("annee");
@@ -77,7 +114,10 @@
         // Ajouter le champ sélectionné
         if (selectedValueCategory) {
             var selectedField = document.createElement("p");
-            selectedField.textContent = "Graphique de la catégorie: " + selectedValueCategory + " Mois: " + selectedValueMois + " Année: " + selectedValueAnnee;
+            if(selectedValueMois === "00" ){
+                selectedField.textContent = "Graphique de la catégorie: " + selectedValueCategory + " tout les mois  de l'Année: " + selectedValueAnnee;
+            }
+            selectedField.textContent = "Graphique de la catégorie: " + selectedValueCategory + " Mois: " + selectedValueMois + "/ Année: " + selectedValueAnnee;
             selectedFieldsElement.appendChild(selectedField);
         }
         

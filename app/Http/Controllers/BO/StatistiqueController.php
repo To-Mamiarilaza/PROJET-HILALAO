@@ -17,11 +17,25 @@ class StatistiqueController extends Controller
             $category = new Category();
             $allCategories = $category->getAllCategory();
             $currentYear = date("Y");
-            $nbUsers = Statistique::getDataClientsYear($currentYear); 
-            $nb = Statistique::nombre(Statistique::getDonneeNb($nbUsers)) ;
-            return view('BO.statistique',['allCategories' => $allCategories,'NbUsers' => $nb]);
-        } 
+            $nbUsers = Statistique::getDataUsersYear($currentYear); 
+            $nbClients = Statistique::getDataClientsYear($currentYear); 
+            $nbTerrains = Statistique::getDataTerrainsYear($currentYear, 0); 
+            
+            // Convertir les tableaux en chaînes JSON
+            $nbUsers = json_encode($nbUsers);
+            $nbClients = json_encode($nbClients);
+            $nbTerrains = json_encode($nbTerrains);
+            
+            return view('BO.statistique', [
+                'allCategories' => $allCategories,
+                'NbUsers' => $nbUsers,
+                'NbClients' => $nbClients,
+                'NbTerrains' => $nbTerrains
+            ]);
+        }
+        
     }
+    
 
 
 
