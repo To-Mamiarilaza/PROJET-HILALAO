@@ -143,7 +143,7 @@
                             beginAtZero: true,
                             title: {
                                 display: true,
-                                text: "Salaire (en euros)"
+                                text: "Réservations et montant obtenues"
                             }
                         }
                     }
