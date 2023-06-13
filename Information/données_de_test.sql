@@ -64,6 +64,14 @@ insert into picture values
 	(DEFAULT,		'Terrain3.jpg',		2,					3),
 	(DEFAULT,		'Terrain4.jpg',		2,					4);
 
+
+insert into picture values
+-- 	(id_picture,	picture,			id_type_picture,	id_field)
+	(DEFAULT,		'Terrain5.jpg',		2,					1),
+	(DEFAULT,		'Terrain6.jpg',		2,					2),
+	(DEFAULT,		'Terrain7.jpg',		1,					3),
+	(DEFAULT,		'Terrain8.jpg',		1,					4);
+
 INSERT INTO dispo_and_price VALUES
 (DEFAULT, 1, '08:00:00', '19:00:00', 1, 30000),
 (DEFAULT, 2, '08:00:00', '19:00:00', 1, 30000),

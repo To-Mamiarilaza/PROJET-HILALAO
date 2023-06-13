@@ -1,6 +1,7 @@
 <?php 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FOC\LoginController;
+use App\Http\Controllers\FOC\FieldController;
 use App\Http\Controllers\FOC\CustomerController;
 
 Route::POST('/SignIn', [LoginController::class,
@@ -24,11 +25,19 @@ Route::post('/signUpCin', [LoginController::class, 'signUpCin'])
 Route::POST('/login', [LoginController::class, 'login'])
 ->name('login');
 
+Route::GET('/deconnect', [LoginController::class, 'deconnect'])
+->name('deconnect');
+
 /// pour la page Profil
 Route::post('/ClientProfil', [LoginController::class, 'profilClient'])
 ->name('profilClient');
 
-
 Route::get('/home-client', function() {
     return view('FOC/home');
 });
+
+Route::get('/list-field', [FieldController::class, 'listField'])
+->name('list-field');
+
+Route::get('/profile-field', [FieldController::class, 'profileField'])
+->name('profile-field');

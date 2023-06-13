@@ -19,8 +19,7 @@ class LoginController extends Controller
             $client = Client::login($password, $email);
             if($client != null) {
                 session()->put('clientConnected', $client);
-                $value = session()->get('clientConnected');
-                return view('FOC/welcome')->with('client', $value);
+                return redirect()->to('/home-client');
             }
             else {
                 throw new Exception("Veuillez ressayer");
@@ -49,5 +48,15 @@ class LoginController extends Controller
 	{
 		return view('FOC/profilClient');
 	}
+
+    public function deconnect() {
+        // Récupérez l'ID de session actuel
+        $sessionId = session()->getId();
+
+        // Utilisez l'ID de session pour oublier la session
+        Session::forget($sessionId);
+
+        return view('FOC/login');
+    }
 }
 ?>

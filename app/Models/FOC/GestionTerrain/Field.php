@@ -130,15 +130,29 @@ class Field {
     //Recuperer toutes les terrain
     public static function getAll()
     {
-        $results = DB::select('SELECT * FROM terrain');
+        $results = DB::select('SELECT * FROM field');
         $datas = array();
         $i = 0;
         foreach ($results as $row) {
-            $datas[$i] =  new Field($row->id_field, Category::findById($row->id_category), Client::findById($row->id_client), $row->name, FieldType::findById($row->id_field_type), Infrastructure::findById($row->id_infrastucture), Light::findById($row->id_light), $row->description, $row->address, $row->latitude, $row->longitude,  $row->insert_date,  $row->field_files);
+            $datas[$i] =  new Field($row->id_field, Category::findById($row->id_category), Client::findById($row->id_client), $row->name, FieldType::findById($row->id_field_type), Infrastructure::findById($row->id_infrastructure), Light::findById($row->id_light), $row->description, $row->address, $row->latitude, $row->longitude,  $row->insert_date,  $row->field_files);
             $i++;
         }
         
         return $datas;
+    }
+
+    //Recuperer toutes les terrain du client connecte
+    public static function getFieldsClientConnectedById($idClientConnected)
+    {
+        $results = DB::select('SELECT * FROM field WHERE id_client = '.$idClientConnected);
+        $datas = array();
+        $i = 0;
+        foreach ($results as $row) {
+            $datas[$i] =  new Field($row->id_field, Category::findById($row->id_category), Client::findById($row->id_client), $row->name, FieldType::findById($row->id_field_type), Infrastructure::findById($row->id_infrastructure), Light::findById($row->id_light), $row->description, $row->address, $row->latitude, $row->longitude,  $row->insert_date,  $row->field_files);
+            $i++;
+        }
+          
+         return $datas;
     }
 
     //Trouver un terrain par son id
@@ -146,7 +160,7 @@ class Field {
     {
         $results = DB::table('field')->where('id_field', $id)->first();
         
-        return  new Field($results->id_field,  Category::findById($results->id_category), Client::findById($results->id_client), $results->name, FieldType::findById($results->id_field_type), Infrastructure::findById($results->id_infrastucture), Light::findById($results->id_light), $results->description, $results->address, $results->latitude, $results->longitude,  $results->insert_date,  $results->field_files);
+        return  new Field($results->id_field,  Category::findById($results->id_category), Client::findById($results->id_client), $results->name, FieldType::findById($results->id_field_type), Infrastructure::findById($results->id_infrastructure), Light::findById($results->id_light), $results->description, $results->address, $results->latitude, $results->longitude,  $results->insert_date,  $results->field_files);
     }
 
     //Sauvegarder un terrain dans la base

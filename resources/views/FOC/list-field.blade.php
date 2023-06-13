@@ -35,16 +35,16 @@
                 </div>
             </div>
         </form>
-
         <div class="list-field mt-3">
             <div class="row g-4">
+            @foreach ($fields as $field)
                 <div class="col-md-3">
-                    <a href="" class="lien-terrain">
+                    <a href="{{ route('profile-field') }}" class="lien-terrain">
                         <div class="terrain border p-3">
-                            <img src="{{ asset('image/terrain.jpg') }}" alt="Image du terrain" class="terrain__img">
-                            <h6 class="mt-2 terrain__h6">Stade de mahamasina</h6>
-                            <p class="terrain__categorie">Foot à 11</p>
-                            <p>Le plus grand stade national de Madagascar, avec une très belle ...</p>
+                            <img src="{{ asset('image/'.$profilePicture) }}" alt="Image du terrain" class="terrain__img">
+                            <h6 class="mt-2 terrain__h6">{{ $field->getName() }}</h6>
+                            <p class="terrain__categorie">{{ $field->getCategory()->getCategory() }}</p>
+                            <p>{{ $field->getDescription() }}</p>
                             <div class="star">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
@@ -55,43 +55,7 @@
                         </div>
                     </a>
                 </div>
-
-                <div class="col-md-3">
-                    <a href="" class="lien-terrain">
-                        <div class="terrain border p-3">
-                            <img src="{{ asset('image/terrain.jpg') }}" alt="Image du terrain" class="terrain__img">
-                            <h6 class="mt-2 terrain__h6">Stade de mahamasina</h6>
-                            <p class="terrain__categorie">Foot à 7</p>
-                            <p class="terrain__description">Le plus grand stade national de Madagascar, avec une très belle ...</p>
-                            <div class="star">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                                <i class="far fa-star"></i>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col-md-3">
-                    <a href="" class="lien-terrain">
-                        <div class="terrain border p-3">
-                            <img src="{{ asset('image/elgeco.jpg') }}" alt="Image du terrain" class="terrain__img">
-                            <h6 class="mt-2 terrain__h6">Stade Elgeco Plus</h6>
-                            <p class="terrain__categorie">Foot à 11</p>
-                            <p>Le plus grand stade national de Madagascar, avec une très belle ...</p>
-                            <div class="star">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                                <i class="far fa-star"></i>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
+            @endforeach
             </div>
         </div>
 

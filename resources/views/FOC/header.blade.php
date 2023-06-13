@@ -27,7 +27,7 @@
                             <a class="nav-link active" aria-current="page" href="#"><i class="fas fa-bell"></i></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><i class="fas fa-power-off"></i></a>
+                            <a class="nav-link" href="{{ route('deconnect') }}"><i class="fas fa-power-off"></i></a>
                         </li>
                     </ul>
                 </div>
