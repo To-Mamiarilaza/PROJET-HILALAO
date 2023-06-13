@@ -9,6 +9,7 @@ class Statistique
     public $nb;
     public $month;
     public $date;
+    public $category;
 
     public function getNb()
     {
@@ -35,6 +36,15 @@ class Statistique
     public function setDate($value)
     {
         $this->date = $value;
+    }
+
+    public function getCategory()
+    {
+        return $this->category;
+    }
+    public function setCategory($value)
+    {
+        $this->category = $value;
     }
 
     public function __construct()
@@ -142,16 +152,28 @@ class Statistique
         }
     }
 
-    public static function getDataTerrainsMonth($mois,$annee)
+    public static function getDataTerrainsMonth($mois,$annee,$category)
     {
         try{
             $req= "SELECT COUNT(id_field) AS nb, insert_date 
-            FROM field
+            FROM field 
             WHERE EXTRACT(MONTH FROM insert_date) = %s
             AND EXTRACT(YEAR FROM insert_date) = %s
             GROUP BY insert_date
             ORDER BY insert_date;";
-            $req = sprintf($req,$mois,$annee);
+            if($category > 0){
+                $req= "SELECT COUNT(id_field) AS nb, insert_date 
+                FROM field 
+                WHERE EXTRACT(MONTH FROM insert_date) = %s
+                AND EXTRACT(YEAR FROM insert_date) = %s
+                AND id_category = %s
+                GROUP BY insert_date
+                ORDER BY insert_date;";
+                $req = sprintf($req,$mois,$annee,$category);
+            }else{
+                $req = sprintf($req,$mois,$annee);
+            }
+            
             $category = DB::select($req);
             $res = array();
             foreach ($category as $result) {
@@ -166,7 +188,7 @@ class Statistique
         }
     }
 
-    public static function getDataTerrainsYear($annee)
+    public static function getDataTerrainsYear($annee,$category)
     {
         try {
             $req = "SELECT EXTRACT(MONTH FROM insert_date) AS month,
@@ -175,7 +197,18 @@ class Statistique
             WHERE EXTRACT(YEAR FROM insert_date) = %s
             GROUP BY EXTRACT(MONTH FROM insert_date)
             ORDER BY EXTRACT(MONTH FROM insert_date) ";
-            $req = sprintf($req, $annee);
+            if($category > 0){
+                $req = "SELECT EXTRACT(MONTH FROM insert_date) AS month,
+                COUNT(id_field) AS nb_field
+                FROM field
+                WHERE EXTRACT(YEAR FROM insert_date) = %s
+                AND id_category = %s
+                GROUP BY EXTRACT(MONTH FROM insert_date)
+                ORDER BY EXTRACT(MONTH FROM insert_date) ";
+                $req = sprintf($req,$annee,$category);
+            }else{
+                $req = sprintf($req,$annee);
+            }
             $category = DB::select($req);
             $res=[];
             foreach ($category as $result) {
@@ -191,14 +224,21 @@ class Statistique
         }
     }
 
+    public static function verifierdonnee($ini)
+    {
+        if($ini == 'mois' ){
+            return [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+        }else{
+            return [0,0,0,0,0,0,0,0,0,0];
+        }
+    }
+
     public static function getDonneeNb($database)
     {
         $res=[];
         $month = 1;
         $jour = 1;
-        if(count($database)>0){
-            
-        }
+        $ini = 'annee';
         for($k=0; $k<count($database); $k++){
             if($database[$k]->getMonth() !=null){
                 for($i = 0;$i<$database[$k]->getMonth()-$month; $i++){
@@ -223,8 +263,22 @@ class Statistique
                     }
                 }
                 $jour = count($res)+ 1;
-            }
-            
+                $ini = 'mois';
+            } 
+        }
+        if(count($database) ==0)
+        {
+            $res = Statistique::verifierdonnee($ini);
+        }
+        return $res;
+    }
+
+    public static function nombre($database)
+    {
+        $res = 0;
+        for($i=0; $i<count($database); $i++)
+        {
+            $res = $res + $database[$i];
         }
         return $res;
     }
