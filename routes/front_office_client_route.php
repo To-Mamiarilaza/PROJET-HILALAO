@@ -28,3 +28,6 @@ Route::get('/ClientProfil', [LoginController::class, 'profilClient'])
 ->name('profilClient');
 
 
+Route::get('/home-client', function() {
+    return view('FOC/home');
+});
