@@ -24,7 +24,8 @@
                         <h1>Uploader ici les fichiers necessaires</h1>
                         <p class="mt-4">
                             Pour nous aider à confirmer votre terrain, veuillez remplir ces dossiers 
-                            enzipper dans un fichier. L'uploade de fichier est 
+                            enzipper dans un fichier. <br>L'uploade de fichier est necessaire et indispensable
+                            a la creation ou l'ajout de votre terrain.
                         </p>
                     </div>
                     <div class="row">
