@@ -106,7 +106,7 @@
             </div>
         </div>
     </div>
-    <script src="{{ asset('js/disponibility.js') }}"></script>
+    <script src="{{ asset('js/FOC/disponibility.js') }}"></script>
 </body>
 
 </html>
