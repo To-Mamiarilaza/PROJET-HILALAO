@@ -69,3 +69,14 @@ $other-color-2: #EBF8B8;
 ::-webkit-scrollbar {
     display: none;
 }
+
+#calendar {
+    height: 500px;
+}
+
+.error {
+    font-size: 12px;
+    margin: 0;
+    color: #d32222;
+    margin-top: 15px;
+}
