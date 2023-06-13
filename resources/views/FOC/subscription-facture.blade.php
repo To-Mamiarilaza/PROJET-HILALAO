@@ -61,52 +61,60 @@
 					<div class="col-md-1 alert alert-danger" role="alert"><b>20 jours</b></div>
 				</div>
 				<div class="row">
-					<div class="col-md-8">
+					<div class="col-md-6">
 						<div class="row">
-							<p class="mt-3">Apres 5 jours de retard, les informations sur tous vos terrains ne seront plus visible</p>
+							<div class="alert alert-warning" role="alert">
+								<p class="mt-3">Apres 5 jours de retard, les informations sur tous vos terrains ne seront plus visible</p>
+							</div>
 						</div>
 						<div class="row payement-sub-fact justify-content-center fonction-list">
-							<h1>Payement</h1>
-							<div class="row contenu-sub-fact">
-								<form action="" method="get" class="col-md-8 form-content">
-									<div class="row">
-										<div class="col-md-10">
-											<div class="row info-payement">
-												<form>
-													<div class="col-md-2">
-														<label for="mois" class="control-label mt-2"><b>Mois</b></label>
-													</div>
-													<div class="col-md-6">
-														<select id="mois" class="form-control" required>
-															<option value="">Selectionner le mois</option>
-															<option value="1">Jan</option>
-															<option value="2">Fev</option>
-															<option value="3">Mar</option>
-														</select>
-													</div>
-												</form>
-											</div>				
+							<div class="row">
+								{{-- <div class="col-md-4"> --}}
+									<h1>Payement</h1>
+								{{-- </div>
+								<div class="col-md-4 mvola-pic">
+									<img src="{{ asset('image/mvola.png') }}" alt="mvola" srcset="">
+								</div> --}}
+							</div>
+							<div class="row">
+								<div class="col-md-10 contenu-sub-fact">
+									<form action="" method="get" class="col-md-12 form-content">
+										<div class="row info-payement">
+											<div class="col-md-4">
+												<label for="mois" class="mt-2 control-label"><b>Mois</b></label>
+											</div>
+											<div class="col-md-8">
+												<select id="mois" class="form-control" required>
+													<option value="">Sélectionnez le mois</option>
+													<option value="1">Jan</option>
+													<option value="2">Fev</option>
+													<option value="3">Mar</option>
+												</select>
+											</div>
 										</div>
-									</div>
-									<div class="row">
-										<div class="col-md-10">
-											<div class="row info-payement">
-												<form>
-													<div class="col-md-2">
-														<label for="montants" class="control-label mt-2"><b>Montants</b></label>
-													</div>
-													<div class="col-md-6">
-														<input type="number" name="montants" id="montants">
-													</div>
-												</form>
-											</div>				
+										<div class="row info-payement">
+											<div class="col-md-4">
+												<label for="montant" class="mt-2 control-label"><b>Montants</b></label>
+											</div>
+											<div class="col-md-8">
+												<input type="number" aria-label=".form-control-lg" class="form-content__input form-content__input--log form-control" name="montant" id="montant">
+											</div>
 										</div>
-									</div>
-								</form>
+										<div class="row info-payement">
+											<div class="col-md-4">
+												<label for="tel" class="mt-2 control-label"><b>Numero tel</b></label>
+											</div>
+											<div class="col-md-8">
+												<input type="tel" aria-label=".form-control-lg" class="form-content__input form-content__input--log form-control" name="tel" id="tel">
+											</div>
+										</div>
+										<input class="btn btn-success" type="submit" value="Valider">
+									</form>
+								</div>
 							</div>
 						</div>
 					</div>
-					<div class="col-md-4 image-place">
+					<div class="col-md-6 image-place">
 						<img src="{{ asset('image/pocket-money.png') }}" alt="Upload file" srcset="">
 					</div>
 				</div>

@@ -11,9 +11,15 @@
     padding-top: 10%;
 }
 
-.info-payement {
+.contenu-sub-fact {
     background-color: aliceblue;
     margin-top: 3%;
+}
+
+/* .mvola-pic {
+} */
+
+.info-payement {
     padding-bottom: 5%;
     padding-top: 5%;
 }
