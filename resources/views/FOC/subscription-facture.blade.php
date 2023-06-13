@@ -1,3 +1,17 @@
+<?php
+	// Parcourir le tableau des mois
+	function printMonth() {
+	$mois = array(
+		"Janvier", "Février", "Mars", "Avril",
+		"Mai", "Juin", "Juillet", "Août",
+		"Septembre", "Octobre", "Novembre", "Décembre"
+	);
+	for ($i = 0; $i < count($mois); $i++) {
+			echo "<td>" . $mois[$i] . "</td>";
+		}
+	}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,9 +54,9 @@
 					<table class="table table-bordered">
 						{{-- ATAO BOUCLE LE MOIS --}}
 						<tr>
-							<td>Janvier</td>
-							<td>Fevrier</td>
-							<td>Mars</td>
+							<?php
+								printMonth();
+							?>
 						</tr>
 						{{-- LE RESULTAT KO ATAO BOUCLE --}}
 						<tr>
@@ -54,11 +68,17 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="row sub-fact-annee">
+				<div class="row sub-fact-annee info-stat">
 					<div class="col-md-3">
 						<p class="mt-3">Fin de votre abonnement dans</p>
 					</div>
-					<div class="col-md-1 alert alert-danger" role="alert"><b>20 jours</b></div>
+					<div class="col-md-1 info-limite-sub alert alert-danger" role="alert"><b>20 jours</b></div>
+					<div class="col-md-6 to-stat">
+						<p class="mt-3">
+							Les terrains sont toujours parametrable selon leurs changements.<br>
+							Vous pouvez consulter ainsi les statistique ci-dessous</p>
+						<a href="" class="btn btn-warning mt-3">Voir les statisitques</a>
+					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-6">
@@ -68,49 +88,40 @@
 							</div>
 						</div>
 						<div class="row payement-sub-fact justify-content-center fonction-list">
-							<div class="row">
-								{{-- <div class="col-md-4"> --}}
-									<h1>Payement</h1>
-								{{-- </div>
-								<div class="col-md-4 mvola-pic">
-									<img src="{{ asset('image/mvola.png') }}" alt="mvola" srcset="">
-								</div> --}}
-							</div>
-							<div class="row">
-								<div class="col-md-10 contenu-sub-fact">
-									<form action="" method="get" class="col-md-12 form-content">
-										<div class="row info-payement">
-											<div class="col-md-4">
-												<label for="mois" class="mt-2 control-label"><b>Mois</b></label>
-											</div>
-											<div class="col-md-8">
-												<select id="mois" class="form-control" required>
-													<option value="">Sélectionnez le mois</option>
-													<option value="1">Jan</option>
-													<option value="2">Fev</option>
-													<option value="3">Mar</option>
-												</select>
-											</div>
+							<h1>Payement</h1>
+							<div class="col-md-10 contenu-sub-fact">
+								<form action="" method="get" class="col-md-12 form-content">
+									<div class="row info-payement">
+										<div class="col-md-4">
+											<label for="mois" class="mt-2 control-label"><b>Mois</b></label>
 										</div>
-										<div class="row info-payement">
-											<div class="col-md-4">
-												<label for="montant" class="mt-2 control-label"><b>Montants</b></label>
-											</div>
-											<div class="col-md-8">
-												<input type="number" aria-label=".form-control-lg" class="form-content__input form-content__input--log form-control" name="montant" id="montant">
-											</div>
+										<div class="col-md-8">
+											<select id="mois" class="form-control" required>
+												<option value="">Sélectionnez le mois</option>
+												<option value="1">Jan</option>
+												<option value="2">Fev</option>
+												<option value="3">Mar</option>
+											</select>
 										</div>
-										<div class="row info-payement">
-											<div class="col-md-4">
-												<label for="tel" class="mt-2 control-label"><b>Numero tel</b></label>
-											</div>
-											<div class="col-md-8">
-												<input type="tel" aria-label=".form-control-lg" class="form-content__input form-content__input--log form-control" name="tel" id="tel">
-											</div>
+									</div>
+									<div class="row info-payement">
+										<div class="col-md-4">
+											<label for="montant" class="mt-2 control-label"><b>Montants</b></label>
 										</div>
-										<input class="btn btn-success" type="submit" value="Valider">
-									</form>
-								</div>
+										<div class="col-md-8">
+											<input type="number" aria-label=".form-control-lg" class="form-content__input form-content__input--log form-control" name="montant" id="montant">
+										</div>
+									</div>
+									<div class="row info-payement">
+										<div class="col-md-4">
+											<label for="tel" class="mt-2 control-label"><b>Numero tel</b></label>
+										</div>
+										<div class="col-md-8">
+											<input type="tel" aria-label=".form-control-lg" class="form-content__input form-content__input--log form-control" name="tel" id="tel">
+										</div>
+									</div>
+									<input class="btn btn-to-sub-fact btn-success" type="submit" value="Valider">
+								</form>
 							</div>
 						</div>
 					</div>
