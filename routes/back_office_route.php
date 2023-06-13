@@ -64,23 +64,13 @@ Route::get('/users', function () {
     // Appeler la méthode countClientsMonth du modèle Client avec les paramètres appropriés
     $annee = $_GET['annee'];
     $mois = $_GET['mois'];
-    $category = $_GET['annee'];
     $usersData = [];
-    $ref=0;
     if($mois == '00'){
         $usersData = Statistique::getDataUsersYear($annee);
     }else{
         $usersData = Statistique::getDataUsersMonth($mois,$annee);
-        $ref =2;
     }
     $data = Statistique::getDonneeNb($usersData);
-    if($data == null){
-        if($ref == 2 ){
-            $data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-        }else{
-            $data = [0,0,0,0,0,0,0,0,0,0];
-        }
-    }
     // Retourner les données en format JSON
     return response()->json($data);
 });
@@ -88,23 +78,13 @@ Route::get('/clients', function () {
     // Appeler la méthode countClientsMonth du modèle Client avec les paramètres appropriés
     $annee = $_GET['annee'];
     $mois = $_GET['mois'];
-    $category = $_GET['annee'];
     $clientsData = [];
-    $ref =0;
     if($mois == '00'){
         $clientsData = Statistique::getDataClientsYear($annee);
     }else{
         $clientsData = Statistique::getDataClientsMonth($mois,$annee);
-        $ref = 2;
     }
     $data = Statistique::getDonneeNb($clientsData);
-    if($data == null){
-        if($ref == 2 ){
-            $data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-        }else{
-            $data = [0,0,0,0,0,0,0,0,0,0];
-        }
-    }
     // Retourner les données en format JSON
     return response()->json($data);
 });
@@ -112,31 +92,18 @@ Route::get('/terrains', function () {
     // Appeler la méthode countClientsMonth du modèle Client avec les paramètres appropriés
     $annee = $_GET['annee'];
     $mois = $_GET['mois'];
-    $category = $_GET['annee'];
+    $category = $_GET['category'];
     $terrainsData = [];
-    $ref = 0;
     if($mois == '00'){
-        $terrainsData = Statistique::getDataTerrainsYear($annee);
-        $ref = 1;
+        $terrainsData = Statistique::getDataTerrainsYear($annee,$category);
     }else{
-        $terrainsData = Statistique::getDataTerrainsMonth($mois,$annee);
-        $ref=2;
+        $terrainsData = Statistique::getDataTerrainsMonth($mois,$annee,$category);
     }
     $data = Statistique::getDonneeNb($terrainsData);
-    if($data == null){
-        if($ref == 2 ){
-            $data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-        }else{
-            $data = [0,0,0,0,0,0,0,0,0,0];
-        }
-    }
     
     // Retourner les données en format JSON
     return response()->json($data);
 });
-
-Route::get('/filtrer', [StatistiqueController::class, 
-'filtrer'])->name('filtrer');
 
 
 ?>

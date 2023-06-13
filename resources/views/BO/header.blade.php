@@ -18,7 +18,6 @@
 <header>
     <div id="Logo">
         <img src="{{ asset('css/BO/image/logo1.png') }}"/>
-        <!-- <i class="fa fa-align-justify fa-3x"> </i> -->
     </div>
-    <i class="fa fa-bell fa-2x"> </i>
+    <i class="fa fa-bell fa-2x"> </i> 
 </header>
