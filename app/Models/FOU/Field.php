@@ -2,6 +2,7 @@
 namespace App\Models\FOU;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
+use DateTime;
 
 class Field {
     private $id_field;
@@ -134,7 +135,7 @@ class Field {
         $this->setName($result->name);
         $this->setLatitude($result->latitude);
         $this->setLongitude($result->longitude);
-        $this->setInsertDate($result->insert_date);
+        $this->setInsertDate(DateTime::createFromFormat('Y-M-d', $result->insert_date));
         $this->setFieldFiles($result->field_files);
     }
 }

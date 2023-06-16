@@ -28,6 +28,14 @@ class FieldUser extends FieldDetailled {
         $this->setOthersReservations(Reservation::findOthersReservation($id_field, $id_users));
     }
 
+    public static function findReservation($id_field) {
+        $field = new FieldUser();
+        $field->findById($id_field);
+        $field->setUsersReservations([]);
+        $field->setOthersReservations(Reservation::findByIdField($id_field));
+        return $field;
+    }
+
     public function getUsers() {
         return $this->users;
     }

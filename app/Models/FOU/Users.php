@@ -1,6 +1,7 @@
 <?php
 namespace App\Models\FOU;
 use Illuminate\Support\Facades\DB;
+use App\Exceptions\UserException;
 
 class Users {
     private $id_users;
@@ -12,20 +13,36 @@ class Users {
     private $sign_up_date;
     private $pwd;
 
+    public function log() {
+        $user = Users::findByMail($this->getMail());
+        if ($user->getPwd() == $this->getPwd()) {
+            return $user;
+        }
+        throw new UserException(message:"Le mot de passe est erroné", type:"pwd");
+    }
+
+    public static function findByMail($mail) {
+        $sql = "SELECT id_users, first_name, last_name, birth_date, phone_number, mail, sign_up_date, pwd FROM users WHERE mail='%s'";
+        $sql = sprintf($sql, $mail);
+        $users_db = DB::select($sql);
+        $user = new Users();
+        if (count($users_db)!=0) {
+            $user->settingDBResult($users_db[0]);
+        } else {
+            throw new UserException();
+        }
+        return $user;
+    }
+
     public static function SfindById($id) {
         $sql = 'SELECT id_users, first_name, last_name, birth_date, phone_number, mail, sign_up_date, pwd FROM users WHERE id_users=%s';
         $sql = sprintf($sql, $id);
         $users_db = DB::select($sql);
         $user = new Users();
         if (count($users_db)!=0) {
-            $user->setIdUsers($users_db[0]->id_users);
-            $user->setFirstName($users_db[0]->first_name);
-            $user->setLastName($users_db[0]->last_name);
-            $user->setBirthDate($users_db[0]->birth_date);
-            $user->setPhoneNumber($users_db[0]->phone_number);
-            $user->setMail($users_db[0]->mail);
-            $user->setSignUpDate($users_db[0]->sign_up_date);
-            $user->setPwd($users_db[0]->pwd);
+            $user->settingDBResult($users_db[0]);
+        } else {
+            throw new UserException();
         }
         return $user;
     }
@@ -35,15 +52,21 @@ class Users {
         $sql = sprintf($sql, $id);
         $users_db = DB::select($sql);
         if (count($users_db)!=0) {
-            $this->setIdUsers($users_db[0]->id_users);
-            $this->setFirstName($users_db[0]->first_name);
-            $this->setLastName($users_db[0]->last_name);
-            $this->setBirthDate($users_db[0]->birth_date);
-            $this->setPhoneNumber($users_db[0]->phone_number);
-            $this->setMail($users_db[0]->mail);
-            $this->setSignUpDate($users_db[0]->sign_up_date);
-            $this->setPwd($users_db[0]->pwd);
+            $this->settingDBResult($users_db[0]);
+        } else {
+            throw new UserException();
         }
+    }
+
+    public function settingDBResult($result) {
+        $this->setIdUsers($result->id_users);
+        $this->setFirstName($result->first_name);
+        $this->setLastName($result->last_name);
+        $this->setBirthDate($result->birth_date);
+        $this->setPhoneNumber($result->phone_number);
+        $this->setMail($result->mail);
+        $this->setSignUpDate($result->sign_up_date);
+        $this->setPwd($result->pwd);
     }
 
 

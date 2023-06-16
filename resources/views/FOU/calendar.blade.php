@@ -31,16 +31,16 @@
         {
             color: 'green',
             title: 'Votre réservation',
-            start: '{{ $reservation->getReservationDate() }}T{{ $reservation->getStartTime() }}',
-            end: '{{ $reservation->getReservationDate() }}T{{ $reservation->getEndTime() }}'
+            start: "{{ $reservation->getReservationDate()->format('Y-m-d') }}T{{ $reservation->getStartTime()->format('H:i:s') }}",
+            end: "{{ $reservation->getReservationDate()->format('Y-m-d') }}T{{ $reservation->getEndTime()->format('H:i:s') }}"
         },
         @endforeach
         @foreach ($field->getOthersReservations() as $reservation)
         {
             color: 'red',
             title: 'Reserved',
-            start: '{{ $reservation->getReservationDate() }}T{{ $reservation->getStartTime() }}',
-            end: '{{ $reservation->getReservationDate() }}T{{ $reservation->getEndTime() }}'
+            start: "{{ $reservation->getReservationDate()->format('Y-m-d') }}T{{ $reservation->getStartTime()->format('H:i:s') }}",
+            end: "{{ $reservation->getReservationDate()->format('Y-m-d') }}T{{ $reservation->getEndTime()->format('H:i:s') }}"
         },
         @endforeach
       ]
@@ -73,5 +73,22 @@
     <h1>{{ date('Y-m-d') }}</h1>
     <div id='calendar'></div>
     <h1>Tiavina Malalaniaina</h1>
+    <form action="{{ route('reserve') }}" method="POST">
+        @csrf
+        <input type="hidden" name="id_field" value="1">
+        <div>
+            <label for="day">Date de la réservation</label>
+            <input type="date" name="reservation_date" id="">
+        </div>
+        <div>
+            <label for="start_time">Début</label>
+            <input type="time" name="start_time" id="">
+        </div>
+        <div>
+            <label for="duration">Fin</label>
+            <input type="number" name="duration" id="">
+        </div>
+        <input type="submit" value="Valider">
+    </form>
 </body>
 </html>
