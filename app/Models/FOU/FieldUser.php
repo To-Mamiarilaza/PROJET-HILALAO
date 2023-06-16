@@ -14,10 +14,17 @@ class FieldUser extends FieldDetailled {
 
     public static function Sfind($id_field, $id_users) {
         $field = new FieldUser();
-        $field->findById($id_field);
-        $field->setUsers(Users::SfindById($id_users));
-        $field->setUsersReservations(Reservation::findUsersReservation($id_field, $id_users));
-        $field->setOthersReservations(Reservation::findOthersReservation($id_field, $id_users));
+        if ($id_users != null) {
+            $field->findById($id_field);
+            $field->setUsers(Users::SfindById($id_users));
+            $field->setUsersReservations(Reservation::findUsersReservation($id_field, $id_users));
+            $field->setOthersReservations(Reservation::findOthersReservation($id_field, $id_users));
+        } else {
+            $field->findById($id_field);
+            $field->setUsers(Users::SfindById($id_users));
+            $field->setUsersReservations([]);
+            $field->setOthersReservations(Reservation::findOthersReservation($id_field, 0));
+        }
         return $field;
     }
 

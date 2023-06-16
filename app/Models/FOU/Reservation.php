@@ -1,7 +1,10 @@
 <?php
 namespace App\Models\FOU;
+
+use App\Exceptions\SecurityException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
+use DateTime;
 
 class Reservation {
     private $id_reservation;
@@ -12,6 +15,7 @@ class Reservation {
     private $id_field;
     private $duration;
     private $end_time;
+    private $date_heure_reservation;
 
     public static function prepareReservation($id_field, $id_users,$reservation_date, $start_time, $duration) {
         $reservation = new Reservation();
@@ -20,9 +24,14 @@ class Reservation {
         $reservation->setReservationDate($reservation_date);
         $reservation->setIdField($id_field);
         $reservation->setIdUsers($id_users);
+        $end_time = $start_time->modify('+'.$duration.' hours');
+        $reservation->setEndTime($end_time);
+        $reservation->setDateHeureReservation(new DateTimeFO($reservation->getReservationDate(), $reservation->getStartTime(), $reservation->getEndTime()));
         return $reservation;
     }
 
+    public function isDispo() {
+    }
 
     public function save() {
         $sql = "INSERT INTO \"public\".reservation ( reservation_date, id_users, start_time, id_field, duration) VALUES ( '%s', %s, '%s', %s, %s )";
@@ -30,8 +39,18 @@ class Reservation {
         DB::insert($sql);
     }
 
+    public static function findByIdField($id) {
+        $sql = 'SELECT id_reservation, reservation_date, id_users, start_time, id_field, duration, end_time FROM "public".v_actif_reservation f ';
+        $reservations_db = DB::select($sql);
+        $res = array();
+        foreach ($reservations_db as $reservation_db) {
+            $res[] = Reservation::settingDBResult($reservation_db);
+        }
+        return $res;
+    }
+
     public static function findAll() {
-        $sql = 'SELECT id_reservation, reservation_date, id_users, start_time, id_field, duration, end_time FROM "public".v_liste_reservation_actif f ';
+        $sql = 'SELECT id_reservation, reservation_date, id_users, start_time, id_field, duration, end_time FROM "public".v_actif_reservation f ';
         $reservations_db = DB::select($sql);
         $res = array();
         foreach ($reservations_db as $reservation_db) {
@@ -74,7 +93,7 @@ class Reservation {
     }
 
     public function findActifReservation() {
-        $sql = 'SELECT id_reservation, reservation_date, id_users, start_time, id_field, duration, end_time FROM "public".v_liste_reservation_actif f';
+        $sql = 'SELECT id_reservation, reservation_date, id_users, start_time, id_field, duration, end_time FROM "public".v_actif_reservation f';
         $reservations_db = DB::select($sql);
         $res = array();
         foreach ($reservations_db as $reservation_db) {
@@ -133,17 +152,24 @@ class Reservation {
     public function setEndTime($values) {
         $this->end_time = $values;
     }
+    public function getDateHeureReservation() {
+        return $this->date_heure_reservation;
+    }
+    public function setDateHeureReservation($values) {
+        $this->date_heure_reservation = $values;
+    }
 
     public static function settingDBResult($result) {
         $temp = new Reservation();
         $temp->setIdReservation($result->id_reservation);
-        $temp->setReservationDate($result->reservation_date);
+        $temp->setReservationDate(DateTime::createFromFormat('Y-m-d', $result->reservation_date));
         $temp->setIdUsers($result->id_users);
         $temp->setUsers(Users::SfindById($result->id_users));
-        $temp->setStartTime($result->start_time);
+        $temp->setStartTime(DateTime::createFromFormat('H:i:s', $result->start_time));
         $temp->setIdField($result->id_field);
         $temp->setDuration($result->duration);
-        $temp->setEndTime($result->end_time);
+        $temp->setEndTime(DateTime::createFromFormat('H:i:s', $result->end_time));
+        $temp->setDateHeureReservation(new Availability(DateTime::createFromFormat('Y-M-d', $result->reservation_date), DateTime::createFromFormat('H:i:s',$result->start_time), DateTime::createFromFormat('H:i:s', $result->end_time)));
         return $temp;
     }
 

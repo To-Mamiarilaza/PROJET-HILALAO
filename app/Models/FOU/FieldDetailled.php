@@ -83,7 +83,7 @@ class FieldDetailled extends Field{
         $this->setFieldType($result->field_type);
         $this->setInfrastructure($result->infrastructure);
         $this->setLight($result->light);
-        $this->setAvailability(AvailabilityField::findByIdField($result->id_field));
+        $this->setAvailability(Availability::findByIdField($result->id_field));
         $this->setReservations(Reservation::findActifReservationByIdField($result->id_field));
     }
 }

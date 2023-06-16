@@ -5,7 +5,7 @@ namespace App\Http\Controllers\FOU;
 use App\Http\Controllers\Controller;
 use App\Models\FOU\ListField;
 
-class MyListFieldController extends Controller
+class FieldController extends Controller
 {
     public function index()
     {
