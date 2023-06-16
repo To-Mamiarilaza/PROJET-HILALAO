@@ -39,7 +39,7 @@
             <div class="row g-4">
             @foreach ($fields as $field)
                 <div class="col-md-3">
-                    <a href="{{ route('profile-field') }}" class="lien-terrain">
+                    <a href="{{ route('profile-field', ['idField' => $field->getIdField()]) }}" class="lien-terrain">
                         <div class="terrain border p-3">
                             <img src="{{ asset('image/'.$profilePicture) }}" alt="Image du terrain" class="terrain__img">
                             <h6 class="mt-2 terrain__h6">{{ $field->getName() }}</h6>

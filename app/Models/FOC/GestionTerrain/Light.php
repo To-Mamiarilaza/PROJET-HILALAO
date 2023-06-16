@@ -45,6 +45,6 @@ class Light
     {
         $results = DB::table('light')->where('id_light', $id)->first();
         
-        return new Infrastructure($results->id_light, $results->light);
+        return new Light($results->id_light, $results->light);
     }
 }

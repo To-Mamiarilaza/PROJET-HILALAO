@@ -30,9 +30,23 @@ class FieldController extends Controller
         ]);
     }
 
-    public function profileField(Request $request)
+    //Profil du terrain
+    public function profileField( $idField)
     {
-        echo $request->get('idField');
+        $field = Field::findById($idField);
+        $fieldPicture = PictureField::getPictureField($field);
+        $profilePicture = null;
+        if(count($fieldPicture) != 0) {
+            $profilePicture = $fieldPicture[0]->getPicture();
+        }
+        else {
+            $profilePicture = "terrainInconnu.jpg";
+        }
+
+        return view('FOC/profile-field')->with([
+            'field' => $field,
+            'profilePicture' => $profilePicture,
+        ]);
     }
 }
 ?>

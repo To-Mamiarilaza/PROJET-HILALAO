@@ -10,8 +10,8 @@ class Infrastructure
 
     public function __construct($id_infrastructure, $infrastructure)
     {
-        $this->id_infrastructure = $infrastructure;
-        $this->id_infrastructure = $infrastructure;
+        $this->id_infrastructure = $id_infrastructure;
+        $this->infrastructure = $infrastructure;
     }
 
 ///Encapsulation
@@ -48,7 +48,7 @@ class Infrastructure
     public static function findById($id)
     {
         $results = DB::table('infrastructure')->where('id_infrastructure', $id)->first();
-        
+ 
         return new Infrastructure($results->id_infrastructure, $results->infrastructure);
     }
 

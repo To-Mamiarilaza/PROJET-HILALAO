@@ -57,7 +57,7 @@ class PictureField
     //Recuperer toutes les images d'un terrain
     public static function getPictureField($field)
     {
-        $results = DB::select('SELECT * FROM picture WHERE id_field ='.$field->id_field);
+        $results = DB::select('SELECT * FROM picture WHERE id_field ='.$field->getIdfield());
         $datas = array();
         $i = 0;
         foreach ($results as $row) {

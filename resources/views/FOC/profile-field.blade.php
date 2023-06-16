@@ -92,17 +92,13 @@
             <div class="terrain col-md-8">
                 <h1 class="terrain__nom">Stade de Mahamasina</h1>
                 <ul class="list-carac">
-                    <li class="carac">Catégorie : <span>Foot à 11</span></li>
-                    <li class="carac">Infrastructure : <span>Intérieur</span></li>
-                    <li class="carac">Surface : <span>Synthétique</span></li>
-                    <li class="carac">Lumière : <span>Eclairé</span></li>
+                    <li class="carac">Catégorie : <span>{{ $field->getCategory()->getCategory() }}</span></li>
+                    <li class="carac">Infrastructure : <span>{{ $field->getInfrastructure()->getInfrastructure() }}</span></li>
+                    <li class="carac">Surface : <span>{{ $field->getFieldType()->getFieldType() }}</span></li>
+                    <li class="carac">Lumière : <span>{{ $field->getLight()->getLight() }}</span></li>
                 </ul>
                 <h3 class="terrain__desc__titre">DESCRIPTION</h3>
-                <p class="terrain__desc__content">
-                    Le terrain de Barea de Mahamasina est un stade de football situé à Antananarivo,
-                    la capitale de Madagascar. Il est principalement utilisé pour les matches de football,
-                    mais il peut également accueillir d'autres événements sportifs et culturels.
-                </p>
+                <p class="terrain__desc__content">{{ $field->getDescription() }}</p>
 
                 <div class="row parametrage mb-4">
                     <div class="col-md-5 my-2">

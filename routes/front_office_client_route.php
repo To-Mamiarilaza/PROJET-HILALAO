@@ -39,5 +39,5 @@ Route::get('/home-client', function() {
 Route::get('/list-field', [FieldController::class, 'listField'])
 ->name('list-field');
 
-Route::get('/profile-field', [FieldController::class, 'profileField'])
+Route::get('/profile-field/{idField}', [FieldController::class, 'profileField'])
 ->name('profile-field');

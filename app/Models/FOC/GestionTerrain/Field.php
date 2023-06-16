@@ -159,7 +159,8 @@ class Field {
     public static function findById($id)
     {
         $results = DB::table('field')->where('id_field', $id)->first();
-        
+        $infra =Light::findById($results->id_light);
+
         return  new Field($results->id_field,  Category::findById($results->id_category), Client::findById($results->id_client), $results->name, FieldType::findById($results->id_field_type), Infrastructure::findById($results->id_infrastructure), Light::findById($results->id_light), $results->description, $results->address, $results->latitude, $results->longitude,  $results->insert_date,  $results->field_files);
     }
 
