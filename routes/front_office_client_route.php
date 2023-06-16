@@ -32,6 +32,18 @@ Route::GET('/deconnect', [LoginController::class, 'deconnect'])
 Route::post('/ClientProfil', [LoginController::class, 'profilClient'])
 ->name('profilClient');
 
+Route::get('/addTerrain',function() {
+    return view('FOC/addTerrain');
+});
+
+Route::get('/addTerrain-File', function() {
+    return view('FOC/addTerrain-File');
+});
+
+Route::get('/subscription-facture', function() {
+    return view('FOC/subscription-facture');
+});
+
 Route::get('/home-client', function() {
     return view('FOC/home');
 });

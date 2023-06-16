@@ -1,0 +1,48 @@
+.sub-fact-annee {
+    padding-top: 3%;
+    padding-bottom: 2%;
+    margin-bottom: 5%;
+}
+
+.info-stat {
+    margin-bottom: 2%;
+}
+
+.to-stat {
+    background-color: aliceblue;
+    padding-bottom: 2%;
+}
+
+.sub-fact-annee .info-limite-sub {
+    margin-left: -5%;
+    margin-right: 15%;
+    height: 50%;
+}
+
+.info-limite-sub {
+    height: 10%;
+}
+
+.sub-fact-annee label {
+    padding-top: 10%;
+}
+
+.payement-sub-fact {
+    padding-top: 10%;
+}
+
+.contenu-sub-fact {
+    background-color: aliceblue;
+    margin-top: 3%;
+}
+
+.btn-to-sub-fact {
+    margin-bottom: 5%;
+}
+
+.info-payement {
+    padding-bottom: 5%;
+    padding-top: 5%;
+}
+
+
