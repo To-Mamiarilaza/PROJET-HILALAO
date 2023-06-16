@@ -1,3 +1,6 @@
+CREATe DATABASE hilalao;
+\c hilalao;
+
 CREATE SEQUENCE "public".abonnement_notification_id_abonnement_notification_seq START WITH 1 INCREMENT BY 1;
 
 CREATE SEQUENCE "public".abonnement_state_id_abonnement_state_seq START WITH 1 INCREMENT BY 1;
