@@ -198,7 +198,7 @@
                 </div>
                 <div class="row list-terrain" style="margin-top:2%" >
                     <div class="col-md-4 list-terrain-image">
-                        <img src="{{ asset('css/FOU/assets/image/profil2.jpg') }}">
+                        <img src="{{ asset('css/FOU/assets/image/profil2.jp') }}">
                     </div>
                     <div class="col-md-8 list-terrain-info">
                         <div class="row list-terrain-info-head">
