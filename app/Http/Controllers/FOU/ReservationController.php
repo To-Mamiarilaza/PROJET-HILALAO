@@ -18,7 +18,7 @@ class ReservationController extends Controller
             $users = Session::get("user");
             $field = FieldUser::Sfind($id_field, $users->getIdUsers());
         } else {
-            $field = FieldUser::Sfind($id_field, null);
+            $field = FieldUser::findReservation($id_field, null);
         }
         return view('FOU\calendar' , ['field' => $field]);
     }

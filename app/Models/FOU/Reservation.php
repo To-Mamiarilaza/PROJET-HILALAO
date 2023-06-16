@@ -40,7 +40,8 @@ class Reservation {
     }
 
     public static function findByIdField($id) {
-        $sql = 'SELECT id_reservation, reservation_date, id_users, start_time, id_field, duration, end_time FROM "public".v_actif_reservation f ';
+        $sql = 'SELECT id_reservation, reservation_date, id_users, start_time, id_field, duration, end_time FROM "public".v_actif_reservation f WHERE id_field = %s';
+        $sql = sprintf($sql, $id);
         $reservations_db = DB::select($sql);
         $res = array();
         foreach ($reservations_db as $reservation_db) {

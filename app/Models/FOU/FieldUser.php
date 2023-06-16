@@ -14,17 +14,10 @@ class FieldUser extends FieldDetailled {
 
     public static function Sfind($id_field, $id_users) {
         $field = new FieldUser();
-        if ($id_users != null) {
-            $field->findById($id_field);
-            $field->setUsers(Users::SfindById($id_users));
-            $field->setUsersReservations(Reservation::findUsersReservation($id_field, $id_users));
-            $field->setOthersReservations(Reservation::findOthersReservation($id_field, $id_users));
-        } else {
-            $field->findById($id_field);
-            $field->setUsers(Users::SfindById($id_users));
-            $field->setUsersReservations([]);
-            $field->setOthersReservations(Reservation::findOthersReservation($id_field, 0));
-        }
+        $field->findById($id_field);
+        $field->setUsers(Users::SfindById($id_users));
+        $field->setUsersReservations(Reservation::findUsersReservation($id_field, $id_users));
+        $field->setOthersReservations(Reservation::findOthersReservation($id_field, $id_users));
         return $field;
     }
 
@@ -33,6 +26,14 @@ class FieldUser extends FieldDetailled {
         $this->setUsers(Users::SfindById($id_users));
         $this->setUsersReservations(Reservation::findUsersReservation($id_field, $id_users));
         $this->setOthersReservations(Reservation::findOthersReservation($id_field, $id_users));
+    }
+
+    public static function findReservation($id_field) {
+        $field = new FieldUser();
+        $field->findById($id_field);
+        $field->setUsersReservations([]);
+        $field->setOthersReservations(Reservation::findByIdField($id_field));
+        return $field;
     }
 
     public function getUsers() {
