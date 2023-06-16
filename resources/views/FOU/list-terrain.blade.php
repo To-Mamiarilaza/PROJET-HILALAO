@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="{{ asset('css/FOU/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/FOU/assets/css/list-terrain.css') }} ">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-
     <title>HILALAO | TERRAIN</title>
 </head>
 <body>
