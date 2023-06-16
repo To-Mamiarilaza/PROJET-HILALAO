@@ -6,7 +6,7 @@ use App\Http\Controllers\FOU\InfoTerrain;
 use App\Http\Controllers\FOU\HomeController;
 use App\Http\Controllers\FOU\LogController;
 
-Route::get('/ListFields', [MyListFieldController::class, 'index']);
+Route::get('/ListFields', [FieldController::class, 'index']);
 Route::get('/calendar', [ReservationController::class, 'index']);
 Route::get('/reserve', [ReservationController::class, 'reserve']);
 
