@@ -5,6 +5,8 @@ var Stadia_OSMBright = L.tileLayer('https://tiles.stadiamaps.com/tiles/osm_brigh
     attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
 });
 
+// marker
 var marker = L.marker([-18.879190, 47.507905]).addTo(map);
+marker.bindPopup("<b>Test marker</b>").openPopup();
 
 Stadia_OSMBright.addTo(map);
