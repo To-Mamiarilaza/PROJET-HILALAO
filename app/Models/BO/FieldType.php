@@ -45,7 +45,7 @@ class FieldType
 
     public function getFieldTypeById($id)
     {
-        $req = sprintf("SELECT * FROM FieldType WHERE id_field_type = %s", $id);
+        $req = sprintf("SELECT * FROM Field_Type WHERE id_field_type = %s", $id);
         $res = DB::select($req);
         
         if (count($res) > 0) {

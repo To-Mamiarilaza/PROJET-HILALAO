@@ -1,6 +1,8 @@
 @include('BO/header') 
 @include('BO/nav')
 
+
+<link rel="stylesheet" href="{{ asset('css/BO/asset/category.css') }}">
     <div class="contenu">
         <h1>Abonnement</h1>
 
