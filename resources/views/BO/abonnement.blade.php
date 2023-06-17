@@ -3,46 +3,54 @@
 
     <div class="contenu">
         <h1>Abonnement</h1>
-
+      <form action="{{ route('abonnement') }}" method="get">
         <div id="sort-selectors">
-            <p><label for="sort-column">Categorie :</label>
-              <select id="sort-column">
-                  <option value="nom">Nom</option>
-                  <option value="age">Âge</option>
-                  <option value="profession">Profession</option>
+            <p><label for="categorie">Categorie :</label>
+              <select id="categorie" name="categorie">
+                <option value="all">Tous les categories</option>
+                @foreach($categories as $categorie)
+                  <option value="{{ $categorie->category }}">{{ $categorie->category }}</option>
+                @endforeach
               </select>
             </p>
     
             <p>
-              <label for="sort-direction">Mois :</label>
-              <select id="sort-direction">
-                  <option value="asc">Croissant</option>
-                  <option value="desc">Décroissant</option>
+              <label for="mois">Mois :</label>
+              <select id="mois"  name="mois">
+                  <option value="00">Tous les mois</option>
+                  <option value="01">Janvier</option>
+                  <option value="02">Fevrier</option>
+                  <option value="03">Mars</option>
+                  <option value="04">Avril</option>
+                  <option value="05">Mai</option>
+                  <option value="06">Juin</option>
+                  <option value="07">Juillet</option>
+                  <option value="08">Aout</option>
+                  <option value="09">Septembre</option>
+                  <option value="10">Octobre</option>
+                  <option value="11">Novembre</option>
+                  <option value="12">Decembre</option>
               </select>
 
-              <label for="sort-direction">Annee :</label>
-              <select id="sort-direction">
-                  <option value="asc">Croissant</option>
-                  <option value="desc">Décroissant</option>
+              <label for="annee">Annee :</label>
+              <select id="annee" name="annee">
+                @for($annee = 2023; $annee <= 2033; $annee++)
+                  <option value="{{ $annee }}">{{ $annee }}</option>
+                @endfor   
               </select>
             </p>
 
             <p>
-              <label for="sort-direction">Payé :</label>
-              <select id="sort-direction">
-                  <option value="asc">Croissant</option>
-                  <option value="desc">Décroissant</option>
-              </select>
-
-              <label for="sort-direction">Non payé :</label>
-              <select id="sort-direction">
-                  <option value="asc">Croissant</option>
-                  <option value="desc">Décroissant</option>
+              <label for="annee">Etat de payement :</label>
+              <select name="etat">
+                <option value="paid">Paye</option>
+                <option value="unpaid">Non paye</option>
               </select>
             </p>
-
-            <input type="button" value="Valider les filtres">
-        </div>
+            
+            <input type="submit" value="Valider les filtres" >
+          </div>
+        </form>
         
         <table>
             <thead>

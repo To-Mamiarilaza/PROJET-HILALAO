@@ -265,3 +265,30 @@ join client cl on cl.id_client = f.id_client
 join subscription s on s.id_field = f.id_field
 join subscription_state ss on ss.id_subscription_state = s.id_subscription_state
 where start_date <= DATE('06-06-2023') and  (start_date + INTERVAL '1 month' * duration) >= DATE('06-06-2023')
+
+
+select f.name, c.category, cl.first_name as client, c.subscribing_price as price,  start_date, duration, start_date + INTERVAL '1 month' * duration AS end_date 
+from field f
+join category c on c.id_category = f.id_category
+join client cl on cl.id_client = f.id_client
+join subscription s on s.id_field = f.id_field
+join subscription_state ss on ss.id_subscription_state = s.id_subscription_state
+where c.category = selectedCategorie and  EXTRACT(MONTH FROM start_date) = selectedMonth AND EXTRACT(YEAR FROM start_date) = selectedYear
+
+select f.name, c.category, cl.first_name as client, c.subscribing_price as price,  start_date, duration, start_date + INTERVAL '1 month' * duration AS end_date 
+from field f
+join category c on c.id_category = f.id_category
+join client cl on cl.id_client = f.id_client
+join subscription s on s.id_field = f.id_field
+join subscription_state ss on ss.id_subscription_state = s.id_subscription_state
+where c.category = $selectedCategorie and  EXTRACT(MONTH FROM start_date) = $selectedMonth AND EXTRACT(YEAR FROM start_date) = $selectedYear
+
+
+
+
+SELECT f.id_field, f.name
+FROM field f
+LEFT JOIN subscription s ON f.id_field = s.id_field
+WHERE s.id_field IS NULL;
+
+

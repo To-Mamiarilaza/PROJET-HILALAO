@@ -87,5 +87,78 @@ class Abonnement
             throw new Exception("Impossible d'avoir ");
         }
     }
+
+    public function getAbonnementSort($selectedCategorie, $selectedMonth, $selectedYear, $selectedPayed){
+        try{
+            $res = array();
+            if($selectedPayed != "paid"){
+                if($selectedMonth != 00){
+                    // $selectedMonth = 
+                
+                    $date = mktime(0, 0, 0, $selectedMonth, 0, $selectedYear);
+                    $date_formatee = date('Y-m-d', $date);
+
+                    $date2 = mktime(0, 0, 0, $selectedMonth + 1, 0, $selectedYear);
+                    $date_formatee2 = date('Y-m-d', $date2);
+
+                    $requette = "SELECT f.name, c.category, cl.first_name AS client, c.subscribing_price AS price
+                    FROM field f
+                    JOIN category c ON c.id_category = f.id_category
+                    JOIN client cl ON cl.id_client = f.id_client
+                    LEFT JOIN subscription s ON f.id_field = s.id_field 
+                        AND EXTRACT(YEAR FROM s.start_date) =" .$selectedYear.
+                        "AND EXTRACT(MONTH FROM s.start_date) = ".$selectedMonth.
+                    "WHERE s.id_field IS NULL";
+                }
+                $abonnement = DB::select($requette);
+                
+                foreach ($abonnement as $result) {
+                    $temp = new Abonnement();
+                    $temp->setName($result->name);
+                    $temp->setCategory($result->category);
+                    $temp->setClient($result->client);
+                    $temp->setPrice($result->price);
+                    $temp->setStart_date($date_formatee);
+                    $temp->setEnd_date($date_formatee2);
+                    $temp->setDuration(1);
+                    $res[] = $temp;
+                }
+                return $res;
+            }else{
+                $requette = "select f.name, c.category, cl.first_name as client, c.subscribing_price as price,  start_date, duration, start_date + INTERVAL '1 month' * duration AS end_date 
+                from field f
+                join category c on c.id_category = f.id_category
+                join client cl on cl.id_client = f.id_client
+                join subscription s on s.id_field = f.id_field
+                join subscription_state ss on ss.id_subscription_state = s.id_subscription_state
+                where EXTRACT(YEAR FROM start_date) = ".$selectedYear;
+                
+                if($selectedMonth != 00){
+                    $requette .="and EXTRACT(MONTH FROM start_date) = ".$selectedMonth;
+                    
+                }
+
+                if($selectedCategorie != "all"){
+                    $requette .="and c.category = '".$selectedCategorie."'";
+                }
+                $abonnement = DB::select($requette);
+            }
+                foreach ($abonnement as $result) {
+                    $temp = new Abonnement();
+                    $temp->setName($result->name);
+                    $temp->setCategory($result->category);
+                    $temp->setClient($result->client);
+                    $temp->setPrice($result->price);
+                    $temp->setStart_date($result->start_date);
+                    $temp->setEnd_date($result->end_date);
+                    $temp->setDuration($result->duration);
+                    $res[] = $temp;
+                }
+            return $res;
+
+        }catch(Exception $e){
+            throw new Exception("Impossible d'avoir ");
+        }
+    }
 }
 ?>
