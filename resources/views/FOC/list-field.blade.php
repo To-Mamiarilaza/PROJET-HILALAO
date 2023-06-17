@@ -14,7 +14,7 @@
     <div class="container">
         <h1 class="accueil-text mt-4">Listes des terrains</h1>
         <p>Voila la liste de vos terrain, vous pouvez les gérer ici</p>
-        <a href="" class="btn btn-info text-white"><i class="fas fa-plus-circle mx-2"></i> Ajouter une nouvelle Terrain</a>
+        <a href="{{ route('loadAddField') }}" class="btn btn-info text-white"><i class="fas fa-plus-circle mx-2"></i> Ajouter une nouvelle Terrain</a>
         <hr>
         <h4 class="filtre-text">Filtre multicritère</h4>
         <form class="form" action="">

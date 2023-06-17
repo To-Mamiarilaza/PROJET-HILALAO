@@ -8,6 +8,10 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Exceptions\ClientExceptionHandler;
+use App\Models\FOC\GestionTerrain\Category;
+use App\Models\FOC\GestionTerrain\FieldType;
+use App\Models\FOC\GestionTerrain\Infrastructure;
+use App\Models\FOC\GestionTerrain\Light;
 use App\Models\FOC\GestionTerrain\PictureField;
 
 class FieldController extends Controller
@@ -47,6 +51,50 @@ class FieldController extends Controller
             'field' => $field,
             'profilePicture' => $profilePicture,
         ]);
+    }
+
+    //Charger l'insertion terrain
+    public function loadAddField() {
+        //Le client
+        $clientConnected = session()->get('clientConnected');
+
+        //Charger toutes les categories du terrain
+        $categoryField = Category::getAll();
+
+        //Les type de terrain
+        $fieldType = FieldType::getAll();
+
+        //Les infrastructures
+        $infrastructure = Infrastructure::getAll();
+
+        //Lumiere
+        $light = Light::getAll();
+
+        return view('FOC/add-field')->with([
+            'category' => $categoryField,
+            'fieldType' => $fieldType,
+            'infrastructure' => $infrastructure,
+            'light' => $light,
+        ]);
+    }
+
+    //Inserer le terrain
+    public function addField(Request $request) {
+        $name = $request->input('nameField');
+        $category = $request->input('category');
+        $surface = $request->input('surface');
+        $infrastructure = $request->input('infrastructure');
+        $light = $request->input('light');
+
+        $data = [
+            'name' => $name,
+            'category' => $category,
+            'surface' => $surface,
+            'infrastructure' => $infrastructure,
+            'light' => $light
+        ];
+    
+        Session::put('field', $data);
     }
 }
 ?>

@@ -31,13 +31,14 @@
 			<div class="row justify-content-center fonction-list">
                 <h1>Formulaire d'ajout de terrain</h1>
 				<div class="col-md-12 contenu-terrain">
-					<form action="" method="get" class="col-md-12 form-content">
+					<form action="/addFieldFile" method="POST" class="col-md-12 form-content">
+					@csrf	
 						<div class="row info-terrain">
 							<div class="col-md-2">
 								<label for="nom" class="control-label"><b>Nom</b></label>
 							</div>
 							<div class="col-md-8">
-								<input class="form-content__input form-content__input--log form-control" type="text" placeholder="exemple@gmail.com" aria-label=".form-control-lg" id="nom" name="nom" placeholder="nom du terrain">
+								<input class="form-content__input form-content__input--log form-control" type="text" placeholder="nom de votre terrain" aria-label=".form-control-lg" id="nom" name="nameField">
 							</div>
 						</div>
 						<div class="row info-terrain">
@@ -45,11 +46,11 @@
 								<label for="categories" class="control-label"><b>Catégories</b></label>
 							</div>
 							<div class="col-md-8">
-								<select id="categories" class="form-control" required>
+								<select id="categories" class="form-control" name="category">
 									<option value="">Sélectionnez une catégorie</option>
-									<option value="football">Foot à 11</option>
-									<option value="basketball">Foot à 7</option>
-									<option value="tennis">Basket</option>
+									@foreach ($category as $item)
+									<option value="{{ $item->getIdCategory() }}">{{ $item->getCategory() }}</option>
+									@endforeach
 								</select>
 							</div>
 						</div>
@@ -58,14 +59,11 @@
 								<label for="surface" class="control-label"><b>Surface</b></label>
 							</div>
 							<div class="col-md-8">
-								<select id="surface" class="form-control" required>
+								<select id="surface" class="form-control" name="surface">
 									<option value="">Sélectionnez une type de surface</option>
-									<option value="Goudron">Goudron</option>
-									<option value="Synthétique">Synthétique</option>
-									<option value="Gazon">Gazon</option>
-									<option value="Terre">Terre</option>
-									<option value="Tapis">Tapis</option>
-									<option value="Parquet">Parquet</option>
+									@foreach ($fieldType as $item)
+									<option value="{{ $item->getIdFieldType() }}">{{ $item->getFieldType() }}</option>
+									@endforeach
 								</select>
 							</div>
 						</div>
@@ -75,14 +73,12 @@
 							</div>
 							<div class="col-md-8">
 								<div class="radio">
+								@foreach ($infrastructure as $item)
 									<label>
-										<input type="radio" name="optionsRadios" id="" value="">
-										Intérieur
+									{{ $item->getInfrastructure() }}
+										<input type="radio" name="infrastructure" id="" value="{{ $item->getIdInfrastructure() }}">
 									</label>
-									<label>
-										<input type="radio" name="optionsRadios" id="" value="">
-										Extérieur
-									</label>
+									@endforeach
 								</div>
 							</div>
 						</div>
@@ -92,14 +88,12 @@
 							</div>
 							<div class="col-md-8">
 								<div class="radio">
+									@foreach ($light as $item)
 									<label>
-										<input type="radio" name="optionsRadios" id="" value="">
-										Eclairé
+										{{ $item->getLight() }}
+										<input type="radio" name="light" id="" value="{{ $item->getIdLight() }}">										
 									</label>
-									<label>
-										<input type="radio" name="optionsRadios" id="" value="">
-										Non Eclairé
-									</label>
+									@endforeach
 								</div>
 							</div>
 						</div>

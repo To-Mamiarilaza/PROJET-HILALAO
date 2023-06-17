@@ -32,12 +32,14 @@ Route::GET('/deconnect', [LoginController::class, 'deconnect'])
 Route::post('/ClientProfil', [LoginController::class, 'profilClient'])
 ->name('profilClient');
 
-Route::get('/addTerrain',function() {
-    return view('FOC/addTerrain');
-});
+Route::GET('/loadAddField', [FieldController::class, 'loadAddField'])
+->name('loadAddField');
 
-Route::get('/addTerrain-File', function() {
-    return view('FOC/addTerrain-File');
+Route::GET('/addField', [FieldController::class, 'addField'])
+->name('addField');
+
+Route::POST('/addFieldFile', function() {
+    return view('FOC/addFieldFile');
 });
 
 Route::get('/subscription-facture', function() {
