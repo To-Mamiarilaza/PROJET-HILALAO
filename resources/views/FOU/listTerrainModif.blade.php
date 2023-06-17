@@ -198,7 +198,7 @@
                 </div>
                 <div class="row list-terrain" style="margin-top:2%" >
                     <div class="col-md-4 list-terrain-image">
-                        <img src="{{ asset('css/FOU/assets/image/profil2.jp') }}">
+                        <img src="{{ asset('css/FOU/assets/image/profil2.jpg') }}">
                     </div>
                     <div class="col-md-8 list-terrain-info">
                         <div class="row list-terrain-info-head">
@@ -224,11 +224,12 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-5 sig">
-            <img src="{{ asset('css/FOU/assets/image/sig.jpg') }}">
+        <div class="col-md-5 col-offset-7 sig">
+            <div id="map"></div>
         </div>
     </div>
 </div>
+<script src="{{ asset('js/carte.js') }}"></script>
 <script src="{{ asset('css/FOU/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 </body>
 </html>
