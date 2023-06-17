@@ -1,0 +1,53 @@
+form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+form label {
+  width: 80px;
+  text-align: center;
+  margin-right: 10px;
+  padding-left: 20px;
+}
+form select,
+form input[type=text] {
+  flex: 1;
+  margin-bottom: 10px;
+  padding: 5px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  width: 50px;
+  height: 35px;
+  background-color: white;
+  text-align: center;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: 15px;
+}
+
+.form-group {
+  align-items: center;
+}
+.form-group input[type=text],
+.form-group select {
+  width: 200px;
+  padding: 5px;
+}
+
+#Statistique {
+  width: auto;
+  border: solid 1px;
+  height: 100px;
+  display: flex;
+}
+
+.par {
+  width: 150px;
+  margin-left: 15%;
+  margin-top: 10px;
+  height: 70px;
+  box-shadow: 0px 2px 4px rgba(251, 247, 247, 0.3);
+  text-align: center;
+  background-color: #f4f8f7;
+  border-radius: 10px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}/*# sourceMappingURL=statistique.css.map */

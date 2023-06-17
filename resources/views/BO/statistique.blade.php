@@ -1,11 +1,12 @@
 @include('BO/header') 
 @include('BO/nav')
-
+    
+<link rel="stylesheet" href="{{ asset('css/BO/asset/statistique.css') }}">
 <link rel="stylesheet" href="{{asset('js/chart.js')}}">
     <script src="{{asset('js/chart.js')}}"></script>
 
 <div class="contenu">
-
+    
     <h1>Statistique</h1>
     <form action="/filtrer" method="GET">
         <div class="form-group">
@@ -22,6 +23,7 @@
             <label for="mois">Mois :</label>
             <select onchange="updateSelectedFields()" class="form-control form-control-sm" name="mois" id="mois" value="00">
                 <option value="00">Toutes les mois</option>
+                <option value="00">Tout les mois</option>
                 <option value="01">Janvier</option>
                 <option value="02">Février</option>
                 <option value="03">Mars</option>
@@ -39,7 +41,7 @@
         <div class="form-group">
             <label for="annee">Année :</label>
             <select onchange="updateSelectedFields()" class="form-control form-control-sm" name="annee" id="annee" value="2023">
-                @for($annee = 2020; $annee < 2030; $annee++)
+                @for($annee = 2023; $annee <= 2033; $annee++)
                     <option value="{{ $annee }}">{{ $annee }}</option>
                 @endfor   
             </select>
@@ -244,7 +246,7 @@
             });
         });
     }
-
 </script>
+</div>
 </body>
 </html>

@@ -1,6 +1,8 @@
 @include('BO/header') 
 
 @include('BO/nav')
+
+<link rel="stylesheet" href="{{ asset('css/BO/asset/category.css') }}">
 <div class="contenu">
     <form action="{{ route('updateByid') }}" method="get">
         @csrf
