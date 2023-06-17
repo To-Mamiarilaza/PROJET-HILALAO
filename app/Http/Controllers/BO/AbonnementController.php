@@ -11,6 +11,18 @@ use Illuminate\Support\Facades\Session;
 
 class AbonnementController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            // Vérifier la présence de la session 'id'
+            if (!Session::has('id_account_admin')) {
+                // Rediriger vers une page ou retourner une réponse selon vos besoins
+                return redirect()->route('log'); // Exemple de redirection vers une page de connexion
+            }
+            
+            return $next($request);
+        });
+    }
     public function abonnement(Request $request) {
         
         $model = new Abonnement();

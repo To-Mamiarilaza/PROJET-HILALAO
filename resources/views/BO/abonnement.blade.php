@@ -4,8 +4,8 @@
 
 <link rel="stylesheet" href="{{ asset('css/BO/asset/category.css') }}">
     <div class="contenu">
-        <h1>Abonnement</h1>
       <form action="{{ route('abonnement') }}" method="get">
+        <h1>Abonnement</h1>
         <div id="sort-selectors">
             <p><label for="categorie">Categorie :</label>
               <select id="categorie" name="categorie">

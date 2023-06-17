@@ -112,23 +112,22 @@ class AccountAdmin
 
     public function getAccountAdminConnected($mail, $pwd)
     {
-        try{
-            $req = "SELECT * FROM account_admin WHERE mail = '%s' AND pwd = '%s'";
-            $req = sprintf($req, $mail, $pwd);
-            $account = DB::select($req);
-            if (count($account) > 0) {
-                $result = $account[0];
-                $temp = new AccountAdmin();
-                $temp->setId_account_admin($result->id_account_admin);
-                $temp->setMail($result->mail);
-                $temp->setPwd($result->pwd);
-                $temp->setFirst_name($result->first_name);
-                $temp->setLast_name($result->last_name);
-                $temp->setPhone_number($result->phone_number);
-                return $temp;
-            }
-        }catch(Exception $e){
-            throw new Exception("Incorrect");
+        $req = "SELECT * FROM account_admin WHERE mail = '%s' AND pwd = '%s'";
+        $req = sprintf($req, $mail, $pwd);
+        
+        $account = DB::select($req);
+        if (count($account) > 0) {
+            $result = $account[0];
+            $temp = new AccountAdmin();
+            $temp->setId_account_admin($result->id_account_admin);
+            $temp->setMail($result->mail);
+            $temp->setPwd($result->pwd);
+            $temp->setFirst_name($result->first_name);
+            $temp->setLast_name($result->last_name);
+            $temp->setPhone_number($result->phone_number);
+            return $temp;
+        }else{
+            throw new \Exception("Adresse e-mail ou mot de passe incorrect.");
         }
     }
 

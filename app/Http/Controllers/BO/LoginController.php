@@ -29,15 +29,12 @@ class LoginController extends Controller
             $password = $request->input('password');
             $account = $model->getAccountAdminConnected($mail,$password);
             Session::put('id_account_admin', $account->id_account_admin);
-            Session::save();
             $statistiqueController = app(StatistiqueController::class);
             return $statistiqueController->statistique();
             // Faites ce que vous voulez avec les données récupérées
             // return view('BO.statistique', ['account'=>$account]);
         } catch (Exception $e) {
-            $errorMessage = $e->getMessage();
-            // $errorMessage = "Incorrect";
-            return view('BO/login', ['error'=>$errorMessage]);
+            return view('BO/login', ['error'=>$e->getMessage()]);
             // Passer le message d'erreur à la vue
         }
     }
