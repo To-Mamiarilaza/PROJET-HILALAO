@@ -10,7 +10,8 @@
     <form action="/filtrer" method="GET">
         <div class="form-group">
             <label for="categorie">Catégorie :</label>
-            <select onchange="updateSelectedFields()" class="form-control form-control-sm" name="category" id="category" value="Toutes les categories">
+            <select onchange="updateSelectedFields()" class="form-control form-control-sm" name="category" id="category" value="0">
+                <option value="0">Toutes type de category</option>
                 @foreach($allCategories as $category)
                     <option value="{{ $category->id_category }}">{{ $category->category }}</option>
                 @endforeach
@@ -45,14 +46,14 @@
         </div>
     </form>
     <div id="Statistique">
-        <div class="par">
-            <h3> <a href="#"> Clients </a> </h3>
+        <div id="Nombreclient" class="par">
+        <h3>  Clients  </h3>
         </div>
-        <div class="par">
-            <h3> <a href="#"> Utilisateurs </a> </h3>
+        <div id="Nombreutilisateur" class="par">
+            <h3> Utilisateurs </h3>
         </div>
-        <div class="par">
-            <h3> <a href="#"> Terrains </a> </h3>
+        <div id="Nombreterrain" class="par">
+            <h3> Terrains  </h3>
         </div>
     </div>
     <div id="selectedFields">  </div>
@@ -60,7 +61,44 @@
 
 <script>
     var ctx = document.getElementById('myChart').getContext('2d');
-    var myChart;
+    var clientsData = {!! $NbClients !!};
+    var usersData = {!! $NbUsers !!};
+    var terrainsData = {!! $NbTerrains !!};
+    // Utilisez les variables clientsData, usersData et terrainsData dans votre script
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: getLabels('00'),
+            datasets: [
+                {
+                    label: 'Clients',
+                    data: clientsData,
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Utilisateurs',
+                    data: usersData,
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Terrains',
+                    data: terrainsData,
+                    borderColor: 'green',
+                    borderWidth: 1
+                }
+            ]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
 
     function updateSelectedFields() {
         var selectElementAnnee = document.getElementById("annee");
@@ -71,20 +109,21 @@
         var selectedValueCategory = selectElementCategory.value;
         var selectedFieldsElement = document.getElementById("selectedFields");
         
-        selectedFieldsElement.innerHTML = "";// Appel de la fonction getClientsData et affichage des données sur la page
+        selectedFieldsElement.innerHTML = "";
         
         // Ajouter le champ sélectionné
         if (selectedValueCategory) {
             var selectedField = document.createElement("p");
-            selectedField.textContent = "Graphique de la catégorie: " + selectedValueCategory + " Mois: " + selectedValueMois + " Année: " + selectedValueAnnee;
+            if(selectedValueMois === "00" ){
+                selectedField.textContent = "Graphique de la catégorie: " + selectedValueCategory + " tout les mois  de l'Année: " + selectedValueAnnee;
+            }
+            selectedField.textContent = "Graphique de la catégorie: " + selectedValueCategory + " Mois: " + selectedValueMois + "/ Année: " + selectedValueAnnee;
             selectedFieldsElement.appendChild(selectedField);
         }
         
         // Mettre à jour le graphique
         updateChart(selectedValueCategory, selectedValueMois, selectedValueAnnee);
     }
-
-    var clientsData;var utilisateursData;var terrainsData;
 
     function updateChart(category, mois, annee) {
         if (myChart) {
@@ -100,9 +139,9 @@
                         getTerrainsData(category, mois, annee)
                             .then(function(dataT) {
                         clientsData = dataC;
-                        console.log(clientsData);
                         utilisateursData = dataU;
                         terrainsData = dataT;
+                        console.log(terrainsData);
 
                         myChart = new Chart(ctx, {
                             type: 'line',
@@ -112,20 +151,20 @@
                                     {
                                         label: 'Clients',
                                         data: clientsData,
-                                        borderColor: 'rgba(255, 99, 132, 1)',
-                                        borderWidth: 1
+                                        borderColor: 'blue',
+                                        borderWidth: 2.5
                                     },
                                     {
                                         label: 'Utilisateurs',
                                         data: utilisateursData,
-                                        borderColor: 'rgba(54, 162, 235, 1)',
-                                        borderWidth: 1
+                                        borderColor: 'red',
+                                        borderWidth: 2
                                     },
                                     {
                                         label: 'Terrains',
                                         data: terrainsData,
                                         borderColor: 'green',
-                                        borderWidth: 1
+                                        borderWidth: 1.5,
                                     }
                                 ]
                             },
@@ -143,10 +182,11 @@
             .catch(function(error) {
                 console.error(error);
             });
+            getNombreclient(utilisateursData);
     }
 
     function getLabels(mois) {
-        var defaultLabels = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31];
+        var defaultLabels = [1,2, 3,4, 5,6, 7,8, 9,10, 11,12, 13,14, 15,16, 17,18, 19,20, 21,22, 23,24, 25,26, 27,28 ,29,30, 31];
 
         if (mois === '00') {
             // Retourner des labels personnalisés pour le mois sélectionné
@@ -172,8 +212,6 @@
             });
         });
     }
-
-
 
     function getClientsData(category, mois, annee) {
         return new Promise(function(resolve, reject) {
@@ -208,9 +246,5 @@
     }
 
 </script>
-
-<div id="graphe">
-
-</div>
 </body>
 </html>
