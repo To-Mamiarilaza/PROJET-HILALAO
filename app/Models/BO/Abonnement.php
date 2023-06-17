@@ -93,8 +93,6 @@ class Abonnement
             $res = array();
             if($selectedPayed != "paid"){
                 if($selectedMonth != 00){
-                    // $selectedMonth = 
-                
                     $date = mktime(0, 0, 0, $selectedMonth, 0, $selectedYear);
                     $date_formatee = date('Y-m-d', $date);
 
