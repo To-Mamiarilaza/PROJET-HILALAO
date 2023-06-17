@@ -14,21 +14,27 @@
         <div class="row">
         @php
             $p = "Nom d'utilisateur";
+            $errorClass = ""; // Classe pour le champ d'erreur
             if (isset($error)) {
                 $p = $error;
+                $errorClass = "form-content__input--error"; // Ajoutez la classe d'erreur
             }
         @endphp
+
         <script>
             var passwordField = document.getElementById('password');
 
             @if (isset($error))
+            <div class="alert alert-danger">
+                {{ $error }}
+            </div>
                 passwordField.value = '{{ $error }}';
                 passwordField.classList.add('form-content__input--error');
             @endif
         </script>
             <h1 class="box__title">Log <span class="box__title--span">in</span></h1>
             <form class="col-md-12 form-content" action="{{ route('login') }}">
-                <input class="form-content__input form-content__input--log" type="mail" placeholder="{{ $p }}" name="mail" aria-label=".form-control-lg" required>
+                <input class="form-content__input form-content__input--log {{ $errorClass }}" type="mail" placeholder="{{ $p }}" name="mail" aria-label=".form-control-lg" required>
                 <input class="form-content__input form-content__input--log" type="password" placeholder="Mot de passe" name="password" aria-label=".form-control-lg" id="password" required>
                 <div class="form-content__checkbox">
                     <input type="checkbox" class="form-content__input form-content__input--showing-password" onclick="showPassword()">

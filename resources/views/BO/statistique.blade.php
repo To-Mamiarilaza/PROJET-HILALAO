@@ -22,7 +22,6 @@
         <div class="form-group">
             <label for="mois">Mois :</label>
             <select onchange="updateSelectedFields()" class="form-control form-control-sm" name="mois" id="mois" value="00">
-                <option value="00">Toutes les mois</option>
                 <option value="00">Tout les mois</option>
                 <option value="01">Janvier</option>
                 <option value="02">Février</option>
@@ -49,13 +48,13 @@
     </form>
     <div id="Statistique">
         <div id="Nombreclient" class="par">
-        <h3>  Clients  </h3>
+        <h3> {{ $NbClients }} Clients  </h3>
         </div>
         <div id="Nombreutilisateur" class="par">
-            <h3> Utilisateurs </h3>
+            <h3> {{ $NbUsers }} Utilisateurs </h3>
         </div>
         <div id="Nombreterrain" class="par">
-            <h3> Terrains  </h3>
+            <h3> {{ $NbTerrains }} Terrains  </h3>
         </div>
     </div>
     <div id="selectedFields">  </div>
@@ -63,9 +62,12 @@
 
 <script>
     var ctx = document.getElementById('myChart').getContext('2d');
-    var clientsData = {!! $NbClients !!};
-    var usersData = {!! $NbUsers !!};
-    var terrainsData = {!! $NbTerrains !!};
+    var clientsData;
+    var usersData ;
+    var terrainsData ;
+    // Appel initial de la fonction pour afficher les courbes par défaut
+    updateChart('0', '00', '2023');
+
     // Utilisez les variables clientsData, usersData et terrainsData dans votre script
     var myChart = new Chart(ctx, {
         type: 'line',

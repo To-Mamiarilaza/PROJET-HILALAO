@@ -23,7 +23,7 @@ use App\Http\Controllers\BO\AbonnementController;
 
 Route::get('/', function () {
     return view('BO/login');
-});
+})->name('log');
 
 Route::get('/Check', [LoginController::class,
         'checkAccount']

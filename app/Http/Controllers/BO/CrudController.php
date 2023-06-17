@@ -12,7 +12,20 @@ use Illuminate\Support\Facades\Session;
 
 class CrudController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            // Vérifier la présence de la session 'id'
+            if (!Session::has('id_account_admin')) {
+                // Rediriger vers une page ou retourner une réponse selon vos besoins
+                return redirect()->route('log'); // Exemple de redirection vers une page de connexion
+            }
+            
+            return $next($request);
+        });
+    }
     private function getSelected($selected){
+        $c = new CrudController();
         if($selected == 'category'){
             $model = new Category();
             $all = $model->getAllCategory();
@@ -30,6 +43,7 @@ class CrudController extends Controller
     }
 
     public function update(Request $request){
+        $c = new CrudController();
         try {
             $selected = $request->input('variable');
             if($selected == "category"){
@@ -56,6 +70,7 @@ class CrudController extends Controller
     }
 
     public function getViewUpdate($selected,$id){
+        $c = new CrudController();
         try {
 
             if($selected == "category"){
@@ -78,6 +93,7 @@ class CrudController extends Controller
 
     public function all($variable)
     {
+        $c = new CrudController();
         try {
             $result = $this->getSelected($variable);
             return $result; // Renvoyer la valeur retournée par la méthode getSelected()
@@ -88,6 +104,7 @@ class CrudController extends Controller
 
     public function save(Request $request)
     {
+        $c = new CrudController();
         try {
             $ref = $request->input('variable');
             
