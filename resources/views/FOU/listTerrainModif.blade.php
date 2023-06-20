@@ -229,7 +229,43 @@
         </div>
     </div>
 </div>
-<script src="{{ asset('js/carte.js') }}"></script>
+<script>
+    var map = L.map('map').setView([-18.879190, 47.507905], 10);
+
+    var Stadia_OSMBright = L.tileLayer('https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png', {
+        maxZoom: 20,
+        attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+    });
+
+    // marker
+    
+
+    Stadia_OSMBright.addTo(map);
+
+    var terrainData = [
+        @foreach($infos as $info)
+            {
+                name: "{{ $info->name }}",
+                category: "{{ $info->category }}",
+                fieldType: "{{ $info->field_type }}",
+                infrastructure: "{{ $info->infrastructure }}",
+                light: "{{ $info->light }}",
+                address: "{{ $info->address }}",
+                longitude: {{ $info->longitude }},
+                latitude: {{ $info->latitude }},
+                description: "{{ $info->description }}"
+            },
+        @endforeach
+    ];
+
+    // Exemple d'utilisation des données générées
+    terrainData.forEach(function(terrain) {
+        // Effectuez d'autres actions spécifiques à chaque terrain
+        var marker = L.marker([terrain.latitude, terrain.longitude]).addTo(map);
+        marker.bindPopup(terrain.name).openPopup();
+        
+    });
+</script>
 <script src="{{ asset('css/FOU/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 </body>
 </html>

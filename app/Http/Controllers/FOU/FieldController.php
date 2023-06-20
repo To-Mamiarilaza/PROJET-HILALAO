@@ -4,6 +4,7 @@ namespace App\Http\Controllers\FOU;
 
 use App\Http\Controllers\Controller;
 use App\Models\FOU\ListField;
+use App\Models\FOU\InfoField;
 
 class FieldController extends Controller
 {
@@ -11,6 +12,10 @@ class FieldController extends Controller
     {
         $listFieldInstance = new ListField();
         $listFields = $listFieldInstance->getListFields();
-        return view('FOU\listTerrainModif', ['listFields' => $listFields]);
+
+        $infoField = new InfoField();
+        $info = $infoField->allinfoField();
+
+        return view('FOU\listTerrainModif', ['listFields' => $listFields], ['infos' => $info]);
     }
 }
