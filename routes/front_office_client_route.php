@@ -18,7 +18,7 @@ Route::post('/changePicture', [InscriptionController::class, 'changePicture'])
 ->name('changePicture');
 
 /// pour la page suivante de Sign In : insert CIN
-Route::post('/CIN-Client', [LoginController::class, 'nextSignin'])
+Route::post('/CIN-Client', [InscriptionController::class, 'insertCIN'])
 ->name('signinnext');
 
 /// pour la page Login
