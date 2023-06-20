@@ -1,0 +1,30 @@
+$principal-color: #E17B36;
+$secondar-color: #2A1F1D;
+$other-color-1: #33658A;
+
+.menu {
+    box-shadow: 3px 3px 5px #2a1f1d3b;
+}
+
+.navbar-links {
+    margin-left: 5%;
+
+    ul {
+        li {
+            margin-left: 20px;
+            margin-right: 20px;
+            font-weight: 600;
+
+            a:hover {
+                color: $principal-color !important;
+            }
+        }
+    }
+}
+
+.titre {
+    font-size: 23px;
+    font-weight: 700;
+    letter-spacing: 5px;
+    color: #E17B36 !important;
+  }

@@ -140,6 +140,7 @@ CREATE  TABLE "public".client (
 	id_status            integer  NOT NULL  ,
 	sign_up_date         timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL  ,
 	id_cin               integer    ,
+	customer_picture	 varchar,
 	CONSTRAINT pk_client PRIMARY KEY ( id_client ),
 	CONSTRAINT fk_client_cin FOREIGN KEY ( id_cin ) REFERENCES "public".cin( id_cin )   ,
 	CONSTRAINT fk_client_status_client FOREIGN KEY ( id_status ) REFERENCES "public".status_client( id_status_client )   

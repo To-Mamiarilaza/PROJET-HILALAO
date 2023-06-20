@@ -12,8 +12,15 @@
 	<div class="container box">
 		<div class="row sign_box">
 			<h1 class="box__title">Sign <span class="box__title--span">up</span></h1>
-			<form enctype="multipart/form-data" action="{{ route('signinnext') }}" method="POST" class="col-md-12 form-content">
+			<form enctype="multipart/form-data" action="{{ route('signin') }}" method="post" class="col-md-12 form-content">
 				@csrf
+				<div class="row">
+					<div class="col-md-4 input_pictures">
+                        <h5 class="card-title">Profil picture</h5>
+                        <input type="file" id="profil" style="display: none;" name="profilPicture">
+                        <label for="profil" class="btn btn-primary btn-block">Sélectionner une image</label>
+                    </div>
+				</div>
 				<div class="row">
 					<div class="col-md-3">
 						<label for="email" class="control-label"><b>First name</b></label>

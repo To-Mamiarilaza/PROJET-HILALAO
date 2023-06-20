@@ -1,0 +1,45 @@
+$principal-color: #E17B36;
+$secondar-color: #2A1F1D;
+$other-color-1: #33658A;
+
+.div {
+    &__form {
+
+        margin-top: 20px;
+        
+
+        &__p  {
+            color: $other-color-1;
+            font-weight: 600;
+        }
+    }
+
+    &__ul {
+        list-style: none;
+        margin-top: 30px;
+        padding: 0;
+        line-height: 35px;
+
+        &__li {
+            color: $secondar-color;
+            &__span {
+                font-weight: 600;
+                font-size: 18px;
+
+                &--titre {
+                    margin-right: 10px;
+                }
+
+                &--argent  {
+                    color: $other-color-1;
+                    font-weight: 500;
+                }
+            }
+        }
+    }
+}
+
+.chart-container {
+    height: 350px;
+    box-shadow: 3px 3px 5px #2a1f1d98;
+}
