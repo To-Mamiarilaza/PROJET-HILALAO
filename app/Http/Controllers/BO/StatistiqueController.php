@@ -13,14 +13,13 @@ class StatistiqueController extends Controller
 {
 
     public function statistique(){
-        if (Session::has('id_account_admin')) {
+        if (Session::has('account_admin')) {
             $category = new Category();
             $allCategories = $category->getAllCategory();
             $currentYear = date("Y");
             $nbUsers = Statistique::getDataUsersYear($currentYear); 
             $nbClients = Statistique::getDataClientsYear($currentYear); 
             $nbTerrains = Statistique::getDataTerrainsYear($currentYear, 0); 
-            
             // Convertir les tableaux en chaînes JSON
             $nbUsers = json_encode($nbUsers);
             $nbClients = json_encode($nbClients);

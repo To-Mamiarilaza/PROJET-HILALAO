@@ -24,9 +24,7 @@
         <div id="user">
             <a href="#"><i class="fa fa-bell fa-2x"> </i></a>
             <a href="#"><i class="fa fa-user-circle fa-2x"></i></a>
-            <a href="#"><i class="fa fa-user-plus  fa-2x"> </i></a>
+            <a href="{{ route('view_sign') }}"><i class="fa fa-user-plus  fa-2x"> </i></a>
         </div>
     </div>
-    
-    
 </header>
