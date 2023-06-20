@@ -22,6 +22,9 @@
                 <a href="#">Publicitaire  <i class="fa fa-share-square "></i></a>
             </div>
             <div class="list_nav">
+                <a href="{{ route('validationClient') }}">Liste d'attente    <i class="fa fa-chart-line "></i>  </a>
+            </div>
+            <div class="list_nav">
                 <a href="#" id="toggleList">Caracteristique <i class="fa fa-angle-down fa"></i></a>
             </div>
                     <ul id="maListe" style="display: none;">

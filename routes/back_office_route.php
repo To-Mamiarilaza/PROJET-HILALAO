@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\BO\ValidationClientController;
+use App\Models\BO\ValidationClient;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BO\LoginController;
 use App\Http\Controllers\BO\CrudController;
@@ -9,6 +11,7 @@ use App\Models\BO\Statistique;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\BO\AbonnementController;
+use App\Http\Controllers\BO\DetailClientController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +39,14 @@ Route::get('/Statistique', [StatistiqueController::class,
 Route::get('/Abonnement', [AbonnementController::class,
     'abonnement']
 )->name('abonnement');
+
+Route::get('/ValidationClient', [ValidationClientController::class,
+    'validationClient']
+)->name('validationClient');
+
+Route::get('/DetailClient/{id_client}', [DetailClientController::class,
+    'detailClient']
+)->name('detailClient');
 
 Route::get('/sign', function () {
     return view('BO/sign');
