@@ -15,21 +15,20 @@
 			<h1 class="box__title">Profil <span class="box__title--span">Client</span></h1>
 			<div class="row">
 				<div class="col-md-3 client-picture profil">
-					<h5 class="card-title">Picture Profil</h5>
-					<input type="file" id="image-upload" style="display: none;">
-					<label for="image-upload" class="btn btn-primary btn-block">Upload picture</label>
+					<h5 class="card-title">Photo de profil</h5>
+					<img src="{{ asset('image/Client/'.$client->getCustomerPicture()) }}" width="120" height="100">
 				</div>
 				{{-- <div class="col-md-8 champ-CIN"> --}}
 					<div class="col-md-4 cinPdp">
 						<h5 class="card-title">CIN recto</h5>
 						<a href="#" class="thumbnail">
-							<img src="..." alt="...">
+							<img src="{{ asset('image/CIN/'.$cin->getFirstPicture()) }}" width="120" height="100">
 						</a>
 					</div>
 					<div class="col-md-4 cinPdp">
 						<h5 class="card-title">CIN verso</h5>
 						<a href="#" class="thumbnail">
-							<img src="..." alt="...">
+							<img src="{{ asset('image/CIN/'.$cin->getSecondPicture()) }}" width="120" height="100">
 						</a>
 					</div>
 				{{-- </div> --}}

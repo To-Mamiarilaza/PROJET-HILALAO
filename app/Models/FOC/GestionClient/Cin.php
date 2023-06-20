@@ -30,17 +30,17 @@ class Cin
     public function setCinNumber($cin_number = "")
     {
         $this->cin_number = $cin_number;
-        if($cin_number == "" || $cin_number == null) throw Exception("id invalid");
+        if($cin_number == "" || $cin_number == null) throw new \Exception("id invalid");
     }
 
     public function getFirstPicture()
     {
-        return $this->cin_number;
+        return $this->first_picture;
     }
     public function setFirstPicturer($first_picture = "")
     {
         $this->first_picture = $first_picture;
-        if($first_picture == "" || $first_picture == null) throw Exception("le nom d'image ne doit pas etre vide ou null");
+        if($first_picture == "" || $first_picture == null) throw new \Exception("le nom d'image ne doit pas etre vide ou null");
     }
 
     public function getSecondPicture()
@@ -50,7 +50,7 @@ class Cin
     public function setSecondPicture($second_picture = "")
     {
         $this->second_picture = $second_picture;
-        if($second_picture == "" || $second_picture == null) throw Exception("le nom d'image ne doit pas etre vide ou null");
+        if($second_picture == "" || $second_picture == null) throw new \Exception("le nom d'image ne doit pas etre vide ou null");
 
     }
 
@@ -67,7 +67,6 @@ class Cin
         
         return $datas;
     }
-
     //Recuperer le cin correspondant le id au parametre id
     public static function findById($id)
     {

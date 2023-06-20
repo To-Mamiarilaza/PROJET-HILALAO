@@ -14,20 +14,17 @@ Route::get('/SignIn', [LoginController::class, 'signin'])
 Route::post('/insertClient', [InscriptionController::class, 'insertClient'])
 ->name('signin');
 
-/// pour la page suivante de Sign In : insert CIN
-Route::post('/CIN-Client', [InscriptionController::class, 'insertCIN'])
-    ->name('signinnext');
+Route::post('/changePicture', [InscriptionController::class, 'changePicture'])
+->name('changePicture');
 
+/// pour la page suivante de Sign In : insert CIN
+Route::post('/CIN-Client', [LoginController::class, 'nextSignin'])
+->name('signinnext');
 
 /// pour la page Login
 Route::get('/Login', [LoginController::class, 'login'])
 ->name('login');
 
 /// pour la page Profil
-Route::get('/ClientProfil', [LoginController::class, 'profilClient'])
+Route::post('/ClientProfil', [LoginController::class, 'profilClient'])
 ->name('profilClient');
-
-
-Route::get('/home-client', function() {
-    return view('FOC/home');
-});

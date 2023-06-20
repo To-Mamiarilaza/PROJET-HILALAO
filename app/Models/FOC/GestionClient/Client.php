@@ -2,6 +2,7 @@
 
 namespace App\Models\FOC\GestionClient;
 use Illuminate\Support\Facades\DB;
+use DateTime;
 
 class Client
 {
@@ -16,8 +17,9 @@ class Client
     private $id_status;
     private $sign_up_date;
     private $cin;
+    private $customer_picture;
 
-    public function __construct($first_name, $last_name, $phone_number, $mail, $address, $birth_date, $pwd, $status, $cin)
+    public function __construct($first_name, $last_name, $phone_number, $mail, $address, $birth_date, $pwd, $status, $cin ,$customer_picture)
     {
         $this->setFirstName($first_name);
         $this->setLastName($last_name);
@@ -28,12 +30,24 @@ class Client
         $this->setPwd($pwd);
         $this->setidStatus($status);
         $this->setCin($cin);
+        $this->setCustomerPicture($customer_picture);
     }
 
 ///Encapsulation
     public function getIdClient()
     {
         return $this->id_client;
+    }
+
+    public function getCustomerPicture()
+    {
+        return $this->customer_picture;
+    }
+
+    public function setCustomerPicture($customer_picture = "")
+    {
+        if($customer_picture == "" || $customer_picture == null) throw new \Exception("Nom d'image ivalide ou vide");
+        $this->customer_picture = $customer_picture;
     }
 
     public function getFirstName()
@@ -90,6 +104,16 @@ class Client
         $this->address = $address;
         if ($address == "" || $address == null) throw new \Exception("Adresse invalide ou vide");
     }
+    public function getCIn()
+    {
+        return $this->$cin;
+    }
+    
+    public function setCin($Cin = "")
+    {
+        $this->cin = $Cin;
+        if ($Cin == "") throw new \Exception("Cin vide");
+    }
 
     public function getBirthDate()
     {
@@ -129,17 +153,6 @@ class Client
         return $this->sign_up_date;
     }
 
-    public function getCin()
-    {
-        return $this->cin;
-    }
-
-    public function setCin($cin)
-    {
-        $this->cin = $cin;
-        if($cin == "" || $cin == null) throw new \Exception("Cin invalide ou vide");
-    }
-
     public static function lastClientId()
     {
         $result = DB::table('client')->orderBy('id_client', 'desc')->value('id_client');
@@ -147,6 +160,17 @@ class Client
         return $result ? $result : null;
     }
 
+    public function updateCustomerPicture($id, $newPicture)
+    {
+        try {
+            DB::table('client')
+                ->where('id_cin', $id)
+                ->update(['customer_picture' => $newPicture]);
+        } catch (\Exception $e) {
+            throw new \Exception("Erreur lors de la mise à jour de la photo du client : " . $e->getMessage());
+        }
+    }
+       
     //Recuperer toutes les clients
     public static function getAll()
     {
@@ -162,19 +186,19 @@ class Client
     }
 
     //Recuperer le client correspondant le id au parametre id
-    public static function findById($id)
+    public static function findByIdCin($idCin)
     {
-        $results = DB::table('client')->where('id_client', $id)->first();
+        $results = DB::table('client')->where('id_cin', $idCin)->first();
         
-        return  new Client($results->id_client, $results->first_name, $results->last_name, $results->phone_number, $results->mail, $results->address, $results->birth_date, $results->pwd, $results->status, $results->sign_up_date, $results->cin);
+        return new Client($results->id_client, $results->first_name, $results->last_name, $results->phone_number, $results->mail, $results->address, $results->birth_date, $results->pwd, $results->id_status, $results->sign_up_date, $results->id_cin);
     }
 
     //Sauvegarder un client dans la base
     public function create()
     {
         try {
-            $formattedBirthDate = date('Y-m-d', strtotime($this->birth_date));
-        
+            $birthDate = new DateTime($this->birth_date);
+            $formattedBirthDate = $birthDate->format('Y-m-d');
             $req = "INSERT INTO client VALUES (DEFAULT, '%s', '%s', '%s', '%s', '%s', '%s', '%s', %d, DEFAULT, %d)";
             $req = sprintf($req, $this->first_name, $this->last_name, $this->phone_number, $this->mail, $this->address, $formattedBirthDate, $this->pwd, $this->id_status, $this->cin);
             DB::insert($req);
@@ -182,7 +206,6 @@ class Client
             throw new \Exception("Erreur lors de la création du client : " . $e->getMessage());
         }
     }
-    
 
     //Mettre a jour un client
     public function update()

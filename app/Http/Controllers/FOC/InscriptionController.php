@@ -1,5 +1,5 @@
 <?php
-    namespace App\Http\Controllers\FOC;
+namespace App\Http\Controllers\FOC;
 
     use App\Models\FOC\GestionClient\Client;
     use App\Models\FOC\GestionClient\Cin;
@@ -7,124 +7,109 @@
     use App\Http\Controllers\Controller;
     use Illuminate\Support\Facades\Storage;
 
-
-    class InscriptionController extends Controller
+class InscriptionController extends Controller
+{
+    public function insertCIN(Request $request)
     {
-        public function insertCIN(Request $request)
-        {
-            try{
-                $cinNumber = $request->input('cinNumber');
-                $picRecto = $this->upload($request, 'picRecto', 'recto', 'upload/CIN/');
-                $picVerso = $this->upload($request, 'picVerso', 'verso', 'upload/CIN/');
-            
-                if ($picRecto && $picVerso) {
-                    //echo $picRecto;
-                    //echo $picVerso;
-                    $cin = new Cin($cinNumber, $picRecto, $picVerso);
-                    $cin->create();
-            
-                    $lastId = $cin->lastCinId();
-                    //echo $lastId;
-                    $formData = $request->session()->get('formData');
-                    $firstname = $formData['firstname'];
-                    $lastname = $formData['lastname'];
-                    $phone_numbers = $formData['phoneNumber'];
-                    $email = $formData['email'];
-                    $address = $formData['address'];
-                    $birth_date = $formData['birth_date'];
-                    $password = $formData['password'];
-                    $confirmed_password = $formData['confirmed_password'];
-                    $id_status = $formData['id_status'];
+        $cinNumber = $request->input('cinNumber');
+        $picRecto = $this->upload($request, 'picRecto', 'image/CIN');
+        $picVerso = $this->upload($request, 'picVerso', 'image/CIN');
+        //echo $picRecto;
 
-                    if ($password == $confirmed_password) {
-                        $client = new Client($firstname, $lastname, $phone_numbers, $email, $address, $birth_date, $password, $id_status, $lastId);
-                        $client->create();
-                        return view('FOC/ProfilClient',['client' => $client , 'cin' => $cin]);
-                    }
-                } else {
-                    // Gérer l'erreur de téléchargement des fichiers ici
-                    $erreur = 'Erreur lors du téléchargement des fichiers CIN.';
-                }
-            }
-            catch(\Exception $e){
-                //throw $e;
-                return redirect()->back()->withErrors([$e->getMessage()])->withInput();
-            }
-        }
-        
-        public function upload(Request $request, $name, $nomDuFichier, $cheminDestination)
-        {
-            try{
-                $imageName = "";
-                if ($request->hasFile($name)) {
-                    $file = $request->file($name);
-                    $extension = $file->getClientOriginalExtension();
-                    $allowedExtensions = ['png', 'gif', 'jpg', 'jpeg', 'pdf'];
-            
-                    if (in_array($extension, $allowedExtensions)) {
-                        $sequence = 1;
-                        $newFileName = $nomDuFichier . $sequence . '.' . $extension;
-            
-                        while (Storage::exists($cheminDestination . $newFileName)) {
-                            $sequence++;
-                            $newFileName = $nomDuFichier . $sequence . '.' . $extension;
-                        }
-                        $path = $file->storeAs($cheminDestination, $newFileName, 'public');
-            
-                        $file->move($path,$newFileName);
+        if ($picRecto && $picVerso) {
+            //echo $picRecto;
+            //echo $picVerso;
+            try {
+                $cin = new Cin($cinNumber, $picRecto, $picVerso);
+                $cin->create();
+                //echo $cin->getFirstPicture();
 
-                        $imageName = $newFileName;
-                    } else {
-                        // Gérer l'erreur d'extension de fichier ici
-                        $erreur = 'Vous devez uploader un fichier de type png, gif, jpg, jpeg ou pdf.';
-                    }
-                }
-            
-                return $imageName;
+                $lastId = $cin->lastCinId();
+                $client = $request->session()->get('client');
+                $client->setCin($lastId);
+                $client->create();
+                return view('FOC/ProfilClient', ['client' => $client, 'cin' => $cin]);
+            } catch (\Exception $e) {
+                $error = $e->getMessage();
+                return redirect()->back()->withErrors([$error])->withInput();
             }
-            catch(\Exception $e){
-                //throw $e;
-                return redirect()->back()->withErrors([$e->getMessage()])->withInput();            
-            }
-        }
-        public function insertClient(Request $request)
-        {
-            try{
-                $firstname = $request->input('firstname');
-                $lastname = $request->input('lastname');
-                $phone_number = $request->input('phoneNumber');
-                $email = $request->input('email');
-                $address = $request->input('address');
-                $birth_date = $request->input('birth_date');
-                $password = $request->input('password');
-                $confirmed_password = $request->input('confirmed_password');
-                // $card_number = $request->input('idCard');
-                $id_status = 2;
-                //$id_cin = null;
-
-                    $request->session()->put('formData', [
-                        'firstname' => $firstname,
-                        'lastname' => $lastname,
-                        'phoneNumber' => $phone_number,
-                        'email' => $email,
-                        'address' => $address,
-                        'birth_date' => $birth_date,
-                        'password' => $password,
-                        'confirmed_password' => $confirmed_password,
-                        'id_status' => $id_status,
-                    ]);
-                    if($password == $confirmed_password){
-                        return view('FOC/sign_next_CIN');
-                    }
-                    else{
-                        $error = "Veuillez Confirmer votre mot de passe";
-                        return redirect()->back()->withErrors([$error])->withInput();
-                    }
-            }
-            catch(\Exception $e){
-                throw $e;
-                return view('FOC/sign',['error' , $e->getMessage()]);
-            }
+        } else {
+            // Gérer l'erreur de téléchargement des fichiers ici
+            $error = 'Erreur lors du téléchargement des fichiers CIN.';
+            return redirect()->back()->withErrors([$error])->withInput();
         }
     }
+
+    public function upload(Request $request, $name, $cheminDestination)
+    {
+        try {
+            if ($request->hasFile($name)) {
+                echo 'j';
+                $file = $request->file($name);
+                $imageName = "";
+    
+                if ($file->isValid()) {
+                    $extension = $file->getClientOriginalExtension();
+                    $allowedExtensions = ['png', 'gif', 'jpg', 'jpeg', 'pdf'];
+    
+                    if (in_array($extension, $allowedExtensions)) {
+                        $path = public_path($cheminDestination);
+                        $imageName = $file->getClientOriginalName();
+                        $imageName = preg_replace('/([^.a-z0-9]+)/i', '-', $imageName);
+    
+                        $file->move($path, $imageName);
+    
+                        $imageName = $imageName;
+                    } else {
+                        $erreur = 'Vous devez uploader un fichier de type png, gif, jpg, jpeg ou pdf.';
+                        echo $erreur;
+                    }
+                }
+                return $imageName;
+            } else {
+                $erreur = 'Le fichier ' . $name . ' n\'a pas été soumis.';
+                echo $erreur;
+            }
+    
+        } catch (\Exception $e) {
+            throw $e;
+            //return redirect()->back()->withErrors([$e->getMessage()])->withInput();            
+        }
+    }
+    
+    
+    public function insertClient(Request $request)
+    {
+        $firstname = $request->input('firstname');
+        $lastname = $request->input('lastname');
+        $phone_number = $request->input('phoneNumber');
+        $email = $request->input('email');
+        $address = $request->input('address');
+        $birth_date = $request->input('birth_date');
+        $password = $request->input('password');
+        $confirmed_password = $request->input('confirmed_password');
+        // $customer_profile = $request->input('profilPicture');
+        // echo $customer_profile;
+        //dd($request->all());
+        $customer_profile = $this->upload($request, 'profilPicture', 'image/Client');
+        //echo $customer_profile;
+        // $card_number = $request->input('idCard');
+        $id_status = 2;
+        //$id_cin = null;
+
+        try {
+            $client = new Client($firstname, $lastname, $phone_number, $email, $address, $birth_date, $password, $id_status, 0, $customer_profile);
+            $request->session()->put('client', $client);
+            if ($password == $confirmed_password) {
+                return view('FOC/sign_next_CIN');
+            } else {
+                $error = "Veuillez Confirmer votre mot de passe";
+                return redirect()->back()->withErrors([$error])->withInput();
+            }
+        } catch (\Exception $e) {
+            $error = $e->getMessage();
+            return redirect()->back()->withErrors([$error])->withInput();
+        }
+    }
+}
 ?>
