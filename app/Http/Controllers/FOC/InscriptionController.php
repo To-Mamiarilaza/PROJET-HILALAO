@@ -73,7 +73,7 @@ class InscriptionController extends Controller
     
         } catch (\Exception $e) {
             throw $e;
-            //return redirect()->back()->withErrors([$e->getMessage()])->withInput();            
+            return redirect()->back()->withErrors([$e->getMessage()])->withInput();            
         }
     }
     
