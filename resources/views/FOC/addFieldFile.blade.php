@@ -31,13 +31,14 @@
                     <div class="row">
                         <h3>Importer les documents ici</h3>
                         <div class="col-md-12 contenu-terrain">
-                            <form action="" method="get" class="col-md-12 form-content">
+                            <form enctype="multipart/form-data" action="{{ route('addFieldFile') }}" method="POST" class="col-md-12 form-content">
+                                @csrf
                                 <div class="row info-terrain">
                                     <div class="col-md-6">
                                         <label for="dossierTerrain" class="control-label"><b>Dossier a fournir</b></label>
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="file" id="image-upload" style="display: none;">
+                                        <input type="file" id="image-upload" style="display: none;" name="fileField">
                                         <label for="image-upload" class="btn btn-primary btn-block btn-edited">Dossier</label>
                                     </div>
                                 </div><br>

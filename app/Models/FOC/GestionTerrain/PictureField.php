@@ -69,26 +69,50 @@ class PictureField
     }
 
     //Recuperer la photo de profil d'un terrain
+    public static function getPictureProfile($field) {
+        $picture = null;
+        $result = DB::table('picture')
+        ->where('id_field', $field->getIdfield())
+        ->where('id_type_picture', 1)
+        ->first();
+        if($result == null) {
+            $picture = new PictureField(0, 'terrainInconnu.jpg', TypePicture::findById(1), Field::findById($field->getIdField()));
+        }
+        else {
+            $picture = new PictureField($result->id_picture, $result->picture, TypePicture::findById(1), Field::findById($field->getIdField()));
+        }  
+        
+        return $picture;
+    }
+
+    //Recuperer la photo de profil des terrains
     public static function getPictureProfileField($fields)
-    {
+    {   
         $datas = array();
+        $i = 0;
         foreach($fields as $field) {
-            $results = DB::select('SELECT * FROM picture WHERE id_field ='.$field->getIdfield().' AND id_type_picture =1');
-            $datas = array();
-            $i = 0;
-            foreach ($results as $row) {
-                $datas[$i] = new PictureField($row->id_picture, $row->picture, TypePicture::findById($row->id_type_picture), Field::findById($row->id_field));
+            //$results = DB::select('SELECT * FROM picture WHERE id_field ='.$field->getIdfield().' AND id_type_picture =1');
+            $result = DB::table('picture')
+            ->where('id_field', $field->getIdfield())
+            ->where('id_type_picture', 1)
+            ->first();
+            if($result == null) {
+                $datas[$i] = new PictureField(0, 'terrainInconnu.jpg', TypePicture::findById(1), Field::findById($field->getIdField()));
                 $i++;
-            }            
+            }
+            else {
+                $datas[$i] = new PictureField($result->id_picture, $result->picture, TypePicture::findById(1), Field::findById($field->getIdField()));
+                $i++;
+            }          
         }
 
         return $datas;
     }
 
-    //Recuperer la photo secondaire d'un terrain
-    public static function getSecondProfileField($field)
+    //Recuperer les photos secondaire d'un terrain
+    public static function getSecondPictureField($field)
     {
-        $results = DB::select('SELECT * FROM picture WHERE id_field ='.$field->id_field.' AND id_type_picture =2');
+        $results = DB::select('SELECT * FROM picture WHERE id_field ='.$field->getIdField().' AND id_type_picture =2');
         $datas = array();
         $i = 0;
         foreach ($results as $row) {
@@ -111,7 +135,7 @@ class PictureField
     public function create()
     {
         $req = "INSERT INTO picture VALUES ( default, '%s', %d, %d)";
-        $req = sprintf($req,$this->picture,$this->type_picture->id_type_picture,$this->field->id_field);
+        $req = sprintf($req,$this->picture,$this->type_picture->getIdTypePicture(),$this->field->getIdField());
         DB::insert($req);
     }
    
@@ -123,8 +147,8 @@ class PictureField
         ->update([
             'id_picture' => $this->id_picture,
             'picture' => $this->picture,
-            'id_type_picture' => $this->type_picture->id_type_picture,
-            'id_field' => $this->field->id_field,
+            'id_type_picture' => $this->type_picture->getIdTypePicture(),
+            'id_field' => $this->field->getIdField(),
         ]);
     }
    

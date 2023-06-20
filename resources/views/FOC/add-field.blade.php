@@ -31,14 +31,14 @@
 			<div class="row justify-content-center fonction-list">
                 <h1>Formulaire d'ajout de terrain</h1>
 				<div class="col-md-12 contenu-terrain">
-					<form action="/addFieldFile" method="POST" class="col-md-12 form-content">
+					<form action="{{ route('addField') }}" method="POST" class="col-md-12 form-content">
 					@csrf	
 						<div class="row info-terrain">
 							<div class="col-md-2">
 								<label for="nom" class="control-label"><b>Nom</b></label>
 							</div>
 							<div class="col-md-8">
-								<input class="form-content__input form-content__input--log form-control" type="text" placeholder="nom de votre terrain" aria-label=".form-control-lg" id="nom" name="nameField">
+								<input class="form-content__input form-content__input--log form-control" type="text" placeholder="nom de votre terrain" aria-label=".form-control-lg" id="nom" name="nameField" value="nomTerrain">
 							</div>
 						</div>
 						<div class="row info-terrain">

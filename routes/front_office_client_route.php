@@ -25,6 +25,11 @@ Route::post('/signUpCin', [LoginController::class, 'signUpCin'])
 Route::POST('/login', [LoginController::class, 'login'])
 ->name('login');
 
+
+Route::get('/home', function () {
+    return view('FOC/home');
+});
+
 Route::GET('/deconnect', [LoginController::class, 'deconnect'])
 ->name('deconnect');
 
@@ -35,12 +40,12 @@ Route::post('/ClientProfil', [LoginController::class, 'profilClient'])
 Route::GET('/loadAddField', [FieldController::class, 'loadAddField'])
 ->name('loadAddField');
 
-Route::GET('/addField', [FieldController::class, 'addField'])
+Route::POST('/addField', [FieldController::class, 'addField'])
 ->name('addField');
 
-Route::POST('/addFieldFile', function() {
-    return view('FOC/addFieldFile');
-});
+Route::POST('/addFieldFile', [FieldController::class, 'addFieldFile'])
+->name('addFieldFile');
+
 
 Route::get('/subscription-facture', function() {
     return view('FOC/subscription-facture');
@@ -55,3 +60,9 @@ Route::get('/list-field', [FieldController::class, 'listField'])
 
 Route::get('/profile-field/{idField}', [FieldController::class, 'profileField'])
 ->name('profile-field');
+
+Route::POST('/searchField', [FieldController::class, 'searchField'])
+->name('searchField');
+
+Route::POST('/editImageProfile', [FieldController::class, 'editImage'])
+->name('editImageProfile');

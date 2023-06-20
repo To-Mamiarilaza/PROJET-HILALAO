@@ -45,6 +45,6 @@ class TypePicture
     {
         $results = DB::table('type_picture')->where('id_type_picture', $id)->first();
         
-        return new Day($results->id_type_picture, $results->type_picture);
+        return new TypePicture($results->id_type_picture, $results->type_picture);
     }
 }
