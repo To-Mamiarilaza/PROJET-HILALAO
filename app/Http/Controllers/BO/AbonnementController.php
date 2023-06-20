@@ -37,7 +37,7 @@ class AbonnementController extends Controller
         $selectedMonth = $request->input('mois');
         $selectedYear = $request->input('annee');
         $selectedPayed = $request->input('etat');
-        
+        $donnee_de_paiement = $model->paiementrecue($selectedYear,$selectedCategorie);
         if ($selectedCategorie != null || $selectedMonth != null || $selectedYear != null || $selectedPayed != null) {
             try {
             $all = $model->getAbonnementSort($selectedCategorie, $selectedMonth, $selectedYear, $selectedPayed);
@@ -45,14 +45,14 @@ class AbonnementController extends Controller
                 return redirect()->back()->with('error', 'Une erreur s\'est produite lors du tri des abonnements.');
             }
         }
-        
         return view('BO.abonnement', [
             'all' => $all,
             'categories' => $categories,
             'selectedCategorie' => $selectedCategorie,
             'selectedMonth' => $selectedMonth,
             'selectedYear' => $selectedYear,
-            'selectedPayed' => $selectedPayed
+            'selectedPayed' => $selectedPayed,
+            'donnee' => json_encode($model->avoir_label($donnee_de_paiement))
         ]);
     }
 }

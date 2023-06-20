@@ -12,12 +12,27 @@ class Abonnement
     public $start_date;
     public $end_date;
     public $duration;
+    public $total_prix;
+    public $mois;
 
     public function getName() {
         return $this->name;
     }
     public function setName($value) {
         $this->name = $value;
+    }
+
+    public function getTotal_prix() {
+        return $this->total_prix;
+    }
+    public function setTotal_prix($value) {
+        $this->total_prix = $value;
+    }
+    public function getMois() {
+        return $this->mois;
+    }
+    public function setMois($value) {
+        $this->mois = $value;
     }
 
     public function getCategory() {
@@ -62,9 +77,80 @@ class Abonnement
         $this->duration = $value;
     }
 
+    public function paiementrecue($annee,$category){
+        try{
+            $req = "SELECT
+            EXTRACT(MONTH FROM DATE_TRUNC('month', generate_series(start_date, start_date + (s.duration || ' month')::interval - INTERVAL '1 day', '1 month'))) AS month,
+            SUM(c.subscribing_price) AS price
+            FROM
+                field f
+                JOIN category c ON c.id_category = f.id_category
+                JOIN subscription s ON s.id_field = f.id_field
+            WHERE
+                EXTRACT(YEAR FROM start_date) = ".$annee."
+            GROUP BY
+                EXTRACT(MONTH FROM DATE_TRUNC('month', generate_series(start_date, start_date + (s.duration || ' month')::interval - INTERVAL '1 day', '1 month')))
+            order by
+                month asc
+                ";
+            if($category != "all"){
+                $req = "SELECT
+                c.id_category as id_category,
+                EXTRACT(MONTH FROM DATE_TRUNC('month', generate_series(start_date, start_date + (s.duration || ' month')::interval - INTERVAL '1 day', '1 month'))) AS month,
+                SUM(c.subscribing_price) AS price
+                FROM
+                    field f
+                    JOIN category c ON c.id_category = f.id_category
+                    JOIN subscription s ON s.id_field = f.id_field
+                WHERE
+                    EXTRACT(YEAR FROM start_date) = 2023
+                    and c.category = '".$category."'
+                GROUP BY
+                    EXTRACT(MONTH FROM DATE_TRUNC('month', generate_series(start_date, start_date + (s.duration || ' month')::interval - INTERVAL '1 day', '1 month'))),
+                    c.id_category
+                order by
+                    month asc
+                    ";
+            }
+            $abonnement = DB::select($req);
+                
+            $res = array();
+            foreach ($abonnement as $result) {
+                $temp = new Abonnement();
+                $temp->setMois($result->month);
+                $temp->setTotal_prix($result->price);
+                $res[] = $temp;
+            }
+            return $res;
+        }catch(Exception $e){
+            $e->getMessage();
+        }
+    }
+
+    public function avoir_label($database){
+        $res=[];
+        $month = 1;
+        for($k=0; $k<count($database); $k++){
+            for($i = 0;$i<$database[$k]->getMois()-$month; $i++){
+                $res = [...$res,0];
+            }
+            $res = [...$res,$database[$k]->getTotal_prix()];
+            if($k == count($database)-1){
+                for($i = 0;$i<12-$database[$k]->getMois(); $i++){
+                    $res = [...$res,0];
+                }
+            }
+            $month = count($res)+ 1;
+        }
+        return $res;
+    }
+
     public function getAllAbonnenent(){
         try{
-            $abonnement = DB::select("select f.name, c.category, cl.first_name as client, c.subscribing_price as price,  start_date, start_date + INTERVAL '1 month' * duration AS end_date, duration
+            $abonnement = DB::select("select f.name, c.category, 
+            cl.first_name as client, c.subscribing_price as price,  
+            start_date, start_date + INTERVAL '1 month' * duration AS 
+            end_date, duration
             from field f
             join category c on c.id_category = f.id_category
             join client cl on cl.id_client = f.id_client
@@ -107,6 +193,7 @@ class Abonnement
                         AND EXTRACT(YEAR FROM s.start_date) =" .$selectedYear.
                         "AND EXTRACT(MONTH FROM s.start_date) = ".$selectedMonth.
                     "WHERE s.id_field IS NULL";
+
                 }
                 $abonnement = DB::select($requette);
                 
@@ -133,7 +220,6 @@ class Abonnement
                 
                 if($selectedMonth != 00){
                     $requette .="and EXTRACT(MONTH FROM start_date) = ".$selectedMonth;
-                    
                 }
 
                 if($selectedCategorie != "all"){

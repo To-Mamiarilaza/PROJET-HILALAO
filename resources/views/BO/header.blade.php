@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{ asset('fontawesome-5/css/all.css') }}">
     <link rel="stylesheet" href="{{ asset('fontawesome-5/css/all.min.css') }}"> 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Page Admin</title>
 </head>
 <body>
