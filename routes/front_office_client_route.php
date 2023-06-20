@@ -28,3 +28,10 @@ Route::get('/Login', [LoginController::class, 'login'])
 /// pour la page Profil
 Route::post('/ClientProfil', [LoginController::class, 'profilClient'])
 ->name('profilClient');
+
+Route::get('/home-client', function() {
+    return view('FOC/home');
+
+Route::get('/stat-terrain', function() {
+    return view('FOC/statistic-field');
+});
