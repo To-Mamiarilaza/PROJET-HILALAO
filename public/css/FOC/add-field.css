@@ -16,8 +16,8 @@
 
 .contenu-terrain {
     background-color: aliceblue;
-    margin-bottom: 3%;
-    padding-bottom: 5%;
+    /* margin-bottom: 3%;
+    padding-bottom: 5%; */
 }
 
 .info-terrain .btn-edited {
