@@ -23,6 +23,7 @@
             <label for="mois">Mois :</label>
             <select onchange="updateSelectedFields()" class="form-control form-control-sm" name="mois" id="mois" value="00">
                 <option value="00">Tout les mois</option>
+                <option value="00">Toutes les mois</option>
                 <option value="01">Janvier</option>
                 <option value="02">Février</option>
                 <option value="03">Mars</option>

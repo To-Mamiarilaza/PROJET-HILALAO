@@ -67,7 +67,6 @@
               </tr>
             </thead>
             <tbody>
-
               @foreach ($all as $abonnement)
               <tr>
                 <td>{{ $abonnement->name }}</td>

@@ -43,7 +43,7 @@
                 <button type="submit" class="form-content__input--submit">SIGN IN</button>
             </form>
         </div>
-        <p>Don't have a account? <a href="{{ route('view_sign') }}">Sign up</a></p>
+        <p>Don't have a account? Sign up</p>
     </div>
 </body>
 
