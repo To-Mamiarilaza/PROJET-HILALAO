@@ -87,12 +87,8 @@ class InscriptionController extends Controller
         $birth_date = $request->input('birth_date');
         $password = $request->input('password');
         $confirmed_password = $request->input('confirmed_password');
-         //$customer_profile = $request->input('profilPicture');
-        //echo $customer_profile;
         //dd($request->all());
         $customer_profile = $this->upload($request, 'profilPicture', 'image/Client');
-        //echo $customer_profile;
-        // $card_number = $request->input('idCard');
         $id_status = 2;
         //$id_cin = null;
 
