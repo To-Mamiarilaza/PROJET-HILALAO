@@ -9,10 +9,14 @@ body {
 
 form {
   margin-left: 10%;
+  float: left;
+  width: 30%;
+  height: 40%;
 }
 
 table {
   width: 80%;
+  height: 50%;
   border: 1px solid #ccc;
   border-collapse: collapse;
   margin: auto;
@@ -65,4 +69,11 @@ select:focus {
 
 .fa-bell:hover {
   color: #e17b36;
+}
+
+#graphe {
+  float: right;
+  width: 50%;
+  height: 40%;
+  margin-right: 50px;
 }/*# sourceMappingURL=category.css.map */
