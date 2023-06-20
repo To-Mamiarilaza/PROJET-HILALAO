@@ -28,6 +28,10 @@ Route::POST('/login', [LoginController::class, 'login'])
 Route::post('/ClientProfil', [LoginController::class, 'profilClient'])
 ->name('profilClient');
 
+Route::get('/ajoutTerrain',function() {
+    return view('FOC/ajoutTerrain');
+});
+
 Route::get('/addTerrain',function() {
     return view('FOC/addTerrain');
 });

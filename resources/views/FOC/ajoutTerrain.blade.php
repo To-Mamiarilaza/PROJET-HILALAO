@@ -13,14 +13,14 @@
 <body>
 	@include('FOC/header');
 
-	<section>
+    <section>
 		<div class="container mt-5">
 			<div class="row">
 				<div class="col-md-6 image-place">
 					<img src="{{ asset('image/add-terrain.png') }}" alt="Image terrain" srcset="">
 				</div>
 				<div class="col-md-6">
-					{{-- <h1>Ajouter vos terrains dans la liste</h1> --}}
+					<h1>Ajouter vos terrains dans la liste</h1>
 					<p class="mt-4">
 						Vous pouvez bien sûr ajouter votre terrain ainsi que d'autres informations nécessaires 
 						afin que les utilisateurs puissent mieux voir les merveilles sur le terrain où ils jouent.
@@ -110,17 +110,17 @@
 					<div class="col-md-4">
 						<div class="row info-terrain">
 							<div class="col-md-2">
-								{{-- <label for="adresse" class="control-label"><b>Adresse</b></label> --}}
+								<label for="adresse" class="control-label"><b>Adresse</b></label>
 							</div>
 							<div class="col-md-6">
 								<input class="form-content__input form-content__input--log form-control" type="text" placeholder="adresse terrain" aria-label=".form-control-lg" id="adresse" name="adresse">
 							</div>
 						</div>
-						<div id="map" style="height: 400px;"></div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
+
 </body>
 </html>
