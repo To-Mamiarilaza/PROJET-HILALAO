@@ -6,13 +6,13 @@
     margin-right: 80%;
 }
 
-.info-terrain .btn {
+/* .info-terrain .btn {
     margin-right: 80%;
     width: 70%;
     background-color: #ffc107;
     border: none;
     color: black;
-}
+} */
 
 .contenu-terrain {
     background-color: aliceblue;
@@ -20,6 +20,26 @@
     padding-bottom: 5%; */
 }
 
+.contenu-terrain .btn {
+    margin-top: 6%;
+}
+
 .info-terrain .btn-edited {
     margin-bottom: 20%;
+}
+
+.info-terrain .label-for-radio {
+    width: 150px;
+    display: flex;
+}
+
+#map {
+    position: absolute;
+    height: 320px;
+    width: 610px;
+}
+
+.sig-map {
+    margin-top: 5%;
+    padding-right: 22%;
 }
