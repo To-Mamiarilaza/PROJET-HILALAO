@@ -25,7 +25,6 @@ class StatistiqueController extends Controller
     }
 
     public function statistique(){
-        
         $category = new Category();
         $allCategories = $category->getAllCategory();
         $currentYear = date("Y");
