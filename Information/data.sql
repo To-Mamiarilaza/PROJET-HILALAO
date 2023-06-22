@@ -292,3 +292,5 @@ LEFT JOIN subscription s ON f.id_field = s.id_field
 WHERE s.id_field IS NULL;
 
 
+
+update client set id_status = 3 where id_client = 

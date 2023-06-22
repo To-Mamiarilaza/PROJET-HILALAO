@@ -5,16 +5,16 @@ use Illuminate\Support\Facades\DB;
 
 class DetailClient
 {
-    public $first_name;
-    public $last_name;
-    public $phone_number;
-    public $mail;
-    public $address;
-    public $birth_date;
-    public $sign_up_date;
-    public $cin_number;
-    public $first_picture;
-    public $second_picture;
+    private $first_name;
+    private $last_name;
+    private $phone_number;
+    private $mail;
+    private $address;
+    private $birth_date;
+    private $sign_up_date;
+    private $cin_number;
+    private $first_picture;
+    private $second_picture;
 
     public function getFirst_name() {
         return $this->first_name;
@@ -114,6 +114,15 @@ class DetailClient
             }
         }catch(Exception $e){
             throw new Exception("Impossible d'avoir ");
+        }
+    }
+
+    public function update_status($value, $id_client) {
+        try{
+            $requette = "update client set id_status = ".$value." where id_client = ".$id_client;
+            DB::update($requette);
+        } catch(Exception $e){
+            throw new Exception("Impossible de modifier");
         }
     }
 }

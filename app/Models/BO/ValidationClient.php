@@ -35,7 +35,7 @@ class ValidationClient
         try{
             $client = DB::select("select c.id_client, c.first_name, c.last_name from client c
             join status_client sc on c.id_status = sc.id_status_client
-            where sc.id_status_client = 1");
+            where sc.id_status_client = 2");
             $res = array();
             foreach ($client as $result) {
                 $temp = new ValidationClient();

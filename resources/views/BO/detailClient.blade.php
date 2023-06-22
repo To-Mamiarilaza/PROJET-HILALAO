@@ -31,5 +31,5 @@
     </tbody>
 </table>
 
-<a href="#"><input type="button" value="Refusé"></a>
-<a href="#"><input type="button" value="Validé"></a>
+<a href="{{ route('') }}"><input type="button" value="Refusé"></a>
+<a href="{{ route('') }}"><input type="button" value="Validé"></a>

@@ -22,4 +22,8 @@ class DetailClientController extends Controller
             'all' => $all
         ]);
     }
+
+    public function modifierStatus(){
+        
+    }
 }
