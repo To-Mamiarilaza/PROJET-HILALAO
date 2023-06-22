@@ -16,8 +16,8 @@
 
 .contenu-terrain {
     background-color: aliceblue;
-    /* margin-bottom: 3%;
-    padding-bottom: 5%; */
+    /* margin-bottom: 3%; */
+    padding-bottom: 5%;
 }
 
 .contenu-terrain .btn {
@@ -42,4 +42,8 @@
 .sig-map {
     margin-top: 5%;
     padding-right: 22%;
+}
+
+.sig-map .btn {
+    margin-top: 0%;
 }

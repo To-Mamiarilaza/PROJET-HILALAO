@@ -33,7 +33,7 @@
 			<div class="row justify-content-center fonction-list">
 				<h1>Formulaire d'ajout de terrain</h1>
 				<div class="col-md-12 contenu-terrain">
-					<form action="" method="get" id="formMap">
+					<form action="" method="get">
 						<div class="row">
 							<div class="col-md-6">
 								<div class="row info-terrain">
@@ -107,23 +107,28 @@
 										</div>
 									</div>
 								</div>
+								<input class="btn btn-success" type="submit" value="Ajouter">
+							</form>
 						</div>
 						<div class="col-md-6">
-							<div class="row sig-map">
-								<div class="col-md-4">
-									<label for="adresse" class="control-label mt-2"><b>Adresse</b></label>
+							<form action="" id="formMap">
+								<div class="row sig-map">
+									<div class="col-md-3">
+										<label for="adresse" class="control-label mt-2"><b>Adresse</b></label>
+									</div>
+									<div class="col-md-5">
+										<input class="form-content__input form-content__input--log form-control" type="text" placeholder="adresse terrain" aria-label=".form-control-lg" id="adresse" name="adresse">
+									</div>
+									<div class="col-md-4">
+										<input class="btn btn-warning valide-coord-map" type="submit" value="Valider">
+									</div>
 								</div>
-								<div class="col-md-6">
-									<input class="form-content__input form-content__input--log form-control" type="text" placeholder="adresse terrain" aria-label=".form-control-lg" id="adresse" name="adresse">
+								<div class="row sig-map">
+									<div id="map"></div>
 								</div>
-							</div>
-							<div class="row sig-map">
-								<div id="map"></div>
-							</div>
+							</form>
 						</div>
 					</div>
-					<input class="btn btn-success" type="submit" value="Ajouter">
-					</form>
 				</div>
 
 			</div>
