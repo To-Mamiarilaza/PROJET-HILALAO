@@ -128,6 +128,9 @@
 								</div>
 							</form>
 						</div>
+						<div class="row">
+							<div id="info"></div>
+						</div>
 					</div>
 				</div>
 
@@ -143,28 +146,34 @@
 		}).addTo(map);
 
 		var marker;
+		var info = document.getElementById("info");
 
-		document.getElementById("formMap").addEventListener("submit", function(event) {
-		event.preventDefault(); // Empêche le rechargement de la page lors de la soumission du formulaire
-
-		var positionInput = document.getElementById("adresse").value;
+		map.on('click', function(e) {
+		var latitude = e.latlng.lat;
+		var longitude = e.latlng.lng;
 
 		// Supprimer le marqueur précédent s'il existe
 		if (marker) {
 			marker.remove();
 		}
 
-		var coordinates = positionInput.split(",");
-		var latitude = parseFloat(coordinates[0].trim());
-		var longitude = parseFloat(coordinates[1].trim());
-
-		if (!isNaN(latitude) && !isNaN(longitude)) {
-			map.setView([latitude, longitude], 13);
-			marker = L.marker([latitude, longitude]).addTo(map);
-		} else {
-			alert("Les coordonnées saisies ne sont pas valides. Veuillez utiliser le format 'latitude, longitude'.");
-		}
+		marker = L.marker([latitude, longitude]).addTo(map);
+		updateInfo(latitude, longitude);
 		});
+
+		function updateInfo(latitude, longitude) {
+		fetch('https://nominatim.openstreetmap.org/reverse?format=json&lat=' + latitude + '&lon=' + longitude)
+			.then(function(response) {
+			return response.json();
+			})
+			.then(function(data) {
+			var address = data.display_name;
+			info.innerHTML = 'Latitude: ' + latitude + '<br>Longitude: ' + longitude + '<br>Adresse: ' + address;
+			})
+			.catch(function(error) {
+			console.log('Une erreur s\'est produite :', error);
+			});
+		}
 	</script>
 
 <script src="{{ asset('css/FOU/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
