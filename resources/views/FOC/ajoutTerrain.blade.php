@@ -128,9 +128,10 @@
 								</div>
 							</form>
 						</div>
-						<div class="row">
+				{{-- Eto no de- commenter -na rah te ahita ny info sur adresse, coord, ... --}}
+						{{-- <div class="row">
 							<div id="info"></div>
-						</div>
+						</div> --}}
 					</div>
 				</div>
 
@@ -148,17 +149,39 @@
 		var marker;
 		var info = document.getElementById("info");
 
-		map.on('click', function(e) {
-		var latitude = e.latlng.lat;
-		var longitude = e.latlng.lng;
+		document.getElementById("formMap").addEventListener("submit", function(event) {
+		event.preventDefault(); // Empêche le rechargement de la page lors de la soumission du formulaire
+
+		var positionInput = document.getElementById("adresse").value;
 
 		// Supprimer le marqueur précédent s'il existe
 		if (marker) {
 			marker.remove();
 		}
 
-		marker = L.marker([latitude, longitude]).addTo(map);
-		updateInfo(latitude, longitude);
+		fetch('https://nominatim.openstreetmap.org/search?format=json&q=' + positionInput)
+			.then(function(response) {
+			return response.json();
+			})
+			.then(function(data) {
+			if (data.length > 0) {
+				var latitude = parseFloat(data[0].lat);
+				var longitude = parseFloat(data[0].lon);
+
+				if (!isNaN(latitude) && !isNaN(longitude)) {
+				map.setView([latitude, longitude], 13);
+				marker = L.marker([latitude, longitude]).addTo(map);
+				updateInfo(latitude, longitude);
+				} else {
+				info.innerHTML = 'Impossible de trouver la position pour l\'adresse saisie.';
+				}
+			} else {
+				info.innerHTML = 'Aucun résultat trouvé pour l\'adresse saisie.';
+			}
+			})
+			.catch(function(error) {
+			console.log('Une erreur s\'est produite :', error);
+			});
 		});
 
 		function updateInfo(latitude, longitude) {
