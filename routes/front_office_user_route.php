@@ -14,3 +14,8 @@ Route::get('/reserve', [ReservationController::class, 'reserve']);
 Route::get('/infoTerrain/{id_field}', [InfoTerrain::class, 'index']);
 
 Route::get('/carte', [InfoTerrain::class, 'afficheCarte']);
+
+//Profile terrain
+Route::get('/ProfileTerrain', [InfoTerrain::class, 'profileTerrain']);
+Route::get('/test', [InfoTerrain::class, 'test']);
+

@@ -19,7 +19,7 @@
 }
 
 .animated-button {
-  border: 1px #bbbbbb solid;
+  border: 1px rgb(187, 187, 187) solid;
   padding: 10px 20px;
   font-size: 12px;
   cursor: pointer;
@@ -29,7 +29,7 @@
 }
 
 .animated-button::before {
-  content: '';
+  content: "";
   background-color: rgba(255, 255, 255, 0.4);
   position: absolute;
   top: -100%;
@@ -37,7 +37,6 @@
   width: 100%;
   height: 100%;
   opacity: 0;
-  -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
 
@@ -47,12 +46,8 @@
 }
 
 .terrain-box {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 16px;
@@ -81,7 +76,7 @@
 }
 
 .animated-button-dispo::before {
-  content: '';
+  content: "";
   background-color: rgba(255, 255, 255, 0.4);
   position: absolute;
   top: -100%;
@@ -89,12 +84,10 @@
   width: 100%;
   height: 100%;
   opacity: 0;
-  -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
 
 .animated-button-dispo:hover::before {
   top: 0;
   opacity: 1;
-}
-/*# sourceMappingURL=specified.css.map */
+}/*# sourceMappingURL=specified.css.map */
