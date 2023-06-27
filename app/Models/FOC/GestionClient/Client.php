@@ -192,7 +192,7 @@ class Client
     {
         $results = DB::table('client')->where('id_cin', $idCin)->first();
         
-        return  new Client($results->id_client, $results->first_name, $results->last_name, $results->phone_number, $results->mail, $results->address, $results->birth_date, $results->pwd,Status::findById($results->id_status), $results->sign_up_date, Cin::findById($results->id_cin));
+        return new Client($results->id_client, $results->first_name, $results->last_name, $results->phone_number, $results->mail, $results->address, $results->birth_date, $results->pwd, $results->id_status, $results->sign_up_date, $results->id_cin);
     }
 
     //Sauvegarder un client dans la base
