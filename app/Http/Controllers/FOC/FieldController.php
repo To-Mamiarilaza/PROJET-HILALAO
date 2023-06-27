@@ -14,6 +14,7 @@ use App\Models\FOC\GestionTerrain\Infrastructure;
 use App\Models\FOC\GestionTerrain\Light;
 use App\Models\FOC\GestionTerrain\PictureField;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Http;
 use Carbon\Carbon;
 
 class FieldController extends Controller
@@ -48,7 +49,7 @@ class FieldController extends Controller
     }
 
     //Charger l'insertion terrain
-    public function loadAddField() {
+    public function loadAddField($error="") {
         //Charger toutes les categories du terrain
         $categoryField = Category::getAll();
 
@@ -66,29 +67,49 @@ class FieldController extends Controller
             'fieldType' => $fieldType,
             'infrastructure' => $infrastructure,
             'light' => $light,
+            'error' => $error,
         ]);
     }
 
     //Inserer le terrain
     public function addField(Request $request) {
-        $name = $request->input('nameField');
-        $category = $request->input('category');
-        $surface = $request->input('surface');
-        $infrastructure = $request->input('infrastructure');
-        $light = $request->input('light');
+        try {
+            if($request->input('latitude') != null && $request->input('longitude') != null && $request->input('adresseResult') != null) {
+            
+                $name = $request->input('nameField');
+                $category = $request->input('category');
+                $surface = $request->input('surface');
+                $infrastructure = $request->input('infrastructure');
+                $light = $request->input('light');
+        
+                $latitude = $request->input('latitude');
+                $longitude = $request->input('longitude');
+                $adresseResult = $request->input('adresseResult');
 
-        $data = [
-            'name' => $name,
-            'category' => $category,
-            'surface' => $surface,
-            'infrastructure' => $infrastructure,
-            'light' => $light
-        ];
-    
-        Session::put('field', $data);
+                $data = [
+                    'name' => $name,
+                    'category' => $category,
+                    'surface' => $surface,
+                    'infrastructure' => $infrastructure,
+                    'light' => $light,
+                    'latitude' => $latitude,
+                    'longitude' => $longitude,
+                    'adresse' => $adresseResult,
+                ];
+            
+                Session::put('field', $data);
 
-        return view('FOC/addFieldFile');
+                return view('FOC/addFieldFile');
+            }
+            else {
+                throw new Exception("Veuillez saisir en premier votre adresse");
+            }
+            
+        } catch(Exception $e) {
+           echo $e->getMessage();
+        } 
     }
+
 
     //Inserer le dossier du terrain
     public function addFieldFile(Request $request) {
@@ -122,7 +143,12 @@ class FieldController extends Controller
         $dateActuelle = Carbon::now();
         $dateFormatee = $dateActuelle->format('Y-m-d H:i:s');
 
-        $field = new Field('default',$category,$clientConnected,$name,$surface,$infrastructure,$light,'yes','adress', 0.0, 0.0, $dateFormatee, $file);
+        //Les coordonnees et information geographique
+        $latitude = $data['latitude'];
+        $longitude = $data['longitude'];
+        $adresse = $data['adresse'];
+
+        $field = new Field('default',$category,$clientConnected,$name,$surface,$infrastructure,$light,'',$adresse, $latitude, $longitude, $dateFormatee, $file);
         $field->create($clientConnected);
 
         return redirect()->route('list-field');

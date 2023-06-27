@@ -66,3 +66,10 @@ Route::POST('/searchField', [FieldController::class, 'searchField'])
 
 Route::POST('/editImageProfile', [FieldController::class, 'editImage'])
 ->name('editImageProfile');
+
+Route::POST('/getInfosAdress', [FieldController::class, 'getInfosAdress'])
+->name('getInfosAdress');
+
+Route::get('/disponibility', function () {
+    return view('FOC/disponibility');
+});

@@ -77,7 +77,7 @@
                             <p class="parameter-hour">10:00 H à 13:00 H <span class="parameter-price">50 000 Ar</span> </p>
                         </div>
                     </div>
-                    <a href="" class="btn btn-warning mt-3">Paramétrer disponibilité et prix</a>
+                    <a href="/disponibility" class="btn btn-warning mt-3">Paramétrer disponibilité et prix</a>
                     <a href="" class="btn btn-warning my-3" data-bs-toggle="modal" data-bs-target="#new-indisponible">Marquer des indisponibilités</a> <br>
                 </div>
             </div>
