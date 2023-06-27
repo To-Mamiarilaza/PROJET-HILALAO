@@ -16,7 +16,7 @@ class UserException extends Exception {
         return $this->type;
     }
     public function setType($values) {
-        $this->type = $values
+        $this->type = $values;
     }
 
 }

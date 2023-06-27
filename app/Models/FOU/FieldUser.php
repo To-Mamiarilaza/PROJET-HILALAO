@@ -6,6 +6,7 @@ class FieldUser extends FieldDetailled {
     private $users;
     private $users_reservations;
     private $others_reservations;
+    private $direct_reservations;
 
     public function __construct()
     {
@@ -16,16 +17,18 @@ class FieldUser extends FieldDetailled {
         $field = new FieldUser();
         $field->findById($id_field);
         $field->setUsers(Users::SfindById($id_users));
-        $field->setUsersReservations(Reservation::findUsersReservation($id_field, $id_users));
-        $field->setOthersReservations(Reservation::findOthersReservation($id_field, $id_users));
+        $field->setUsersReservations(Reservation::findUsersReservation($id_users, $id_field ));
+        $field->setOthersReservations(Reservation::findOthersReservation($id_users, $id_field ));
+        $field->setDirectReservations(Reservation::findDirectReservationByIdField($id_field));
         return $field;
     }
 
     public function find($id_field, $id_users) {
         $this->findById($id_field);
         $this->setUsers(Users::SfindById($id_users));
-        $this->setUsersReservations(Reservation::findUsersReservation($id_field, $id_users));
-        $this->setOthersReservations(Reservation::findOthersReservation($id_field, $id_users));
+        $this->setUsersReservations(Reservation::findUsersReservation($id_users, $id_field));
+        $this->setOthersReservations(Reservation::findOthersReservation($id_users, $id_field));
+        $this->setDirectReservations(Reservation::findDirectReservationByIdField($id_field));
     }
 
     public static function findReservation($id_field) {
@@ -33,6 +36,7 @@ class FieldUser extends FieldDetailled {
         $field->findById($id_field);
         $field->setUsersReservations([]);
         $field->setOthersReservations(Reservation::findByIdField($id_field));
+        $field->setDirectReservations(Reservation::findDirectReservationByIdField($id_field));
         return $field;
     }
 
@@ -53,6 +57,12 @@ class FieldUser extends FieldDetailled {
     }
     public function setOthersReservations($values) {
         $this->others_reservations = $values;
+    }
+    public function getDirectReservations() {
+        return $this->direct_reservations;
+    }
+    public function setDirectReservations($values) {
+        $this->direct_reservations = $values;
     }
 
 }

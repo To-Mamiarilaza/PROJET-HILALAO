@@ -3,7 +3,6 @@ namespace App\Models\FOU;
 
 use App\Exceptions\SecurityException;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Database\Eloquent\Model;
 use DateTime;
 
 class Reservation {
@@ -19,14 +18,12 @@ class Reservation {
 
     public static function prepareReservation($id_field, $id_users,$reservation_date, $start_time, $duration) {
         $reservation = new Reservation();
-        $reservation->setStartTime($start_time);
+        $reservation->setStartTime(DateTime::createFromFormat('H:i', $start_time));
         $reservation->setDuration($duration);
-        $reservation->setReservationDate($reservation_date);
+        $reservation->setReservationDate(DateTime::createFromFormat('Y-m-d', $reservation_date));
         $reservation->setIdField($id_field);
         $reservation->setIdUsers($id_users);
-        $end_time = $start_time->modify('+'.$duration.' hours');
-        $reservation->setEndTime($end_time);
-        $reservation->setDateHeureReservation(new DateTimeFO($reservation->getReservationDate(), $reservation->getStartTime(), $reservation->getEndTime()));
+        $reservation->setDateHeureReservation(new DateTimeFO($reservation->getReservationDate(), $reservation->getStartTime()));
         return $reservation;
     }
 
@@ -35,7 +32,7 @@ class Reservation {
 
     public function save() {
         $sql = "INSERT INTO \"public\".reservation ( reservation_date, id_users, start_time, id_field, duration) VALUES ( '%s', %s, '%s', %s, %s )";
-        $sql = sprintf($sql, $this->getReservationDate(), $this->getIdUsers(), $this->getStartTime(), $this->getIdField(), $this->getDuration());
+        $sql = sprintf($sql, $this->getReservationDate()->format('Y-m-d'), $this->getIdUsers(), $this->getStartTime()->format('H:i:s'), $this->getIdField(), $this->getDuration());
         DB::insert($sql);
     }
 
@@ -63,6 +60,7 @@ class Reservation {
     public static function findOthersReservation($id_users, $id_field) {
         $sql = 'SELECT id_reservation, reservation_date, id_users, start_time, id_field, duration, end_time FROM "public".v_actif_reservation f WHERE id_field = %s AND id_users != %s';
         $sql = sprintf($sql, $id_field, $id_users);
+        echo $sql;
         $reservations_db = DB::select($sql);
         $res = array();
         foreach ($reservations_db as $reservation_db) {
@@ -70,6 +68,30 @@ class Reservation {
         }
         return $res;
     }
+
+    public static function findDirectReservationByIdField($id_field) {
+        $sql = 'SELECT id_direct_reservation, reservation_date, client_name, start_time, id_field, duration, end_time FROM "public".v_direct_reservation f WHERE id_field = %s';
+        $sql = sprintf($sql, $id_field);
+        echo $sql;
+        $reservations_db = DB::select($sql);
+        $res = array();
+        foreach ($reservations_db as $reservation_db) {
+            $temp = new Reservation();
+            $users = new Users();
+            $users->setLastName($reservation_db->client_name);
+            $temp->setIdReservation($reservation_db->id_direct_reservation);
+            $temp->setReservationDate(DateTime::createFromFormat('Y-m-d', $reservation_db->reservation_date));
+            $temp->setUsers($users);
+            $temp->setStartTime(DateTime::createFromFormat('H:i:s', $reservation_db->start_time));
+            $temp->setIdField($reservation_db->id_field);
+            $temp->setDuration($reservation_db->duration);
+            $temp->setEndTime(DateTime::createFromFormat('H:i:s', $reservation_db->end_time));
+            $temp->setDateHeureReservation(new Availability(DateTime::createFromFormat('Y-M-d', $reservation_db->reservation_date), DateTime::createFromFormat('H:i:s',$reservation_db->start_time), DateTime::createFromFormat('H:i:s', $reservation_db->end_time)));
+            $res[] = $temp;
+        }
+        return $res;
+    }
+
 
     public static function findUsersReservation($id_users, $id_field) {
         $sql = 'SELECT id_reservation, reservation_date, id_users, start_time, id_field, duration, end_time FROM "public".v_actif_reservation f WHERE id_field = %s AND id_users = %s';

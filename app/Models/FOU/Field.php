@@ -121,6 +121,17 @@ class Field {
 
     }
 
+    public static function getFilters() {
+        $filters = [];
+        $filters[0]['value'] = Filter::find("light");
+        $filters[1]['value'] = Filter::find("infrastructure");
+        $filters[2]['value'] = Filter::find("field_type");
+        $filters[0]['name'] = "Eclairage";
+        $filters[1]['name'] = "Infrastructure";
+        $filters[2]['name'] = "Type du terrain";
+        return $filters;
+    }
+
     protected function settingDBResult($result) {
         $this->setIdField($result->id_field);
         $this->setIdCategory($result->id_category);
