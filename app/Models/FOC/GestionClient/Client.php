@@ -106,7 +106,7 @@ class Client
     }
     public function getCIn()
     {
-        return $this->$cin;
+        return $this->cin;
     }
     
     public function setCin($Cin = "")
