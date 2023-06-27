@@ -1,14 +1,16 @@
 <?php
 	// Parcourir le tableau des mois
+	function printStats() {
+		$stats = array("info","danger","default");
+	}
+
 	function printMonth() {
-	$mois = array(
-		"Janvier", "Février", "Mars", "Avril",
-		"Mai", "Juin", "Juillet", "Août",
-		"Septembre", "Octobre", "Novembre", "Décembre"
-	);
-	for ($i = 0; $i < count($mois); $i++) {
-			echo "<td>" . $mois[$i] . "</td>";
-		}
+		$mois = array(
+			"Janvier", "Février", "Mars", "Avril",
+			"Mai", "Juin", "Juillet", "Août",
+			"Septembre", "Octobre", "Novembre", "Décembre"
+		);
+		for ($i = 0; $i < count($mois); $i++) { echo "<td>" . $mois[$i] . "</td>"; }
 	}
 ?>
 
