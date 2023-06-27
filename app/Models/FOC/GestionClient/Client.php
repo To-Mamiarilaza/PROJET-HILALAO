@@ -3,6 +3,8 @@
 namespace App\Models\FOC\GestionClient;
 use Illuminate\Support\Facades\DB;
 use DateTime;
+use Exception;
+use App\Exceptions\ClientExceptionHandler;
 
 class Client
 {
@@ -178,7 +180,7 @@ class Client
         $datas = array();
         $i = 0;
         foreach ($results as $row) {
-            $datas[$i] = new Client($row->id_client, $row->first_name, $row->last_name, $row->phone_number, $row->mail, $row->address, $row->birth_date, $row->pwd, $row->status, $row->sign_up_date, $row->cin);
+            $datas[$i] = new Client($row->id_client, $row->first_name, $row->last_name, $row->phone_number, $row->mail, $row->address, $row->birth_date, $row->pwd, Status::findById($row->id_status), $row->sign_up_date, Cin::findById($row->id_cin));
             $i++;
         }
         
@@ -190,7 +192,7 @@ class Client
     {
         $results = DB::table('client')->where('id_cin', $idCin)->first();
         
-        return new Client($results->id_client, $results->first_name, $results->last_name, $results->phone_number, $results->mail, $results->address, $results->birth_date, $results->pwd, $results->id_status, $results->sign_up_date, $results->id_cin);
+        return  new Client($results->id_client, $results->first_name, $results->last_name, $results->phone_number, $results->mail, $results->address, $results->birth_date, $results->pwd,Status::findById($results->id_status), $results->sign_up_date, Cin::findById($results->id_cin));
     }
 
     //Sauvegarder un client dans la base
@@ -236,18 +238,21 @@ class Client
 
     public static function login($pwd, $mail) 
     {
-        $req = "SELECT * FROM client WHERE pwd = '%s' AND mail = '%s'";
-        $req = sprintf($req,$pwd,$mail);
-        $results = DB::select($req);
-        $i = 0;
-        if($results) {
-            foreach ($results as $row) {
-                return new Client($row->id_client, $row->first_name, $row->last_name, $row->phone_number, $row->mail, $row->address, $row->birth_date, $row->pwd, $row->status, $row->sign_up_date, $row->cin);
-            }    
+        try {
+            $req = "SELECT * FROM client WHERE pwd = '%s' AND mail = '%s'";
+            $req = sprintf($req,$pwd,$mail);
+            $results = DB::select($req);
+            $i = 0;
+            if($results) {
+                foreach ($results as $row) {
+                    return new Client($row->id_client, $row->first_name, $row->last_name, $row->phone_number, $row->mail, $row->address, $row->birth_date, $row->pwd, $row->id_status, $row->sign_up_date, $row->id_cin);
+                }
+            }
+            throw new Exception("Veuillez ressayer");
+                
+        } catch(Exception $e) {
+
         }
-        
-        return null;
-        //throw Exception("Customer not found");
     }
     
 }

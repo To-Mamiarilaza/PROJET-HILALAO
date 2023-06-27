@@ -3,27 +3,35 @@ namespace App\Http\Controllers\FOC;
 
 use App\Models\FOC\GestionClient\Client;
 use App\Http\Controllers\Controller;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use App\Exceptions\ClientExceptionHandler;
+
 
 class LoginController extends Controller
 {
     public function login(Request $request)
     {
-        $email = $request->input('email');
-        $password = $request->input('password');
-        $client = Client::login($password, $email);
-
-        if($client != null) {
-            session()->put('customerConnected', $client);
-            $value = session()->get('customerConnected');
-            return view('FOC/welcome')->with('customer', $value);
-        }      
-        echo "erreur";
+        try {
+            $email = $request->input('email');
+            $password = $request->input('password');
+            $client = Client::login($password, $email);
+            if($client != null) {
+                session()->put('clientConnected', $client);
+                return redirect()->to('/home-client');
+            }
+            else {
+                throw new Exception("Veuillez ressayer");
+            }
+            
+        } catch(Exception $e) {
+            return view('FOC/login')->with('error', $e->getMessage());
+        }     
     }
     public function signin(Request $request)
     {
-        return view('FOC/sign');
+        return view('FOC/signUp');
     }
 
     public function nextsignup(Request $request)
@@ -39,5 +47,15 @@ class LoginController extends Controller
 	{
 		return view('FOC/profilClient');
 	}
+
+    public function deconnect() {
+        // Récupérez l'ID de session actuel
+        $sessionId = session()->getId();
+
+        // Utilisez l'ID de session pour oublier la session
+        Session::forget($sessionId);
+
+        return view('FOC/login');
+    }
 }
 ?>

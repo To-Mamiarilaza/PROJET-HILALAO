@@ -13,8 +13,9 @@ Route::get('/reservation/{argument1}', function ($argument1) {
 Route::get('/insertDirectReservation', [ReservationController::class, 'insertDirectReservation'])
 ->name('insert');
 
-Route::get('/', function () {
-	return view('FOC/login');
+
+Route::get('/home', function () {
+    return view('FOC/home');
 });
 
 Route::get('/list-field', function () {
@@ -42,10 +43,26 @@ Route::post('/CIN-Client', [InscriptionController::class, 'insertCIN'])
 /// pour la page Login
 Route::get('/Login', [LoginController::class, 'login'])
 ->name('login');
+Route::GET('/deconnect', [LoginController::class, 'deconnect'])
+->name('deconnect');
 
 /// pour la page Profil
 Route::post('/ClientProfil', [LoginController::class, 'profilClient'])
 ->name('profilClient');
+
+Route::GET('/loadAddField', [FieldController::class, 'loadAddField'])
+->name('loadAddField');
+
+Route::POST('/addField', [FieldController::class, 'addField'])
+->name('addField');
+
+Route::POST('/addFieldFile', [FieldController::class, 'addFieldFile'])
+->name('addFieldFile');
+
+
+Route::get('/subscription-facture', function() {
+    return view('FOC/subscription-facture');
+});
 
 Route::get('/home-client', function() {
     return view('FOC/home');
@@ -54,4 +71,16 @@ Route::get('/home-client', function() {
 Route::get('/stat-terrain', function() {
     return view('FOC/statistic-field');
 });
+
+Route::get('/list-field', [FieldController::class, 'listField'])
+->name('list-field');
+
+Route::get('/profile-field/{idField}', [FieldController::class, 'profileField'])
+->name('profile-field');
+
+Route::POST('/searchField', [FieldController::class, 'searchField'])
+->name('searchField');
+
+Route::POST('/editImageProfile', [FieldController::class, 'editImage'])
+->name('editImageProfile');
 ?>

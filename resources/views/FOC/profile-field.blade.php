@@ -18,27 +18,19 @@
         <div class="row gx-5">
             <div class="col-md-4">
                 <div class="principale">
-                    <a href="" data-bs-toggle="modal" data-bs-target="#updatePhoto" onclick="updatePhoto(this)">
-                        <img class="principale__img img" src="{{ asset('image/elgeco.jpg') }}" alt="Image du terrain principale">
+                    <a href="" data-bs-toggle="modal" data-bs-target="#updatePhoto" data-photo="{{ $profilePicture->getIdPicture() }}" onclick="updatePhoto(this)">
+                        <img class="principale__img img" src="{{ asset('image/pictureField/'.$profilePicture->getPicture()) }}" alt="Image du terrain principale">
                     </a>
                 </div>
                 <div class="second-list mt-3">
                     <div class="row">
+                        @foreach ($secondPictures as $secondPicture)
                         <div class="col-md-4 second">
-                            <a href="" data-bs-toggle="modal" data-bs-target="#updatePhoto" onclick="updatePhoto(this)">
-                                <img class="second-list__second__img img" src="{{ asset('image/elgeco-plus.jpg') }}" alt="">
+                            <a href="" data-bs-toggle="modal" data-bs-target="#updatePhoto" data-photo="{{ $secondPicture->getIdPicture() }}" onclick="updatePhoto(this)">
+                                <img class="second-list__second__img img" src="{{ asset('image/pictureField/'.$secondPicture->getPicture()) }}" alt="">
                             </a>
                         </div>
-                        <div class="col-md-4 second">
-                            <a href="" data-bs-toggle="modal" data-bs-target="#updatePhoto" onclick="updatePhoto(this)">
-                                <img class="second-list__second__img img" src="{{ asset('image/elgeco-plus.jpg') }}" alt="">
-                            </a>
-                        </div>
-                        <div class="col-md-4 second">
-                            <a href="" data-bs-toggle="modal" data-bs-target="#updatePhoto" onclick="updatePhoto(this)">
-                                <img class="second-list__second__img img" src="{{ asset('image/elgeco-plus.jpg') }}" alt="">
-                            </a>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
                 <div class="dispo">
@@ -90,19 +82,15 @@
                 </div>
             </div>
             <div class="terrain col-md-8">
-                <h1 class="terrain__nom">Stade de Mahamasina</h1>
+                <h1 class="terrain__nom">{{ $field->getName() }}</h1>
                 <ul class="list-carac">
-                    <li class="carac">Catégorie : <span>Foot à 11</span></li>
-                    <li class="carac">Infrastructure : <span>Intérieur</span></li>
-                    <li class="carac">Surface : <span>Synthétique</span></li>
-                    <li class="carac">Lumière : <span>Eclairé</span></li>
+                    <li class="carac">Catégorie : <span>{{ $field->getCategory()->getCategory() }}</span></li>
+                    <li class="carac">Infrastructure : <span>{{ $field->getInfrastructure()->getInfrastructure() }}</span></li>
+                    <li class="carac">Surface : <span>{{ $field->getFieldType()->getFieldType() }}</span></li>
+                    <li class="carac">Lumière : <span>{{ $field->getLight()->getLight() }}</span></li>
                 </ul>
                 <h3 class="terrain__desc__titre">DESCRIPTION</h3>
-                <p class="terrain__desc__content">
-                    Le terrain de Barea de Mahamasina est un stade de football situé à Antananarivo,
-                    la capitale de Madagascar. Il est principalement utilisé pour les matches de football,
-                    mais il peut également accueillir d'autres événements sportifs et culturels.
-                </p>
+                <p class="terrain__desc__content">{{ $field->getDescription() }}</p>
 
                 <div class="row parametrage mb-4">
                     <div class="col-md-5 my-2">
@@ -186,7 +174,8 @@
     </div>
 
     <!-- Modal pour changer les photos du terrain -->
-    <form action="" method="" class="updatePhoto">
+    <form enctype="multipart/form-data" id="updatePhotoForm" action="{{ route('editImageProfile') }}" method="POST" class="updatePhoto">
+    @csrf   
         <div class="modal fade" id="updatePhoto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -201,7 +190,8 @@
                             </div>
                             <div class="col-md-7">
                                 <label for="file" class="form-label">Choisir l'image pour remplacer l'existant</label>
-                                <input type="file" id="file" class="form-control">
+                                <input type="file" id="file" class="form-control" name="image">
+                                <input type="hidden" name="idImage"/>
                                 <p class="error"><i class="fas fa-info-circle mx-2"></i> Afficher l'erreur ici</p>
                             </div>
                         </div>
@@ -392,6 +382,19 @@
             var image = element.getElementsByClassName("img")[0];
             var imageContainer = document.getElementById("recentPhoto");
             imageContainer.src = image.src;
+
+
+            //Recuperer la valeur de data-photo depuis le lien du photo
+            var idImage = element.getAttribute('data-photo');
+            console.log(idImage);
+            //Recuperer le formulaire cible
+            var form = document.getElementById('updatePhotoForm');
+            //Recuperer la valeur de l'input correspondant au name
+            var inputField = form.querySelector('input[name="idImage"]');
+            
+            // Mettre à jour la valeur de l'input avec la photo
+            inputField.value = idImage;
+            
         }
     </script>
 </body>
