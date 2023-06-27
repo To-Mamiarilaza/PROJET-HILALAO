@@ -5,8 +5,8 @@ use Illuminate\Support\Facades\DB;
 
 class FieldType
 {
-    public $id_field_type;
-    public $field_type;
+    protected $id_field_type;
+    protected $field_type;
 
     public function getId_field_type()
     {
@@ -62,15 +62,15 @@ class FieldType
 
     public function save(){
         $req = "INSERT INTO field_type(field_type) VALUES ('%s')";
-        $field_type = $this->field_type;
+        $field_type = $this->getField_type();
         $req = sprintf($req,$field_type);
         DB::insert($req);
     }
 
     public function update(){
         $req = "update field_type set field_type='%s' where id_field_type = %s";
-        $id_field_type = $this->id_field_type;
-        $field_type = $this->field_type;
+        $id_field_type = $this->getId_field_type();
+        $field_type = $this->getField_type();
         $req = sprintf($req,$field_type,$id_field_type);
         DB::update($req);
     }

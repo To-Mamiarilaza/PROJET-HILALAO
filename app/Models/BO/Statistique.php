@@ -6,10 +6,10 @@ use Illuminate\Support\Facades\DB;
 
 class Statistique
 {
-    public $nb;
-    public $month;
-    public $date;
-    public $category;
+    protected $nb;
+    protected $month;
+    protected $date;
+    protected $category;
 
     public function getNb()
     {

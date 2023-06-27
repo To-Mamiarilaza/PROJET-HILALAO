@@ -1,67 +1,161 @@
 @include('BO/header') 
-@include('BO/nav')
+@include('BO/nav') 
     
 <link rel="stylesheet" href="{{ asset('css/BO/asset/statistique.css') }}">
 <link rel="stylesheet" href="{{asset('js/chart.js')}}">
     <script src="{{asset('js/chart.js')}}"></script>
-
-<div class="contenu">
+<body>
     
-    <h1>Statistique</h1>
-    <form action="/filtrer" method="GET">
-        <div class="form-group">
-            <label for="categorie">Catégorie :</label>
-            <select onchange="updateSelectedFields()" class="form-control form-control-sm" name="category" id="category" value="0">
-                <option value="0">Toutes type de category</option>
-                @foreach($allCategories as $category)
-                    <option value="{{ $category->id_category }}">{{ $category->category }}</option>
-                @endforeach
-            </select>
-        </div>
+        <section class="content p-4">
+            <div class="en-tete mt-2">
+                STATISTIQUE
+            </div>
 
-        <div class="form-group">
-            <label for="mois">Mois :</label>
-            <select onchange="updateSelectedFields()" class="form-control form-control-sm" name="mois" id="mois" value="00">
-                <option value="00">Tout les mois</option>
-                <option value="00">Toutes les mois</option>
-                <option value="01">Janvier</option>
-                <option value="02">Février</option>
-                <option value="03">Mars</option>
-                <option value="04">Avril</option>
-                <option value="05">Mai</option>
-                <option value="06">Juin</option>
-                <option value="07">Juillet</option>
-                <option value="08">Aout</option>
-                <option value="09">Septembre</option>
-                <option value="10">Octobre</option>
-                <option value="11">Novembre</option>
-                <option value="12">Décembre</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="annee">Année :</label>
-            <select onchange="updateSelectedFields()" class="form-control form-control-sm" name="annee" id="annee" value="2023">
-                @for($annee = 2023; $annee <= 2033; $annee++)
-                    <option value="{{ $annee }}">{{ $annee }}</option>
-                @endfor   
-            </select>
-        </div>
-    </form>
-    <div id="Statistique">
-        <div id="Nombreclient" class="par">
-        <h3> {{ $NbClients }} Clients  </h3>
-        </div>
-        <div id="Nombreutilisateur" class="par">
-            <h3> {{ $NbUsers }} Utilisateurs </h3>
-        </div>
-        <div id="Nombreterrain" class="par">
-            <h3> {{ $NbTerrains }} Terrains  </h3>
-        </div>
+            <div class="row partie-number mt-2">
+                <div class="col-md-4 p-3">
+                    <div class="number-display">
+                        <p class="title">Nombre de client</p>
+                        <p class="number">{{ $NbClients }}</p>
+                    </div>
+                </div>
+                <div class="col-md-4 p-3">
+                    <div class="number-display">
+                        <p class="title">Nombre de terrain</p>
+                        <p class="number">{{ $NbTerrains }}</p>
+                    </div>
+                </div>
+                <div class="col-md-4 p-3">
+                    <div class="number-display">
+                        <p class="title">Nombre d'utilisateur</p>
+                        <p class="number">{{ $NbUsers }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-8 p-3">
+                    <div class="chart">
+                        <h2>Courbe représentative</h2>
+                        <div class="filtre">
+                            <select onchange="updateSelectedFields()" name="category" id="category" class="form-select form-control form-control-sm" id="category" value="0">
+                                <option value="0">Toutes type de category</option>
+                                @foreach($allCategories as $category)
+                                    <option value="{{ $category->getId_category() }}">{{ $category->getCategory() }}</option>
+                                @endforeach
+                            </select>
+                            <select onchange="updateSelectedFields()" class="form-select" name="mois" id="mois" value="00">
+                                <option value="00">Tout les mois</option>
+                                <option value="00">Toutes les mois</option>
+                                <option value="01">Janvier</option>
+                                <option value="02">Février</option>
+                                <option value="03">Mars</option>
+                                <option value="04">Avril</option>
+                                <option value="05">Mai</option>
+                                <option value="06">Juin</option>
+                                <option value="07">Juillet</option>
+                                <option value="08">Aout</option>
+                                <option value="09">Septembre</option>
+                                <option value="10">Octobre</option>
+                                <option value="11">Novembre</option>
+                                <option value="12">Décembre</option>
+                            </select>
+                            <select onchange="updateSelectedFields()" class="form-select" name="annee" id="annee" value="2023">
+                            @for($annee = 2023; $annee <= 2033; $annee++)
+                                <option value="{{ $annee }}">{{ $annee }}</option>
+                            @endfor   
+                            </select>
+                        </div>
+                        <canvas id="myChart" width="150" height="50"></canvas>
+                        <div id="selectedFields" ></div>
+                    </div>
+                </div>
+                <div class="col-md-4 p-3">
+                    <div class="list-client">
+                        <h2>Listes des clients</h2>
+                        <div class="list-container">
+
+                            <a href="">
+                                <div class="client mt-2">
+                                    <div class="image">
+                                        <img src="./asset/client.png" alt="Image du client">
+                                    </div>
+                                    <div class="detail-client">
+                                        <p class="name">Andry FINIAVANA</p>
+                                        <p class="terrain">Nombre de terrain : <span class="number">4</span></p>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <a href="">
+                                <div class="client mt-2">
+                                    <div class="image">
+                                        <img src="./asset/client.png" alt="Image du client">
+                                    </div>
+                                    <div class="detail-client">
+                                        <p class="name">Andry FINIAVANA</p>
+                                        <p class="terrain">Nombre de terrain : <span class="number">4</span></p>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <a href="">
+                                <div class="client mt-2">
+                                    <div class="image">
+                                        <img src="./asset/client.png" alt="Image du client">
+                                    </div>
+                                    <div class="detail-client">
+                                        <p class="name">Andry FINIAVANA</p>
+                                        <p class="terrain">Nombre de terrain : <span class="number">4</span></p>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <a href="">
+                                <div class="client mt-2">
+                                    <div class="image">
+                                        <img src="./asset/client.png" alt="Image du client">
+                                    </div>
+                                    <div class="detail-client">
+                                        <p class="name">Andry FINIAVANA</p>
+                                        <p class="terrain">Nombre de terrain : <span class="number">4</span></p>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <a href="">
+                                <div class="client mt-2">
+                                    <div class="image">
+                                        <img src="./asset/client.png" alt="Image du client">
+                                    </div>
+                                    <div class="detail-client">
+                                        <p class="name">Andry FINIAVANA</p>
+                                        <p class="terrain">Nombre de terrain : <span class="number">4</span></p>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <a href="">
+                                <div class="client mt-2">
+                                    <div class="image">
+                                        <img src="./asset/client.png" alt="Image du client">
+                                    </div>
+                                    <div class="detail-client">
+                                        <p class="name">Andry FINIAVANA</p>
+                                        <p class="terrain">Nombre de terrain : <span class="number">4</span></p>
+                                    </div>
+                                </div>
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
     </div>
-    <div id="selectedFields">  </div>
-    <canvas id="myChart" width="150" height="50"></canvas>
 
-<script>
+    <script src="{{ asset('css/BO/asset/bootstrap.bundle.min.js') }}"></script>
+    <script>
     var ctx = document.getElementById('myChart').getContext('2d');
     var clientsData;
     var usersData ;
@@ -250,6 +344,8 @@
         });
     }
 </script>
-</div>
+
 </body>
+
 </html>
+

@@ -1,53 +1,104 @@
-form {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+.number-display {
+  background-color: white;
+  box-shadow: 3px 3px 5px lightgray;
+  font-weight: 500;
+  padding: 5px 15px;
 }
-form label {
-  width: 80px;
-  text-align: center;
+.number-display .title {
+  margin: 5px 10px;
+  font-size: 18px;
+}
+.number-display .number {
+  margin: 5px 10px;
+  font-size: 30px;
+  letter-spacing: 2px;
+  color: #3176aa;
+}
+
+.chart {
+  background-color: white;
+  box-shadow: 3px 3px 5px lightgray;
+  padding: 5px 15px;
+  height: 450px;
+}
+.chart h2 {
+  font-size: 18px;
+  color: #3176aa;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  border-bottom: solid #3176aa 1px;
+}
+.chart .filtre {
+  width: 80%;
+  display: flex;
+}
+.chart .filtre select {
+  margin: 5px 10px;
+  height: 30px;
+  font-size: 15px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.list-client {
+  background-color: white;
+  box-shadow: 3px 3px 5px lightgray;
+  padding: 5px 15px;
+  position: relative;
+  height: 450px;
+}
+.list-client h2 {
+  font-size: 18px;
+  color: #3176aa;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  border-bottom: solid #3176aa 1px;
+  position: sticky;
+  z-index: 10;
+}
+.list-client .list-container {
+  height: 380px;
+  overflow: auto;
+}
+.list-client .list-container a {
+  text-decoration: none;
+}
+.list-client .list-container .client {
+  display: flex;
+  align-items: center;
+  background-color: rgb(233, 233, 233);
+  padding: 8px 15px;
+  border-radius: 5px;
   margin-right: 10px;
+}
+.list-client .list-container .client:hover {
+  background-color: rgb(168, 182, 187);
+}
+.list-client .list-container .client .image {
+  width: 40px;
+  height: 40px;
+}
+.list-client .list-container .client .image img {
+  height: 100%;
+  width: 100%;
+  background-color: white;
+  border-radius: 100%;
+}
+.list-client .list-container .client .detail-client {
   padding-left: 20px;
 }
-form select,
-form input[type=text] {
-  flex: 1;
-  margin-bottom: 10px;
-  padding: 5px;
-  border-radius: 20px;
-  border: 1px solid #ccc;
-  width: 50px;
-  height: 35px;
-  background-color: white;
-  text-align: center;
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-  font-size: 15px;
+.list-client .list-container .client .detail-client .name {
+  margin: 0px 10px;
+  color: #3176aa;
 }
-
-.form-group {
-  align-items: center;
+.list-client .list-container .client .detail-client .terrain {
+  margin: 0px 10px;
+  font-weight: 500;
+  font-size: 12px;
+  color: #3176aa;
 }
-.form-group input[type=text],
-.form-group select {
-  width: 200px;
-  padding: 5px;
-}
-
-#Statistique {
-  width: auto;
-  border: solid 1px;
-  height: 100px;
-  display: flex;
-}
-
-.par {
-  width: 150px;
-  margin-left: 15%;
-  margin-top: 10px;
-  height: 70px;
-  box-shadow: 0px 2px 4px rgba(251, 247, 247, 0.3);
-  text-align: center;
-  background-color: #f4f8f7;
-  border-radius: 10px;
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+.list-client .list-container .client .detail-client .number {
+  font-size: 18px;
+  color: rgb(202, 120, 65);
+  margin-left: 10px;
 }/*# sourceMappingURL=statistique.css.map */

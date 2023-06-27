@@ -18,14 +18,14 @@
     </thead>
     <tbody>
       <tr>
-        <td>{{ $all->first_name }}</td>
-        <td>{{ $all->last_name }}</td>
-        <td>{{ $all->phone_number }}</td>
-        <td>{{ $all->mail }}</td>
-        <td>{{ $all->address }}</td>
-        <td>{{ $all->cin_number }}</td>
-        <td>{{ $all->first_picture }}</td>
-        <td>{{ $all->second_picture }}</td>
+        <td>{{ $all->getFirst_name() }}</td>
+        <td>{{ $all->getLast_name() }}</td>
+        <td>{{ $all->getPhone_number() }}</td>
+        <td>{{ $all->getMail() }}</td>
+        <td>{{ $all->getAdress() }}</td>
+        <td>{{ $all->getCin_number() }}</td>
+        <td>{{ $all->getFirst_picture() }}</td>
+        <td>{{ $all->getSecond_picture() }}</td>
       </tr>
 
     </tbody>

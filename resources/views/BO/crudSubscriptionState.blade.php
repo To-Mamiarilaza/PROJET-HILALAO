@@ -14,10 +14,10 @@
             </tr>
             @foreach ($all as $crud)
             <tr>
-                <td>{{ $crud->subscription_state }}</td>
+                <td>{{ $crud->getSubscription_state() }}</td>
                 <td>
-                    <a href= "{{ route('update' , ['variable' => $ref,'id' => $crud->id_subscription_state])}}"><input type="button" value="Modifier"></a>
-                    <a href= "{{ route('delete' , ['variable' => $ref,'id' => $crud->id_subscription_state])}}"><input type="button" value="Supprimer"></a>
+                    <a href= "{{ route('update' , ['variable' => $ref,'id' => $crud->getId_subscription_state()])}}"><input type="button" value="Modifier"></a>
+                    <a href= "{{ route('delete' , ['variable' => $ref,'id' => $crud->getId_subscription_state()])}}"><input type="button" value="Supprimer"></a>
                 </td>
             </tr>
             @endforeach

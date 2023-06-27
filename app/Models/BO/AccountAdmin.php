@@ -7,12 +7,12 @@ use Illuminate\Support\Facades\DB;
 
 class AccountAdmin
 {   
-    public $id_account_admin;
-    public $first_name;
-    public $last_name;
-    public $mail;
-    public $phone_number;
-    public $pwd;
+    protected $id_account_admin;
+    protected $first_name;
+    protected $last_name;
+    protected $mail;
+    protected $phone_number;
+    protected $pwd;
 
 
     // Getter pour l'attribut 'id_account_admin'
@@ -52,7 +52,7 @@ class AccountAdmin
     }
 
     // Getter pour l'attribut 'first_name'
-    public function getFirst_namename()
+    public function getFirst_name()
     {
         return $this->first_name;
     }
@@ -134,11 +134,11 @@ class AccountAdmin
     public function save() {
         try{
             $req = "INSERT INTO account_admin(first_name,last_name,mail,phone_number,pwd) VALUES ('%s','%s','%s','%s',%s)";
-            $mail = $this->mail;
-            $pwd = $this->pwd;
-            $last_name = $this->last_name ;
-            $first_name = $this->first_name ;
-            $phone_number = $this->phone_number ;
+            $mail = $this->getMail();
+            $pwd = $this->getPwd()();
+            $last_name = $this->getLast_name() ;
+            $first_name = $this->getFirst_name() ;
+            $phone_number = $this->getPhone_number() ;
             $req = sprintf($req,$first_name,$last_name,$mail,$phone_number,$pwd);
             DB::insert($req);
         }catch(Exception $e){

@@ -5,9 +5,9 @@ use Illuminate\Support\Facades\DB;
 
 class ValidationClient
 {
-    public $id_client;
-    public $first_name;
-    public $last_name;
+    protected $id_client;
+    protected $first_name;
+    protected $last_name;
 
     public function getId_client() {
         return $this->id_client;
@@ -35,7 +35,7 @@ class ValidationClient
         try{
             $client = DB::select("select c.id_client, c.first_name, c.last_name from client c
             join status_client sc on c.id_status = sc.id_status_client
-            where sc.id_status_client = 2");
+            where sc.id_status_client = 1");
             $res = array();
             foreach ($client as $result) {
                 $temp = new ValidationClient();
@@ -46,7 +46,7 @@ class ValidationClient
             }
             return $res;
         }catch(Exception $e){
-            throw new Exception("Impossible d'avoir ");
+            $e->getMessage();
         }
     }
 }

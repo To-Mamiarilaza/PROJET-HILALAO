@@ -28,7 +28,7 @@ class LoginController extends Controller
             $mail = $request->input('mail');
             $password = $request->input('password');
             $account = $model->getAccountAdminConnected($mail,$password);
-            Session::put('id_account_admin', $account->id_account_admin);
+            Session::put('id_account_admin', $account->getId_account_admin());
             Session::put('account_admin', $account);
             Session::save();
             $statistiqueController = app(StatistiqueController::class);

@@ -5,15 +5,15 @@ use Illuminate\Support\Facades\DB;
 
 class Abonnement
 {
-    public $name;
-    public $category;
-    public $client;
-    public $price;
-    public $start_date;
-    public $end_date;
-    public $duration;
-    public $total_prix;
-    public $mois;
+    protected $name;
+    protected $category;
+    protected $client;
+    protected $price;
+    protected $start_date;
+    protected $end_date;
+    protected $duration;
+    protected $total_prix;
+    protected $mois;
 
     public function getName() {
         return $this->name;

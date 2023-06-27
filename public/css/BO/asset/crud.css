@@ -1,0 +1,19 @@
+.contenue {
+  padding: 15px 20px;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 3px 3px 5px lightgray;
+}
+.contenue .ajout {
+  color: white;
+}
+.contenue .ajout i {
+  margin-right: 20px;
+}
+.contenue h2 {
+  font-size: 23px;
+  color: #3176aa;
+}
+.contenue table {
+  width: 60% !important;
+}/*# sourceMappingURL=crud.css.map */

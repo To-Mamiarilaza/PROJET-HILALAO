@@ -8,7 +8,7 @@
     <h1>Liste des comptes Back Office</h1>
         <ul>
             @foreach ($all as $account)
-                <li>{{ $account->firstname }} {{ $account->name }}</li>
+                <li>{{ $account->getFirst_name() }} {{ $account->getName() }}</li>
             @endforeach
         </ul>
     </body>

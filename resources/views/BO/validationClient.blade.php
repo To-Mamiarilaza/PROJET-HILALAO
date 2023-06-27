@@ -14,10 +14,10 @@
     <tbody>
       @foreach ($all as $abonnement)
       <tr>
-        <td>{{ $abonnement->id_client }}</td>
-        <td>{{ $abonnement->first_name }}</td>
-        <td>{{ $abonnement->last_name }}</td>
-        <td><a href="{{ route('detailClient', ['id_client' => $abonnement->id_client ]) }}"><input type="button" value="Detail"></a></td>
+        <td>{{ $abonnement->getId_client() }}</td>
+        <td>{{ $abonnement->getFirst_name() }}</td>
+        <td>{{ $abonnement->getLast_name() }}</td>
+        <td><a href="{{ route('detailClient', ['id_client' => $abonnement->getId_client() ]) }}"><input type="button" value="Detail"></a></td>
       </tr>
       @endforeach
 

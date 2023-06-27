@@ -6,9 +6,9 @@ use Illuminate\Support\Facades\DB;
 
 class Category
 {
-    public $id_category;
-    public $category;
-    public $subscribing_price;
+    protected $id_category;
+    protected $category;
+    protected $subscribing_price;
 
     public function getId_category()
     {
@@ -84,8 +84,8 @@ class Category
     public function save(){
         try{
             $req = "INSERT INTO category(category,subscribing_price) VALUES ('%s',%s)";
-            $category = $this->category;
-            $subscribing_price = $this->subscribing_price;
+            $category = $this->getCategory();
+            $subscribing_price = $this->getSubscribing_price();
             $req = sprintf($req,$category,$subscribing_price);
             DB::insert($req);
 
@@ -97,9 +97,9 @@ class Category
     public function update(){
         try{
             $req = "update category set category='%s' , subscribing_price =%s  where id_category = %s ";
-            $id_category = $this->id_category;
-            $category = $this->category;
-            $subscribing_price = $this->subscribing_price;
+            $id_category = $this->getId_category();
+            $category = $this->getCategory();
+            $subscribing_price = $this->getSubscribing_price();
             $req = sprintf($req,$category,$subscribing_price,$id_category);
             print($req);
             DB::update($req);

@@ -61,15 +61,15 @@ class SubscriptionState
 
     public function save(){
         $req = "INSERT INTO subscription_state(subscription_state) VALUES ('%s')";
-        $subscription_state = $this->subscription_state;
+        $subscription_state = $this->getSubscription_state();
         $req = sprintf($req,$subscription_state);
         DB::insert($req);
     }
 
     public function update(){
         $req = "update subscription_state set subscription_state='%s' where id_subscription_state = %s";
-        $id_subscription_state = $this->id_subscription_state;
-        $subscription_state = $this->subscription_state;
+        $id_subscription_state = $this->getId_subscription_state();
+        $subscription_state = $this->getSubscription_state();
         $req = sprintf($req,$subscription_state,$id_subscription_state);
         DB::update($req);
     }

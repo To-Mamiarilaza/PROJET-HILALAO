@@ -1,50 +1,37 @@
-<nav>
-    <div class="nav">
-        <div class="nav_account">
-            <div class="profil">
-                <i class="fa fa-user-circle fa-5x">  </i>
-                <p>Admin</p>
-            </div>
-            <div class="info">
-                 <text>Nom: RAKOTO</text></br>
-                 <text>Tel: 034 05 050 05</text></br>
-                 <text>Mail: mail@gmail.com</text></br>
-            </div>
+<div class="reference">
+    <section class="sidebar">
+        <div class="profile-name">
+            <p class="nom">Benjamina</p>
+            <p class="profile">Admin</p>
         </div>
-        <div id="list">
-            <div class="list_nav">
-                <a href="{{ route('statistique') }}">Statistique  <i class="fa fa-chart-line "></i>  </a>
-            </div>
-            <div class="list_nav">
-                <a href="{{ route('abonnement') }}">Abonnement   <i class="fa fa-paperclip "></i></a>
-            </div>
-            <div class="list_nav">
-                <a href="#">Publicitaire  <i class="fa fa-share-square "></i></a>
-            </div>
-            <div class="list_nav">
-                <a href="{{ route('validationClient') }}">Liste d'attente    <i class="fa fa-chart-line "></i>  </a>
-            </div>
-            <div class="list_nav">
-                <a href="#" id="toggleList">Caracteristique <i class="fa fa-angle-down fa"></i></a>
-            </div>
-                    <ul id="maListe" style="display: none;">
-                        <li><p><a href="{{ route('crud', ['variable' => 'category']) }}"><i class="fa fa-folder-open"></i> Category</a></p></li>
-                        <li><p><a href="{{ route('crud', ['variable' => 'subscription_state']) }}"><i class="fa fa-check-square"></i> Subscription_state</a></p></li>
-                        <li><p><a href="{{ route('crud', ['variable' => 'field_type']) }}"><i class="fa fa-tags"></i> Field Type</a></p></li>
-                    </ul>
-            
+
+        <hr>
+
+        <div class="lien">
+            <ul>
+                <li class=""><a href="{{ route('statistique') }}"><i class="fas fa-chart-bar"></i> Statistique</a></li>
+                <li><a href="{{ route('abonnement') }}"><i class="fas fa-credit-card"></i> Abonnement</a></li>
+                <li><a href="{{ route('validationClient') }}"><i class="fas fa-clock"></i> Listes d'attentes</a></li>
+                <li class="checked" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne"
+                    aria-expanded="false" aria-controls="flush-collapseOne">
+                    <a href=""><i class="fas fa-cogs"></i> Caractéristique</a>
+                </li>
+
+                <div class="accordion accordion-flush" id="accordionFlushExample">
+                    <div class="accordion-item">
+                        <div id="flush-collapseOne" class="accordion-collapse collapse"
+                            aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                                <ul>
+                                    <li><a href="{{ route('crud', ['variable' => 'category']) }}">Catégories</a></li>
+                                    <li><a href="{{ route('crud', ['variable' => 'subscription_state']) }}">Etat abonnement</a></li>
+                                    <li><a href="{{ route('crud', ['variable' => 'field_type']) }}">Type de terrain</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </ul>
         </div>
-        
-        <script>
-            document.getElementById('toggleList').addEventListener('click', function() {
-            var liste = document.getElementById('maListe');
-            if (liste.style.display === 'none') {
-                liste.style.display = 'block';
-            } else {
-                liste.style.display = 'none';
-            }
-            });
-        </script>
-    </div>
-    
-</nav>
+    </section>

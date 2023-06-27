@@ -16,11 +16,11 @@
             </tr>
             @foreach ($all as $crud)
             <tr>
-                <td>{{ $crud->category }}</td>
-                <td>{{ $crud->subscribing_price }}</td>
+                <td>{{ $crud->getCategory() }}</td>
+                <td>{{ $crud->getSubscribing_price() }}</td>
                 <td>
-                    <a href= "{{ route('update' , ['variable' => $ref,'id' => $crud->id_category])}}"><input type="button" value="Modifier"></a>
-                    <a href= "{{ route('delete' , ['variable' => $ref,'id' => $crud->id_category])}}"><input type="button" value="Supprimer"></a>
+                    <a href= "{{ route('update' , ['variable' => $ref,'id' => $crud->getId_category()])}}"><input type="button" value="Modifier"></a>
+                    <a href= "{{ route('delete' , ['variable' => $ref,'id' => $crud->getId_category()])}}"><input type="button" value="Supprimer"></a>
                 </td>
             </tr>
             @endforeach

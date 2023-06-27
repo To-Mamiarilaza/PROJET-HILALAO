@@ -12,7 +12,7 @@
               <select id="categorie" name="categorie">
                 <option value="all">Tous les categories</option>
                 @foreach($categories as $categorie)
-                  <option value="{{ $categorie->category }}">{{ $categorie->category }}</option>
+                  <option value="{{ $categorie->getCategory() }}">{{ $categorie->getCategory() }}</option>
                 @endforeach
               </select>
             </p>
@@ -75,13 +75,13 @@
             <tbody>
               @foreach ($all as $abonnement)
               <tr>
-                <td>{{ $abonnement->name }}</td>
-                <td>{{ $abonnement->category }}</td>
-                <td>{{ $abonnement->client }}</td>
-                <td>{{ $abonnement->price }}</td>
-                <td>{{ $abonnement->start_date }}</td>
-                <td>{{ $abonnement->end_date }}</td>
-                <td>{{ $abonnement->duration }}</td>
+                <td>{{ $abonnement->getName() }}</td>
+                <td>{{ $abonnement->getCategory() }}</td>
+                <td>{{ $abonnement->getClient() }}</td>
+                <td>{{ $abonnement->getPrice() }}</td>
+                <td>{{ $abonnement->getStart_date() }}</td>
+                <td>{{ $abonnement->getEnd_date() }}</td>
+                <td>{{ $abonnement->getDuration() }}</td>
               </tr>
               @endforeach
 

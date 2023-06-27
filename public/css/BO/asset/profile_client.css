@@ -1,0 +1,93 @@
+.client-profile {
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 3px 3px 5px lightgray;
+  padding: 15px 30px;
+}
+.client-profile .detail-client {
+  display: flex;
+}
+.client-profile .detail-client .image img {
+  width: 220px;
+  height: 200px;
+  cursor: pointer;
+}
+.client-profile .detail-client .image .cin-image {
+  display: flex;
+}
+.client-profile .detail-client .image .cin-image img {
+  width: 100px;
+  margin: 0 5px;
+  height: 50px;
+  cursor: pointer;
+}
+.client-profile .detail-client .information {
+  margin-left: 30px;
+  border-left: solid 2px #3176aa;
+}
+.client-profile .detail-client .information ul {
+  list-style: none;
+  line-height: 50px;
+}
+.client-profile .detail-client .information ul li span {
+  font-weight: 600;
+  margin-right: 7px;
+}
+.client-profile .detail-client .information .decision {
+  margin-left: 30px;
+  margin-bottom: 50px;
+}
+.client-profile .detail-client .information .decision a {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.attentes-client {
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 3px 3px 5px lightgray;
+}
+.attentes-client h2 {
+  margin: 0;
+  padding: 8px 20px;
+  background-color: #3176aa;
+  font-size: 20px;
+  color: white;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.attentes-client .listes-client {
+  padding: 20px;
+  height: 400px;
+  overflow-y: auto;
+}
+.attentes-client .listes-client a {
+  text-decoration: none;
+}
+.attentes-client .listes-client .terrain {
+  display: flex;
+  text-align: left;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 15px;
+}
+.attentes-client .listes-client .terrain img {
+  width: 80px;
+  height: 50px;
+}
+.attentes-client .listes-client .terrain .detail-terrain .nom {
+  width: 150px;
+  margin: 0;
+  color: black;
+}
+.attentes-client .listes-client .terrain .detail-terrain .categorie {
+  font-size: 12px;
+  color: rgb(136, 136, 136);
+  margin: 0;
+  margin-top: 8px;
+}
+.attentes-client .listes-client .terrain .date {
+  margin: 0;
+  font-size: 10px;
+  color: black;
+}/*# sourceMappingURL=profile_client.css.map */
