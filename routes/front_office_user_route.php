@@ -19,3 +19,16 @@ Route::get('/sign/user', [LogController::class, 'sign'])->name('sign-user');
 Route::post('/log/user/in', [LogController::class, 'signin'])->name('log-user-treat');
 Route::get('/landing', [HomeController::class, 'index'])->name('landing');
 Route::get('/log/user/out', [LogController::class, 'signout'])->name('log-out');
+Route::get('/ListFields', [FieldController::class, 'index']);
+Route::get('/calendar', [ReservationController::class, 'index']);
+Route::get('/reserve', [ReservationController::class, 'reserve']);
+
+
+Route::get('/infoTerrain/{id_field}', [InfoTerrain::class, 'index']);
+
+Route::get('/carte', [InfoTerrain::class, 'afficheCarte']);
+
+//Profile terrain
+Route::get('/ProfileTerrain', [InfoTerrain::class, 'profileTerrain']);
+Route::get('/test', [InfoTerrain::class, 'test']);
+

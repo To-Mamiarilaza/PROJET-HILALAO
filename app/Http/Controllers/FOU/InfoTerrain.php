@@ -14,8 +14,10 @@ class InfoTerrain extends Controller {
         return view("FOU/info_terrain", ['infos' => $info]);
     }
 
-    public function afficheCarte() {
-        
-        return view("FOU/carte");
+    public function profileTerrain(){
+        return view("FOU/profileTerrain");
+    }
+    public function test(){
+        return view("FOU/test");
     }
 }

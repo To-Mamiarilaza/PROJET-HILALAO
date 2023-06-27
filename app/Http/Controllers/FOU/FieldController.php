@@ -7,19 +7,28 @@ use App\Models\FOU\FieldDetailled;
 use App\Models\FOU\Category;
 use App\Models\FOU\Field;
 use Illuminate\Http\Request;
+use App\Models\FOU\ListField;
+use App\Models\FOU\InfoField;
 
 class FieldController extends Controller
 {
     public function index($id_category = 0)
     {
-        $categories = Category::findAll();
-        if ($id_category == 0) {
-            $fields = FieldDetailled::findAll();
-        } else {
-            $fields = FieldDetailled::findByCategory($id_category);
-        }
-        $filters = Field::getFilters();
-        return view('FOU\list-terrain', ['fields' => $fields, 'categories' => $categories, 'id_category' => $id_category, 'filters' => $filters]);
+        // $categories = Category::findAll();
+        // if ($id_category == 0) {
+        //     $fields = FieldDetailled::findAll();
+        // } else {
+        //     $fields = FieldDetailled::findByCategory($id_category);
+        // }
+        // $filters = Field::getFilters();
+        // return view('FOU\list-terrain', ['fields' => $fields, 'categories' => $categories, 'id_category' => $id_category, 'filters' => $filters]);
+        $listFieldInstance = new ListField();
+        $listFields = $listFieldInstance->getListFields();
+
+        $infoField = new InfoField();
+        $info = $infoField->allinfoField();
+
+        return view('FOU\listTerrainModif', ['listFields' => $listFields], ['infos' => $info]);
     }
 
     public function filter(Request $request) {
