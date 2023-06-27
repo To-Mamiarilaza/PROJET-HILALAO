@@ -35,3 +35,6 @@
             </ul>
         </div>
     </section>
+
+
+    <script src="{{ asset('css/BO/asset/bootstrap.bundle.min.js') }}"></script>

@@ -90,9 +90,22 @@ class Category
             DB::insert($req);
 
         }catch(Exception $e){
-            throw new Exception("Impossible d'inserer la categorie");
+            $e->getMessage();
         }
     }
+
+    // public function delete(){
+    //     try{
+    //         $req = "delete ";
+    //         $category = $this->getCategory();
+    //         $subscribing_price = $this->getSubscribing_price();
+    //         $req = sprintf($req,$category,$subscribing_price);
+    //         DB::insert($req);
+
+    //     }catch(Exception $e){
+    //         $e->getMessage();
+    //     }
+    // }
 
     public function update(){
         try{

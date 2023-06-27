@@ -93,7 +93,6 @@ class CrudController extends Controller
 
     public function all($variable)
     {
-        $c = new CrudController();
         try {
             $result = $this->getSelected($variable);
             return $result; // Renvoyer la valeur retournée par la méthode getSelected()
@@ -104,7 +103,6 @@ class CrudController extends Controller
 
     public function save(Request $request)
     {
-        $c = new CrudController();
         try {
             $ref = $request->input('variable');
             
