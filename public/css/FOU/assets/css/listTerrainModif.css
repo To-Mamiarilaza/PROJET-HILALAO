@@ -40,65 +40,53 @@ body {
 }
 
 .list {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   height: 650px;
   margin-top: -3%;
 }
-
 .list-titre {
   height: 10%;
 }
-
 .list-filtre {
   height: 10%;
   margin-bottom: -2%;
 }
-
 .list-filtre-category {
   margin-left: -4%;
 }
-
 .list-terrain {
   height: 80%;
   border-radius: 5px;
-  border: 1px solid #bbbbbb;
+  border: 1px solid rgb(187, 187, 187);
   height: 200px;
   margin-left: 0%;
   width: 100%;
 }
-
 .list-terrain-image {
   height: 77%;
   margin: 2%;
   border-radius: 5px;
   width: 25%;
 }
-
 .list-terrain-image img {
   width: 116%;
   height: 100%;
   margin-left: -8%;
   border-radius: 3px;
 }
-
 .list-terrain-info {
   padding: 2%;
   font-size: 69%;
 }
-
 .list-terrain-info-head {
   margin-bottom: -4%;
 }
 
 .sig {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   height: 650px;
 }
-
 .sig img {
   height: 85%;
   width: 120%;
-}
-/*# sourceMappingURL=listTerrainModif.css.map */
+}/*# sourceMappingURL=listTerrainModif.css.map */

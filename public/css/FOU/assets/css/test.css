@@ -1,0 +1,17 @@
+.cont {
+  height: 300px;
+  width: 100%;
+}
+
+.parent {
+  display: flex;
+  overflow-y: auto;
+  /* Autres styles pour le div parent */
+}
+
+.child {
+  flex-shrink: 0;
+  height: 100%;
+  width: 200px;
+  /* Autres styles pour les divs filles */
+}/*# sourceMappingURL=test.css.map */
