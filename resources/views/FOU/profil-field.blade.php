@@ -22,18 +22,14 @@
         </div>
         <div class="col-md-7 info-texte">
             <div class="row info-texte-title">
-                <h3>Urban Futsal Andraharo</h3>
+                <h3>{{ $field->getName() }}</h3>
             </div>
             <div class="row info-texte-creation">
-                <p> Creer le : 12 Decembre 2014 </p>
+                <p> Creer le : {{ $field->getInsertDate() }}</p>
             </div>
             <div class="row info-texte-description">
-                <p>Ouvert depuis mi-septembre, l’Urban Futsal à Andraharo est le premier centre de loisir où l’on peut jouer au football en salle ou futsal. Dans ces matchs de ballon rond sur miniterrain,
-                    il n’est pas besoin d’être un bon dribbleur ou un buteur à la Ronaldo pour s’imposer. Le plaisir de jouer suffit.
-                    Ce centre créé par trois amis amoureux du ballon rond, met à la disposition de ses clients quatre terrains synthétiques : deux grands de 30 x 18 mètres et deux petits de 22 x 16 mètres. « Ces terrains sont conçus pour les jeux de cinq contre cinq. Mais à six contre six, cela reste très confortable », explique Freddy Benjamin, le responsable de la société. D’ores et déjà,
-                    il est clair que le futsal intéresse beaucoup les Tananariviens.
-                    Ce n’est pas si anodin que ça si l’on sait qu’au Brésil, les grands joueurs comme Pelé, Zibo, Socrate, Bebeto ou Ronaldinho sont tous issus du futsal. Ses liens avec le football classique sont d’ailleurs très étroits puisque
-                    le futsal est aujourd’hui une discipline sportive indépendante placée sous l’égide de la Fifa.
+                <p>
+                    {{ $field->getDescription() }}
                 </p>
             </div>
             <div class="row info-texte-rating">
