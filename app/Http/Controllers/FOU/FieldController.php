@@ -12,23 +12,24 @@ use App\Models\FOU\InfoField;
 
 class FieldController extends Controller
 {
+    public function detail($id_field) {
+        $field = new FieldDetailled();
+        $field->findById($id_field);
+        return view('FOU\profil-field', ['field' => $field]);
+    }
+
     public function index($id_category = 0)
     {
-        // $categories = Category::findAll();
-        // if ($id_category == 0) {
-        //     $fields = FieldDetailled::findAll();
-        // } else {
-        //     $fields = FieldDetailled::findByCategory($id_category);
-        // }
-        // $filters = Field::getFilters();
-        // return view('FOU\list-terrain', ['fields' => $fields, 'categories' => $categories, 'id_category' => $id_category, 'filters' => $filters]);
-        $listFieldInstance = new ListField();
-        $listFields = $listFieldInstance->getListFields();
-
+        $categories = Category::findAll();
+        if ($id_category == 0) {
+            $fields = FieldDetailled::findAll();
+        } else {
+            $fields = FieldDetailled::findByCategory($id_category);
+        }
         $infoField = new InfoField();
         $info = $infoField->allinfoField();
-
-        return view('FOU\listTerrainModif', ['listFields' => $listFields], ['infos' => $info]);
+        $filters = Field::getFilters();
+        return view('FOU\list-terrain', ['fields' => $fields, 'categories' => $categories, 'id_category' => $id_category, 'filters' => $filters, 'infos' => $info]);
     }
 
     public function filter(Request $request) {
