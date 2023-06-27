@@ -27,6 +27,7 @@
                     <p>Adresse : {{$info->address}}</p>
                     <p>Coordonnée Géographique : longitude : {{$info->longitude}} et latitude : {{$info->latitude}}</p>
                     <p>Description : {{$info->description}}</p>
+                    <a href="/calendar/{{ $info->id_field }}">Reserver</a>
                 @endforeach
             </div>
         </div>

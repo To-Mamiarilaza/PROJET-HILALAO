@@ -4,7 +4,6 @@ namespace App\Http\Controllers\FOU;
 
 use Illuminate\View\View;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\Controller;
 use App\Models\FOU\Users;
 use App\Exceptions\UserException;
@@ -48,7 +47,7 @@ class LogController extends Controller
 
     public function signout() {
         Session::remove("user");
-        return Redirect('landing');
+        return Redirect('/log/user');
     }
 }
 
