@@ -1,16 +1,21 @@
 <?php
 	// Parcourir le tableau des mois
-	function printStats() {
-		$stats = array("info","danger","default");
-	}
-
 	function printMonth() {
 		$mois = array(
 			"Janvier", "Février", "Mars", "Avril",
 			"Mai", "Juin", "Juillet", "Août",
 			"Septembre", "Octobre", "Novembre", "Décembre"
 		);
-		for ($i = 0; $i < count($mois); $i++) { echo "<td>" . $mois[$i] . "</td>"; }
+
+		$couleurs = array("info", "danger", "default");
+
+		for ($i = 0; $i < count($mois); $i++) {
+			// La ligne $classe = $couleurs[$i % count($couleurs)];
+			// permet d'attribuer la classe appropriée en utilisant l'opérateur modulo % pour assurer que la classe revient
+			// à la première couleur lorsque $i dépasse la taille du tableau $couleurs.
+			$classe = $couleurs[$i % count($couleurs)];
+			echo '<td><div class="alert alert-'.$classe.'">' . $mois[$i] . '</div></td>';
+		}
 	}
 ?>
 
@@ -59,12 +64,6 @@
 							<?php
 								printMonth();
 							?>
-						</tr>
-						{{-- LE RESULTAT KO ATAO BOUCLE --}}
-						<tr>
-							<td><div class="alert alert-info" role="alert">de</div></td>
-							<td><div class="alert alert-danger" role="alert">fa</div></td>
-							<td><div class="alert alert-default" role="alert">ult</div></td>
 						</tr>
 					</table>
 				</div>
