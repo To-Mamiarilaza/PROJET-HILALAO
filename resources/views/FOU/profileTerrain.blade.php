@@ -1,4 +1,7 @@
 @include('template.Header')
+<link rel="stylesheet" href="{{ asset('css/FOU/assets/css/profileTerrain.css') }} ">
+<link rel="stylesheet" href="{{ asset('fontawesome-5/css/all.min.css')}}">
+<link rel="stylesheet" href="{{ asset('fontawesome-5/css/all.min.css')}}">
 <div class="container">
     <div class="row info">
         <div class="col-md-5 info-photo">
@@ -31,230 +34,115 @@
     </div>
     <div class="row booking">
         <div class="row booking-title">
-            <div class="col-md-12 ">
-                <h3>Reservation</h3>
-                <hr style="margin-top: -5px;">
-            </div>
+            <h5>Reservation</h5>
         </div>
+        <hr style="
+            margin-left: 12px;
+            height:2px;
+            width: 80%;
+        ">
         <div class="row booking-date">
-            <div class="col-6 col-md-3 mt-5">
-                <div class="custom-div" onclick="toggleColor(this)">
-                    <h5 class="mb-0">Lun</h5>
-                    <p class="mb-0">1</p>
-                    <footer class="mt-1">Juin</footer>
+            <div class="col-md-6 booking-date-disponibilite">
+                <div class="row booking-date-disponibilite-title">
+                    <h7>Choisir la Date</h7>
+                </div>  
+                <div class="row booking-date-disponibilite-allDate">
+                    <div class="name-list">
+                        <ul>
+                            <li class="active">Ven 26 Juin</li>
+                            <li>Sam 27 Juin</li>
+                            <li>Dim 28 Juin</li>
+                            <li>Lun 29 Juin</li>
+                            <li>Mar 30 Juin</li>
+                            <li>Mer 01  Juin </li>
+                        </ul>
+                    </div>
+                </div>      
+            </div>
+            <div class="col-md-6 booking-date-creneau">
+                <div class="row booking-date-creneau-title">
+                    <h7>Vendredi 26 Juin</h7>
                 </div>
-            </div>
-            <div class="col-6 col-md-3 mt-5 calendrier">
-                <div class="custom-div" onclick="toggleColor(this)">
-                    <h5 class="mb-0">Mar</h5>
-                    <p class="mb-0">2</p>
-                    <footer class="mt-1">Juin</footer>
+                <div class="row booking-date-creneau-horraire">
+                    <div class="row booking-date-creneau-horraire-plageHorrairePrice">
+                        <div class="col-md-6 plageHorraire">12h - 13h30</div>
+                        <div class="col-md-6 price"><i class="fas fa-dollar-sign"></i> 50.000Ar</div>
+                    </div>
+                    <div class="row booking-date-creneau-horraire-plageHorrairePrice">
+                        <div class="col-md-6 plageHorraire">15h - 16h</div>
+                        <div class="col-md-6 price">
+                            <i class="fas fa-dollar-sign"></i>
+                            25.000Ar
+                        </div>
+                    </div>
+                    <div class="row booking-date-creneau-horraire-plageHorrairePrice">
+                        <div class="col-md-6 plageHorraire">15h - 16h</div>
+                        <div class="col-md-6 price">
+                            <i class="fas fa-dollar-sign"></i>
+                            120.000Ar
+                        </div>
+                    </div>
+                    <div class="row booking-date-creneau-horraire-plageHorrairePrice">
+                        <div class="col-md-6 plageHorraire">15h - 16h</div>
+                        <div class="col-md-6 price">
+                            <i class="fas fa-dollar-sign"></i>
+                            140.000Ar
+                        </div>
+                    </div>
+                    <div class="row booking-date-creneau-horraire-plageHorrairePrice">
+                        <div class="col-md-6 plageHorraire">15h - 16h</div>
+                        <div class="col-md-6 price">
+                            <i class="fas fa-dollar-sign"></i>
+                            50.000Ar
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-6 col-md-3 mt-5 calendrier">
-                <div class="custom-div" onclick="toggleColor(this)">
-                    <h5 class="mb-0">Mer</h5>
-                    <p class="mb-0">3</p>
-                    <footer class="mt-1">Juin</footer>
-                </div>
-            </div>
-            <div class="col-6 col-md-3 mt-5 calendrier">
-                <div class="custom-div" onclick="toggleColor(this)">
-                    <h5 class="mb-0">Jeu</h5>
-                    <p class="mb-0">4</p>
-                    <footer class="mt-1">Juin</footer>
-                </div>
-            </div>
-            <div class="col-6 col-md-3 mt-5 calendrier">
-                <div class="custom-div" onclick="toggleColor(this)">
-                    <h5 class="mb-0">Ven</h5>
-                    <p class="mb-0">5</p>
-                    <footer class="mt-1">Juin</footer>
-                </div>
-            </div>
-            <div class="col-6 col-md-3 mt-5 calendrier">
-                <div class="custom-div" onclick="toggleColor(this)">
-                    <h5 class="mb-0">Sam</h5>
-                    <p class="mb-0">6</p>
-                    <footer class="mt-1">Juin</footer>
-                </div>
-            </div>
-            <div class="col-6 col-md-3 mt-5 calendrier">
-                <div class="custom-div" onclick="toggleColor(this)">
-                    <h5 class="mb-0">Dim</h5>
-                    <p class="mb-0">7</p>
-                    <footer class="mt-1">Juin</footer>
-                </div>
-            </div>
-            <div class="col-6 col-md-3 mt-5 calendrier">
-                <div class="custom-div" onclick="toggleColor(this)">
-                    <h5 class="mb-0">Lun</h5>
-                    <p class="mb-0">8</p>
-                    <footer class="mt-1">Juin</footer>
-                </div>
-            </div>
-            <div class="col-6 col-md-3 mt-5 calendrier">
-                <div class="custom-div" onclick="toggleColor(this)">
-                    <h5 class="mb-0">Mar</h5>
-                    <p class="mb-0">9</p>
-                    <footer class="mt-1">Juin</footer>
-                </div>
-            </div>
-            <div class="col-6 col-md-3 mt-5 calendrier">
-                <div class="custom-div" onclick="toggleColor(this)">
-                    <h5 class="mb-0">Mer</h5>
-                    <p class="mb-0">10</p>
-                    <footer class="mt-1">Juin</footer>
-                </div>
-            </div>
-            <div class="col-6 col-md-3 mt-5 calendrier">
-                <div class="custom-div" onclick="toggleColor(this)">
-                    <h5 class="mb-0">Jeu</h5>
-                    <p class="mb-0">11</p>
-                    <footer class="mt-1">Juin</footer>
-                </div>
-            </div>
-            <div class="col-6 col-md-3 mt-5 calendrier">
-                <div class="custom-div" onclick="toggleColor(this)">
-                    <h5 class="mb-0">Ven</h5>
-                    <p class="mb-0">12</p>
-                    <footer class="mt-1">Juin</footer>
-                </div>
-            </div>
-            <div class="col-6 col-md-3 mt-5 calendrier">
-                <div class="custom-div" onclick="toggleColor(this)">
-                    <h5 class="mb-0">Sam</h5>
-                    <p class="mb-0">13</p>
-                    <footer class="mt-1">Juin</footer>
-                </div>
-            </div>
-            <div class="col-6 col-md-3 mt-5 calendrier">
-                <div class="custom-div" onclick="toggleColor(this)">
-                    <h5 class="mb-0">Dim</h5>
-                    <p class="mb-0">14</p>
-                    <footer class="mt-1">Juin</footer>
-                </div>
-            </div>
-            <div class="col-6 col-md-3 mt-5 calendrier">
-                <div class="custom-div" onclick="toggleColor(this)">
-                    <h5 class="mb-0">Lun</h5>
-                    <p class="mb-0">15</p>
-                    <footer class="mt-1">Juin</footer>
-                </div>
-            </div>
-            <div class="col-6 col-md-3 mt-5 calendrier">
-                <div class="custom-div" onclick="toggleColor(this)">
-                    <h5 class="mb-0">Mar</h5>
-                    <p class="mb-0">16</p>
-                    <footer class="mt-1">Juin</footer>
-                </div>
-            </div>
-            <div class="col-6 col-md-3 mt-5 calendrier">
-                <div class="custom-div" onclick="toggleColor(this)">
-                    <h5 class="mb-0">Mer</h5>
-                    <p class="mb-0">17</p>
-                    <footer class="mt-1">Juin</footer>
-                </div>
-            </div>
-            <div class="col-6 col-md-3 mt-5 calendrier">
-                <div class="custom-div" onclick="toggleColor(this)">
-                    <h5 class="mb-0">Jeu</h5>
-                    <p class="mb-0">18</p>
-                    <footer class="mt-1">Juin</footer>
-                </div>
-            </div>
-            <div class="col-6 col-md-3 mt-5 calendrier">
-                <div class="custom-div" onclick="toggleColor(this)">
-                    <h5 class="mb-0">Ven</h5>
-                    <p class="mb-0">19</p>
-                    <footer class="mt-1">Juin</footer>
-                </div>
-            </div>
-            <div class="col-6 col-md-3 mt-5 calendrier">
-                <div class="custom-div" onclick="toggleColor(this)">
-                    <h5 class="mb-0">Sam</h5>
-                    <p class="mb-0">20</p>
-                    <footer class="mt-1">Juin</footer>
-                </div>
-            </div>
-            <div class="col-6 col-md-3 mt-5 calendrier">
-                <div class="custom-div" onclick="toggleColor(this)">
-                    <h5 class="mb-0">Dim</h5>
-                    <p class="mb-0">21</p>
-                    <footer class="mt-1">Juin</footer>
-                </div>
-            </div>
-            
-        </div>
-        <hr class="hrSpecifique">
-        <div class="row creneau">
-            <div class="col-md-2 creneau-title">
-                <h5>Creneau Possible</h5>
-            </div>
-            <div class="col-md-10 creneau-horraire">
-                <div class="horraire-div" onclick="toggleColor(this)">11:00</div>
-                <div class="horraire-div" onclick="toggleColor(this)">12:00</div>
-                <div class="horraire-div" onclick="toggleColor(this)">13:00</div>
-                <div class="horraire-div" onclick="toggleColor(this)">14:00</div>
-                <div class="horraire-div" onclick="toggleColor(this)">15:00</div>
-                <div class="horraire-div" onclick="toggleColor(this)">16:00</div>
-                <div class="horraire-div" onclick="toggleColor(this)">17:00</div>
-                <div class="horraire-div" onclick="toggleColor(this)">18:00</div>
-                <div class="horraire-div" onclick="toggleColor(this)">19:00</div>
-                <div class="horraire-div" onclick="toggleColor(this)">20:00</div>
-                <div class="horraire-div" onclick="toggleColor(this)">21:00</div>
-                <div class="horraire-div" onclick="toggleColor(this)">22:00</div>
-                <div class="horraire-div" onclick="toggleColor(this)">23:00</div>
-                <div class="horraire-div" onclick="toggleColor(this)">24:00</div>
-            </div>
-        </div>
-        <hr style="margin-left: 1%;width: 96%;">
-        <!-- <div class="row confirmation">
-            <button class="bouton-confirmation">Confirmer</button>
-        </div> -->
-        <div class="row confirmation">
-    <button class="bouton-confirmation" data-bs-toggle="modal" data-bs-target="#exampleModal">Confirmer</button>
-  </div>
+            </div>         
+        </div> 
+    </div>
 
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Formulaire de confirmation</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <!-- <div class="row booking">
+        <div class="row confirmation">
+            <button class="bouton-confirmation" data-bs-toggle="modal" data-bs-target="#exampleModal">Confirmer</button>
         </div>
-        <div class="modal-body">
-          <!-- Votre contenu de formulaire ici -->
-          <form>
-            <div class="mb-3">
-              <label for="nom" class="form-label">Nom</label>
-              <input type="text" class="form-control" id="nom">
-            </div>
-            <div class="mb-3">
-              <label for="email" class="form-label">Email</label>
-              <input type="email" class="form-control" id="email">
-            </div>
-            <!-- Ajoutez d'autres champs de formulaire selon vos besoins -->
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-          <button type="button" class="btn btn-primary">Confirmer</button>
-        </div>
-      </div>
-    </div>
-  </div>
-    </div>
+    </div> -->
 </div>
 <script>
     function toggleColor(element) {
       element.classList.toggle('active');
     }
+    function toggleButton(button) {
+      button.classList.toggle('active');
+    }
 
 </script>
 <script>
     src="{{ asset('css/FOU/bootstrap/js/bootstrap.bundle.min.js')}}"
+</script>
+<script>
+     // Sélectionne tous les éléments li de la liste
+     const liItems = document.querySelectorAll('.name-list li');
+
+// Fonction pour gérer les clics sur les éléments li
+function handleClick(event) {
+    // Retire la classe "active" de l'élément li actuellement actif
+    const activeLi = document.querySelector('.name-list li.active');
+    activeLi.classList.remove('active');
+
+    // Ajoute la classe "active" à l'élément li cliqué
+    event.target.classList.add('active');
+}
+
+// Attache un gestionnaire d'événement de clic à chaque élément li
+liItems.forEach(function(li) {
+    li.addEventListener('click', handleClick);
+});
+
+// Active l'effet hover sur le premier élément li au chargement de la page
+window.addEventListener('DOMContentLoaded', function() {
+    const firstLi = document.querySelector('.name-list li:first-child');
+    firstLi.classList.add('active');
+});
 </script>
 </body>
 </html>
