@@ -25,7 +25,6 @@ class DateTimeFO{
     public function anterior() {
         $today = Date('Y-M-d');
         $time = time();
-        var_dump($time);
     }
 
     public function getDay() {

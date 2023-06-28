@@ -1,3 +1,19 @@
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ asset('css/FOU/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/FOU/assets/css/Template/newHeader.css') }} ">
+    <link rel="stylesheet" href="{{ asset('css/FOU/assets/css/SpecifiedCss/specified.css') }} ">
+    <link rel="stylesheet" href="{{ asset('css/FOU/assets/css/listTerrainModif.css') }} ">
+    <link rel="stylesheet" href="{{ asset('css/FOU/assets/css/profileTerrain.css') }} ">
+    <link rel="stylesheet" href="{{ asset('css/FOU/assets/css/carte.css')}}">
+    <link rel="stylesheet" href="{{ asset('fontawesome-5/css/all.min.css')}}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <title>Document</title>
+</head>
+<body>
 @include('template.Header')
 <link rel="stylesheet" href="{{ asset('css/FOU/assets/css/profileTerrain.css') }} ">
 <link rel="stylesheet" href="{{ asset('fontawesome-5/css/all.min.css')}}">
@@ -5,7 +21,7 @@
 <div class="container">
     <div class="row info">
         <div class="col-md-5 info-photo">
-            <img src="{{ asset('css/FOU/assets/image/futsalAndraharo.jpg') }}"> 
+            <img src="{{ asset('css/FOU/assets/image/futsalAndraharo.jpg') }}">
         </div>
         <div class="col-md-7 info-texte">
             <div class="row info-texte-title">
@@ -13,11 +29,11 @@
             </div>
             <div class="row info-texte-creation">
                 <p> Creer le : 12 Decembre 2014 </p>
-            </div>  
+            </div>
             <div class="row info-texte-description">
-                <p>Ouvert depuis mi-septembre, l’Urban Futsal à Andraharo est le premier centre de loisir où l’on peut jouer au football en salle ou futsal. Dans ces matchs de ballon rond sur miniterrain, 
+                <p>Ouvert depuis mi-septembre, l’Urban Futsal à Andraharo est le premier centre de loisir où l’on peut jouer au football en salle ou futsal. Dans ces matchs de ballon rond sur miniterrain,
                     il n’est pas besoin d’être un bon dribbleur ou un buteur à la Ronaldo pour s’imposer. Le plaisir de jouer suffit.
-                    Ce centre créé par trois amis amoureux du ballon rond, met à la disposition de ses clients quatre terrains synthétiques : deux grands de 30 x 18 mètres et deux petits de 22 x 16 mètres. « Ces terrains sont conçus pour les jeux de cinq contre cinq. Mais à six contre six, cela reste très confortable », explique Freddy Benjamin, le responsable de la société. D’ores et déjà, 
+                    Ce centre créé par trois amis amoureux du ballon rond, met à la disposition de ses clients quatre terrains synthétiques : deux grands de 30 x 18 mètres et deux petits de 22 x 16 mètres. « Ces terrains sont conçus pour les jeux de cinq contre cinq. Mais à six contre six, cela reste très confortable », explique Freddy Benjamin, le responsable de la société. D’ores et déjà,
                     il est clair que le futsal intéresse beaucoup les Tananariviens.
                     Ce n’est pas si anodin que ça si l’on sait qu’au Brésil, les grands joueurs comme Pelé, Zibo, Socrate, Bebeto ou Ronaldinho sont tous issus du futsal. Ses liens avec le football classique sont d’ailleurs très étroits puisque
                     le futsal est aujourd’hui une discipline sportive indépendante placée sous l’égide de la Fifa.
@@ -29,7 +45,7 @@
                 <span class="fa fa-star checked"> </span>
                 <span class="fa fa-star"> </span>
                 <span class="fa fa-star"> </span>
-            </div>        
+            </div>
         </div>
     </div>
     <div class="row booking">

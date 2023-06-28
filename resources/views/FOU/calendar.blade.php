@@ -43,6 +43,14 @@
             end: "{{ $reservation->getReservationDate()->format('Y-m-d') }}T{{ $reservation->getEndTime()->format('H:i:s') }}"
         },
         @endforeach
+        @foreach ($field->getDirectReservations() as $reservation)
+        {
+            color: 'red',
+            title: 'Reserved',
+            start: "{{ $reservation->getReservationDate()->format('Y-m-d') }}T{{ $reservation->getStartTime()->format('H:i:s') }}",
+            end: "{{ $reservation->getReservationDate()->format('Y-m-d') }}T{{ $reservation->getEndTime()->format('H:i:s') }}"
+        },
+        @endforeach
       ]
     });
 
@@ -71,11 +79,13 @@
 </head>
 <body>
     <h1>{{ date('Y-m-d') }}</h1>
+   {{ var_dump($field->getDirectReservations()); }}
+
     <div id='calendar'></div>
     <h1>Tiavina Malalaniaina</h1>
     <form action="{{ route('reserve') }}" method="POST">
         @csrf
-        <input type="hidden" name="id_field" value="1">
+        <input type="hidden" name="id_field" value="{{ $field->getIdField() }}">
         <div>
             <label for="day">Date de la réservation</label>
             <input type="date" name="reservation_date" id="">
