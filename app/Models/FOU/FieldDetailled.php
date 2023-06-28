@@ -111,6 +111,14 @@ class FieldDetailled extends Field{
         $this->executingQuery($sql);
     }
 
+    public static function sfindById($id) {
+        $model = new FieldDetailled();
+        $sql = "SELECT id_field, id_category, category, subscribing_price, id_client, name, id_field_type, field_type, id_infrastructure, infrastructure, id_light, light, description, address, latitude, longitude, insert_date, field_files FROM v_field_detailled WHERE id_field=%s";
+        $sql = sprintf($sql, $id);
+        $model->executingQuery($sql);
+        return $model;
+    }
+
     public static function findAll() {
         $sql = "SELECT id_field, id_category, category, subscribing_price, id_client, name, id_field_type, field_type, id_infrastructure, infrastructure, id_light, light, description, address, latitude, longitude, insert_date, field_files FROM v_field_detailled";
         $field_db = DB::select($sql);
@@ -172,7 +180,11 @@ class FieldDetailled extends Field{
         $this->reservations = $values;
     }
 
+    public function getDisponibility() {
+        $availability = [];
 
+        return $availability;
+    }
 
     protected function settingDBResult($result) {
         parent::settingDBResult($result);

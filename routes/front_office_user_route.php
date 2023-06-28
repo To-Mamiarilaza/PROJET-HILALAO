@@ -5,6 +5,7 @@ use App\Http\Controllers\FOU\ReservationController;
 use App\Http\Controllers\FOU\InfoTerrain;
 use App\Http\Controllers\FOU\HomeController;
 use App\Http\Controllers\FOU\LogController;
+use App\Http\Controllers\FOU\TestController;
 
 Route::get('/list-field/{id_category}', [FieldController::class, 'index'])->name('list-field');
 Route::get('/list-field', [FieldController::class, 'index'])->name('list-field-all');
@@ -20,6 +21,7 @@ Route::get('/landing', [HomeController::class, 'index'])->name('landing');
 Route::get('/log/user/out', [LogController::class, 'signout'])->name('log-out');
 Route::get('/ListFields', [FieldController::class, 'index']);
 Route::get('/field/detail/{id_field}', [FieldController::class, 'detail'])->name('detail-field');
+Route::get('/tester', [TestController::class, 'index'])->name('test');
 
 
 Route::get('/infoTerrain/{id_field}', [InfoTerrain::class, 'index']);
