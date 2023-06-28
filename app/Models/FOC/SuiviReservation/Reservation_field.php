@@ -2,9 +2,10 @@
 namespace App\Models\FOC\SuiviReservation;
 
 use Illuminate\Support\Facades\DB;
-
+use DateTime;
 class Reservation_field
 {
+    private $id_day;
     private $id_client;
     private $start_time;
     private $end_time;
@@ -33,6 +34,16 @@ class Reservation_field
     private $rv_field_name;
     private $field_description;
     private $field_address;
+
+    public function getIdDay()
+    {
+        return $this->id_day;
+    }
+
+    public function setIdDay($id_Day)
+    {
+        $this->id_day = $id_Day;
+    }
 
     public function getIdClient()
     {
@@ -284,6 +295,21 @@ class Reservation_field
         $this->duration = $Duration;
     }
 
+    public function getEnd()
+    {
+        $timestamp = $this->getStart();
+        $hoursToAdd = $this->getDuration();
+
+        // Convertir le timestamp en un format exploitable
+        $time = strtotime($timestamp);
+
+        // Ajouter l'heure spécifiée
+        $newTime = date('H:i', strtotime("+{$hoursToAdd} hours", $time));
+
+        return $newTime; // Affiche le nouveau timestamp avec l'heure ajoutée
+
+    }
+
     public function getRvFieldName()
     {
         return $this->rv_field_name;
@@ -316,6 +342,7 @@ class Reservation_field
 
 
     public function __construct(
+        $id_day,
         $id_client,
         $start_time,
         $end_time,
@@ -345,6 +372,7 @@ class Reservation_field
         $field_description,
         $field_address
     ) {
+        $this->id_day = $id_day;
         $this->id_client = $id_client;
         $this->start_time = $start_time;
         $this->end_time = $end_time;
@@ -362,7 +390,7 @@ class Reservation_field
         $this->latitude = $latitude;
         $this->description = $description;
         $this->id_reservation = $id_reservation;
-        $this->reservation_date = $reservation_date;
+        $this->reservation_date=$reservation_date;
         $this->first_name = $first_name;
         $this->last_name = $last_name;
         $this->birth_date = $birth_date;
@@ -375,16 +403,19 @@ class Reservation_field
         $this->field_address = $field_address;
     }
 
-    public static function getReservationsWithFields($id_client)
+    public static function getReservationsWithFields()
     {
         $results = DB::table('v_reservation_detailled_field')
-            ->where('id_client', $id_client)
-            ->limit(1)
+            ->where('id_client', 1)
+            // ->where('reservation_date', '>=', DB::raw('CURRENT_DATE'))
+            // ->where('reservation_date', '<', DB::raw("CURRENT_DATE + INTERVAL '7 days'"))
+            ->where('id_day', 1)
             ->get();
 
         $reservations = [];
         foreach ($results as $result) {
             $reservation = new Reservation_field(
+                $result->id_day,
                 $result->id_client,
                 $result->start_time,
                 $result->end_time,
@@ -419,6 +450,7 @@ class Reservation_field
 
         return $reservations;
     }
+
 
 }
 

@@ -5,8 +5,8 @@ use App\Http\Controllers\FOC\InscriptionController;
 use App\Models\FOC\SuiviReservation\Reservation_field;
 use App\Http\Controllers\FOC\ReservationController;
 
-Route::get('/reservation/{argument1}', function ($argument1) {
-    $reservationFields = Reservation_field::getReservationsWithFields($argument1);
+Route::get('/reservation/', function () {
+    $reservationFields = Reservation_field::getReservationsWithFields();
     return view('FOC/reservation', ['reservationFields' => $reservationFields]);
 })->name('getReservationOneWeek');
 

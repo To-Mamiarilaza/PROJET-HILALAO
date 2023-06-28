@@ -31,7 +31,8 @@
                             <!-- 0.5 veut dire 50% -->
                             <div class="col-md-8 reservation-detail">
                                 <ul>
-                                    <li>Le <span class="important">{{ $reservation->getReservationDate() }}</span> de <span class="important">10:00</span> à <span class="important">11:30</span></li>
+                                    <li>Le <span class="important">{{ date('d F Y', strtotime($reservation->getReservationDate())) }}</span>
+ de <span class="important">{{ date('H:i', strtotime($reservation->getStart())) }}</span> à <span class="important">{{ $reservation->getEnd() }}</span></li>
                                     <li>Payé : <span class="important">{{ $reservation->getPrice()*(0.5) }} Ar</span> Reste : <span class="important">{{ $reservation->getPrice() - $reservation->getPrice()*(0.5) }} Ar</span> </li>
                                     <li>Par <span class="important">{{ $reservation->getFirstName() }} {{ $reservation->getLastName() }}</span></li>
                                 </ul>

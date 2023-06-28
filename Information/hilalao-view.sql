@@ -3,6 +3,8 @@ CREATE SCHEMA IF NOT EXISTS "public";
 -- vue generale pour avoir le prix, le detail des terrains 
 CREATE OR REPLACE VIEW v_reservation_detailled_field AS
 SELECT 
+      rf.id_dispo_and_price,
+      rf.id_day,
       rf.id_client,
        rf.start_time,
        rf.end_time,
@@ -32,10 +34,12 @@ SELECT
        rv.field_description,
        rv.field_address
 FROM v_detailled_field rf
-JOIN v_reservation_one_week rv ON rf.field_id = rv.id_field;
+JOIN v_detailled_reservation rv ON rf.field_id = rv.id_field;
 
 CREATE OR REPLACE VIEW v_detailled_field AS
 SELECT 
+      dap.id_dispo_and_price,
+      dap.id_day,
        dap.start_time,
        dap.end_time,
        dap.id_field,

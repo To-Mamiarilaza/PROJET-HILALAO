@@ -88,6 +88,7 @@ class ReservationController extends Controller
             */
             $reservationField = new Reservation_field(
                 1,
+                1,
                 $start_time,
                 $end_time,
                 $rf_id_field,
@@ -117,7 +118,7 @@ class ReservationController extends Controller
                 $field_address
             );
 
-            $reservationFields = Reservation_field::getReservationsWithFields(1); /* 1 est le id du client */
+            $reservationFields = Reservation_field::getReservationsWithFields();
 
             return view('FOC/reservation', ['reservationFields' => $reservationFields]);
         } else {
@@ -149,6 +150,7 @@ class ReservationController extends Controller
 
             $reservationField = new Reservation_field(
                 1,
+                1,
                 $start_time,
                 $end_time,
                 $rf_id_field,
@@ -178,7 +180,7 @@ class ReservationController extends Controller
                 $field_address
             );
 
-            $reservationFields = Reservation_field::getReservationsWithFields(1); /* 1 est le id du client */
+            $reservationFields = Reservation_field::getReservationsWithFields();
 
             return view('FOC/reservation', ['reservationFields' => $reservationFields, 'error' => $error]);
         }
