@@ -44,9 +44,15 @@ Route::get('/ValidationClient', [ValidationClientController::class,
     'validationClient']
 )->name('validationClient');
 
+
+Route::get('/detailClient/{value}/{id_client}', [DetailClientController::class, 
+    'modifierStatus']
+)->name('DetailCLient');
+
 Route::get('/DetailClient/{id_client}', [DetailClientController::class,
     'detailClient']
 )->name('detailClient');
+
 
 Route::get('/sign', function () {
     return view('BO/sign');

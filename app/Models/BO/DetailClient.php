@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\DB;
 
 class DetailClient
 {
+    private $id_client;
     private $first_name;
     private $last_name;
     private $phone_number;
@@ -16,6 +17,13 @@ class DetailClient
     private $first_picture;
     private $second_picture;
     private $nombre_terrains;
+
+    public function getId_client() {
+        return $this->id_client;
+    }
+    public function setId_client($value) {
+        $this->id_client = $value;
+    }
 
     public function getFirst_name() {
         return $this->first_name;
@@ -98,7 +106,7 @@ class DetailClient
     //client en attente
     public function getDetailClient($id_client){
         try{
-            $detail = "select c.first_name, c.last_name, c.phone_number, c.mail, c.address, c.birth_date, c.sign_up_date, cin.cin_number, cin.first_picture, cin.second_picture
+            $detail = "select c.id_client, c.first_name, c.last_name, c.phone_number, c.mail, c.address, c.birth_date, c.sign_up_date, cin.cin_number, cin.first_picture, cin.second_picture
             from client c
             join cin on cin.id_cin = c.id_cin
             where c.id_client = ".$id_client;
@@ -108,6 +116,7 @@ class DetailClient
             if (count($details) > 0) {
                 $result = $details[0];
                 $temp = new DetailClient();
+                $temp->setId_client($result->id_client);
                 $temp->setFirst_name($result->first_name);
                 $temp->setLast_name($result->last_name);
                 $temp->setPhone_number($result->phone_number);
