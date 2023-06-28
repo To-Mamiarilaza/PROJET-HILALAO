@@ -122,6 +122,9 @@
 								<div class="row sig-map">
 									<div id="map"></div>
 								</div>
+								<div class="row sig-info">
+									<div id="info"></div>
+								</div>
 							</form>
 						</div>
 						@isset($error)

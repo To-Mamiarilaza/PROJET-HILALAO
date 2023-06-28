@@ -10,12 +10,11 @@ class Cin
     private $first_picture;
     private $second_picture;
 
-    public function __construct($id_cin, $cin_number,$first_picture,$second_picture)
+    public function __construct($cin_number,$first_picture,$second_picture)
     {
-        $this->id_cin = $id_cin;
-        $this->cin_number = $cin_number;
-        $this->first_picture = $first_picture;
-        $this->second_picture = $second_picture;
+        $this->setCinNumber($cin_number);
+        $this->setFirstPicturer($first_picture);
+        $this->setSecondPicture($second_picture);
     }
 
 ///Encapsulation
@@ -31,15 +30,17 @@ class Cin
     public function setCinNumber($cin_number = "")
     {
         $this->cin_number = $cin_number;
+        if($cin_number == "" || $cin_number == null) throw new \Exception("id invalid");
     }
 
     public function getFirstPicture()
     {
-        return $this->cin_number;
+        return $this->first_picture;
     }
     public function setFirstPicturer($first_picture = "")
     {
         $this->first_picture = $first_picture;
+        if($first_picture == "" || $first_picture == null) throw new \Exception("le nom d'image ne doit pas etre vide ou null");
     }
 
     public function getSecondPicture()
@@ -49,6 +50,8 @@ class Cin
     public function setSecondPicture($second_picture = "")
     {
         $this->second_picture = $second_picture;
+        if($second_picture == "" || $second_picture == null) throw new \Exception("le nom d'image ne doit pas etre vide ou null");
+
     }
 
     //Recuperer toutes les cin
@@ -64,15 +67,22 @@ class Cin
         
         return $datas;
     }
-
     //Recuperer le cin correspondant le id au parametre id
     public static function findById($id)
     {
         $results = DB::table('cin')->where('id_cin', $id)->first();
-        
+   
         return new Cin($results->id_cin, $results->cin_number,$results->first_picture,$results->second_picture);
     }
 
+    //Recuperer le dernier cin
+    public static function lastCinId()
+    {
+        $result = DB::table('cin')->orderBy('id_cin', 'desc')->value('id_cin');
+    
+        return $result ? $result : null;
+    }
+    
      //Sauvegarder un cin dans la base
      public function create()
      {

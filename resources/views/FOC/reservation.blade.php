@@ -17,65 +17,33 @@
         <h1 class="reservation-title my-3">Réservations du terrain</h1>
         <div class="direct-reservation">
             <button class="btn btn-info text-white" data-bs-toggle="modal" data-bs-target="#reservation-directe "> <i class="fas fa-pen mx-2"></i> Réservation directe</button>
+            <a href="{{ route('selectByWeek') }}" class="btn btn-info text-white"> Filtre par semaines </a>
+            <a href="{{ route('selectAll') }}" class="btn btn-info text-white"> Toutes les reservations </a>
         </div>
         <div class="row mt-3">
+        @if (isset($reservationFields))          
             <div class="col-md-4 list-reservation">
                 <h5>Les réservations le plus proches</h5>
                 <div class="liste-display mt-3">
+                    @foreach ($reservationFields as $reservation)
                     <div class="row reservation-element my-4">
-                        <div class="col-md-3">
-                            <img class="user-picture" src="{{ asset('image/user.jpg') }}" alt="Image de l'utilisateur">
+                            <div class="col-md-3">
+                                <img class="user-picture" src="{{ asset('image/user.jpg') }}" alt="Image de l'utilisateur">
+                            </div>
+                            <!-- 0.5 veut dire 50% -->
+                            <div class="col-md-8 reservation-detail">
+                                <ul>
+                                    <li>Le <span class="important">{{ date('d F Y', strtotime($reservation->getReservationDate())) }}</span>
+ de <span class="important">{{ date('H:i', strtotime($reservation->getStart())) }}</span> à <span class="important">{{ $reservation->getEnd() }}</span></li>
+                                    <li>Payé : <span class="important">{{ $reservation->getPrice()*(0.5) }} Ar</span> Reste : <span class="important">{{ $reservation->getPrice() - $reservation->getPrice()*(0.5) }} Ar</span> </li>
+                                    <li>Par <span class="important">{{ $reservation->getFirstName() }} {{ $reservation->getLastName() }}</span></li>
+                                </ul>
+                            </div>
                         </div>
-                        <div class="col-md-8 reservation-detail">
-                            <ul>
-                                <li>Le <span class="important">10/11/23</span> de <span class="important">10:00</span> à <span class="important">11:30</span></li>
-                                <li>Payé : <span class="important">10 000 Ar</span> Reste : <span class="important">50 000 Ar</span> </li>
-                                <li>Par <span class="important">Rakotonjarasoa George</span></li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="row reservation-element my-4">
-                        <div class="col-md-3">
-                            <img class="user-picture" src="{{ asset('image/user.jpg') }}" alt="Image de l'utilisateur">
-                        </div>
-                        <div class="col-md-8 reservation-detail">
-                            <ul>
-                                <li>Le <span class="important">10/11/23</span> de <span class="important">10:00</span> à <span class="important">11:30</span></li>
-                                <li>Payé : <span class="important">10 000 Ar</span> Reste : <span class="important">50 000 Ar</span> </li>
-                                <li>Par <span class="important">Rakotonjarasoa George</span></li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="row reservation-element my-4">
-                        <div class="col-md-3">
-                            <img class="user-picture" src="{{ asset('image/user.jpg') }}" alt="Image de l'utilisateur">
-                        </div>
-                        <div class="col-md-8 reservation-detail">
-                            <ul>
-                                <li>Le <span class="important">10/11/23</span> de <span class="important">10:00</span> à <span class="important">11:30</span></li>
-                                <li>Payé : <span class="important">10 000 Ar</span> Reste : <span class="important">50 000 Ar</span> </li>
-                                <li>Par <span class="important">Rakotonjarasoa George</span></li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="row reservation-element my-4">
-                        <div class="col-md-3">
-                            <img class="user-picture" src="{{ asset('image/user.jpg') }}" alt="Image de l'utilisateur">
-                        </div>
-                        <div class="col-md-8 reservation-detail">
-                            <ul>
-                                <li>Le <span class="important">10/11/23</span> de <span class="important">10:00</span> à <span class="important">11:30</span></li>
-                                <li>Payé : <span class="important">10 000 Ar</span> Reste : <span class="important">50 000 Ar</span> </li>
-                                <li>Par <span class="important">Rakotonjarasoa George</span></li>
-                            </ul>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
-
             </div>
+        @endisset
             <div class="col-md-8 calendrier">
                 <h5>Calendrier de réservation</h5>
                 <div id="calendar" class="mt-3">
@@ -87,7 +55,7 @@
     </div>
 
     <!-- Modal pour insérer une réservation en directe -->
-    <form action="" method="POST" class="form">
+    <form action=" {{ route('insert') }}" method="GET" class="form">
         <div class="modal fade" id="reservation-directe" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -98,27 +66,29 @@
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="client-name" class="form-label"> Nom du client : </label>
-                            <input type="text" class="form-control" name="" id="client-name">
+                            <input type="text" class="form-control" name="nom_client" id="client-name">
                         </div>
                         <div class="mb-3">
                             <label for="client-phone" class="form-label"> N° Téléphone : </label>
-                            <input type="text" class="form-control" name="" id="client-phone">
+                            <input type="text" class="form-control" name="telephone_client" id="client-phone">
                         </div>
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="client-phone" class="form-label"> Date du réservation : </label>
-                                <input type="date" class="form-control" name="" id="client-phone">
+                                <input type="date" class="form-control" name="date_reservation" id="client-phone">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="client-phone" class="form-label"> Heure début : </label>
-                                <input type="time" class="form-control" name="" id="client-phone">
+                                <input type="time" class="form-control" name="heure_debut" id="client-phone">
                             </div>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="client-phone" class="form-label"> Duration : </label>
-                            <input type="number" class="form-control" name="" id="client-phone" value="1">
+                            <input type="number" class="form-control" name="duration" id="client-phone" value="1">
                         </div>
-                        <p class="error mx-1"><i class="fas fa-info-circle   mx-3"></i> Afficher les érreurs ici</p>
+                        @if (isset($error)) 
+                            <p class="error mx-1"><i class="fas fa-info-circle   mx-3"></i> {{ $error }}</p>
+                        @endisset
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -130,7 +100,7 @@
     </form>
 
     <script>
-        // Pour parametrer le calendrier
+        // Pour paramétrer le calendrier
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -139,38 +109,29 @@
                     center: 'title',
                     right: 'timeGridWeek'
                 },
-
                 initialView: 'timeGridWeek',
                 editable: false,
                 eventColor: 'rgb(35, 160, 35)',
                 allDaySlot: false,
-
                 viewRender: function(view, element) {
                     var headerContainer = element.find('.fc-header-toolbar .fc-day-header-container');
                     headerContainer.addClass('custom-day-header');
                 },
-
-                events: [{
-                        title: 'Anjarasoa Fleuris',
-                        start: new Date(2023, 5, 14, 9, 0),
-                        end: new Date(2023, 5, 14, 11, 0)
-                    },
+                events: [
+                    @foreach ($reservationFields as $reservation)
                     {
-                        title: 'Rakoto Feno',
-                        start: new Date(2023, 5, 15, 14, 0),
-                        end: new Date(2023, 5, 15, 16, 0)
+                        title: '{{ $reservation->getFirstName() }} {{ $reservation->getLastName() }}',
+                        start: new Date('{{ $reservation->getReservationDate() }}' + 'T{{ $reservation->getStart() }}'),
+                        end: new Date('{{ $reservation->getReservationDate() }}' + 'T{{ Carbon\Carbon::parse($reservation->getStart())->addHours($reservation->getDuration()) }}'),
                     },
-                    {
-                        title: 'To Mamiarilaza',
-                        start: new Date(2023, 5, 16, 10, 30),
-                        end: new Date(2023, 5, 16, 12, 30)
-                    },
+                    @endforeach
                 ]
             });
-
             calendar.render();
         });
     </script>
+    
+    
     <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
 </body>
 

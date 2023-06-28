@@ -1,3 +1,6 @@
+CREATE DATABASE hilalao;
+\c hilalao
+
 CREATE SEQUENCE "public".abonnement_notification_id_abonnement_notification_seq START WITH 1 INCREMENT BY 1;
 
 CREATE SEQUENCE "public".abonnement_state_id_abonnement_state_seq START WITH 1 INCREMENT BY 1;
@@ -137,6 +140,7 @@ CREATE  TABLE "public".client (
 	id_status            integer  NOT NULL  ,
 	sign_up_date         timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL  ,
 	id_cin               integer    ,
+	customer_picture	 varchar,
 	CONSTRAINT pk_client PRIMARY KEY ( id_client ),
 	CONSTRAINT fk_client_cin FOREIGN KEY ( id_cin ) REFERENCES "public".cin( id_cin )   ,
 	CONSTRAINT fk_client_status_client FOREIGN KEY ( id_status ) REFERENCES "public".status_client( id_status_client )
@@ -242,6 +246,11 @@ CREATE  TABLE "public".dispo_and_price (
 	CONSTRAINT fk_dispo_and_price_field FOREIGN KEY ( id_field ) REFERENCES "public".field( id_field )
  );
 
+--vue cin client
+CREATE or replace view v_clientCin as 
+	select c.id_client,c.first_name,c.last_name,c.address,c.phone_number,c.mail,c.birth_date,ci.id_cin,ci.cin_number,ci.first_picture,ci.second_picture from client c
+	join cin as ci
+	on c.id_cin = ci.id_cin;
 --FO Sprint1 (Liste Terrain)
 
 --Vue pour la liste de tous les terrains,

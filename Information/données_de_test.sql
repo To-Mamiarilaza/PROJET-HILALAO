@@ -10,9 +10,9 @@ INSERT INTO cin VALUES
 (DEFAULT, '119 105 250 300', 'client3_cin_picture1.png', 'client3_cin_picture2.png');
 
 INSERT INTO client VALUES
-(DEFAULT, 'John', 'RAKOTOARISOA', '0321531728', 'john.rakoto@gmail.com', 'Antananarivo', '2000-11-24', 'john1234', 1, '2023-01-15', 1),
-(DEFAULT, 'Andry', 'ANDRIAMAMITIANA', '0341451743', 'andry123@gmail.com', 'Lot 3 bis Iavoloha', '1987-01-12', 'andry-andry', 1, '2023-04-23', 2),
-(DEFAULT, 'Fitia', 'MIAROTIA', '0331754393', 'fitiaMia@gmail.com', 'Lot IAV 416', '1998-07-05', 'fitia@@', 1, '2023-10-07', 3);
+(DEFAULT, 'John', 'RAKOTOARISOA', '0321531728', 'john.rakoto@gmail.com', 'Antananarivo', '2000-11-24', 'john1234', 1, '2023-01-15', 1,'sary1.jpg'),
+(DEFAULT, 'Andry', 'ANDRIAMAMITIANA', '0341451743', 'andry123@gmail.com', 'Lot 3 bis Iavoloha', '1987-01-12', 'andry-andry', 1, '2023-04-23', 2,'sary2.png'),
+(DEFAULT, 'Fitia', 'MIAROTIA', '0331754393', 'fitiaMia@gmail.com', 'Lot IAV 416', '1998-07-05', 'fitia@@', 1, '2023-10-07', 3, 'sary3.png');
 
 -- Données pour les informations requis pour le terrain
 INSERT INTO category VALUES

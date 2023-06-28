@@ -12,6 +12,18 @@
     background-color: #ffc107;
     border: none;
     color: black;
+}
+
+.contenu-terrain {
+    background-color: aliceblue;
+    margin-bottom: 3%;
+    padding-bottom: 5%;
+}
+
+/* .contenu-terrain .btn {
+    width: 50%;
+} */
+
 } */
 
 .contenu-terrain {
@@ -42,6 +54,10 @@
 .sig-map {
     margin-top: 5%;
     padding-right: 22%;
+}
+
+.sig-info {
+    margin-top: 55%;
 }
 
 .sig-map .btn {

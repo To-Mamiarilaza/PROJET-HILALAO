@@ -29,15 +29,14 @@ class LoginController extends Controller
             return view('FOC/login')->with('error', $e->getMessage());
         }     
     }
-
-    public function signUp(Request $request)
+    public function signin(Request $request)
     {
         return view('FOC/signUp');
     }
 
-    public function signUpCin(Request $request)
+    public function nextsignup(Request $request)
     {
-        return view('FOC/signUpCin');
+        return view('FOC/sign_next_CIN');
     }
 	public function nextSignin(Request $request)
 	{
