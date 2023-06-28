@@ -191,19 +191,19 @@
                                     {
                                         label: 'Clients',
                                         data: clientsData,
-                                        borderColor: 'blue',
+                                        borderColor: '#FF0C64',
                                         borderWidth: 2.5
                                     },
                                     {
                                         label: 'Utilisateurs',
                                         data: utilisateursData,
-                                        borderColor: 'red',
+                                        borderColor: '#FFA70C',
                                         borderWidth: 2
                                     },
                                     {
                                         label: 'Terrains',
                                         data: terrainsData,
-                                        borderColor: 'green',
+                                        borderColor: '#0CDEFF',
                                         borderWidth: 1.5,
                                     }
                                 ]

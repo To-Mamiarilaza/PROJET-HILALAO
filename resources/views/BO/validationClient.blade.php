@@ -27,7 +27,7 @@
             </div>
         </div>
 
-        <div class="col-md-6 p-3">
+        {{-- <div class="col-md-6 p-3">
             <div class="attentes-client">
                 <h2>Listes des terrains en attentes</h2>
                 <div class="listes-client">
@@ -45,8 +45,8 @@
                     </a>
                 </div>
             </div>
+        </div> --}}
         </div>
-            </div>
 
         </section>
     </div>
