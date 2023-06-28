@@ -56,36 +56,6 @@ class ReservationController extends Controller
             $field_description = 'Un terrain de football de qualité';
             $field_address = '123 Rue du Terrain';
 
-            /*
-            $id_client,
-            $start_time,
-            $end_time,
-            $rf_id_field,
-            $price,
-            $field_id,
-            $field_name,
-            $field_category,
-            $subscribing_price,
-            $field_type,
-            $infrastructure,
-            $light,
-            $address,
-            $longitude,
-            $latitude,
-            $description,
-            $id_reservation,
-            $reservation_date,
-            $first_name,
-            $last_name,
-            $birth_date,
-            $phone_number,
-            $mail,
-            $start,
-            $duration,
-            $rv_field_name,
-            $field_description,
-            $field_address
-            */
             $reservationField = new Reservation_field(
                 1,
                 1,
@@ -118,7 +88,7 @@ class ReservationController extends Controller
                 $field_address
             );
 
-            $reservationFields = Reservation_field::getReservationsWithFields();
+            $reservationFields = $reservationField->getReservationsWithFields();
 
             return view('FOC/reservation', ['reservationFields' => $reservationFields]);
         } else {
@@ -180,7 +150,7 @@ class ReservationController extends Controller
                 $field_address
             );
 
-            $reservationFields = Reservation_field::getReservationsWithFields();
+            $reservationFields = $reservationField->getReservationsWithFields();
 
             return view('FOC/reservation', ['reservationFields' => $reservationFields, 'error' => $error]);
         }

@@ -3,6 +3,7 @@ namespace App\Models\FOC\SuiviReservation;
 
 use Illuminate\Support\Facades\DB;
 use DateTime;
+
 class Reservation_field
 {
     private $id_day;
@@ -390,7 +391,7 @@ class Reservation_field
         $this->latitude = $latitude;
         $this->description = $description;
         $this->id_reservation = $id_reservation;
-        $this->reservation_date=$reservation_date;
+        $this->reservation_date = $reservation_date;
         $this->first_name = $first_name;
         $this->last_name = $last_name;
         $this->birth_date = $birth_date;
@@ -403,13 +404,37 @@ class Reservation_field
         $this->field_address = $field_address;
     }
 
-    public static function getReservationsWithFields()
+    public function getDay(){
+
+        $dateTime = new DateTime($this->getReservationDate());
+        $jourSemaineFrancais = $dateTime->format('l');
+
+        if($jourSemaineFrancais == "Monday") return "Lundi";
+        else if($jourSemaineFrancais == "Tuesday") return "Mardi";
+        else if($jourSemaineFrancais == "Wednesday") return "Mercredi";
+        else if($jourSemaineFrancais == "Thursday") return "Jeudi";
+        else if($jourSemaineFrancais == "Friday") return "Vendredi";
+        else if($jourSemaineFrancais == "Saturday") return "Samedi";
+        else if($jourSemaineFrancais == "Sunday") return "Dimanche";
+    }
+    public function getExactDay() /* Prends l'id du jour de la date de reservation */
     {
+        $day = self::getDay();
+
+        $result = DB::table('day')
+            ->where('day', $day)
+            ->value('id_day');
+        return $result ? $result : null;
+    }
+
+    public function getReservationsWithFields()
+    {
+        $exactDay = self::getExactDay();
         $results = DB::table('v_reservation_detailled_field')
             ->where('id_client', 1)
             // ->where('reservation_date', '>=', DB::raw('CURRENT_DATE'))
             // ->where('reservation_date', '<', DB::raw("CURRENT_DATE + INTERVAL '7 days'"))
-            ->where('id_day', 1)
+            ->where('id_day', $exactDay)
             ->get();
 
         $reservations = [];
