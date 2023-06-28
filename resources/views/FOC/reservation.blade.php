@@ -17,6 +17,8 @@
         <h1 class="reservation-title my-3">Réservations du terrain</h1>
         <div class="direct-reservation">
             <button class="btn btn-info text-white" data-bs-toggle="modal" data-bs-target="#reservation-directe "> <i class="fas fa-pen mx-2"></i> Réservation directe</button>
+            <a href="{{ route('selectByWeek') }}" class="btn btn-info text-white"> Filtre par semaines </a>
+            <a href="{{ route('selectAll') }}" class="btn btn-info text-white"> Toutes les reservations </a>
         </div>
         <div class="row mt-3">
         @if (isset($reservationFields))          

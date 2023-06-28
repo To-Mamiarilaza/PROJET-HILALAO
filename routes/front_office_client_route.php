@@ -5,7 +5,7 @@ use App\Http\Controllers\FOC\InscriptionController;
 use App\Models\FOC\SuiviReservation\Reservation_field;
 use App\Http\Controllers\FOC\ReservationController;
 
-Route::get('/reservation/', function () {
+Route::get('/reservation', function () {
     $start_time = '10:00';
     $end_time = '11:30';
     $rf_id_field = 1;
@@ -64,8 +64,13 @@ Route::get('/reservation/', function () {
     );
     $reservationFields = $reservationField->getReservationsWithFields();
     return view('FOC/reservation', ['reservationFields' => $reservationFields]);
-})->name('getReservationOneWeek');
+})->name('getAllReservation');
 
+Route::get('/selectByWeek', [ReservationController::class, 'getReservationOneWeek'])
+->name('selectByWeek');
+
+Route::get('/selectAll', [ReservationController::class, 'getAllReservation'])
+->name('selectAll');
 
 Route::get('/insertDirectReservation', [ReservationController::class, 'insertDirectReservation'])
 ->name('insert');

@@ -427,6 +427,56 @@ class Reservation_field
         return $result ? $result : null;
     }
 
+    public function getReservationsOneWeek()
+    {
+        $exactDay = self::getExactDay();
+        $results = DB::table('v_reservation_detailled_field')
+            ->where('id_client', 1)
+            ->where('reservation_date', '>=', DB::raw('CURRENT_DATE'))
+            ->where('reservation_date', '<', DB::raw("CURRENT_DATE + INTERVAL '7 days'"))
+            ->where('id_day', $exactDay)
+            ->get();
+
+        $reservations = [];
+        foreach ($results as $result) {
+            $reservation = new Reservation_field(
+                $result->id_day,
+                $result->id_client,
+                $result->start_time,
+                $result->end_time,
+                $result->rf_id_field,
+                $result->price,
+                $result->field_id,
+                $result->field_name,
+                $result->field_category,
+                $result->subscribing_price,
+                $result->field_type,
+                $result->infrastructure,
+                $result->light,
+                $result->address,
+                $result->longitude,
+                $result->latitude,
+                $result->description,
+                $result->id_reservation,
+                $result->reservation_date,
+                $result->first_name,
+                $result->last_name,
+                $result->birth_date,
+                $result->phone_number,
+                $result->mail,
+                $result->start,
+                $result->duration,
+                $result->rv_field_name,
+                $result->field_description,
+                $result->field_address
+            );
+            $reservations[] = $reservation;
+        }
+
+        return $reservations;
+    }
+    
+
     public function getReservationsWithFields()
     {
         $exactDay = self::getExactDay();
