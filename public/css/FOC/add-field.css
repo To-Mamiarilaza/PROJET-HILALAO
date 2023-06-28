@@ -12,6 +12,18 @@
     background-color: #ffc107;
     border: none;
     color: black;
+}
+
+.contenu-terrain {
+    background-color: aliceblue;
+    margin-bottom: 3%;
+    padding-bottom: 5%;
+}
+
+/* .contenu-terrain .btn {
+    width: 50%;
+} */
+
 } */
 
 .contenu-terrain {

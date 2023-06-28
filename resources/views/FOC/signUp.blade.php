@@ -11,16 +11,23 @@
 </head>
 <body>
 	<div class="container box">
+		@if($errors->any())
+    	<div class="alert alert-danger">
+        	<ul>
+            	@foreach($errors->all() as $error)
+                	<li>{{ $error }}</li>
+            	@endforeach
+        	</ul>
+    	</div>
+	@endif
 		<div class="row sign_box">
 			<h1 class="box__title">Sign <span class="box__title--span">up</span></h1>
-			<div class="col-md-4 client-picture profil">
-				<h5 class="card-title">Picture Profil</h5>
-				<input type="file" id="image-upload" style="display: none;">
-				<label for="image-upload" class="btn btn-primary btn-block">Upload picture</label>
-			</div>
 			<div class="col-md-8">
-				<form enctype="multipart/form-data" action="{{ route('signUpCin') }}" method="POST" class="form-content">
+				<form enctype="multipart/form-data" action="{{ route('signin') }}" method="POST" class="form-content">
 					@csrf
+						<h5 class="card-title">Picture Profil</h5>
+						<input type="file" id="image-upload" style="display: none;" name="profilPicture">
+						<label for="image-upload" class="btn btn-primary btn-block">Upload picture</label>
 					<div class="row">
 						<div class="col-md-3">
 							<label for="email" class="control-label"><b>First name</b></label>
@@ -63,6 +70,14 @@
 					</div>
 					<div class="row">
 						<div class="col-md-3">
+							<label for="address" class="control-label"><b> Birth date </b></label>
+						</div>
+						<div class="col-md-9">
+							<input class="form-content__input form-content__input--log" type="date" aria-label=".form-control-lg" name="birth_date">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-3">
 							<label for="password" class="control-label"><b>Password</b></label>
 						</div>
 						<div class="col-md-9">
@@ -74,7 +89,7 @@
 							<label for="password" class="control-label"><b>Confirm your password</b></label>
 						</div>
 						<div class="col-md-9">
-							<input class="form-content__input form-content__input--log" type="password" aria-label=".form-control-lg" id="password" name="password">
+							<input class="form-content__input form-content__input--log" type="password" aria-label=".form-control-lg" id="password" name="confirmed_password">
 						</div>
 					</div>
 					{{-- <div class="form-content__checkbox">

@@ -1,0 +1,126 @@
+.principale__img {
+  width: 100%;
+  cursor: pointer;
+}
+
+.second-list__second__img {
+  width: 100%;
+  cursor: pointer;
+}
+
+.dispo__titre {
+  color: #33658A;
+  letter-spacing: 5px;
+  font-size: 20px;
+}
+.dispo .list-parametre {
+  max-height: 150px;
+  overflow-x: auto;
+}
+.dispo .list-parametre .parametre {
+  width: 80%;
+}
+.dispo .list-parametre .parametre ul {
+  display: flex;
+  justify-content: space-around;
+  padding: 0;
+  list-style: none;
+  margin-bottom: 10px;
+}
+.dispo .list-parametre .parametre .jour {
+  background-color: none;
+  color: #E17B36;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+  border: solid 2px #E17B36;
+}
+.dispo .list-parametre .parametre .jour--checked {
+  background-color: #E17B36;
+  color: white;
+}
+.dispo .list-parametre .parametre .parameter-hour {
+  font-size: 13px;
+  color: #33658A;
+  margin-left: 15px;
+  font-weight: 500;
+}
+.dispo .list-parametre .parametre .parameter-price {
+  margin-left: 35px;
+  font-size: 16px;
+  color: #2A1F1D;
+}
+
+.terrain__nom {
+  color: #82bbe1;
+  font-size: 30px;
+  padding-bottom: 15px;
+  border-bottom: solid 2px;
+  letter-spacing: 5px;
+}
+.terrain__desc__titre {
+  color: #2A1F1D !important;
+  letter-spacing: 2px !important;
+  font-size: 23px;
+}
+.terrain .list-carac {
+  margin-top: 20px;
+  line-height: 30px;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+.terrain .list-carac li {
+  font-size: 18px;
+}
+.terrain .list-carac li span {
+  margin-left: 15px;
+  font-weight: 400;
+  color: #E17B36;
+}
+
+.parametrage a {
+  text-decoration: none;
+}
+
+.suivie__label {
+  color: #33658A;
+  font-size: 17px;
+}
+
+.supprimer__label {
+  font-size: 17px;
+}
+
+.choix a {
+  width: 80px;
+}
+
+.unavailability-p {
+  color: #E17B36;
+  margin: 8px;
+  font-weight: 500;
+}
+
+.list-unavailability {
+  overflow-y: auto;
+  max-height: 200px;
+}
+.list-unavailability span {
+  color: #33658A;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.error {
+  font-size: 12px;
+  margin: 0;
+  color: #d32222;
+  margin-top: 15px;
+}
+
+.updatePhoto img {
+  width: 100%;
+}/*# sourceMappingURL=profil-terrain.css.map */

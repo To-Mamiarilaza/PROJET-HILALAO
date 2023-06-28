@@ -19,8 +19,7 @@ class LoginController extends Controller
             $client = Client::login($password, $email);
             if($client != null) {
                 session()->put('clientConnected', $client);
-                $value = session()->get('clientConnected');
-                return view('FOC/welcome')->with('client', $value);
+                return redirect()->to('/home-client');
             }
             else {
                 throw new Exception("Veuillez ressayer");
@@ -30,20 +29,33 @@ class LoginController extends Controller
             return view('FOC/login')->with('error', $e->getMessage());
         }     
     }
-
-    public function signUp(Request $request)
+    public function signin(Request $request)
     {
         return view('FOC/signUp');
     }
 
-    public function signUpCin(Request $request)
+    public function nextsignup(Request $request)
     {
-        return view('FOC/signUpCin');
+        return view('FOC/sign_next_CIN');
     }
+	public function nextSignin(Request $request)
+	{
+		return view('FOC/sign_next_CIN');
+	}
 
-    public function profilClient(Request $request)
-    {
-        return view('FOC/profilClient');
+	public function profilClient(Request $request)
+	{
+		return view('FOC/profilClient');
+	}
+
+    public function deconnect() {
+        // Récupérez l'ID de session actuel
+        $sessionId = session()->getId();
+
+        // Utilisez l'ID de session pour oublier la session
+        Session::forget($sessionId);
+
+        return view('FOC/login');
     }
 }
 ?>
