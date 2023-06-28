@@ -126,78 +126,18 @@
 								<div class="row sig-map">
 									<div id="map"></div>
 								</div>
+								<div class="row sig-info">
+									<div id="info"></div>
+								</div>
 							</form>
 						</div>
-				{{-- Eto no de- commenter -na rah te ahita ny info sur adresse, coord, ... --}}
-						{{-- <div class="row">
-							<div id="info"></div>
-						</div> --}}
 					</div>
 				</div>
 
 			</div>
 		</div>
 	</section>
-
-	<script>
-		var map = L.map('map').setView([-18.986092 , 47.532949], 13);
-		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-		attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
-		maxZoom: 18
-		}).addTo(map);
-
-		var marker;
-		var info = document.getElementById("info");
-
-		document.getElementById("formMap").addEventListener("submit", function(event) {
-		event.preventDefault(); // Empêche le rechargement de la page lors de la soumission du formulaire
-
-		var positionInput = document.getElementById("adresse").value;
-
-		// Supprimer le marqueur précédent s'il existe
-		if (marker) {
-			marker.remove();
-		}
-
-		fetch('https://nominatim.openstreetmap.org/search?format=json&q=' + positionInput)
-			.then(function(response) {
-			return response.json();
-			})
-			.then(function(data) {
-			if (data.length > 0) {
-				var latitude = parseFloat(data[0].lat);
-				var longitude = parseFloat(data[0].lon);
-
-				if (!isNaN(latitude) && !isNaN(longitude)) {
-				map.setView([latitude, longitude], 13);
-				marker = L.marker([latitude, longitude]).addTo(map);
-				updateInfo(latitude, longitude);
-				} else {
-				info.innerHTML = 'Impossible de trouver la position pour l\'adresse saisie.';
-				}
-			} else {
-				info.innerHTML = 'Aucun résultat trouvé pour l\'adresse saisie.';
-			}
-			})
-			.catch(function(error) {
-			console.log('Une erreur s\'est produite :', error);
-			});
-		});
-
-		function updateInfo(latitude, longitude) {
-		fetch('https://nominatim.openstreetmap.org/reverse?format=json&lat=' + latitude + '&lon=' + longitude)
-			.then(function(response) {
-			return response.json();
-			})
-			.then(function(data) {
-			var address = data.display_name;
-			info.innerHTML = 'Latitude: ' + latitude + '<br>Longitude: ' + longitude + '<br>Adresse: ' + address;
-			})
-			.catch(function(error) {
-			console.log('Une erreur s\'est produite :', error);
-			});
-		}
-	</script>
+@include('FOC/scriptMap');
 
 <script src="{{ asset('css/FOU/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 </body>

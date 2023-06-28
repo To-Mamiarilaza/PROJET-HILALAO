@@ -47,3 +47,10 @@ Route::get('/subscription-facture', function() {
 Route::get('/home-client', function() {
     return view('FOC/home');
 });
+
+// ---------------------------------------
+Route::get('/edit', function() {
+    return view('FOC/edit');
+});
+// ---------------------------------------
+
