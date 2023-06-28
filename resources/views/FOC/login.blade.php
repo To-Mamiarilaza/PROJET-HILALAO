@@ -43,7 +43,7 @@
 			</form>
 				
 		</div>
-		<p>Don't have an account? <a href="{{ route('signUp') }}">Sign up</a></p>
+		<p>Don't have an account? <a href="{{ route('SignIn') }}">Sign up</a></p>
 	</div>
 </body>
 

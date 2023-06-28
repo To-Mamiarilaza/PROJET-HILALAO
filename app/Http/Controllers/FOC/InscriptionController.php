@@ -57,8 +57,6 @@ class InscriptionController extends Controller
                         $imageName = preg_replace('/([^.a-z0-9]+)/i', '-', $imageName);
     
                         $file->move($path, $imageName);
-    
-                        $imageName = $imageName;
                     } else {
                         $erreur = 'Vous devez uploader un fichier de type png, gif, jpg, jpeg ou pdf.';
                         echo $erreur;
@@ -71,7 +69,6 @@ class InscriptionController extends Controller
             }
     
         } catch (\Exception $e) {
-            throw $e;
             return redirect()->back()->withErrors([$e->getMessage()])->withInput();            
         }
     }
@@ -79,7 +76,7 @@ class InscriptionController extends Controller
     
     public function insertClient(Request $request)
     {
-        $firstname = $request->input('firstname');
+        $firstname = $request->input('name');
         $lastname = $request->input('lastname');
         $phone_number = $request->input('phoneNumber');
         $email = $request->input('email');
@@ -96,7 +93,7 @@ class InscriptionController extends Controller
             $client = new Client($firstname, $lastname, $phone_number, $email, $address, $birth_date, $password, $id_status, 0, $customer_profile);
             $request->session()->put('client', $client);
             if ($password == $confirmed_password) {
-                return view('FOC/sign_next_CIN');
+                return view('FOC/signUpCin');
             } else {
                 $error = "Veuillez Confirmer votre mot de passe";
                 return redirect()->back()->withErrors([$error])->withInput();

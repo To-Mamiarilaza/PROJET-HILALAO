@@ -28,6 +28,7 @@
                             <div class="col-md-3">
                                 <img class="user-picture" src="{{ asset('image/user.jpg') }}" alt="Image de l'utilisateur">
                             </div>
+                            <!-- 0.5 veut dire 50% -->
                             <div class="col-md-8 reservation-detail">
                                 <ul>
                                     <li>Le <span class="important">{{ $reservation->getReservationDate() }}</span> de <span class="important">10:00</span> à <span class="important">11:30</span></li>
