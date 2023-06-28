@@ -2,6 +2,7 @@
 
 namespace App\Models\FOC\GestionTerrain;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class DispoAndPrice
 {
@@ -85,7 +86,7 @@ class DispoAndPrice
         $datas = array();
         $i = 0;
         foreach ($results as $row) {
-            $datas[$i] = new DispoAndPrice($row->id_dispo_and_price, Day::findById($row->id_day),  $row->start_time, $row->end_time, Field::findbyId($row->id_field), $row->price);
+            $datas[$i] = new DispoAndPrice($row->id_dispo_and_price, Day::findById($row->id_day),  DispoAndPrice::formatTime($row->start_time), DispoAndPrice::formatTime($row->end_time), Field::findbyId($row->id_field), $row->price);
             $i++;
         }
         
@@ -97,7 +98,7 @@ class DispoAndPrice
     {
         $results = DB::table('dispo_and_price')->where('id_dispo_and_price', $id)->first();
         
-        return new DispoAndPrice($results->id_dispo_and_price, Day::findById($results->id_day),  $results->start_time, $results->end_time, Field::findById($results->field), $results->price);
+        return new DispoAndPrice($results->id_dispo_and_price, Day::findById($results->id_day),  DispoAndPrice::formatTime($results->start_time), DispoAndPrice::formatTime($results->end_time), Field::findById($results->field), $results->price);
     }
 
     //Sauvegarder une disponibilite et prix dans la base
@@ -153,7 +154,25 @@ class DispoAndPrice
     }
 
     //Verifier si l'heure et date insere s'inclusent
-    public static function checkInsert($dispoAndPrice) {
-        
+    public static function checkInsert($allDisposAndPrice, $dispoAndPrice) {
+        foreach($allDisposAndPrice as $item) {
+            if($dispoAndPrice->getDay()->getIdDay() == $item->getDay()->getIdDay() && DispoAndPrice::getHour($dispoAndPrice->getStartTime()) >= DispoAndPrice::getHour($item->getStartTime()) && DispoAndPrice::getHour($dispoAndPrice->getEndTime()) <= DispoAndPrice::getHour($item->getEndTime())) {
+                return false;
+            }
+        }
+
+        return true;
     } 
+
+    //Extraire l'heure d'un type time
+    public static function getHour($time) {
+        return substr($time, 0, 2);
+    }
+
+    //Formatter le time en heure et minutes
+    public static function formatTime($timeValue)
+    {
+        $time = Carbon::createFromFormat('H:i:s', $timeValue);
+        return $time->format('H:i');
+    }
 }

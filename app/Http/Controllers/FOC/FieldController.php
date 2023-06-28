@@ -260,34 +260,44 @@ class FieldController extends Controller
     }
 
     //Charger la page de disponibilite et prix
-    public function loadPageDispoAndPrice() {
-        $allDispo=DispoAndPrice::getAll();
-
-        /*foreach($allDispo as $item) {
-            echo "day : ".$item->getDay()->getIdDay();
-            echo "StartTime : ".$item->getStartTime();
-            echo "EndTime : ".$item->getEndTime();
-            echo "Price : ".$item->getPrice();
+    public function loadPageDispoAndPrice($error = null) {
+        if(isset($_GET['error'])) {
+            $allDispo=DispoAndPrice::getAll();
+            return view('FOC/disponibility')->with([
+                'dispoAndPrice' => $allDispo,
+                'errorInsert' =>  $_GET['error'],
+            ]);
         }
-      */
-       return view('FOC/disponibility')->with([
-            'dispoAndPrice' => $allDispo,
-        ]);
+        else {
+            $allDispo=DispoAndPrice::getAll();
+            return view('FOC/disponibility')->with([
+                'dispoAndPrice' => $allDispo,
+            ]);
+        }
     }
-    public function insertDiposAndPrice(Request $request) {
-        $field = Session::get('field');
-        $jour = $request->input("jour");
-        $starTime = $request->input("star-time");
-        $endTime = $request->input("end-time");
-        $price = $request->input("price");
-        for($i = 0; $i < count($jour); $i++) {
-            $dispoAndPrice = new DispoAndPrice('default',Day::findById($jour[$i]),$starTime[0],$endTime[0],$field,$price[0]);
-            $dispoAndPrice->create();
-        }
 
-        //supprimer les donnees de la session
-        //Session::forget('field');
-        
+    //Inserer les disponibilites et prix
+    public function insertDiposAndPrice(Request $request) {
+        try{
+            $field = Session::get('field');
+            $jour = $request->input("jour");
+            $starTime = $request->input("star-time");
+            $endTime = $request->input("end-time");
+            $price = $request->input("price");
+            $allDisposAndPrice = DispoAndPrice::getAll();
+            for($i = 0; $i < count($jour); $i++) {
+                $dispoAndPrice = new DispoAndPrice('default',Day::findById($jour[$i]),$starTime[0],$endTime[0],$field,$price[0]);
+                if(DispoAndPrice::checkInsert($allDisposAndPrice,$dispoAndPrice)) {
+                    $dispoAndPrice->create();
+                }
+                else {
+                    throw new Exception("L'emploi du temps pour la disponibilite choisie existe deja");
+                }
+            }
+        }
+        catch(\Exception $e){           
+            return redirect()->route('loadPageDispoAndPriceGet', ['error' =>  $e->getMessage()]);
+        }
         return redirect()->route('loadPageDispoAndPriceGet');
     }
 

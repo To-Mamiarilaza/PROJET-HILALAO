@@ -14,7 +14,8 @@
 			<div class="error">
 				<p style="color: red">{{ $error }}</p>
 			</div>
-		@endisset<div class="hidden-form" id="hidden-form">
+		@endisset
+        <div class="hidden-form" id="hidden-form">
 
 	    @foreach ($dispoAndPrice as $item)
         <div class="group-input">
@@ -40,7 +41,6 @@
         <form action="{{ route('insertDiposAndPrice') }}" class="hidden-form" method="POST" id="send-form">
         @csrf   
         </form>
-
         <div class="parameter-insert mt-5" id="parameter-insert">
             <p class="parameter-title">Choisir les jours concernées</p>
             <div class="row">
@@ -71,6 +71,11 @@
                     </div>
                 </div>
                 <p class="error"> <i class="fas fa-info-circle mx-3"></i> Ce paramètre existe déja</p>
+                @isset($errorInsert)
+                    <div class="error">
+                        <p style="color: red">{{ $errorInsert }}</p>
+                    </div>
+                @endisset
                 <button class="btn btn-info ajout-button mt-3" onclick="addNewParameter()"> <i class="fas fa-plus"></i> Ajouter paramètre </button>
             </div>
         </div>
