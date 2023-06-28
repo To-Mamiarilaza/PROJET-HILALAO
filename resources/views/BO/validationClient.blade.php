@@ -23,29 +23,32 @@
                         <hr>
                     </a>
                 @endforeach
+                    </div>
                 </div>
-            </div>
-        </div>
 
-        {{-- <div class="col-md-6 p-3">
-            <div class="attentes-client">
-                <h2>Listes des terrains en attentes</h2>
-                <div class="listes-client">
+                <div class="col-md-6 p-3">
+                    <div class="attentes-client">
+                        <h2>Listes des terrains en attentes</h2>
+                        <div class="listes-client">
+                        @foreach ($terrains as $terrain)
 
-                    <a href="{{ route('detailClient', ['id_client' => $abonnement->getId_client() ]) }}">
-                        <div class="terrain">
-                            <img src="{{ asset('css/BO/asset/elgeco.jpg') }}" alt="Image du terrain">
-                            <div class="detail-terrain">
-                                <p class="nom">Elgeco Plus</p>
-                                <p class="categorie">Foot à 11</p>
-                            </div>
-                            <p class="date">12/08/23</p>
+                            <a href="{{ route('detailTerrain', ['id_terrain' => $terrain->getId_terrain() ]) }}">
+                                <div class="terrain">
+                                    <img src="{{ asset('css/BO/asset/elgeco.jpg') }}" alt="Image du terrain">
+                                    <div class="detail-terrain">
+                                        <p class="nom">{{ $terrain->getName()}}</p>
+                                        <p class="categorie">{{ $terrain->getCategory() }}</p>
+                                    </div>
+                                    <p class="date">{{ $terrain->getInsert_date()}}</p>
+                                </div>
+                                <hr>
+                            </a>
+                        @endforeach
                         </div>
-                        <hr>
-                    </a>
+                    </div>
                 </div>
             </div>
-        </div> --}}
+          </div>
         </div>
 
         </section>
