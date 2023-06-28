@@ -11,7 +11,7 @@ class TestController extends Controller
     {
         $field = FieldDetailled::sFindById(3);
         foreach ($field->getAvailability() as $key) {
-            var_dump($key->getDay());
+            var_dump($key->getUnavailability());
             echo "<br>";
         }
         return view('FOU\empty');
