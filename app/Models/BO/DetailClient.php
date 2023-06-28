@@ -9,12 +9,13 @@ class DetailClient
     private $last_name;
     private $phone_number;
     private $mail;
-    private $address;
+    private $adress;
     private $birth_date;
     private $sign_up_date;
     private $cin_number;
     private $first_picture;
     private $second_picture;
+    private $nombre_terrains;
 
     public function getFirst_name() {
         return $this->first_name;
@@ -44,11 +45,11 @@ class DetailClient
         $this->mail = $value;
     }
 
-    public function getAddress() {
-        return $this->address;
+    public function getAdress() {
+        return $this->adress;
     }
-    public function setAddress($value) {
-        $this->address = $value;
+    public function setAdress($value) {
+        $this->adress = $value;
     }
 
     public function getBirth_date() {
@@ -86,6 +87,13 @@ class DetailClient
         $this->second_picture = $value;
     }
 
+    public function getNombre_terrains() {
+        return $this->nombre_terrains;
+    }
+    public function setNombre_terrains($value) {
+        $this->nombre_terrains = $value;
+    }
+
 
     //client en attente
     public function getDetailClient($id_client){
@@ -104,7 +112,7 @@ class DetailClient
                 $temp->setLast_name($result->last_name);
                 $temp->setPhone_number($result->phone_number);
                 $temp->setMail($result->mail);
-                $temp->setAddress($result->address);
+                $temp->setAdress($result->address);
                 $temp->setBirth_date($result->birth_date);
                 $temp->setSign_up_date($result->sign_up_date);
                 $temp->setCin_number($result->cin_number);
@@ -112,6 +120,41 @@ class DetailClient
                 $temp->setSecond_picture($result->second_picture);
                 return $temp;
             }
+        }catch(Exception $e){
+            throw new Exception("Impossible d'avoir ");
+        }
+    }
+
+    public function getDetailClients(){
+        try{
+            $detail = "select c.first_name, c.last_name, c.phone_number, c.mail, c.address, c.birth_date, c.sign_up_date, cin.cin_number, cin.first_picture, cin.second_picture
+            ,count(field.id_client) as nombre_field
+            from client c
+            join cin on cin.id_cin = c.id_cin 
+            join field on field.id_client = c.id_client
+            group by c.id_client,cin.cin_number, cin.first_picture, cin.second_picture";
+
+            $details = DB::select($detail);
+            $res = array();
+            
+            if (count($details) > 0) {
+                foreach ($details as $result) {
+                    $temp = new DetailClient();
+                    $temp->setFirst_name($result->first_name);
+                    $temp->setLast_name($result->last_name);
+                    $temp->setPhone_number($result->phone_number);
+                    $temp->setMail($result->mail);
+                    $temp->setAdress($result->address);
+                    $temp->setBirth_date($result->birth_date);
+                    $temp->setSign_up_date($result->sign_up_date);
+                    $temp->setCin_number($result->cin_number);
+                    $temp->setFirst_picture($result->first_picture);
+                    $temp->setSecond_picture($result->second_picture);
+                    $temp->setNombre_terrains($result->nombre_field);
+                    $res[] = $temp;
+                }
+            }
+            return $res;
         }catch(Exception $e){
             throw new Exception("Impossible d'avoir ");
         }

@@ -72,78 +72,19 @@
                     <div class="list-client">
                         <h2>Listes des clients</h2>
                         <div class="list-container">
-
-                            <a href="">
-                                <div class="client mt-2">
-                                    <div class="image">
-                                        <img src="./asset/client.png" alt="Image du client">
+                            @foreach($clients as $client)
+                                <a href="">
+                                    <div class="client mt-2">
+                                        <div class="image">
+                                            <img src="{{ asset('css/BO/asset/client.png') }}" alt="Image du client">
+                                        </div>
+                                        <div class="detail-client">
+                                            <p class="name">{{ $client->getFirst_name() }}</p>
+                                            <p class="terrain">Nombre de terrain : <span class="number">{{ $client->getNombre_terrains()}}</span></p>
+                                        </div>
                                     </div>
-                                    <div class="detail-client">
-                                        <p class="name">Andry FINIAVANA</p>
-                                        <p class="terrain">Nombre de terrain : <span class="number">4</span></p>
-                                    </div>
-                                </div>
-                            </a>
-
-                            <a href="">
-                                <div class="client mt-2">
-                                    <div class="image">
-                                        <img src="./asset/client.png" alt="Image du client">
-                                    </div>
-                                    <div class="detail-client">
-                                        <p class="name">Andry FINIAVANA</p>
-                                        <p class="terrain">Nombre de terrain : <span class="number">4</span></p>
-                                    </div>
-                                </div>
-                            </a>
-
-                            <a href="">
-                                <div class="client mt-2">
-                                    <div class="image">
-                                        <img src="./asset/client.png" alt="Image du client">
-                                    </div>
-                                    <div class="detail-client">
-                                        <p class="name">Andry FINIAVANA</p>
-                                        <p class="terrain">Nombre de terrain : <span class="number">4</span></p>
-                                    </div>
-                                </div>
-                            </a>
-
-                            <a href="">
-                                <div class="client mt-2">
-                                    <div class="image">
-                                        <img src="./asset/client.png" alt="Image du client">
-                                    </div>
-                                    <div class="detail-client">
-                                        <p class="name">Andry FINIAVANA</p>
-                                        <p class="terrain">Nombre de terrain : <span class="number">4</span></p>
-                                    </div>
-                                </div>
-                            </a>
-
-                            <a href="">
-                                <div class="client mt-2">
-                                    <div class="image">
-                                        <img src="./asset/client.png" alt="Image du client">
-                                    </div>
-                                    <div class="detail-client">
-                                        <p class="name">Andry FINIAVANA</p>
-                                        <p class="terrain">Nombre de terrain : <span class="number">4</span></p>
-                                    </div>
-                                </div>
-                            </a>
-
-                            <a href="">
-                                <div class="client mt-2">
-                                    <div class="image">
-                                        <img src="./asset/client.png" alt="Image du client">
-                                    </div>
-                                    <div class="detail-client">
-                                        <p class="name">Andry FINIAVANA</p>
-                                        <p class="terrain">Nombre de terrain : <span class="number">4</span></p>
-                                    </div>
-                                </div>
-                            </a>
+                                </a>
+                            @endforeach
 
                         </div>
                     </div>
