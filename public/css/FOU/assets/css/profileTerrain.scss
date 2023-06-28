@@ -1,4 +1,5 @@
 $primary-color: #e17b36;
+$background-primaryColor: #ffebb9;
 $secondary-color: #2A1F1D;
 $troisieme-color:#ebece8;
 $font: Helvetica;
@@ -74,121 +75,139 @@ body{
 }
 
 .booking{
-    margin-top: 2%;
-    height:159px;
-    // border : 1px $border-color solid;
+  margin-top: 2%;
+  height: 320px;
+  margin-left: 0%;
+  margin-right: 0%;
+  width: 60%;
+    hr{
+      background-color: $primary-color;  
+      
+    }
     &-title{
-        height: 8%;
-        width: 100%
+        height: 10%;
+        width: 100%;
+        color: $primary-color;
     }
     &-date{
-        width: 96%;
-        height: 100%;
-        display: flex;
-        flex-wrap: nowrap;
-        overflow-y: scroll;
-        margin-left: 7px;
-    }
-}
-
-.creneau{
-    height: 42px;
-    // background-color: #2A1F1D;
-    width: 100%;
-  
-    &-title{
-        
-    }
-    &-horraire{
-        // border: 1px $border-color solid;
-        height: 100%;
+        height: 90%;
         margin-top: -1%;
-        display: flex;
-        flex-wrap: nowrap;
-        overflow-y: scroll;
-        width: 82%;
+        &-disponibilite{
+          height: 100%;
+          // border : 1px $border-color solid;
+          margin-left: 0;
+          &-title{
+            height: 10%;
+            margin-left: -1;
+            // border : 1px $border-color solid;
+          }
+          &-allDate{
+            height: 90%;
+            margin-left: 0;
+            // border : 1px $border-color solid;
+            margin-left: -3%;
+          }
+        }
+        &-creneau{
+          height: 100%;
+          // border : 1px $border-color solid;
+            &-title{
+            height: 10%;
+            color: $primary-color;
+            // border : 1px $border-color solid;
+          }
+          &-horraire{
+            // height: 100%;
+            margin: auto;
+            text-align: left;
+            &-plageHorrairePrice{
+              height: 10%;
+              margin-top: 2%;
+            }
+            &-plageHorraireMarginTop{
+              height: 10%;
+            }
+            // border : 1px $border-color solid;
+          }
+        }
     }
 }
 
 
-.bouton-confirmation {
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    text-align: center;
-    text-decoration: none;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 4px;
+.plageHorraire {
+  display: inline-block;
+    padding: 5px 20px;
+    border: 1px black solid;
+    border-radius: 6px;
     cursor: pointer;
-    width: 10%;
-    margin-left: 87%;
+    font-size: 73%;
+    width: 36%;
+    height: 100%;
+    margin-right: 2%;
 
-   
-  }
-  
-  .bouton-confirmation:hover {
-    background-color: #45a049;
-  }
-  
-  .bouton-confirmation:active {
-    background-color: #3e8e41;
-  }
-  
-
-
-
-//css specifie
-
-
-.custom-div {
-    display: inline-block;
-    background-color: lightgray;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
-    width: 22%;
-    margin-top: -3%;
-    margin-left: -8%;
-    text-align: center;
-  }
-
-.custom-div.active {
-background-color: $primary-color;
-color: white;
 }
 
-.horraire-div {
-    border: 1px solid black;
-    padding: 10px;
-    color: black;
+.plageHorraire:hover {
+  background-color: #ffca3a;
+  color: #ff8800;
+  border: 1px solid #ff8800;
+  filter: blur(2px);
+}
+
+.plageHorraire.active {
+  background-color: #fff000;
+  color: #ff8800;
+  border: 1px solid #ff8800;
+}
+
+.price{
+  // border: 1px $border-color solid;
+  margin-left: 12%;
+  font-size: small;
+  padding: 2%;
+  i{
+    color: $border-color;
+    font-size: 100%;
+  }
+}
+
+.unDate{
+  margin-left: -1%;
+  margin-top: 2%;
+  // border-bottom: 1px $border-color solid;
+  height: 10%;
+}
+
+.name-list {
     border-radius: 5px;
-    cursor: pointer;
-    transition: border 0.3s, color 0.3s ;
-    margin-right: 1%;
-    
-  }
-  
-  .horraire-div.active {
-    // background-color: red;
-    color: $primary-color;
-    border: 1px $primary-color solid;
-    font-weight: bold;
-  }
-  
+    max-width: 400px;
+    margin-top: 3%;
 
- 
+}
 
-  .calendrier {
-    margin-left: -19%;
-  }
 
-  .hrSpecifique{
-    margin-top: -6px;
-    margin-left: 1%;
-    margin-right: -38%;
-    width: 96%;
-  }
+
+.name-list ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.name-list li {
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #666;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 96%;
+}
+
+.name-list li:hover {
+  background-color: $background-primaryColor;
+  color: $primary-color;
+}
+
+.name-list li.active {
+  background-color: $background-primaryColor;
+  color:$primary-color;
+}

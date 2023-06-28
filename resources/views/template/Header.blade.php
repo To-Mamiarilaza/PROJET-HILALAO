@@ -1,27 +1,32 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light px-5">
-    <div class="container-fluid px-5 mx-5">
-        <a class="navbar-brand logo" href="{{ route('landing') }}">HILALAO</a>
-        <div class="collapse navbar-collapse mx-5" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0 liens">
-                <li class="nav-item mx-2">
-                    <a class="nav-link active" aria-current="page" href="{{ route('landing') }}">Accueil</a>
-                </li>
-                <li class="nav-item mx-2">
-                    <a class="nav-link" href="{{ route('list-field-all') }}">Terrains</a>
-                </li>
-                <li class="nav-item mx-2">
-                    <a class="nav-link" href="">Mes réservations</a>
-                </li>
-                <li class="nav-item mx-2">
-                    <a class="nav-link" href="#">Communauté</a>
-                </li>
-                <li class="nav-item mx-2">
-                    <a class="nav-link" href="">Mon Compte</a>
-                </li>
-                <li class="nav-item mx-2">
-                    <a class="nav-link" href="{{ route('log-user') }}">Se Connecter</a>
-                </li>
-            </ul>
+<?php
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ asset('css/FOU/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/FOU/assets/css/Template/newHeader.css') }} ">
+    <link rel="stylesheet" href="{{ asset('css/FOU/assets/css/SpecifiedCss/specified.css') }} ">
+    <link rel="stylesheet" href="{{ asset('css/FOU/assets/css/listTerrainModif.css') }} ">
+    <link rel="stylesheet" href="{{ asset('css/FOU/assets/css/carte.css')}}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <title>Document</title>
+</head>
+<style>
+    
+  </style>
+
+<body>
+    <div class="row fix">
+        <div class="header">
+            <div class="header-logo">
+                <h3>HILALAO<h3>
+            </div>
         </div>
     </div>
 </nav>
