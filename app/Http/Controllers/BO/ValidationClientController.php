@@ -3,7 +3,7 @@ namespace App\Http\Controllers\BO;
 
 use App\Models\BO\Abonnement;
 use App\Models\BO\Category;
-use App\Models\BO\DetailClient;
+use App\Models\BO\DetailTerrain;
 use App\Models\BO\ValidationClient;
 use Exception;
 use App\Http\Controllers\Controller;
@@ -17,9 +17,11 @@ class ValidationClientController extends Controller
     {
         $validation = new ValidationClient();
         $all = $validation->getPendingClient();
+        $terrain = new DetailTerrain();
+        $terrains = $terrain->getDetailTerrains();
 
         return view('BO.validationClient', [
-            'all' => $all
+            'all' => $all,'terrains' => $terrains
         ]);
     }
 }

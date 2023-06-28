@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Controllers\BO\AbonnementController;
 use App\Http\Controllers\BO\DetailClientController;
+use App\Http\Controllers\BO\DetailTerrainController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +48,18 @@ Route::get('/ValidationClient', [ValidationClientController::class,
 Route::get('/DetailClient/{id_client}', [DetailClientController::class,
     'detailClient']
 )->name('detailClient');
+
+Route::get('/DetailTerrain/{id_terrain}', [DetailTerrainController::class,
+    'detailTerrain']
+)->name('detailTerrain');
+
+Route::get('/ListeTerrain', [DetailTerrainController::class,
+    'all']
+)->name('list_field');
+
+Route::get('/DetailTerrain/{variable}/{id_terrain}', [DetailTerrainController::class,
+    'update']
+)->name('update_status');
 
 Route::get('/sign', function () {
     return view('BO/sign');
