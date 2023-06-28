@@ -49,8 +49,8 @@ Route::get('/home-client', function() {
 });
 
 // ---------------------------------------
-Route::get('/edit', function() {
-    return view('FOC/edit');
+Route::get('/profilClient', function() {
+    return view('FOC/profilClient');
 });
 // ---------------------------------------
 
