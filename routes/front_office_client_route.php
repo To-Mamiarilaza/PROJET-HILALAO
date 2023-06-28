@@ -73,3 +73,14 @@ Route::POST('/getInfosAdress', [FieldController::class, 'getInfosAdress'])
 Route::get('/disponibility', function () {
     return view('FOC/disponibility');
 });
+
+Route::POST('/insertDispoAndPrice', [FieldController::class, 'insertDiposAndPrice'])
+->name('insertDiposAndPrice');
+
+Route::GET('/loadPageDispoAndPriceGet', [FieldController::class, 'loadPageDispoAndPrice'])
+->name('loadPageDispoAndPriceGet');
+
+Route::POST('/loadPageDispoAndPricePost', [FieldController::class, 'loadPageDispoAndPrice'])
+->name('loadPageDispoAndPricePost');
+
+Route::GET('/deleteDisponibility', [FieldController::class, 'deleteDisponibility']);

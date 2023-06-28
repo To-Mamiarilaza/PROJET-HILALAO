@@ -189,7 +189,7 @@ class Field {
     //Sauvegarder un terrain dans la base
     public function create($client)
     {
-        $req = "INSERT INTO field VALUES ( %s, %d, %d, '%s', %d, %d, %d, '%s', %d, %d, %d, '%s', '%s')";
+        $req = "INSERT INTO field VALUES ( %s, %d, %d, '%s', %d, %d, %d, '%s', '%s', %f, %f, '%s', '%s')";
         $req = sprintf($req,$this->id_field,$this->category->getIdCategory(),$this->client->getIdClient(),$this->name,$this->field_type->getIdFieldType(),$this->infrastructure->getIdInfrastructure(),$this->light->getIdLight(),$this->description,$this->address,$this->latitude,$this->longitude, $this->insert_date, $this->field_files);
         DB::insert($req);
         $field = Field::getLastInsertFieldByClient($client);
@@ -262,8 +262,5 @@ class Field {
 
         return $fields;
     }
-
-    
-
 }
 ?>

@@ -9,10 +9,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Exceptions\ClientExceptionHandler;
 use App\Models\FOC\GestionTerrain\Category;
+use App\Models\FOC\GestionTerrain\DispoAndPrice;
 use App\Models\FOC\GestionTerrain\FieldType;
 use App\Models\FOC\GestionTerrain\Infrastructure;
 use App\Models\FOC\GestionTerrain\Light;
 use App\Models\FOC\GestionTerrain\PictureField;
+use App\Models\FOC\GestionTerrain\Day;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Http;
 use Carbon\Carbon;
@@ -41,6 +43,7 @@ class FieldController extends Controller
         $field = Field::findById($idField);
         $profilePictureField = PictureField::getPictureProfile($field);
         $secondPicture = PictureField::getSecondPictureField($field);
+        Session::put('field', $field);
         return view('FOC/profile-field')->with([
             'field' => $field,
             'profilePicture' => $profilePictureField,
@@ -256,5 +259,58 @@ class FieldController extends Controller
         return redirect()->route('profile-field', ['idField' => $pictureNow->getField()->getIdField()]);
     }
 
+    //Charger la page de disponibilite et prix
+    public function loadPageDispoAndPrice() {
+        $allDispo=DispoAndPrice::getAll();
+
+        /*foreach($allDispo as $item) {
+            echo "day : ".$item->getDay()->getIdDay();
+            echo "StartTime : ".$item->getStartTime();
+            echo "EndTime : ".$item->getEndTime();
+            echo "Price : ".$item->getPrice();
+        }
+      */
+       return view('FOC/disponibility')->with([
+            'dispoAndPrice' => $allDispo,
+        ]);
+    }
+    public function insertDiposAndPrice(Request $request) {
+        $field = Session::get('field');
+        $jour = $request->input("jour");
+        $starTime = $request->input("star-time");
+        $endTime = $request->input("end-time");
+        $price = $request->input("price");
+        for($i = 0; $i < count($jour); $i++) {
+            $dispoAndPrice = new DispoAndPrice('default',Day::findById($jour[$i]),$starTime[0],$endTime[0],$field,$price[0]);
+            $dispoAndPrice->create();
+        }
+
+        //supprimer les donnees de la session
+        //Session::forget('field');
+        
+        return redirect()->route('loadPageDispoAndPriceGet');
+    }
+
+    //Supprimer une disponibilite
+    public function deleteDisponibility() {
+        try{
+           
+            $disposSame = DispoAndPrice::getDisposSame($_GET['start'], $_GET['end'], $_GET['price']);
+            if($disposSame != null) {
+                foreach($disposSame as $item) {
+                    $item->delete();
+                }
+                return redirect()->route('loadPageDispoAndPriceGet');
+            }
+            else {
+                throw new Exception("Erreur : disponibilite est null");
+            }
+        }
+        catch(\Exception $e){
+            echo $e->getMessage();           
+        }
+
+        
+    }
 }
 ?>
