@@ -8,7 +8,6 @@ use App\Models\FOU\FieldDetailled;
 use App\Models\FOU\Category;
 use App\Models\FOU\Field;
 use Illuminate\Http\Request;
-use App\Models\FOU\ListField;
 use App\Models\FOU\InfoField;
 
 class FieldController extends Controller

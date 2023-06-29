@@ -9,13 +9,13 @@
     var calendarEl = document.getElementById('calendar');
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
-      initialDate: '{{ date('Y-m-d') }}',
-      initialView: 'timeGridWeek',
+      initialDate: '{{ $date }}',
+      initialView: 'timeGridDay',
       nowIndicator: false,
       headerToolbar: {
         left: 'prev,next today',
         center: 'title',
-        right: 'dayGridMonth,timeGridWeek,timeGridDay'
+        right: 'timeGridDay'
       },
       navLinks: false, // can click day/week names to navigate views
       editable: false,
@@ -23,10 +23,6 @@
       selectMirror: true,
       dayMaxEvents: true, // allow "more" link when too many events
       events: [
-        {
-          title: 'Disponibilité du terrain',
-          start: '2023-01-01',
-        },
         @foreach ($field->getUsersReservations() as $reservation)
         {
             color: 'green',
@@ -86,10 +82,7 @@
     <form action="{{ route('reserve') }}" method="POST">
         @csrf
         <input type="hidden" name="id_field" value="{{ $field->getIdField() }}">
-        <div>
-            <label for="day">Date de la réservation</label>
-            <input type="date" name="reservation_date" id="">
-        </div>
+        <input type="hidden" name="reservation_date" value="{{ $date }}">
         <div>
             <label for="start_time">Début</label>
             <input type="time" name="start_time" id="">

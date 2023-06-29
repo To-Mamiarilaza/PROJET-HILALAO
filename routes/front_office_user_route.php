@@ -9,7 +9,8 @@ use App\Http\Controllers\FOU\TestController;
 
 Route::get('/list-field/{id_category}', [FieldController::class, 'index'])->name('list-field');
 Route::get('/list-field', [FieldController::class, 'index'])->name('list-field-all');
-Route::get('/calendar/{id_field}', [ReservationController::class, 'index'])->name('reserve');
+Route::get('/field/calendar/{id_field}', [ReservationController::class, 'index'])->name('reserve');
+Route::get('/field/calendar/{id_field}/{date}', [ReservationController::class, 'index'])->name('reserve-date');
 Route::post('/reserve', [ReservationController::class, 'reserve'])->name('reserve');
 Route::get('/info-field/{id_field}', [InfoTerrain::class, 'index'])->name('info-field');
 Route::get('/carte', [InfoTerrain::class, 'afficheCarte']);

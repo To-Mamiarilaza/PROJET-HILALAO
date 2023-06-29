@@ -8,12 +8,15 @@ use App\Models\FOU\Reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
-
+use DateTime;
 
 class ReservationController extends Controller
 {
-    public function index($id_field)
+    public function index($id_field, $date = null)
     {
+        if ($date === null) {
+            $date = date('Y-m-d');
+        }
         $users = null;
         if (Session::get("user") !== null) {
             $users = Session::get("user");
@@ -21,7 +24,7 @@ class ReservationController extends Controller
         } else {
             $field = FieldUser::findReservation($id_field);
         }
-        return view('FOU\calendar' , ['field' => $field]);
+        return view('FOU\calendar' , ['field' => $field], ['date' => $date]);
     }
 
     public function reserve(Request $request) {
@@ -35,6 +38,6 @@ class ReservationController extends Controller
         $duration = $request->input('duration');
         $reservation = Reservation::prepareReservation($id_field, $id_users, $reservation_date, $start_time, $duration);
         $reservation->save();
-        return redirect('calendar/'.$id_field);
+        return redirect('/field/calendar/'.$id_field.'/'.$reservation_date);
     }
 }

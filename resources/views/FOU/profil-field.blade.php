@@ -78,7 +78,9 @@
                 <div class="row booking-date-creneau-horraire">
                     @foreach ($availability as $item)
                     <div class="row booking-date-creneau-horraire-plageHorrairePrice">
-                        <div class="col-md-6 plageHorraire">{{ $item->getStartTime()->format('H') }}h{{ $item->getStartTime()->format('i') }} - {{ $item->getEndTime()->format('H') }}h{{ $item->getEndTime()->format('i') }}</div>
+                        <a href="/field/calendar/{{ $field->getIdField() }}/{{ $item->getDay()->format('Y-m-d') }}">
+                            <div class="col-md-6 plageHorraire">{{ $item->getStartTime()->format('H') }}h{{ $item->getStartTime()->format('i') }} - {{ $item->getEndTime()->format('H') }}h{{ $item->getEndTime()->format('i') }}</div>
+                        </a>
                         <div class="col-md-6 price"> {{ $item->getPrice() }} Ar</div>
                     </div>
                     @endforeach
