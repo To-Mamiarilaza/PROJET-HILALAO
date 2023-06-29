@@ -16,6 +16,7 @@ class DetailTerrain
     private $id_terrain;
     private $description;
     private $months;
+    private $picture;
 
     public function getFirst_name() {
         return $this->first_name;
@@ -92,6 +93,13 @@ class DetailTerrain
     }
     public function setCategory($value) {
         $this->category = $value;
+    }
+
+    public function getPicture() {
+        return $this->picture;
+    }
+    public function setPicture($value) {
+        $this->picture = $value;
     }
 
     //terrain en attente
@@ -238,4 +246,30 @@ class DetailTerrain
         }
     }
 
+    public function findByClient($id_client) {
+        try{
+            $requette = "SELECT f.id_field, name, category, p.picture from field f
+            join category c on f.id_category = c.id_category 
+            join client cl on f.id_client = cl.id_client
+            join picture p on f.id_field = p.id_picture
+            where cl.id_client = ".$id_client;
+
+            $field = DB::select($requette);
+            $res = array();
+
+            if(count($field) > 0){
+                foreach($field as $result){
+                    $temp = new DetailTerrain();
+                    $temp->setId_terrain($result->id_terrain);
+                    $temp->setName($result->name);
+                    $temp->setCategory($result->category);
+                    $temp->setPicture($result->picture);
+                    $res[] = $temp;
+                }
+            }
+            return $res;
+        } catch(Exception $e){
+            $e->getMessage();
+        }
+    }
 }

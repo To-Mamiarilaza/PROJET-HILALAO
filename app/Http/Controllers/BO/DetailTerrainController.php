@@ -48,4 +48,13 @@ class DetailTerrainController extends Controller
             'month' => $month->getMonths()
         ]);
     }
+
+    public function fieldByClient($id_client){
+        $field = new DetailTerrain();
+        $all = $field->findByClient($id_client);
+
+        return view('BO.fieldFromClient', [
+            'field' => $all
+        ]);
+    }
 }
