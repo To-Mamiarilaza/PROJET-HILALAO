@@ -41,12 +41,6 @@
   padding-left: 30px;
   padding-right: 30px;
 }
-.client-profile .detail-client .information .accepted-text {
-  color: green;
-}
-.client-profile .detail-client .information .refused-text {
-  color: green;
-}
 
 .attentes-client {
   background-color: white;

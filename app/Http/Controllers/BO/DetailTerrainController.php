@@ -79,7 +79,7 @@ class DetailTerrainController extends Controller
         $all = $field->findByClient($id_client);
 
         return view('BO.fieldFromClient', [
-            'field' => $all
+            'all' => $all
         ]);
     }
 }

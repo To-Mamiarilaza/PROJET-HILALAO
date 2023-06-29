@@ -14,27 +14,25 @@
                 <div class="client-profile">
                     <div class="detail-client">
                         <div class="image">
-                            <img src="./asset/client.png" alt="Image du profile du client">
+                            <img src="{{ asset('css/BO/asset/client.png') }}" alt="Image du profile du client">
                             <hr>
                             <div class="cin-image mt-3">
-                                <img src="./asset/carte-identite.jpg" alt="Photo du CIN avant">
-                                <img src="./asset/carte-identite.jpg" alt="Photo du CIN arrière">
+                                @foreach ($all as $personne)
+                                @endforeach
+                                <img src="{{ asset('css/BO/image/' . $personne->getFirst_picture()) }}" alt="Photo du CIN avant">
+                                <img src="{{ asset('css/BO/image/' . $personne->getSecond_picture()) }}" alt="Photo du CIN arrière">
                             </div>
 
                         </div>
                         <div class="information">
-                            <ul>
-                                <li><span>Nom :</span>MAMIARILAZA</li>
-                                <li><span>Prenom :</span>To Niasimandimby</li>
-                                <li><span>Adresse :</span>Iavoloha 238 bis</li>
-                                <li><span>Mail :</span>mamiarilaza.to@gmail.com</li>
-                                <li><span>Contact :</span>034 14 517 43</li>
-                                <li><span>N° CIN :</span>117 125 432 156</li>
-                            </ul>
-                            <div class="decision mt-4"> 
-                                <a href="" class="btn btn-warning">Valider</a>
-                                <a href="" class="btn btn-danger mx-2">Refuser</a>
-                            </div>
+                                <ul>
+                                    <li><span>Nom :</span> {{ $personne->getFirst_name() }} </li>
+                                    <li><span>Prenom :</span> {{ $personne->getLast_name() }} </li>
+                                    <li><span>Adresse :</span> {{ $personne->getAdress() }} </li>
+                                    <li><span>Mail :</span> {{ $personne->getMail() }} </li>
+                                    <li><span>Contact :</span> {{ $personne->getPhone_number() }} </li>
+                                    <li><span>N° CIN :</span> {{ $personne->getCin() }} </li>
+                                </ul>
                         </div>
                     </div>
                 </div>
@@ -44,30 +42,20 @@
                 <div class="attentes-client">
                     <h2>Listes des terrains du client</h2>
                     <div class="listes-client">
+                        @foreach ($all as $terrain)
 
                         <a href="">
                             <div class="terrain">
-                                <img src="./asset/elgeco.jpg" alt="Image du terrain">
+                                <img src="{{ asset('css/BO/image/' . $terrain->getPicture()) }}" alt="Image du terrain">
                                 <div class="detail-terrain">
-                                    <p class="nom">Elgeco Plus</p>
-                                    <p class="categorie">Foot à 11</p>
+                                    <p class="nom"> {{ $terrain->getName() }} </p>
+                                    <p class="categorie"> {{ $terrain->getCategory() }} </p>
                                 </div>
-                                <p class="date">12/08/23</p>
+                                <p class="date"> {{ $terrain->getSign() }} </p>
                             </div>
                             <hr>
                         </a>
-
-                        <a href="">
-                            <div class="terrain">
-                                <img src="./asset/elgeco.jpg" alt="Image du terrain">
-                                <div class="detail-terrain">
-                                    <p class="nom">Stade de bevalala</p>
-                                    <p class="categorie">Foot à 11</p>
-                                </div>
-                                <p class="date">27/05/23</p>
-                            </div>
-                            <hr>
-                        </a>
+                        @endforeach
 
                     </div>
                 </div>
