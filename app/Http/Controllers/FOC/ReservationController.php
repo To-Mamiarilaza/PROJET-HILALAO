@@ -86,8 +86,6 @@ class ReservationController extends Controller
         $duration = $request->input('duration');
         $data = Session::get('field');
         try {
-            //$id_direct_reservation, $reservation_date, $client_name, $start_time, $id_field, $duration, $phone_number_client
-            /* le 1 faharoa id anle terrain mbola tokony amboarina eo am affichage */
             $reservationDirect = new DirectReservation(1, $date_reservation, $nom_client, $heure_debut, $data->getIdField(), $duration, $telephone_client);
             $reservationDirect->create();
             return $this->getAllReservation();
