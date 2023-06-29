@@ -61,7 +61,7 @@
             <div class="col-md-6 booking-date-disponibilite">
                 <div class="row booking-date-disponibilite-title">
                     <h7>Choisir la Date</h7>
-                </div>  
+                </div>
                 <div class="row booking-date-disponibilite-allDate">
                     <div class="name-list">
                         <ul>
@@ -73,7 +73,7 @@
                             <li>Mer 01  Juin </li>
                         </ul>
                     </div>
-                </div>      
+                </div>
             </div>
             <div class="col-md-6 booking-date-creneau">
                 <div class="row booking-date-creneau-title">
@@ -113,8 +113,8 @@
                         </div>
                     </div>
                 </div>
-            </div>         
-        </div> 
+            </div>
+        </div>
     </div>
 
     <!-- <div class="row booking">

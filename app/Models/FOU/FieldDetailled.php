@@ -18,6 +18,7 @@ class FieldDetailled extends Field{
         parent::__construct();
     }
 
+
     public static function filtre($id_category = '%', $id_infrastructure_array = [], $id_field_type_array = [], $id_light_array = [] , $date_reservation = null, $time = null , $tri = 'asc') {
         $sql = FieldDetailled::filtreQuery($id_category, $id_field_type_array, $id_light_array, $id_infrastructure_array, $date_reservation, $time , $tri);
         $fields = FieldDetailled::executingArrayQuery($sql);
@@ -105,17 +106,21 @@ class FieldDetailled extends Field{
         return FieldDetailled::executingArrayQuery($sql);
     }
 
-    public function findById($id) {
+    public function findById($id, $date = null) {
         $sql = "SELECT id_field, id_category, category, subscribing_price, id_client, name, id_field_type, field_type, id_infrastructure, infrastructure, id_light, light, description, address, latitude, longitude, insert_date, field_files FROM v_field_detailled WHERE id_field=%s";
         $sql = sprintf($sql, $id);
         $this->executingQuery($sql);
     }
 
-    public static function sfindById($id) {
+    public static function sfindById($id, $date = null) {
         $model = new FieldDetailled();
         $sql = "SELECT id_field, id_category, category, subscribing_price, id_client, name, id_field_type, field_type, id_infrastructure, infrastructure, id_light, light, description, address, latitude, longitude, insert_date, field_files FROM v_field_detailled WHERE id_field=%s";
         $sql = sprintf($sql, $id);
-        $model->executingQuery($sql);
+        $field_db = DB::select($sql);
+        if (count($field_db) != 0) {
+            $model->settingDBResult($field_db[0]);
+            if ($date != null) $model->setAvailability(Availability::findByIdField($id, $date));
+        }
         return $model;
     }
 

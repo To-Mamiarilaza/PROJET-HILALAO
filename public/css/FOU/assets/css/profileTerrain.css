@@ -120,16 +120,13 @@ body {
 }
 
 .plageHorraire:hover {
-  background-color: #ffca3a;
-  color: #ff8800;
-  border: 1px solid #ff8800;
-  filter: blur(2px);
+  color: #e17b36;
+  border: 1px rgb(187, 187, 187) solid;
 }
 
 .plageHorraire.active {
-  background-color: #fff000;
-  color: #ff8800;
-  border: 1px solid #ff8800;
+  color: #e17b36;
+  border: 1px rgb(187, 187, 187) solid;
 }
 
 .price {
