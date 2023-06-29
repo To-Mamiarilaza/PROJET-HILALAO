@@ -3,43 +3,44 @@ namespace App\Http\Controllers\FOC;
 
     use App\Models\FOC\GestionClient\Client;
     use App\Models\FOC\GestionClient\Cin;
+    use App\Models\FOC\GestionClient\Status;
     use Illuminate\Http\Request;
     use App\Http\Controllers\Controller;
     use Illuminate\Support\Facades\Storage;
 
 class InscriptionController extends Controller
 {
+    //Inserer cin
     public function insertCIN(Request $request)
     {
         $cinNumber = $request->input('cinNumber');
         $picRecto = $this->upload($request, 'picRecto', 'image/CIN');
         $picVerso = $this->upload($request, 'picVerso', 'image/CIN');
-        //echo $picRecto;
 
         if ($picRecto && $picVerso) {
-            //echo $picRecto;
-            //echo $picVerso;
             try {
-                $cin = new Cin($cinNumber, $picRecto, $picVerso);
+                $cin = new Cin('default',$cinNumber, $picRecto, $picVerso);
                 $cin->create();
-                //echo $cin->getFirstPicture();
 
-                $lastId = $cin->lastCinId();
+                $lastCin = $cin->lastCinId();
                 $client = $request->session()->get('client');
-                $client->setCin($lastId);
+                $client->setCin($lastCin);
                 $client->create();
                 return view('FOC/ProfilClient', ['client' => $client, 'cin' => $cin]);
             } catch (\Exception $e) {
                 $error = $e->getMessage();
+                echo $error;
                 return redirect()->back()->withErrors([$error])->withInput();
             }
         } else {
             // Gérer l'erreur de téléchargement des fichiers ici
             $error = 'Erreur lors du téléchargement des fichiers CIN.';
+            echo $error;
             return redirect()->back()->withErrors([$error])->withInput();
         }
     }
 
+    //Uploaedr un fichier
     public function upload(Request $request, $name, $cheminDestination)
     {
         try {
@@ -73,7 +74,7 @@ class InscriptionController extends Controller
         }
     }
     
-    
+    //Inserer client
     public function insertClient(Request $request)
     {
         $firstname = $request->input('name');
@@ -86,11 +87,11 @@ class InscriptionController extends Controller
         $confirmed_password = $request->input('confirmed_password');
         //dd($request->all());
         $customer_profile = $this->upload($request, 'profilPicture', 'image/Client');
-        $id_status = 2;
+        $status = Status::findById(2);
         //$id_cin = null;
 
         try {
-            $client = new Client($firstname, $lastname, $phone_number, $email, $address, $birth_date, $password, $id_status, 0, $customer_profile);
+            $client = new Client('default',$firstname, $lastname, $phone_number, $email, $address, $birth_date, $password, $status, 0, $customer_profile);
             $request->session()->put('client', $client);
             if ($password == $confirmed_password) {
                 return view('FOC/signUpCin');

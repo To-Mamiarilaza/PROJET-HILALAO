@@ -10,8 +10,9 @@ class Cin
     private $first_picture;
     private $second_picture;
 
-    public function __construct($cin_number,$first_picture,$second_picture)
+    public function __construct($id_cin,$cin_number,$first_picture,$second_picture)
     {
+        $this->id_cin = $id_cin;
         $this->setCinNumber($cin_number);
         $this->setFirstPicturer($first_picture);
         $this->setSecondPicture($second_picture);
@@ -78,9 +79,9 @@ class Cin
     //Recuperer le dernier cin
     public static function lastCinId()
     {
-        $result = DB::table('cin')->orderBy('id_cin', 'desc')->value('id_cin');
+        $result = DB::table('cin')->orderBy('id_cin', 'desc')->first();
     
-        return $result ? $result : null;
+        return new Cin($result->id_cin, $result->cin_number,$result->first_picture,$result->second_picture);
     }
     
      //Sauvegarder un cin dans la base

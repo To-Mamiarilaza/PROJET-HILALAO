@@ -5,12 +5,14 @@ use App\Http\Controllers\Controller;
 use App\Models\FOC\SuiviReservation\Reservation_field;
 use App\Models\FOC\SuiviReservation\DirectReservation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class ReservationController extends Controller
 {
 
     public function getReservationOneWeek()
     {
+        $data = Session::get('field');
             $start_time = '10:00';
             $end_time = '11:30';
             $rf_id_field = 1;
@@ -69,7 +71,7 @@ class ReservationController extends Controller
                 $field_address
             );
 
-            $reservationFields = $reservationField->getReservationsOneWeek();
+            $reservationFields = $reservationField->getReservationsOneWeek($data->getIdField());
 
             return view('FOC/reservation', ['reservationFields' => $reservationFields]);
     }
@@ -82,10 +84,11 @@ class ReservationController extends Controller
         $date_reservation = $request->input('date_reservation');
         $heure_debut = $request->input('heure_debut');
         $duration = $request->input('duration');
+        $data = Session::get('field');
         try {
             //$id_direct_reservation, $reservation_date, $client_name, $start_time, $id_field, $duration, $phone_number_client
             /* le 1 faharoa id anle terrain mbola tokony amboarina eo am affichage */
-            $reservationDirect = new DirectReservation(1, $date_reservation, $nom_client, $heure_debut, 1, $duration, $telephone_client);
+            $reservationDirect = new DirectReservation(1, $date_reservation, $nom_client, $heure_debut, $data->getIdField(), $duration, $telephone_client);
             $reservationDirect->create();
             return $this->getAllReservation();
         } catch (\Exception $e) {
@@ -94,6 +97,7 @@ class ReservationController extends Controller
     }
     public function getAllReservation()
     {
+            $data = Session::get('field');
             $start_time = '10:00';
             $end_time = '11:30';
             $rf_id_field = 1;
@@ -152,7 +156,7 @@ class ReservationController extends Controller
                 $field_address
             );
 
-            $reservationFields = $reservationField->getReservationsWithFields();
+            $reservationFields = $reservationField->getReservationsWithFields($data->getIdField());
 
             return view('FOC/reservation', ['reservationFields' => $reservationFields]);
         } 

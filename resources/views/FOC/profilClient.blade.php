@@ -11,7 +11,7 @@
 	<title>HILALAO | CLIENT - PROFIL</title>
 </head>
 <body>
-	@if($client->getStatus() != 2)
+	@if($client->getStatus()->getIdStatus() != 2)
 		@include('FOC/header');
 	@endif
 
