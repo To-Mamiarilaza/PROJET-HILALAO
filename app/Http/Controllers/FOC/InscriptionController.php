@@ -14,21 +14,19 @@ class InscriptionController extends Controller
         $cinNumber = $request->input('cinNumber');
         $picRecto = $this->upload($request, 'picRecto', 'image/CIN');
         $picVerso = $this->upload($request, 'picVerso', 'image/CIN');
-        //echo $picRecto;
 
         if ($picRecto && $picVerso) {
-            //echo $picRecto;
-            //echo $picVerso;
             try {
                 $cin = new Cin($cinNumber, $picRecto, $picVerso);
                 $cin->create();
-                //echo $cin->getFirstPicture();
 
                 $lastId = $cin->lastCinId();
                 $client = $request->session()->get('client');
                 $client->setCin($lastId);
                 $client->create();
-                return view('FOC/ProfilClient', ['client' => $client, 'cin' => $cin]);
+                $idclient = $client->lastClientId();
+                $clients = $client->findById($idclient);
+                return view('FOC/ProfilClient', ['client' => $clients, 'cin' => $cin]);
             } catch (\Exception $e) {
                 $error = $e->getMessage();
                 return redirect()->back()->withErrors([$error])->withInput();
@@ -84,10 +82,8 @@ class InscriptionController extends Controller
         $birth_date = $request->input('birth_date');
         $password = $request->input('password');
         $confirmed_password = $request->input('confirmed_password');
-        //dd($request->all());
         $customer_profile = $this->upload($request, 'profilPicture', 'image/Client');
         $id_status = 2;
-        //$id_cin = null;
 
         try {
             $client = new Client($firstname, $lastname, $phone_number, $email, $address, $birth_date, $password, $id_status, 0, $customer_profile);
