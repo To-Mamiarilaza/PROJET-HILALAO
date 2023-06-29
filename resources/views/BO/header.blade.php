@@ -34,10 +34,10 @@
                                 <a class="nav-link active" aria-current="page" href="#"><i class="fas fa-bell"></i></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{route ('view_sign')}}"><i class="fas fa-user-plus"></i></a>
+                                <a class="nav-link" href="{{route ('view_sign_admin')}}"><i class="fas fa-user-plus"></i></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{route ('log_out')}}"><i class="fas fa-power-off"></i></a>
+                                <a class="nav-link" href="{{route ('log_out_admin')}}"><i class="fas fa-power-off"></i></a>
                             </li>
                             
                         </ul>

@@ -11,7 +11,7 @@
                 <div class="row">
                     <div class="col-md-6 p-3">
                         <div class="filtre px-3">
-                            <form class="form" action="{{ route('abonnement', ['ref' => 'abonnement']) }}" method="get">
+                            <form class="form" action="{{ route('abonnement_admin', ['ref' => 'abonnement']) }}" method="get">
                                 <div class="">
                                     <label for="categorie" class="form-label">Catégorie</label>
                                     <select name="categorie" id="categorie" class="form-select">

@@ -33,7 +33,7 @@
             @endif
         </script>
             <h1 class="box__title">Log <span class="box__title--span">in</span></h1>
-            <form class="col-md-12 form-content" method="POST" action="{{ route('login') }}" >
+            <form class="col-md-12 form-content" method="POST" action="{{ route('login_admin') }}" >
                 @csrf
                 <input class="form-content__input form-content__input--log {{ $errorClass }}" type="mail" placeholder="{{ $p }}" name="mail" aria-label=".form-control-lg" required>
                 <input class="form-content__input form-content__input--log" type="password" placeholder="Mot de passe" name="password" aria-label=".form-control-lg" id="password" required>

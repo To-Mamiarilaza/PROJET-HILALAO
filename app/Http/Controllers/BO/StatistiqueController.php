@@ -20,7 +20,7 @@ class StatistiqueController extends Controller
                 // Rediriger vers une page ou retourner une réponse selon vos besoins
                 return $next($request);// Exemple de redirection vers une page de connexion
             }
-            return redirect()->route('log'); 
+            return redirect()->route('log_admin'); 
             
         });
     }

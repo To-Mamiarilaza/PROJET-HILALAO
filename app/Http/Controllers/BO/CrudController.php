@@ -18,7 +18,7 @@ class CrudController extends Controller
             // Vérifier la présence de la session 'id'
             if (!Session::has('id_account_admin')) {
                 // Rediriger vers une page ou retourner une réponse selon vos besoins
-                return redirect()->route('log'); // Exemple de redirection vers une page de connexion
+                return redirect()->route('log_admin'); // Exemple de redirection vers une page de connexion
             }
             
             return $next($request);
