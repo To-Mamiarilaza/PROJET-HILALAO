@@ -1,8 +1,11 @@
-<?php 
+<?php
+
+use App\Http\Controllers\FOC\ClientNotificationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FOC\LoginController;
 use App\Http\Controllers\FOC\CustomerController;
 use App\Http\Controllers\FOC\InscriptionController;
+use App\Http\Controllers\FOC\TestNotification;
 
 Route::get('/', function () {
 	return view('FOC/login');
@@ -30,6 +33,14 @@ Route::get('/home-client', function() {
 });
 
 
-Route::get('/stat-terrain', function() {
-    return view('FOC/statistic-field');
+Route::get('/disponibility', function() {
+    return view('FOC/profil-terrain');
 });
+
+Route::get('/testNotification', [ClientNotificationController::class, 'index']);
+
+Route::get('/changeNotificationState/{idNotif}', [ClientNotificationController::class, 'changeNotificationState']);
+
+
+
+

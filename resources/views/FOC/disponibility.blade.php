@@ -68,7 +68,7 @@
         </div>
 
         <!-- Formulaire d'envoie du nouveau paramètre -->
-        <form action="" class="hidden-form" method="POST" id="send-form">
+        <form action="" class="hidden-form" method="GET" id="send-form">
             
         </form>
 

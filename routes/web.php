@@ -18,6 +18,7 @@ Route::get('/', function() {
     return view('welcome');
 });
 
+
 include "back_office_route.php";
 include "front_office_client_route.php";
 include "front_office_user_route.php";
