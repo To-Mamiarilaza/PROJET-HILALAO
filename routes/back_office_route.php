@@ -6,10 +6,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BO\LoginController;
 use App\Http\Controllers\BO\CrudController;
 use App\Http\Controllers\BO\StatistiqueController;
-
 use App\Models\BO\Statistique;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\BO\AbonnementController;
 use App\Http\Controllers\BO\DetailClientController;
 use App\Http\Controllers\BO\DetailTerrainController;
@@ -28,6 +27,15 @@ use App\Http\Controllers\BO\DetailTerrainController;
 Route::get('/', function () {
     return view('BO/login');
 })->name('log');
+
+Route::get('/logout', function () {
+    // Supprimer la session 'id_account_admin'
+    Session::forget('id_account_admin');
+
+    // Rediriger vers la page de connexion ou une autre page selon vos besoins
+    return redirect()->route('log');
+})->name('log_out');
+
 
 Route::get('/Check', [LoginController::class,
         'checkAccount']

@@ -29,12 +29,11 @@ class LoginController extends Controller
             $password = $request->input('password');
             $account = $model->getAccountAdminConnected($mail,$password);
             Session::put('id_account_admin', $account->getId_account_admin());
-            Session::put('account_admin', $account);
+            // Session::put('account_admin', $account);
             Session::save();
             $statistiqueController = app(StatistiqueController::class);
             return $statistiqueController->statistique();
         } catch (Exception $e) {
-            return view('BO/login', ['error'=>$e->getMessage()]);
             $errorMessage = $e->getMessage();
             return view('BO/login', ['error'=>$errorMessage]);
             // Passer le message d'erreur à la vue

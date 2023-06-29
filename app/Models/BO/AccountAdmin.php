@@ -133,13 +133,14 @@ class AccountAdmin
 
     public function save() {
         try{
-            $req = "INSERT INTO account_admin(first_name,last_name,mail,phone_number,pwd) VALUES ('%s','%s','%s','%s',%s)";
+            $req = "INSERT INTO account_admin(first_name,last_name,mail,phone_number,pwd) VALUES ('%s','%s','%s','%s','%s')";
             $mail = $this->getMail();
-            $pwd = $this->getPwd()();
+            $pwd = $this->getPwd();
             $last_name = $this->getLast_name() ;
             $first_name = $this->getFirst_name() ;
             $phone_number = $this->getPhone_number() ;
             $req = sprintf($req,$first_name,$last_name,$mail,$phone_number,$pwd);
+            // echo $req;
             DB::insert($req);
         }catch(Exception $e){
             throw new Exception("Veuillez ressayer");

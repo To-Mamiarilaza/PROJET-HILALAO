@@ -24,10 +24,8 @@ class AbonnementController extends Controller
         });
     }
     public function abonnement(Request $request) {
-        
         $model = new Abonnement();
         $categoryModel = new Category();
-        
         $all = $model->getAllAbonnenent();
         $categories = $categoryModel->getAllCategory();
         
