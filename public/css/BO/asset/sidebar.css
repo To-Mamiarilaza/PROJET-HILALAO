@@ -74,7 +74,8 @@
 }
 
 .accordion-body li a:hover {
-    color: #3176aa !important;
+    color: #ffffff !important;
+    background-color: rgba(141, 93, 61, 0.65);
 }
 
 .accordion-body li:hover {

@@ -17,6 +17,10 @@ class DetailTerrain
     private $description;
     private $months;
     private $picture;
+    private $cin_number;
+    private $first_picture;
+    private $second_picture;
+    private $sign_up_date;
 
     public function getFirst_name() {
         return $this->first_name;
@@ -101,7 +105,34 @@ class DetailTerrain
     public function setPicture($value) {
         $this->picture = $value;
     }
+    
+    public function getCin() {
+        return $this->cin_number;
+    }
+    public function setCin($value) {
+        $this->cin_number = $value;
+    }
 
+    public function getFirst_picture() {
+        return $this->first_picture;
+    }
+    public function setFirst_picture($value) {
+        $this->first_picture = $value;
+    }
+
+    public function getSecond_picture() {
+        return $this->second_picture;
+    }
+    public function setSecond_picture($value) {
+        $this->second_picture = $value;
+    }
+
+    public function getSign() {
+        return $this->sign_up_date;
+    }
+    public function setSign($value) {
+        $this->sign_up_date = $value;
+    }
     //terrain en attente
 
     public function getMonthTerrain($id_terrain,$year){
@@ -248,10 +279,11 @@ class DetailTerrain
 
     public function findByClient($id_client) {
         try{
-            $requette = "SELECT f.id_field, name, category, p.picture from field f
+            $requette = "SELECT cl.first_name, cl.last_name, cl.address, name, category, p.picture, cl.mail, cl.phone_number, cin_number, first_picture, second_picture, cl.sign_up_date from field f
             join category c on f.id_category = c.id_category 
             join client cl on f.id_client = cl.id_client
             join picture p on f.id_field = p.id_picture
+            join cin cin on cl.id_cin = cin.id_cin
             where cl.id_client = ".$id_client;
 
             $field = DB::select($requette);
@@ -260,10 +292,18 @@ class DetailTerrain
             if(count($field) > 0){
                 foreach($field as $result){
                     $temp = new DetailTerrain();
-                    $temp->setId_terrain($result->id_terrain);
+                    $temp->setFirst_name($result->first_name);
+                    $temp->setLast_name($result->last_name);
+                    $temp->setAdress($result->address);
                     $temp->setName($result->name);
                     $temp->setCategory($result->category);
                     $temp->setPicture($result->picture);
+                    $temp->setMail($result->mail);  
+                    $temp->setPhone_number($result->phone_number);
+                    $temp->setCin($result->cin_number);
+                    $temp->setFirst_picture($result->first_picture);
+                    $temp->setSecond_picture($result->second_picture);
+                    $temp->setSign($result->sign_up_date);
                     $res[] = $temp;
                 }
             }
