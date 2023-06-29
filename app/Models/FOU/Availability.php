@@ -14,19 +14,43 @@ class Availability extends DateTimeFO{
         $this->setPrice($price);
     }
 
+    public static function normalize($array_availability){
+        $result = [];
+        foreach ($array_availability as $availability) {
+            foreach (Availability::toAvailability($availability) as $item) {
+                $result[] = $item;
+            }
+        }
+        return $result;
+    }
+
+    public static function toAvailability($availability) {
+        $result = array($availability);
+        foreach ($availability->getUnavailability() as $unavailability) {
+            $index = count($result)-1;
+            if ($unavailability->getStartTime() > $result[$index]->getStartTime() && $unavailability->getEndTime() < $availability->getEndTime()) {
+                $result[$index] = new Availability($availability->getDay(), $availability->getStartTime(), $unavailability->getStartTime());
+                $result[$index+1] = new Availability($availability->getDay(), $unavailability->getEndTime(), $availability->getEndTime());
+            }
+        }
+        return $result;
+    }
+
     public static function groupByDate($array_availability) {
         $result = [];
+        $index = 0;
         for ($i=0; $i<count($array_availability); $i++) {
             $is_in = false;
             for ($j=0; $j<count($result); $j++) {
-                if($array_availability[$i]->getDay() == $result[$j][$i]->getDay()) {
-                    $result[$i][] = $array_availability[$i];
+                if($array_availability[$i]->getDay()->format('d-m-Y') == $result[$j][0]->getDay()->format('d-m-Y')) {
+                    $result[$j][] = $array_availability[$i];
                     $is_in = true;
                     break;
                 }
             }
             if (!$is_in){
                 $result[] = array($array_availability[$i]);
+                $index++;
             }
         }
         return $result;

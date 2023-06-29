@@ -18,6 +18,7 @@ class FieldDetailled extends Field{
         parent::__construct();
     }
 
+
     public static function filtre($id_category = '%', $id_infrastructure_array = [], $id_field_type_array = [], $id_light_array = [] , $date_reservation = null, $time = null , $tri = 'asc') {
         $sql = FieldDetailled::filtreQuery($id_category, $id_field_type_array, $id_light_array, $id_infrastructure_array, $date_reservation, $time , $tri);
         $fields = FieldDetailled::executingArrayQuery($sql);
