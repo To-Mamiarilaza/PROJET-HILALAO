@@ -427,11 +427,11 @@ class Reservation_field
         return $result ? $result : null;
     }
 
-    public function getReservationsOneWeek()
+    public function getReservationsOneWeek($id_client)
     {
         $exactDay = self::getExactDay();
         $results = DB::table('v_reservation_detailled_field')
-            ->where('id_client', 1)
+            ->where('id_client', $id_client)
             ->where('reservation_date', '>=', DB::raw('CURRENT_DATE'))
             ->where('reservation_date', '<', DB::raw("CURRENT_DATE + INTERVAL '7 days'"))
             ->where('id_day', $exactDay)
@@ -477,11 +477,11 @@ class Reservation_field
     }
     
 
-    public function getReservationsWithFields()
+    public function getReservationsWithFields($id_client)
     {
         $exactDay = self::getExactDay();
         $results = DB::table('v_reservation_detailled_field')
-            ->where('id_client', 1)
+            ->where('id_client', $id_client)
             // ->where('reservation_date', '>=', DB::raw('CURRENT_DATE'))
             // ->where('reservation_date', '<', DB::raw("CURRENT_DATE + INTERVAL '7 days'"))
             ->where('id_day', $exactDay)

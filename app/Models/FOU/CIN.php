@@ -9,7 +9,7 @@ class CIN {
     private $second_picture;
 
     public static function findById($id) {
-        $sql = 'SELECT id_cin, cin_number, picture1, picture2 FROM "public".cin WHERE id_cin=%s';
+        $sql = 'SELECT id_cin, cin_number, first_picture, second_picture FROM "public".cin WHERE id_cin=%s';
         $sql = sprintf($sql, $id);
         $cin_db = DB::select($sql);
         $cin = new CIN();

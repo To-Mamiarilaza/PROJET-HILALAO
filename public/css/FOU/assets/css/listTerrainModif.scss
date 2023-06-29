@@ -1,0 +1,112 @@
+$primary-color: #e17b36;
+$secondary-color: #2A1F1D;
+$troisieme-color:#ebece8;
+$font: Helvetica;
+$border-color: rgb(187, 187, 187);
+
+hr{
+        height: 1px;
+    }
+
+body{
+    font-family: $font;
+}
+
+.contenu{
+    margin-top: 2%;
+    margin-left: 0%;
+    margin-left: -7%;
+
+}
+
+/* Largeur de la barre de défilement */
+
+::-webkit-scrollbar {
+    width: 10px;
+    display: none;
+  }
+  
+  /* Couleur de fond de la barre de défilement */
+  ::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+  }
+  
+  /* Couleur de remplissage de la poignée de défilement */
+  ::-webkit-scrollbar-thumb {
+    background-color: #888;
+  }
+  
+  /* Couleur de survol de la poignée de défilement */
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+  }
+
+.allTerrain{
+    max-height: 50%;
+    overflow-y: auto;
+    
+}
+
+.list{
+    // border: 1px solid black;
+    box-sizing: border-box;
+    height: 650px;
+    margin-top: -3%;
+    &-titre{
+        // border:  1px solid black;
+        height: 10%;
+    }
+    &-filtre{
+        // border:  1px solid black;
+        height: 10%;
+        margin-bottom: -2%;
+        &-category{
+            // background-color: #2A1F1D;
+            margin-left: -4%;
+        }
+        &-filtrer{
+        }
+    }
+    &-terrain{
+        // border:  1px solid black;
+        height: 80%;
+        border-radius: 5px;
+        border: 1px solid $border-color;
+        height: 200px;
+        margin-left: 0%;
+        width: 100%;
+        &-image{
+            height: 77%;
+            // border: 1px solid $border-color;
+            margin: 2%;
+            border-radius: 5px;
+            width: 25%;
+            img{
+                width: 116%;
+                height: 100%;
+                margin-left: -8%;
+                border-radius: 3px;
+            }
+        }
+        &-info{
+            // border: 1px solid $border-color;
+            padding: 2%;
+            font-size: 69%;
+            &-head{
+                margin-bottom: -4%;
+            }
+        }
+    }
+}
+
+.sig{
+    // border: 1px solid black;
+    box-sizing: border-box;
+    height: 650px;
+    img{
+        height: 85%;
+        width: 120%;
+      }
+}
+
+

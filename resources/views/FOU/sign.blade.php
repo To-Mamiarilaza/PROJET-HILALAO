@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/FOU/sign.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/FOU/assets/css/sign.css') }}">
     <title>HILALAO | SIGN</title>
 </head>
 <body>
@@ -17,7 +17,6 @@
                 <div class="row">
 
                     <div class="col-md-6">
-
                         <input name="name" class="form-content__input form-content__input--log" type="text" placeholder="Nom d'utilisateur" aria-label=".form-control-lg" required>
                         <input name="email" class="form-content__input form-content__input--log" type="text" placeholder="Email de l'utilisateur" aria-label=".form-control-lg">
                         <input name="dtn" class="form-content__input form-content__input--log" type="text" placeholder="Date de naissance" aria-label=".form-control-lg" id="date" onmouseover="showDate()" required>

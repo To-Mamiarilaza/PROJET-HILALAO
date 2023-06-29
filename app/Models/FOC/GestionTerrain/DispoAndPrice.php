@@ -2,6 +2,7 @@
 
 namespace App\Models\FOC\GestionTerrain;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class DispoAndPrice
 {
@@ -85,7 +86,7 @@ class DispoAndPrice
         $datas = array();
         $i = 0;
         foreach ($results as $row) {
-            $datas[$i] = new DispoAndPrice($row->id_dispo_and_price, Day::findById($row->id_day),  $row->start_time, $row->end_time, Field::findbyId($row->id_field), $row->price);
+            $datas[$i] = new DispoAndPrice($row->id_dispo_and_price, Day::findById($row->id_day),  DispoAndPrice::formatTime($row->start_time), DispoAndPrice::formatTime($row->end_time), Field::findbyId($row->id_field), $row->price);
             $i++;
         }
         
@@ -97,16 +98,21 @@ class DispoAndPrice
     {
         $results = DB::table('dispo_and_price')->where('id_dispo_and_price', $id)->first();
         
-        return new DispoAndPrice($results->id_dispo_and_price, Day::findById($results->id_day),  $results->start_time, $results->end_time, Field::findById($results->field), $results->price);
+        return new DispoAndPrice($results->id_dispo_and_price, Day::findById($results->id_day),  DispoAndPrice::formatTime($results->start_time), DispoAndPrice::formatTime($results->end_time), Field::findById($results->field), $results->price);
     }
 
     //Sauvegarder une disponibilite et prix dans la base
     public function create()
     {
         $req = "INSERT INTO dispo_and_price VALUES ( default, %d, '%s', '%s', %d, %d)";
-           $req = sprintf($req,$this->day->id_day,$this->start_time,$this->end_time, $this->field->id_field, $this->price);
-           DB::insert($req);
-       }
+        echo "Day : ".$this->day->getIdDay();
+        echo "Price : ".$this->price;
+        echo "startTime : ".$this->getStartTime();
+        echo "EndTime : ".$this->getEndTime();
+
+        $req = sprintf($req,$this->day->getIdDay(),$this->start_time,$this->end_time, $this->field->getIdField(), $this->price);
+        DB::insert($req);
+    }
    
     //Mettre a jour une disponibilite et prix
     public function update()
@@ -115,10 +121,10 @@ class DispoAndPrice
         ->where('id_dispo_and_price', $this->id_dispo_and_price)
         ->update([
             'id_dispo_and_price' => $this->id_dispo_and_price,
-            'id_day' => $this->day->id_day,
+            'id_day' => $this->day->getIdDay,
             'start_time' => $this->start_time,
             'end_time' => $this->end_time,
-            'id_field' => $this->field->id_field,
+            'id_field' => $this->field->getIdField,
             'price' => $this->price,
         ]);
     }
@@ -127,7 +133,46 @@ class DispoAndPrice
     public function delete()
     {
         DB::table('dispo_and_price')
-        ->where('id_dispo_price', $this->id_dispo_and_price)
+        ->where('id_dispo_and_price', $this->id_dispo_and_price)
         ->delete();
+    }
+
+    //Avoir les disponibilites de meme date, meme heure et meme prix
+    public static function getDisposSame($startime, $endTime, $price) {
+        $sql = "SELECT * FROM dispo_and_price WHERE start_time='%s' and end_time='%s' and price=%d";
+        $sql=sprintf($sql,$startime,$endTime,$price);
+        echo $sql;
+        $results = DB::select($sql);
+        $datas = array();
+        $i = 0;
+        foreach ($results as $row) {
+            $datas[$i] = new DispoAndPrice($row->id_dispo_and_price, Day::findById($row->id_day),  $row->start_time, $row->end_time, Field::findbyId($row->id_field), $row->price);
+            $i++;
+        }
+        
+        return $datas;
+    }
+
+    //Verifier si l'heure et date insere s'inclusent
+    public static function checkInsert($allDisposAndPrice, $dispoAndPrice) {
+        foreach($allDisposAndPrice as $item) {
+            if($dispoAndPrice->getDay()->getIdDay() == $item->getDay()->getIdDay() && DispoAndPrice::getHour($dispoAndPrice->getStartTime()) >= DispoAndPrice::getHour($item->getStartTime()) && DispoAndPrice::getHour($dispoAndPrice->getEndTime()) <= DispoAndPrice::getHour($item->getEndTime())) {
+                return false;
+            }
+        }
+
+        return true;
+    } 
+
+    //Extraire l'heure d'un type time
+    public static function getHour($time) {
+        return substr($time, 0, 2);
+    }
+
+    //Formatter le time en heure et minutes
+    public static function formatTime($timeValue)
+    {
+        $time = Carbon::createFromFormat('H:i:s', $timeValue);
+        return $time->format('H:i');
     }
 }
