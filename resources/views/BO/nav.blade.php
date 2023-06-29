@@ -12,7 +12,6 @@
                 <li class=""><a href="{{ route('statistique') }}"><i class="fas fa-chart-bar"></i> Statistique</a></li>
                 <li><a href="{{ route('abonnement') }}"><i class="fas fa-credit-card"></i> Abonnement</a></li>
                 <li><a href="{{ route('validationClient') }}"><i class="fas fa-clock"></i> Listes d'attentes</a></li>
-                <li><a href="{{ route('list_field') }}"><i class="fas fa-clock"></i> Listes des terrains</a></li>
                 <li class="checked" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne"
                     aria-expanded="false" aria-controls="flush-collapseOne">
                     <a href=""><i class="fas fa-cogs"></i> Caractéristique</a>

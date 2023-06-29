@@ -23,8 +23,9 @@
                         <hr>
                     </a>
                 @endforeach
-                    </div>
                 </div>
+            </div>
+        </div>
 
                 <div class="col-md-6 p-3">
                     <div class="attentes-client">
@@ -48,11 +49,9 @@
                     </div>
                 </div>
             </div>
-          </div>
         </div>
-
-        </section>
     </div>
+</section>
 
     <script src="{{ asset('css/BO/asset/bootstrap.bundle.min.js')}}"></script>
 </body>
