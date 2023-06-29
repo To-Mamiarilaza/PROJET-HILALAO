@@ -73,7 +73,7 @@
                         <h2>Listes des Terrains</h2>
                         <div class="list-container">
                             @foreach($terrains as $terrain)
-                                <a href="{{ route('detail_field', ['id_terrain' => $terrain->getId_terrain() , 'annee' => 2023]) }}">
+                                <a href="{{ route('detail_field', ['id_terrain' => $terrain->getId_terrain() , 'annee' => 2023,'ref' => 'statistique']) }}">
                                     <div class="client mt-2">
                                         <div class="image">
                                             <img src="{{ asset('css/BO/asset/elgeco.jpg') }}" alt="Image du client">
@@ -94,7 +94,7 @@
                         <h2>Listes des clients</h2>
                         <div class="list-container">
                             @foreach($clients as $client)
-                                <a href="{{ route('fieldByClient', ['id_client' => $client->getId_client() ]) }}">
+                                <a href="{{ route('fieldByClient', ['id_client' => $client->getId_client(),'ref' => 'statistique' ]) }}">
                                     <div class="client mt-2">
                                         <div class="image">
                                             <img src="{{ asset('css/BO/asset/client.png') }}" alt="Image du client">

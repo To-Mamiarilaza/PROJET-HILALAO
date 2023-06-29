@@ -65,21 +65,24 @@ class DetailTerrainController extends Controller
         $detail = new DetailTerrain();
         $id_terrain = $_GET['id_terrain'];
         $annee = $_GET['annee'];
+        $ref = $_GET['ref'];
         $all = $detail->getDetailTerrain($id_terrain);
         $month = $detail->getMonthTerrain($id_terrain,$annee);
     
         return view('BO.detailTerrain', [
             'all' => $all,
-            'month' => $month ? $month->getMonths() : []
+            'month' => $month ? $month->getMonths() : [],
+            'ref' => $ref
         ]);
     }
 
-    public function fieldByClient($id_client){
+    public function fieldByClient($id_client,$ref){
         $field = new DetailTerrain();
         $all = $field->findByClient($id_client);
 
         return view('BO.fieldFromClient', [
-            'all' => $all
+            'all' => $all,
+            'ref' => $ref
         ]);
     }
 }

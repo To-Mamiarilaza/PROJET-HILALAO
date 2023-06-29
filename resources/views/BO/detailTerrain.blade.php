@@ -60,6 +60,7 @@
                         <div class="mt-3 px-4">
                             <div class="row">
                                 <input type="hidden" value="{{  $all->getId_terrain() }}" name="id_terrain"/>
+                                <input type="hidden" value="statistique" name="ref"/>
                                 <div class="col-md-8">
                                     <select name="annee" id="annee" class="form-select annee">
                                         <option value="2023">2023</option>

@@ -70,7 +70,7 @@ Route::get('/DetailTerrain', [DetailTerrainController::class,
     'detailFieldById']
 )->name('detail_field');
 
-Route::get('/fieldByClient/{id_client}', [DetailTerrainController::class,
+Route::get('/fieldByClient/{id_client}/{ref}', [DetailTerrainController::class,
         'fieldByClient']
 )->name('fieldByClient');
 

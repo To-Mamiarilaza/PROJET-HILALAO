@@ -279,7 +279,7 @@ class DetailTerrain
 
     public function findByClient($id_client) {
         try{
-            $requette = "SELECT cl.first_name, cl.last_name, cl.address, name, category, p.picture, cl.mail, cl.phone_number, cin_number, first_picture, second_picture, cl.sign_up_date from field f
+            $requette = "SELECT cl.first_name, cl.last_name, cl.address, name, category, p.picture, cl.mail, cl.phone_number, cin_number, first_picture, second_picture, cl.sign_up_date, f.id_field from field f
             join category c on f.id_category = c.id_category 
             join client cl on f.id_client = cl.id_client
             join picture p on f.id_field = p.id_picture
@@ -304,6 +304,7 @@ class DetailTerrain
                     $temp->setFirst_picture($result->first_picture);
                     $temp->setSecond_picture($result->second_picture);
                     $temp->setSign($result->sign_up_date);
+                    $temp->setId_terrain($result->id_field);
                     $res[] = $temp;
                 }
             }

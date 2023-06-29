@@ -44,7 +44,7 @@
                     <div class="listes-client">
                         @foreach ($all as $terrain)
 
-                        <a href="">
+                        <a href="{{ route('detail_field', ['id_terrain' => $terrain->getId_terrain() , 'annee' => 2023,'ref' => 'statistique']) }}">
                             <div class="terrain">
                                 <img src="{{ asset('css/BO/image/' . $terrain->getPicture()) }}" alt="Image du terrain">
                                 <div class="detail-terrain">
