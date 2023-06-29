@@ -20,4 +20,8 @@ class InfoTerrain extends Controller {
     public function test(){
         return view("FOU/test");
     }
+
+    public function profileUtilisateur(){
+        return view("FOU/profileUtilisateur");
+    }
 }

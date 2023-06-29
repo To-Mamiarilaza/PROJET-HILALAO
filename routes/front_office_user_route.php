@@ -34,3 +34,6 @@ Route::get('/carte', [InfoTerrain::class, 'afficheCarte']);
 Route::get('/ProfileTerrain', [InfoTerrain::class, 'profileTerrain']);
 Route::get('/test', [InfoTerrain::class, 'test']);
 
+//Profile Utilisateur
+Route::get('/profileUtilisateur', [InfoTerrain::class, 'profileUtilisateur']);
+

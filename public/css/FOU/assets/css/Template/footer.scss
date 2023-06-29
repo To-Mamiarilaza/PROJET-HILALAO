@@ -1,0 +1,43 @@
+$primary-color: #e17b36;
+$secondary-color: #2A1F1D;
+$troisieme-color:#ebece8;
+$border-color:rgb(187, 187, 187);
+$borderRadius : 6px;
+.foot{
+    height: 200px;
+    background-color: $primary-color;
+    margin-top: 5%;
+    color: white;
+    &-contenu{
+        // margin-top: 5;
+        padding-top: 1%;
+        &-logo{
+            text-align: center;
+            margin-top: 20px;
+        }
+        &-reseau{
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: center;
+            margin-left: 2%;
+            margin-top: 2%;
+            i{
+                margin-right: 2%;
+                font-size: 120%;
+            }
+        }
+        &-copyright{
+            justify-content: center;
+            text-align: center;
+            display: flex;
+            flex-wrap: nowrap;
+            margin-top: 2%;
+            i{
+                margin-top: 3px;
+                margin-right: 5px;
+            }
+        }
+
+    }
+}
+
