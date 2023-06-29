@@ -53,6 +53,11 @@ Route::get('/DetailTerrain/{id_terrain}', [DetailTerrainController::class,
     'detailTerrain']
 )->name('detailTerrain');
 
+Route::get('/DetailTerrain', [DetailTerrainController::class,
+    'detailFieldById']
+)->name('detail_field');
+
+
 Route::get('/ListeTerrain', [DetailTerrainController::class,
     'all']
 )->name('list_field');

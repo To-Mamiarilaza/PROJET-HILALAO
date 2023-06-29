@@ -39,3 +39,20 @@
 
 
     <script src="{{ asset('css/BO/asset/bootstrap.bundle.min.js') }}"></script>
+    <script>
+       // Sélectionnez tous les éléments li contenant des liens
+        const listeLiens = document.querySelectorAll('.lien li');
+
+        // Parcourez chaque élément li
+        listeLiens.forEach(lien => {
+        // Ajoutez un gestionnaire d'événements de clic à chaque lien
+        lien.addEventListener('click', () => {
+            // Supprimez la classe "checked" de tous les éléments li
+            listeLiens.forEach(li => li.classList.remove('checked'));
+            // Ajoutez la classe "checked" à l'élément li cliqué
+            lien.classList.add('checked');
+        });
+        });
+
+
+    </script>

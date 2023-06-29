@@ -43,7 +43,7 @@
                             @else 
                                 <p class="refused-text">Terrain refusé</p>
                             @endif
-                        @else
+                        @elseif (isset($validation))
                             <a href="{{ route('update_status', ['variable' => 1,'id_terrain' => $all->getId_terrain()]) }}" class="btn btn-warning">Valider</a>
                             <a href="{{ route('update_status', ['variable' => 3,'id_terrain' => $all->getId_terrain()]) }}" class="btn btn-danger mx-4">Refuser</a>
                         @endif
@@ -56,11 +56,12 @@
             <div class="abonnement mt-3">
                 <h2>Etat d'abonnement</h2>
                 <div class="mt-2">
-                    <form action="" class="form">
+                    <form action="{{ route('detail_field')}}" class="form" method="GET">
                         <div class="mt-3 px-4">
                             <div class="row">
+                                <input type="hidden" value="{{  $all->getId_terrain() }}" name="id_terrain"/>
                                 <div class="col-md-8">
-                                    <select name="aannee" id="annee" class="form-select annee">
+                                    <select name="annee" id="annee" class="form-select annee">
                                         <option value="2023">2023</option>
                                         <option value="2022">2022</option>
                                         <option value="2021">2021</option>
@@ -75,17 +76,19 @@
                 </div>
                 <div class="etats mt-3">
                 <ul>
-                    @php
+                @php
                     $mois = array("Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre");
-                    $m = $month ;
-                    @endphp
+                    $m = $month ?? null;
+                @endphp
 
-                    @foreach ($mois as $index => $nomMois)
-                        @php
-                        $classe = in_array($index + 1, $m) ? "" : "non-payé";
-                        @endphp
-                        <li class="{{ $classe }}">{{ $nomMois }}</li>
-                    @endforeach
+                @foreach ($mois as $index => $nomMois)
+                    @php
+                        $classe = ($m === null || in_array($index + 1, $m)) ? "" : "non-payé";
+                        $classe = $m === null ? "non-payé" : $classe;
+                    @endphp
+                    <li class="{{ $classe }}">{{ $nomMois }}</li>
+                @endforeach
+
                 </ul>
                 </div>
             </div>

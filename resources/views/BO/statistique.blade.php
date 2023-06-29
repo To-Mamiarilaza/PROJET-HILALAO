@@ -68,7 +68,28 @@
                         <div id="selectedFields" ></div>
                     </div>
                 </div>
-                <div class="col-md-4 p-3">
+                <div class="col-md-6 p-3">
+                    <div class="list-client">
+                        <h2>Listes des Terrains</h2>
+                        <div class="list-container">
+                            @foreach($terrains as $terrain)
+                                <a href="{{ route('detail_field', ['id_terrain' => $terrain->getId_terrain() , 'annee' => 2023]) }}">
+                                    <div class="client mt-2">
+                                        <div class="image">
+                                            <img src="{{ asset('css/BO/asset/elgeco.jpg') }}" alt="Image du client">
+                                        </div>
+                                        <div class="detail-client">
+                                            <p class="name">{{ $terrain->getName() }}</p>
+                                            <p class="terrain">Adresse :  <span class="number">{{ $terrain->getAdress() }}</span></p>
+                                        </div>
+                                    </div>
+                                </a>
+                            @endforeach
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 p-3">
                     <div class="list-client">
                         <h2>Listes des clients</h2>
                         <div class="list-container">
