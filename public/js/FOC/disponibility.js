@@ -148,6 +148,7 @@ function changeDayState(paramGroup, group) {
 
 // Affiche le groupe en html
 function displayGroup(group) {
+    var link = "/deleteDisponibility?start=" + group[0][1] + "&&end=" + group[0][2] + "&&price=" + group[0][3];
     var HTMLelement = `
             <div class="col-md-4">
                 <ul>
@@ -167,7 +168,7 @@ function displayGroup(group) {
                 
             </div>
             <div class="col-md-2 delete">
-                <a href="">
+                <a href="` + link + `">
                     <i class="fas fa-times"></i>
                 </a>
             </div>`;

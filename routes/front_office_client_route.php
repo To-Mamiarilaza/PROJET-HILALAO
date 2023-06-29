@@ -4,6 +4,29 @@ use App\Http\Controllers\FOC\LoginController;
 use App\Http\Controllers\FOC\InscriptionController;
 use App\Models\FOC\SuiviReservation\Reservation_field;
 use App\Http\Controllers\FOC\ReservationController;
+use App\Http\Controllers\FOC\FieldController;
+
+
+/// pour le premier chargement de la page
+Route::GET('/', [LoginController::class, 'firstPage'])
+->name('firstPage');
+
+/// pour la page Login
+Route::POST('/login', [LoginController::class, 'login'])
+->name('login');
+
+
+/// pour la page Sign In
+Route::get('/SignIn', [LoginController::class, 'signin'])
+->name('SignIn');
+
+Route::post('/insertClient', [InscriptionController::class, 'insertClient'])
+->name('signin');
+
+/// pour la page suivante de Sign In : insert CIN
+Route::post('/CIN-Client', [InscriptionController::class, 'insertCIN'])
+->name('signinnext');
+
 
 Route::get('/selectByWeek', [ReservationController::class, 'getReservationOneWeek'])
 ->name('selectByWeek');
@@ -27,23 +50,9 @@ Route::get('/profil-terrain', function () {
 	return view('FOC/profil-terrain');
 });
 
-/// pour la page Sign In
-Route::get('/SignIn', [LoginController::class, 'signin'])
-->name('SignIn');
-
-Route::post('/insertClient', [InscriptionController::class, 'insertClient'])
-->name('signin');
-
 Route::post('/changePicture', [InscriptionController::class, 'changePicture'])
 ->name('changePicture');
 
-/// pour la page suivante de Sign In : insert CIN
-Route::post('/CIN-Client', [InscriptionController::class, 'insertCIN'])
-->name('signinnext');
-
-/// pour la page Login
-Route::get('/Login', [LoginController::class, 'login'])
-->name('login');
 Route::GET('/deconnect', [LoginController::class, 'deconnect'])
 ->name('deconnect');
 
@@ -90,4 +99,21 @@ Route::POST('/searchField', [FieldController::class, 'searchField'])
 
 Route::POST('/editImageProfile', [FieldController::class, 'editImage'])
 ->name('editImageProfile');
-?>
+
+Route::POST('/getInfosAdress', [FieldController::class, 'getInfosAdress'])
+->name('getInfosAdress');
+
+Route::get('/disponibility', function () {
+    return view('FOC/disponibility');
+});
+
+Route::POST('/insertDispoAndPrice', [FieldController::class, 'insertDiposAndPrice'])
+->name('insertDiposAndPrice');
+
+Route::GET('/loadPageDispoAndPriceGet', [FieldController::class, 'loadPageDispoAndPrice'])
+->name('loadPageDispoAndPriceGet');
+
+Route::POST('/loadPageDispoAndPricePost', [FieldController::class, 'loadPageDispoAndPrice'])
+->name('loadPageDispoAndPricePost');
+
+Route::GET('/deleteDisponibility', [FieldController::class, 'deleteDisponibility']);

@@ -2,40 +2,32 @@
 namespace App\Models\FOU;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
+use DateTime;
 
 class Field {
     private $id_field;
     private $id_category;
-    private $category;
     private $subscribing_price;
     private $id_client;
-    private $client;
     private $name;
     private $id_field_type;
-    private $field_type;
     private $id_infrastructure;
-    private $infrastructure;
     private $id_light;
-    private $light;
     private $description;
     private $address;
     private $latitude;
     private $longitude;
     private $insert_date;
     private $field_files;
-    private $availability;
-    private $reservation;
 
 
-    public static function findById($id) {
-        $sql = "SELECT id_field, id_category, category, subscribing_price, id_client, name, id_field_type, field_type, id_infrastructure, infrastructure, id_light, light, description, address, latitude, longitude, insert_date, field_files FROM v_field_detailled WHERE id_field=%s";
+    public function findById($id) {
+        $sql = "SELECT id_field, id_category, subscribing_price, name, id_field_type, id_infrastructure, id_light, description, address, latitude, longitude, insert_date, field_files FROM field WHERE id_field=%s";
         $sql = sprintf($sql, $id);
         $field_db = DB::select($sql);
-        $field = new Field();
         if (count($field_db) != 0) {
-            $field = Field::settingByDBResult($field_db[0]);
+            $this->settingDBResult($field_db[0]);
         }
-        return $field;
     }
 
 
@@ -52,12 +44,6 @@ class Field {
     public function setIdCategory($values) {
         $this->id_category = $values;
     }
-    public function getCategory() {
-        return $this->category;
-    }
-    public function setCategory($values) {
-        $this->category = $values;
-    }
     public function getSubscribingPrice() {
         return $this->subscribing_price;
     }
@@ -69,12 +55,6 @@ class Field {
     }
     public function setIdClient($values) {
         $this->id_client = $values;
-    }
-    public function getClient() {
-        return $this->client;
-    }
-    public function setClient($values) {
-        $this->client = $values;
     }
     public function getName() {
         return $this->name;
@@ -88,35 +68,17 @@ class Field {
     public function setIdFieldType($values) {
         $this->id_field_type = $values;
     }
-    public function getFieldType() {
-        return $this->field_type;
-    }
-    public function setFieldType($values) {
-        $this->field_type = $values;
-    }
     public function getIdInfrastructure() {
         return $this->id_infrastructure;
     }
     public function setIdInfrastructure($values) {
         $this->id_infrastructure = $values;
     }
-    public function getInfrastructure() {
-        return $this->infrastructure;
-    }
-    public function setInfrastructure($values) {
-        $this->infrastructure = $values;
-    }
     public function getIdLight() {
         return $this->id_light;
     }
     public function setIdLight($values) {
         $this->id_light = $values;
-    }
-    public function getLight() {
-        return $this->light;
-    }
-    public function setLight($values) {
-        $this->light = $values;
     }
     public function getDescription() {
         return $this->description;
@@ -154,37 +116,39 @@ class Field {
     public function setFieldFiles($values) {
         $this->field_files = $values;
     }
-    public function getAvailability() {
-        return $this->availability;
-    }
-    public function setAvailability($values) {
-        $this->availability = $values;
+
+    public function __construct() {
+
     }
 
-    private static function settingByDBResult($result) {
-        $field = new Field();
-        $field->setIdField($result->id_field);
-        $field->setIdCategory($result->id_category);
-        $field->setCategory($result->category);
-        $field->setSubscribingPrice($result->subscribing_price);
-        $field->setIdClient($result->id_client);
-        $field->setClient(Client::findbyId($result->id_client));
-        $field->setName($result->name);
-        $field->setIdFieldType($result->id_field_type);
-        $field->setFieldType($result->field_type);
-        $field->setIdInfrastructure($result->id_infrastructure);
-        $field->setInfrastructure($result->infrastructure);
-        $field->setIdLight($result->name);
-        $field->setLight($result->light);
-        $field->setDescription($result->description);
-        $field->setAddress($result->address);
-        $field->setName($result->name);
-        $field->setLatitude($result->latitude);
-        $field->setLongitude($result->longitude);
-        $field->setInsertDate($result->insert_date);
-        $field->setFieldFiles($result->field_files);
-        $field->setAvailability(AvailabilityField::findByIdField($result->id_field));
-        return $field;
+    public static function getFilters() {
+        $filters = [];
+        $filters[0]['value'] = Filter::find("light");
+        $filters[1]['value'] = Filter::find("infrastructure");
+        $filters[2]['value'] = Filter::find("field_type");
+        $filters[0]['name'] = "Eclairage";
+        $filters[1]['name'] = "Infrastructure";
+        $filters[2]['name'] = "Type du terrain";
+        return $filters;
+    }
+
+    protected function settingDBResult($result) {
+        $this->setIdField($result->id_field);
+        $this->setIdCategory($result->id_category);
+        $this->setSubscribingPrice($result->subscribing_price);
+        $this->setIdClient($result->id_client);
+        $this->setName($result->name);
+        $this->setIdFieldType($result->id_field_type);
+        $this->setIdInfrastructure($result->id_infrastructure);
+        $this->setIdLight($result->name);
+        $this->setDescription($result->description);
+        $this->setAddress($result->address);
+        $this->setName($result->name);
+        // $this->setInsertDate($result->insert_date);
+        $this->setLatitude($result->latitude);
+        $this->setLongitude($result->longitude);
+        $this->setInsertDate(DateTime::createFromFormat('Y-m-d', $result->insert_date));
+        $this->setFieldFiles($result->field_files);
     }
 }
 ?>

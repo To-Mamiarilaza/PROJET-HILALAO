@@ -77,7 +77,7 @@
                             <p class="parameter-hour">10:00 H à 13:00 H <span class="parameter-price">50 000 Ar</span> </p>
                         </div>
                     </div>
-                    <a href="" class="btn btn-warning mt-3">Paramétrer disponibilité et prix</a>
+                    <a href="{{ route('loadPageDispoAndPriceGet') }}" class="btn btn-warning mt-3">Paramétrer disponibilité et prix</a>
                     <a href="" class="btn btn-warning my-3" data-bs-toggle="modal" data-bs-target="#new-indisponible">Marquer des indisponibilités</a> <br>
                 </div>
             </div>
@@ -103,7 +103,7 @@
                     </div>
                     <div class="col-md-5 my-2">
                         <div class="border p-3">
-                            <a href="">
+                            <a href ="{{ route('selectAll') }}">
                                 <i class="fas fa-calendar-alt mx-3"></i>
                                 Suivie de réservation
                             </a>

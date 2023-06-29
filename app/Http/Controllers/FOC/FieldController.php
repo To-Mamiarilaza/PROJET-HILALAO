@@ -9,11 +9,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Exceptions\ClientExceptionHandler;
 use App\Models\FOC\GestionTerrain\Category;
+use App\Models\FOC\GestionTerrain\DispoAndPrice;
 use App\Models\FOC\GestionTerrain\FieldType;
 use App\Models\FOC\GestionTerrain\Infrastructure;
 use App\Models\FOC\GestionTerrain\Light;
 use App\Models\FOC\GestionTerrain\PictureField;
+use App\Models\FOC\GestionTerrain\Day;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Http;
 use Carbon\Carbon;
 
 class FieldController extends Controller
@@ -40,6 +43,7 @@ class FieldController extends Controller
         $field = Field::findById($idField);
         $profilePictureField = PictureField::getPictureProfile($field);
         $secondPicture = PictureField::getSecondPictureField($field);
+        Session::put('field', $field);
         return view('FOC/profile-field')->with([
             'field' => $field,
             'profilePicture' => $profilePictureField,
@@ -48,7 +52,7 @@ class FieldController extends Controller
     }
 
     //Charger l'insertion terrain
-    public function loadAddField() {
+    public function loadAddField($error="") {
         //Charger toutes les categories du terrain
         $categoryField = Category::getAll();
 
@@ -66,29 +70,49 @@ class FieldController extends Controller
             'fieldType' => $fieldType,
             'infrastructure' => $infrastructure,
             'light' => $light,
+            'error' => $error,
         ]);
     }
 
     //Inserer le terrain
     public function addField(Request $request) {
-        $name = $request->input('nameField');
-        $category = $request->input('category');
-        $surface = $request->input('surface');
-        $infrastructure = $request->input('infrastructure');
-        $light = $request->input('light');
+        try {
+            if($request->input('latitude') != null && $request->input('longitude') != null && $request->input('adresseResult') != null) {
+            
+                $name = $request->input('nameField');
+                $category = $request->input('category');
+                $surface = $request->input('surface');
+                $infrastructure = $request->input('infrastructure');
+                $light = $request->input('light');
+        
+                $latitude = $request->input('latitude');
+                $longitude = $request->input('longitude');
+                $adresseResult = $request->input('adresseResult');
 
-        $data = [
-            'name' => $name,
-            'category' => $category,
-            'surface' => $surface,
-            'infrastructure' => $infrastructure,
-            'light' => $light
-        ];
-    
-        Session::put('field', $data);
+                $data = [
+                    'name' => $name,
+                    'category' => $category,
+                    'surface' => $surface,
+                    'infrastructure' => $infrastructure,
+                    'light' => $light,
+                    'latitude' => $latitude,
+                    'longitude' => $longitude,
+                    'adresse' => $adresseResult,
+                ];
+            
+                Session::put('field', $data);
 
-        return view('FOC/addFieldFile');
+                return view('FOC/addFieldFile');
+            }
+            else {
+                throw new Exception("Veuillez saisir en premier votre adresse");
+            }
+            
+        } catch(Exception $e) {
+           echo $e->getMessage();
+        } 
     }
+
 
     //Inserer le dossier du terrain
     public function addFieldFile(Request $request) {
@@ -122,7 +146,12 @@ class FieldController extends Controller
         $dateActuelle = Carbon::now();
         $dateFormatee = $dateActuelle->format('Y-m-d H:i:s');
 
-        $field = new Field('default',$category,$clientConnected,$name,$surface,$infrastructure,$light,'yes','adress', 0.0, 0.0, $dateFormatee, $file);
+        //Les coordonnees et information geographique
+        $latitude = $data['latitude'];
+        $longitude = $data['longitude'];
+        $adresse = $data['adresse'];
+
+        $field = new Field('default',$category,$clientConnected,$name,$surface,$infrastructure,$light,'',$adresse, $latitude, $longitude, $dateFormatee, $file);
         $field->create($clientConnected);
 
         return redirect()->route('list-field');
@@ -230,5 +259,68 @@ class FieldController extends Controller
         return redirect()->route('profile-field', ['idField' => $pictureNow->getField()->getIdField()]);
     }
 
+    //Charger la page de disponibilite et prix
+    public function loadPageDispoAndPrice($error = null) {
+        if(isset($_GET['error'])) {
+            $allDispo=DispoAndPrice::getAll();
+            return view('FOC/disponibility')->with([
+                'dispoAndPrice' => $allDispo,
+                'errorInsert' =>  $_GET['error'],
+            ]);
+        }
+        else {
+            $allDispo=DispoAndPrice::getAll();
+            return view('FOC/disponibility')->with([
+                'dispoAndPrice' => $allDispo,
+            ]);
+        }
+    }
+
+    //Inserer les disponibilites et prix
+    public function insertDiposAndPrice(Request $request) {
+        try{
+            $field = Session::get('field');
+            $jour = $request->input("jour");
+            $starTime = $request->input("star-time");
+            $endTime = $request->input("end-time");
+            $price = $request->input("price");
+            $allDisposAndPrice = DispoAndPrice::getAll();
+            for($i = 0; $i < count($jour); $i++) {
+                $dispoAndPrice = new DispoAndPrice('default',Day::findById($jour[$i]),$starTime[0],$endTime[0],$field,$price[0]);
+                if(DispoAndPrice::checkInsert($allDisposAndPrice,$dispoAndPrice)) {
+                    $dispoAndPrice->create();
+                }
+                else {
+                    throw new Exception("L'emploi du temps pour la disponibilite choisie existe deja");
+                }
+            }
+        }
+        catch(\Exception $e){           
+            return redirect()->route('loadPageDispoAndPriceGet', ['error' =>  $e->getMessage()]);
+        }
+        return redirect()->route('loadPageDispoAndPriceGet');
+    }
+
+    //Supprimer une disponibilite
+    public function deleteDisponibility() {
+        try{
+           
+            $disposSame = DispoAndPrice::getDisposSame($_GET['start'], $_GET['end'], $_GET['price']);
+            if($disposSame != null) {
+                foreach($disposSame as $item) {
+                    $item->delete();
+                }
+                return redirect()->route('loadPageDispoAndPriceGet');
+            }
+            else {
+                throw new Exception("Erreur : disponibilite est null");
+            }
+        }
+        catch(\Exception $e){
+            echo $e->getMessage();           
+        }
+
+        
+    }
 }
 ?>

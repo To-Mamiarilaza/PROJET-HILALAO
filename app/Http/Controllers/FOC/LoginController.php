@@ -11,6 +11,13 @@ use App\Exceptions\ClientExceptionHandler;
 
 class LoginController extends Controller
 {
+    //Premier page a afficher
+    public function firstPage(Request $request)
+    {
+        return view('FOC/login');
+    }
+
+    //Se connecter
     public function login(Request $request)
     {
         try {
@@ -29,6 +36,7 @@ class LoginController extends Controller
             return view('FOC/login')->with('error', $e->getMessage());
         }     
     }
+    
     public function signin(Request $request)
     {
         return view('FOC/signUp');
