@@ -1,0 +1,50 @@
+$principal-color: #E17B36;
+$secondar-color: #2A1F1D;
+$other-color-1: #33658A;
+
+.accueil-text {
+    color: $other-color-1;
+    font-size: 25px;
+}
+
+.filtre-text {
+    color: $other-color-1;
+}
+
+.valider-button {
+    display: flex;
+    align-items: end;
+    margin-left: 20px;
+}
+
+.lien-terrain {
+    text-decoration: none;
+}
+
+.terrain {
+    cursor: pointer;
+    transition: .5s;
+
+    &__img {
+        width: 100%;
+        height: 200px;
+    }
+
+    &__h6 {
+        color: $principal-color;
+    }
+
+    &:hover {
+        box-shadow: 3px 3px 5px $principal-color;
+    }
+
+    &__categorie {
+        font-size: 10px;
+        color: $other-color-1;
+        margin: 0;
+    }
+}
+
+.star {
+    color: $principal-color;
+}
