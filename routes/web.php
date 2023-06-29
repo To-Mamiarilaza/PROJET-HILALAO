@@ -23,4 +23,4 @@ Route::get('/', function() {
 
 include "back_office_route.php";
 include "front_office_client_route.php";
-include "front_office_user_route.php";
+// include "front_office_user_route.php";
