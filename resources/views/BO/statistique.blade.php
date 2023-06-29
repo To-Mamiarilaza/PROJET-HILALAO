@@ -94,7 +94,7 @@
                         <h2>Listes des clients</h2>
                         <div class="list-container">
                             @foreach($clients as $client)
-                                <a href="">
+                                <a href="{{ route('fieldByClient', ['id_client' => $client->getId_client() ]) }}">
                                     <div class="client mt-2">
                                         <div class="image">
                                             <img src="{{ asset('css/BO/asset/client.png') }}" alt="Image du client">
@@ -102,6 +102,7 @@
                                         <div class="detail-client">
                                             <p class="name">{{ $client->getFirst_name() }}</p>
                                             <p class="terrain">Nombre de terrain : <span class="number">{{ $client->getNombre_terrains()}}</span></p>
+                                            
                                         </div>
                                     </div>
                                 </a>

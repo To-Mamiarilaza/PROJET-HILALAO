@@ -62,6 +62,10 @@ Route::get('/DetailTerrain', [DetailTerrainController::class,
     'detailFieldById']
 )->name('detail_field');
 
+Route::get('/fieldByClient/{id_client}', [DetailTerrainController::class,
+        'fieldByClient']
+)->name('fieldByClient');
+
 
 Route::get('/ListeTerrain', [DetailTerrainController::class,
     'all']

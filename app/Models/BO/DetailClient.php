@@ -136,7 +136,7 @@ class DetailClient
 
     public function getDetailClients(){
         try{
-            $detail = "select c.first_name, c.last_name, c.phone_number, c.mail, c.address, c.birth_date, c.sign_up_date, cin.cin_number, cin.first_picture, cin.second_picture
+            $detail = "select c.id_client, c.first_name, c.last_name, c.phone_number, c.mail, c.address, c.birth_date, c.sign_up_date, cin.cin_number, cin.first_picture, cin.second_picture
             ,count(field.id_client) as nombre_field
             from client c
             join cin on cin.id_cin = c.id_cin 
@@ -149,6 +149,7 @@ class DetailClient
             if (count($details) > 0) {
                 foreach ($details as $result) {
                     $temp = new DetailClient();
+                    $temp->setId_client($result->id_client);
                     $temp->setFirst_name($result->first_name);
                     $temp->setLast_name($result->last_name);
                     $temp->setPhone_number($result->phone_number);
