@@ -5,6 +5,7 @@ use Exception;
 use App\Http\Controllers\Controller;
 use App\Models\BO\Category;
 use App\Models\BO\DetailClient;
+use App\Models\BO\DetailTerrain;
 use App\Models\BO\Statistique;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -34,13 +35,16 @@ class StatistiqueController extends Controller
         $nbClients = Statistique::getDataClientsYear($currentYear); 
         $nbTerrains = Statistique::getDataTerrainsYear($currentYear, 0); 
         $clients = $client->getDetailClients();
+        $detail = new DetailTerrain();
+        $terrain = $detail->getAllField();
         
         return view('BO.statistique', [
             'allCategories' => $allCategories,
             'NbUsers' => Statistique::nombre(Statistique::getDonneeNb($nbUsers)),
             'NbClients' => Statistique::nombre(Statistique::getDonneeNb($nbClients)),
             'NbTerrains' => Statistique::nombre(Statistique::getDonneeNb($nbTerrains)),
-            'clients' => $clients
+            'clients' => $clients,
+            'terrains' =>$terrain
         ]);
     }
 }

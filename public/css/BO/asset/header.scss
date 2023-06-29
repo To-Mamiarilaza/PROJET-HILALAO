@@ -1,5 +1,4 @@
-.header
-{
+.header {
     width: 100%;
     height: 70px;
     display: inline-flex;
@@ -9,29 +8,31 @@
     border-radius: 10px;
 }
 
-.header h1{
+.header h1 {
     color: #33658A;
     margin-left: 10%;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-#Logo{
+#Logo {
     width: 30%;
     color: black;
 }
-#user{
-    margin-right: 100px;
 
-    i{
-        padding: 20px;
-        margin-right: 20px;
-        text-decoration: none;
-        color: #33658A;
-        border-radius: 100%;
-        font-size: 20px;
-    }
-    i:hover{
-        font-size: 15px;
-        border: solid 0.5px #33658A;
-    }
+#user {
+    margin-right: 100px;
+}
+
+#user i {
+    padding: 20px;
+    margin-right: 20px;
+    text-decoration: none;
+    color: #33658A;
+    border-radius: 100%;
+    font-size: 20px;
+}
+
+#user i:hover {
+    font-size: 15px;
+    border: solid 0.5px #33658A;
 }

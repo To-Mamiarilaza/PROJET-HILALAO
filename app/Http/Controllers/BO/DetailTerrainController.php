@@ -16,7 +16,8 @@ class DetailTerrainController extends Controller
         $all = $detail->getDetailTerrain($id_terrain);
 
         return view('BO.detailTerrain', [
-            'all' => $all
+            'all' => $all,
+            'validation' => 1
         ]);
     }
 
@@ -44,8 +45,20 @@ class DetailTerrainController extends Controller
     
         return view('BO.detailTerrain', [
             'all' => $all,
-            'etat' => $etat,
-            'month' => $month->getMonths()
+            'etat' => $etat
+        ]);
+    }
+
+    public function detailFieldById() {
+        $detail = new DetailTerrain();
+        $id_terrain = $_GET['id_terrain'];
+        $annee = $_GET['annee'];
+        $all = $detail->getDetailTerrain($id_terrain);
+        $month = $detail->getMonthTerrain($id_terrain,$annee);
+    
+        return view('BO.detailTerrain', [
+            'all' => $all,
+            'month' => $month ? $month->getMonths() : []
         ]);
     }
 }

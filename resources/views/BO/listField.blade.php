@@ -12,7 +12,7 @@
                         <h2>Listes des terrains</h2>
                         <div class="list-container">
                             @foreach($all as $terrain)
-                                <a href="">
+                                <a href="{{ route('detail_field', ['id_terrain' => $terrain->getId_terrain() , 'annee' => 2023]) }}">
                                     <div class="client mt-2">
                                         <div class="image">
                                             <img src="{{ asset('css/BO/asset/client.png') }}" alt="Image du client">
