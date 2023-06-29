@@ -25,7 +25,7 @@ class ValidationClientController extends Controller
             return $next($request);
         });
     }
-    public function validationClient(Request $request)
+    public function validationClient($ref='')
     {
         $validation = new ValidationClient();
         $all = $validation->getPendingClient();
@@ -33,7 +33,8 @@ class ValidationClientController extends Controller
         $terrains = $terrain->getDetailTerrains();
 
         return view('BO.validationClient', [
-            'all' => $all,'terrains' => $terrains
+            'all' => $all,'terrains' => $terrains,
+            'ref' => $ref
         ]);
     }
 }

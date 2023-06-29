@@ -23,7 +23,7 @@ class AbonnementController extends Controller
             return $next($request);
         });
     }
-    public function abonnement(Request $request) {
+    public function abonnement(Request $request,$ref) {
         $model = new Abonnement();
         $categoryModel = new Category();
         $all = $model->getAllAbonnenent();
@@ -50,7 +50,8 @@ class AbonnementController extends Controller
             'selectedMonth' => $selectedMonth,
             'selectedYear' => $selectedYear,
             'selectedPayed' => $selectedPayed,
-            'donnee' => json_encode($model->avoir_label($donnee_de_paiement))
+            'donnee' => json_encode($model->avoir_label($donnee_de_paiement)),
+            'ref' => $ref
         ]);
     }
 }

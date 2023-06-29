@@ -25,7 +25,7 @@ class StatistiqueController extends Controller
         });
     }
 
-    public function statistique(){
+    public function statistique($ref){
         $category = new Category();
         $client = new DetailClient();
         $allCategories = $category->getAllCategory();
@@ -43,7 +43,8 @@ class StatistiqueController extends Controller
             'NbClients' => Statistique::nombre(Statistique::getDonneeNb($nbClients)),
             'NbTerrains' => Statistique::nombre(Statistique::getDonneeNb($nbTerrains)),
             'clients' => $clients,
-            'terrains' =>$terrain
+            'terrains' =>$terrain,
+            'ref' => $ref
         ]);
     }
 }

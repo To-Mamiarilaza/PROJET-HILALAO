@@ -37,19 +37,19 @@ Route::get('/logout', function () {
 })->name('log_out');
 
 
-Route::get('/Check', [LoginController::class,
+Route::post('/Check', [LoginController::class,
         'checkAccount']
 )->name('login');
 
-Route::get('/Statistique', [StatistiqueController::class,
+Route::get('/Statistique/{ref}', [StatistiqueController::class,
         'statistique']
 )->name('statistique');
 
-Route::get('/Abonnement', [AbonnementController::class,
+Route::get('/Abonnement/{ref}', [AbonnementController::class,
     'abonnement']
 )->name('abonnement');
 
-Route::get('/ValidationClient', [ValidationClientController::class,
+Route::get('/ValidationClient/{ref}', [ValidationClientController::class,
     'validationClient']
 )->name('validationClient');
 
@@ -88,7 +88,7 @@ Route::get('/sign', function () {
 })->name('view_sign');
 
 
-Route::get('/Sign', [LoginController::class,
+Route::post('/Sign', [LoginController::class,
     'saveAll'])->name('Sign');
 
 Route::get('/all/{variable}', [CrudController::class, 'all'])->name('crud');

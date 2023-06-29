@@ -50,9 +50,7 @@
 .lien li {
     cursor: pointer;
 }
-.lien li.active {
-    background-color: rgba(141, 93, 61, 0.65);
-}
+
 .lien li:hover {
     background-color: rgba(141, 93, 61, 0.65);
 }

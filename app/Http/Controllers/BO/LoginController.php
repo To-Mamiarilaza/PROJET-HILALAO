@@ -21,18 +21,18 @@ class LoginController extends Controller
         }
     }
 
-    public function checkAccount(Request $request)
+    public function checkAccount()
     {
         try {
             $model = new AccountAdmin();
-            $mail = $request->input('mail');
-            $password = $request->input('password');
+            $mail = $_POST['mail'];
+            $password = $_POST['password'];
             $account = $model->getAccountAdminConnected($mail,$password);
             Session::put('id_account_admin', $account->getId_account_admin());
-            // Session::put('account_admin', $account);
+            Session::put('account_admin', $account);
             Session::save();
             $statistiqueController = app(StatistiqueController::class);
-            return $statistiqueController->statistique();
+            return $statistiqueController->statistique('statistique');
         } catch (Exception $e) {
             $errorMessage = $e->getMessage();
             return view('BO/login', ['error'=>$errorMessage]);
@@ -42,15 +42,15 @@ class LoginController extends Controller
 
     
     
-    public function saveAll(Request $request)
+    public function saveAll()
     {
         $model = new AccountAdmin();
 
-        $model -> setFirst_name($request->input('nom'));
-        $model ->setLast_name($request->input('prenom'));
-        $model ->setPhone_number($request->input('tel'));
-        $model->setMail($request->input('mail'));
-        $model->setPwd($request->input('pwd'));
+        $model -> setFirst_name($_POST['nom']);
+        $model ->setLast_name($_POST['prenom']);
+        $model ->setPhone_number($_POST['tel']);
+        $model->setMail($_POST['mail']);
+        $model->setPwd($_POST['pwd']);
 
         $model-> save();
         
