@@ -9,11 +9,11 @@ class TestController extends Controller
 {
     public function index()
     {
-        $field = FieldDetailled::sFindById(3);
-        foreach ($field->getAvailability() as $key) {
-            var_dump($key->getUnavailability());
-            echo "<br>";
-        }
-        return view('FOU\empty');
+        // $field = FieldDetailled::sFindById(3);
+        // foreach ($field->getAvailability() as $key) {
+        //     var_dump($key->getUnavailability());
+        //     echo "<br>";
+        // }
+        return view('FOU\profileTerrain');
     }
 }

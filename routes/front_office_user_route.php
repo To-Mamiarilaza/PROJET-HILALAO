@@ -21,6 +21,7 @@ Route::get('/landing', [HomeController::class, 'index'])->name('landing');
 Route::get('/log/user/out', [LogController::class, 'signout'])->name('log-out');
 Route::get('/ListFields', [FieldController::class, 'index']);
 Route::get('/field/detail/{id_field}', [FieldController::class, 'detail'])->name('detail-field');
+Route::get('/field/detail/{id_field}/{date}', [FieldController::class, 'detailled'])->name('detailled-field');
 Route::get('/tester', [TestController::class, 'index'])->name('test');
 
 

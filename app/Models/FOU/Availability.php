@@ -38,7 +38,7 @@ class Availability extends DateTimeFO{
             $sql = 'SELECT day, start_time, end_time, id_field, price FROM v_availability_field_for_one_month WHERE id_field=%s';
             $sql = sprintf($sql, $id_field);
         } else {
-            $sql = "SELECT day, start_time, end_time, id_field, price FROM v_availlability_field_for_one_month WHERE id_field=%s AND day='%s'";
+            $sql = "SELECT day, start_time, end_time, id_field, price FROM v_availability_field_for_one_month WHERE id_field=%s AND day='%s'";
             $sql = sprintf($sql, $id_field, $date);
         }
         $availabilitys_db = DB::select($sql);

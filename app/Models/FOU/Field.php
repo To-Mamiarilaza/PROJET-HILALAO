@@ -144,9 +144,10 @@ class Field {
         $this->setDescription($result->description);
         $this->setAddress($result->address);
         $this->setName($result->name);
+        // $this->setInsertDate($result->insert_date);
         $this->setLatitude($result->latitude);
         $this->setLongitude($result->longitude);
-        $this->setInsertDate(DateTime::createFromFormat('Y-M-d', $result->insert_date));
+        $this->setInsertDate(DateTime::createFromFormat('Y-m-d', $result->insert_date));
         $this->setFieldFiles($result->field_files);
     }
 }

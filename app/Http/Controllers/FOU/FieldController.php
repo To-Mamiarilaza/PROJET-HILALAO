@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\FOU;
 
 use App\Http\Controllers\Controller;
+use App\Models\FOU\Availability;
 use App\Models\FOU\FieldDetailled;
 use App\Models\FOU\Category;
 use App\Models\FOU\Field;
@@ -16,6 +17,13 @@ class FieldController extends Controller
         $field = new FieldDetailled();
         $field->findById($id_field);
         return view('FOU\profil-field', ['field' => $field]);
+    }
+    public function detailled($id_field, $date) {
+        $field = new FieldDetailled();
+        $field->findById($id_field);
+        $availability = Availability::findByIdField($id_field, $date);
+        if (count($availability) == 0) return view('FOU\profil-field', ['field' => $field, 'availability_message' => "Ce terrain n'est pas disponible pour cette date"]);
+        return view('FOU\profil-field', ['field' => $field, 'availability' => $availability]);
     }
 
     public function index($id_category = 0)
