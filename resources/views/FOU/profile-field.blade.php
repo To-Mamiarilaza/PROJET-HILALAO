@@ -177,48 +177,14 @@
             </div>
             <div class="col-md-6 tarif px-4">
                 <div class="hidden-form" id="hidden-form">
+                    @foreach ($field->getAvailability() as $availability)
                     <div class="group-input">
-                        <input class="jour" type="number" value="1">
-                        <input class="star-time" type="time" value="07:00">
-                        <input class="end-time" type="time" value="18:00">
-                        <input class="price" type="number" value="50000">
+                        <input class="jour" type="number" value="{{ $availability->getDayOfWeek() }}">
+                        <input class="star-time" type="time" value="{{ $availability->getStartTime()->format('H:i') }}">
+                        <input class="end-time" type="time" value="{{ $availability->getEndTime()->format('H:i') }}">
+                        <input class="price" type="number" value="{{ $availability->getPrice() }}">
                     </div>
-                    <div class="group-input">
-                        <input class="jour" type="number" value="2">
-                        <input class="star-time" type="time" value="07:00">
-                        <input class="end-time" type="time" value="18:00">
-                        <input class="price" type="number" value="50000">
-                    </div>
-                    <div class="group-input">
-                        <input class="jour" type="number" value="3">
-                        <input class="star-time" type="time" value="07:00">
-                        <input class="end-time" type="time" value="18:00">
-                        <input class="price" type="number" value="50000">
-                    </div>
-                    <div class="group-input">
-                        <input class="jour" type="number" value="4">
-                        <input class="star-time" type="time" value="07:00">
-                        <input class="end-time" type="time" value="18:00">
-                        <input class="price" type="number" value="50000">
-                    </div>
-                    <div class="group-input">
-                        <input class="jour" type="number" value="5">
-                        <input class="star-time" type="time" value="07:00">
-                        <input class="end-time" type="time" value="18:00">
-                        <input class="price" type="number" value="50000">
-                    </div>
-                    <div class="group-input">
-                        <input class="jour" type="number" value="6">
-                        <input class="star-time" type="time" value="07:00">
-                        <input class="end-time" type="time" value="21:00">
-                        <input class="price" type="number" value="65000">
-                    </div>
-                    <div class="group-input">
-                        <input class="jour" type="number" value="7">
-                        <input class="star-time" type="time" value="07:00">
-                        <input class="end-time" type="time" value="21:00">
-                        <input class="price" type="number" value="65000">
-                    </div>
+                    @endforeach
                 </div>
 
                 <h2>Tarif du terrain</h2>
@@ -236,15 +202,15 @@
                     <form action="" class="form px-3">
                         <div class="mt-3">
                             <label for="date" class="form-label">Date</label>
-                            <input type="date" id="date" class="form-control">
+                            <input type="date" id="date" class="form-control" name="reservation_date">
                         </div>
                         <div class="mt-3">
                             <label for="debut" class="form-label">Début</label>
-                            <input type="time" id="debut" class="form-control">
+                            <input type="time" id="debut" class="form-control" name="start_time">
                         </div>
                         <div class="mt-3">
-                            <label for="fin" class="form-label">Fin</label>
-                            <input type="time" id="fin" class="form-control">
+                            <label for="fin" class="form-label">Durée</label>
+                            <input type="number" id="fin" class="form-control" name="duration">
                         </div>
                         <p class="erreur">Votre date de réservation est déja prise !</p>
                         <div class="valider mt-3">
@@ -287,8 +253,8 @@
         </div>
     </form>
 
-    <script src="asset/disponibility.js"></script>
-    <script src="asset/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('css/FOU/assets/js/disponibility.js') }}"></script>
+    <script src="{{ asset('css/FOU/assets/js/bootstrap.bundle.min.js') }}"></script>
 
 <script>
     var map = L.map('map').setView([{{ $field->getLatitude() }}, {{ $field->getLongitude() }}], 15);

@@ -34,7 +34,7 @@ function insertHTMLParameter(parametre) {
     var input = document.createElement("div");
     input.classList.add("group-input");
     input.innerHTML = HTMLelement;
-    
+
     var jour = input.getElementsByClassName("jour")[0];
     var start = input.getElementsByClassName("star-time")[0];
     var end = input.getElementsByClassName("end-time")[0];
@@ -161,10 +161,10 @@ function displayGroup(group) {
                 </ul>
             </div>
             <div class="col-md-4 hour">
-                <span class="begin"> </span> à <span class="end"></span> 
+                <span class="begin"> </span> à <span class="end"></span>
             </div>
             <div class="col-md-2 price">
-                
+
             </div>
             `;
 

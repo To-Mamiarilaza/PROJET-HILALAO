@@ -38,6 +38,6 @@ class ReservationController extends Controller
         $duration = $request->input('duration');
         $reservation = Reservation::prepareReservation($id_field, $id_users, $reservation_date, $start_time, $duration);
         $reservation->save();
-        return redirect('/field/calendar/'.$id_field.'/'.$reservation_date);
+        return redirect('/field/detail/'.$id_field);
     }
 }
