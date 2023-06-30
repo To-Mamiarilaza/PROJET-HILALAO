@@ -2,7 +2,7 @@
 @include('BO/nav') 
     
 <link rel="stylesheet" href="{{ asset('css/BO/asset/statistique.css') }}">
-<link rel="stylesheet" href="{{asset('js/Chart.js')}}">
+<!-- <link rel="stylesheet" href="{{asset('js/Chart.js')}}"> -->
     <script src="{{asset('js/Chart.js')}}"></script>
 <body>
     
@@ -262,7 +262,7 @@
     function getUtilisateursData(category, mois, annee) {
         return new Promise(function(resolve, reject) {
             $.ajax({
-                url: "/users?annee="+annee+"&mois="+mois+"&category="+category, // URL de votre endpoint pour récupérer les données des clients
+                url: "/users_admin?annee="+annee+"&mois="+mois+"&category="+category, // URL de votre endpoint pour récupérer les données des clients
                 method: "GET",
                 success: function(response) {
                     clientsData = response;
@@ -278,7 +278,7 @@
     function getClientsData(category, mois, annee) {
         return new Promise(function(resolve, reject) {
             $.ajax({
-                url: "/clients?annee="+annee+"&mois="+mois+"&category="+category, // URL de votre endpoint pour récupérer les données des clients
+                url: "/clients_admin?annee="+annee+"&mois="+mois+"&category="+category, // URL de votre endpoint pour récupérer les données des clients
                 method: "GET",
                 success: function(response) {
                     clientsData = response;
@@ -294,7 +294,7 @@
     function getTerrainsData(category, mois, annee) {
         return new Promise(function(resolve, reject) {
             $.ajax({
-                url: "/terrains?annee="+annee+"&mois="+mois+"&category="+category, // URL de votre endpoint pour récupérer les données des clients
+                url: "/terrains_admin?annee="+annee+"&mois="+mois+"&category="+category, // URL de votre endpoint pour récupérer les données des clients
                 method: "GET",
                 success: function(response) {
                     clientsData = response;
