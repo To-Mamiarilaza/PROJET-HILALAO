@@ -7,8 +7,8 @@ use App\Http\Controllers\FOU\HomeFOUController;
 use App\Http\Controllers\FOU\LogFOUController;
 use App\Http\Controllers\FOU\TestController;
 
-Route::get('/list-field/{id_category}', [FieldFOUController::class, 'index'])->name('list-field');
-Route::get('/list-field', [FieldFOUController::class, 'index'])->name('list-field-all');
+Route::get('/field/list/{id_category}', [FieldFOUController::class, 'index'])->name('list-field-fou');
+Route::get('/field/list', [FieldFOUController::class, 'index'])->name('list-field-all-fou');
 Route::get('/field/calendar/{id_field}', [ReservationFOUController::class, 'index'])->name('reserve');
 Route::get('/field/calendar/{id_field}/{date}', [ReservationFOUController::class, 'index'])->name('reserve-date');
 Route::post('/reserve', [ReservationFOUController::class, 'reserve'])->name('reserve');
