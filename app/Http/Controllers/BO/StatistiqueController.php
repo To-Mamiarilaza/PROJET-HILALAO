@@ -36,6 +36,9 @@ class StatistiqueController extends Controller
         $clients = $client->getDetailClients();
         $detail = new DetailTerrain();
         $terrain = $detail->getAllField();
+        $field = new Statistique();
+        $all = $field->StatField();
+
         
         return view('BO.statistique', [
             'allCategories' => $allCategories,
@@ -43,7 +46,8 @@ class StatistiqueController extends Controller
             'NbClients' => Statistique::nombre(Statistique::getDonneeNb($nbClients)),
             'NbTerrains' => Statistique::nombre(Statistique::getDonneeNb($nbTerrains)),
             'clients' => $clients,
-            'terrains' =>$terrain
+            'terrains' =>$terrain,
+            'all' => $all
         ]);
     }
 }

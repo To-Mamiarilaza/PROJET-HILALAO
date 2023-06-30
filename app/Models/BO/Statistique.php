@@ -10,6 +10,8 @@ class Statistique
     protected $month;
     protected $date;
     protected $category;
+    protected $id_field;
+    protected $id_category;
 
     public function getNb()
     {
@@ -45,6 +47,20 @@ class Statistique
     public function setCategory($value)
     {
         $this->category = $value;
+    }
+
+    public function getId_field() {
+        return $this->id_field;
+    }
+    public function setId_field($value) {
+        $this->id_field = $value;
+    }
+
+    public function getId_category() {
+        return $this->id_category;
+    }
+    public function setId_category($value) {
+        $this->id_category = $value;
     }
 
     public function __construct()
@@ -281,5 +297,29 @@ class Statistique
             $res = $res + $database[$i];
         }
         return $res;
+    }
+
+    public function StatField() {
+        try{
+            $requette = "select count(id_field)as id_field, f.id_category, c.category from field f
+            join category c on c.id_category = f.id_category
+            group by f.id_category, c.category";
+
+            $field = DB::select($requette);
+            $res = array();
+
+            if(count($field) > 0){
+                foreach($field as $result){
+                    $temp = new Statistique();
+                    $temp->setId_field($result->id_field);
+                    $temp->setId_category($result->id_category);
+                    $temp->setCategory($result->category);
+                    $res[] = $temp;
+                }
+            }
+            return $res;
+        } catch(Exception $e){
+            $e->getMessage();
+        }
     }
 }
