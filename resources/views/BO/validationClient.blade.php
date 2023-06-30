@@ -14,7 +14,7 @@
                 <h2>Listes des clients en attentes</h2>
                 <div class="listes-client">
                 @foreach ($all as $abonnement)
-                    <a href="{{ route('detailClient_admin', ['id_client' => $abonnement->getId_client(),'ref' =>'validationClient' ]) }}">
+                    <a href="{{ route('detailClient_admin', ['id_client' => $abonnement->getId_client(),'ref' => 'validationClient' ]) }}">
                         <div class="client">
                             <img src="{{ asset('css/BO/asset/client.png')}}" alt="Image du client">
                                 <p class="nom">{{ $abonnement->getFirst_name() }}</p>
@@ -33,7 +33,7 @@
                         <div class="listes-client">
                         @foreach ($terrains as $terrain)
 
-                            <a href="{{ route('detailTerrain_admin', ['id_terrain' => $terrain->getId_terrain(),'ref' =>'validationClient' ]) }}">
+                            <a href="{{ route('detailTerrain_admin', ['id_terrain' => $terrain->getId_terrain(),'ref' => 'validationClient' ]) }}">
                                 <div class="terrain">
                                     <img src="{{ asset('css/BO/asset/elgeco.jpg') }}" alt="Image du terrain">
                                     <div class="detail-terrain">
