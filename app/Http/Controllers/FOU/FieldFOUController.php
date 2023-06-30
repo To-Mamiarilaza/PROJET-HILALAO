@@ -10,7 +10,7 @@ use App\Models\FOU\Field;
 use Illuminate\Http\Request;
 use App\Models\FOU\InfoField;
 
-class FieldController extends Controller
+class FieldFOUController extends Controller
 {
     public function detail($id_field) {
         $field = new FieldDetailled();

@@ -9,7 +9,7 @@ use App\Models\FOU\Users;
 use App\Exceptions\UserException;
 use Illuminate\Support\Facades\Session;
 
-class LogController extends Controller
+class LogFOUController extends Controller
 {
 
     public function index() {
