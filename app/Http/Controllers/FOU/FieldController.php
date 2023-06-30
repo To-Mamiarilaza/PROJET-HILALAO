@@ -7,15 +7,23 @@ use App\Models\FOU\Availability;
 use App\Models\FOU\FieldDetailled;
 use App\Models\FOU\Category;
 use App\Models\FOU\Field;
-use Illuminate\Http\Request;
+use App\Models\FOU\FieldUser;
 use App\Models\FOU\InfoField;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class FieldController extends Controller
 {
     public function detail($id_field) {
-        $field = new FieldDetailled();
-        $field->findById($id_field);
-        return view('FOU\profile-field', ['field' => $field]);
+        $date = date('Y-m-d');
+        $users = null;
+        if (Session::get("user") !== null) {
+            $users = Session::get("user");
+            $field = FieldUser::Sfind( $id_field, $users->getIdUsers());
+        } else {
+            $field = FieldUser::findReservation($id_field);
+        }
+        return view('FOU\profile-field', ['field' => $field, 'date' => $date]);
     }
     public function detailled($id_field, $date) {
         $field = new FieldDetailled();

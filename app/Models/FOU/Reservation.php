@@ -60,7 +60,6 @@ class Reservation {
     public static function findOthersReservation($id_users, $id_field) {
         $sql = 'SELECT id_reservation, reservation_date, id_users, start_time, id_field, duration, end_time FROM "public".v_actif_reservation f WHERE id_field = %s AND id_users != %s';
         $sql = sprintf($sql, $id_field, $id_users);
-        echo $sql;
         $reservations_db = DB::select($sql);
         $res = array();
         foreach ($reservations_db as $reservation_db) {
@@ -72,7 +71,6 @@ class Reservation {
     public static function findDirectReservationByIdField($id_field) {
         $sql = 'SELECT id_direct_reservation, reservation_date, client_name, start_time, id_field, duration, end_time FROM "public".v_direct_reservation f WHERE id_field = %s';
         $sql = sprintf($sql, $id_field);
-        echo $sql;
         $reservations_db = DB::select($sql);
         $res = array();
         foreach ($reservations_db as $reservation_db) {

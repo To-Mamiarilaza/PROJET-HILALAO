@@ -7,11 +7,69 @@
     <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/FOU/assets/css/header.css ') }}">
     <link rel="stylesheet" href="{{ asset('css/FOU/assets/css/profil-terrain.css ') }}">
-    <link rel="stylesheet" href="{{ asset('fontawesome-5/cs s/all.css')  }}">
+    <link rel="stylesheet" href="{{ asset('fontawesome-5/css/all.css')  }}">
     <link rel="stylesheet" href="{{ asset('css/FOU/assets/css/disponibility.css') }}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <title>Profil du terrain</title>
 </head>
 
+<script src="{{ asset('js/dist/index.global.js') }}"></script>
+<script>
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      initialDate: '{{ date('Y-m-d') }}',
+      initialView: 'timeGridWeek',
+      nowIndicator: false,
+      headerToolbar: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'timeGridWeek'
+      },
+      navLinks: false, // can click day/week names to navigate views
+      editable: false,
+      selectable: false,
+      selectMirror: true,
+      dayMaxEvents: true, // allow "more" link when too many events
+      events: [
+        @foreach ($field->getUsersReservations() as $reservation)
+        {
+            color: 'green',
+            title: 'Votre réservation',
+            start: "{{ $reservation->getReservationDate()->format('Y-m-d') }}T{{ $reservation->getStartTime()->format('H:i:s') }}",
+            end: "{{ $reservation->getReservationDate()->format('Y-m-d') }}T{{ $reservation->getEndTime()->format('H:i:s') }}"
+        },
+        @endforeach
+        @foreach ($field->getOthersReservations() as $reservation)
+        {
+            color: 'red',
+            title: 'Reserved',
+            start: "{{ $reservation->getReservationDate()->format('Y-m-d') }}T{{ $reservation->getStartTime()->format('H:i:s') }}",
+            end: "{{ $reservation->getReservationDate()->format('Y-m-d') }}T{{ $reservation->getEndTime()->format('H:i:s') }}"
+        },
+        @endforeach
+        @foreach ($field->getDirectReservations() as $reservation)
+        {
+            color: 'red',
+            title: 'Reserved',
+            start: "{{ $reservation->getReservationDate()->format('Y-m-d') }}T{{ $reservation->getStartTime()->format('H:i:s') }}",
+            end: "{{ $reservation->getReservationDate()->format('Y-m-d') }}T{{ $reservation->getEndTime()->format('H:i:s') }}"
+        },
+        @endforeach
+      ]
+    });
+
+    calendar.render();
+  });
+    function renduEvenement(event, element) {
+        if (event.nonUtilise) {
+            element.addClass('fc-non-utilise');
+        }
+    }
+</script>
 <body>
     <section class="menu">
         <nav class="navbar navbar-expand-lg navbar-light bg-light px-5">
@@ -54,18 +112,18 @@
         <div class="row">
             <div class="col-md-6 p-3">
                 <div class="image">
-                    <img src="./image/terrain.jpg" alt="Image principale du terrain">
+                    <img src="{{ asset('./images/terrain.jpg') }}" alt="Image principale du terrain">
                 </div>
             </div>
             <div class="col-md-6 p-3">
                 <div class="nom-terrain">
-                    <img src="./image/foot_ball_icon.jpg" alt="Icone terrain de foot">
-                    <h1>Elgeco Plus</h1>
+                    <img src="{{ asset('./images/foot_ball_icon.jpg') }}" alt="Icone terrain de foot">
+                    <h1>{{ $field->getName() }}</h1>
                 </div>
                 <div class="images mt-3">
-                    <img src="./image/elgeco.jpg" alt="Image secondaire du terrain">
-                    <img src="./image/elgeco.jpg" alt="Image secondaire du terrain">
-                    <img src="./image/elgeco.jpg" alt="Image secondaire du terrain">
+                    <img src="{{ asset('./images/elgeco.jpg') }}" alt="Image secondaire du terrain">
+                    <img src="{{ asset('./images/elgeco.jpg') }}" alt="Image secondaire du terrain">
+                    <img src="{{ asset('./images/elgeco.jpg') }}" alt="Image secondaire du terrain">
                 </div>
                 <div class="note p-3">
                     <p>Note du terrain <span class="reserver"><a href="#reservation"><i class="fas fa-edit"></i>
@@ -79,18 +137,12 @@
                     </div>
                 </div>
                 <div class="description">
-                    Le Kianja Barea (en français : stade Barea) est un stade
-                    de football et d'athlétisme dans l'arrondissement de Mahamasina
-                    à Antananarivo, la capitale de Madagascar. Ses
-                    40 260 places assises font de lui le plus grand stade
-                    de la Grande île. Son architecture s'inspire de la forme
-                    des ravinala et des collines de l'Imerina.
+                    {{ $field->getDescription() }}
                 </div>
             </div>
         </div>
 
         <hr>
-
         <div class="caracteristique mx-1">
             <table class="table">
                 <thead>
@@ -106,13 +158,13 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Elgeco Plus</td>
-                        <td>Foot à 11</td>
-                        <td>Analamanga, mahamasina</td>
-                        <td>Extérieur</td>
-                        <td>Goudron</td>
-                        <td>Eclairé</td>
-                        <td>034 14 517 46</td>
+                        <td>{{ $field->getName() }}</td>
+                        <td>{{ $field->getCategory() }}</td>
+                        <td>{{ $field->getAddress() }}</td>
+                        <td>{{ $field->getInfrastructure() }}</td>
+                        <td>{{ $field->getFieldType() }}</td>
+                        <td>{{ $field->getLight() }}</td>
+                        <td>{{ $field->getClient()->getPhoneNumber() }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -121,9 +173,7 @@
         <div class="row my-4">
             <div class="col-md-6 localisation px-4">
                 <h2>Localisation du terrain</h2>
-                <div class="map mt-3">
-                    <img src="image/terrain.jfif" alt="">
-                </div>
+                <div class="map mt-3" id="map"></div>
             </div>
             <div class="col-md-6 tarif px-4">
                 <div class="hidden-form" id="hidden-form">
@@ -203,7 +253,7 @@
                     </form>
                 </div>
                 <div class="col-md-8 calendar px-4">
-                    <img src="image/calendar.webp" alt="">
+                    <div id='calendar'></div>
                 </div>
             </div>
         </div>
@@ -239,6 +289,42 @@
 
     <script src="asset/disponibility.js"></script>
     <script src="asset/bootstrap.bundle.min.js"></script>
+
+<script>
+    var map = L.map('map').setView([{{ $field->getLatitude() }}, {{ $field->getLongitude() }}], 15);
+
+    var Stadia_OSMBright = L.tileLayer('https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png', {
+        maxZoom: 20,
+        attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+    });
+
+    // marker
+
+
+    Stadia_OSMBright.addTo(map);
+
+    var terrainData = [
+        {
+            name: "{{ $field->getName() }}",
+            category: "{{ $field->getCategory() }}",
+            fieldType: "{{ $field->getFieldType() }}",
+            infrastructure: "{{ $field->getInfrastructure() }}",
+            light: "{{ $field->getLight() }}",
+            address: "{{ $field->getAddress() }}",
+            longitude: {{ $field->getLongitude() }},
+            latitude: {{ $field->getLatitude() }},
+            description: "{{ $field->getDescription() }}"
+        },
+    ];
+
+    // Exemple d'utilisation des données générées
+    terrainData.forEach(function(terrain) {
+        // Effectuez d'autres actions spécifiques à chaque terrain
+        var marker = L.marker([terrain.latitude, terrain.longitude]).addTo(map);
+        marker.bindPopup(terrain.name).openPopup();
+
+    });
+</script>
 </body>
 
 </html>

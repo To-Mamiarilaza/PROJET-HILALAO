@@ -22,7 +22,7 @@ class Field {
 
 
     public function findById($id) {
-        $sql = "SELECT id_field, id_category, subscribing_price, name, id_field_type, id_infrastructure, id_light, description, address, latitude, longitude, insert_date, field_files FROM field WHERE id_field=%s";
+        $sql = "SELECT id_field, id_category, subscribing_price, name, id_field_type, id_infrastructure, id_light, description, address, latitude, longitude, insert_date, field_files, id_client FROM field WHERE id_field=%s";
         $sql = sprintf($sql, $id);
         $field_db = DB::select($sql);
         if (count($field_db) != 0) {
