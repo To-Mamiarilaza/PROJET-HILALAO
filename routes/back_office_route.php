@@ -64,7 +64,7 @@ Route::get('/DetailTerrain/{id_terrain}/{ref}', [DetailTerrainController::class,
     'detailTerrain']
 )->name('detailTerrain_admin');
 
-Route::get('/DetailTerrain', [DetailTerrainController::class,
+Route::get('/DetailTerrain/{ref}', [DetailTerrainController::class,
     'detailFieldById']
 )->name('detail_field_admin');
 
@@ -77,7 +77,7 @@ Route::get('/ListeTerrain', [DetailTerrainController::class,
     'all']
 )->name('list_field_admin');
 
-Route::get('/DetailTerrain/{variable}/{id_terrain}', [DetailTerrainController::class,
+Route::get('/DetailTerrain/{variable}/{id_terrain}/{ref}', [DetailTerrainController::class,
     'update']
 )->name('update_status_admin');
 

@@ -45,21 +45,22 @@ class DetailTerrainController extends Controller
         ]);
     }
 
-    public function update($variable,$id_terrain){
+    public function update($variable,$id_terrain,$ref){
         $detail = new DetailTerrain();
         $detail->update_status($variable,$id_terrain);// Appeler la fonction detailTerrain avec la variable d'état
         $etat = $variable; // Valeur de l'état à passer à la fonction detailTerrain
-        return $this->detailTerrainWithEtat($id_terrain, $etat);
+        return $this->detailTerrainWithEtat($id_terrain, $etat,$ref);
     }
     
-    public function detailTerrainWithEtat($id_terrain, $etat) {
+    public function detailTerrainWithEtat($id_terrain, $etat,$ref) {
         $detail = new DetailTerrain();
         $all = $detail->getDetailTerrain($id_terrain);
         $month = $detail->getMonthTerrain($id_terrain,2023);
     
         return view('BO.detailTerrain', [
             'all' => $all,
-            'etat' => $etat
+            'etat' => $etat,
+            'ref' => $ref
         ]);
     }
 
