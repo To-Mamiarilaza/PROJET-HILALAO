@@ -1,6 +1,8 @@
 @include('BO/header') 
 @include('BO/nav') 
-    
+@php
+    use App\Models\BO\DetailClient;
+@endphp
 <link rel="stylesheet" href="{{ asset('css/BO/asset/statistique.css') }}">
 <!-- <link rel="stylesheet" href="{{asset('js/Chart.js')}}"> -->
     <script src="{{asset('js/Chart.js')}}"></script>
@@ -149,20 +151,25 @@
                     <div class="list-client">
                         <h2>Listes des clients</h2>
                         <div class="list-container">
-                            @foreach($clients as $client)
-                                <a href="{{ route('fieldByClient_admin', ['id_client' => $client->getId_client(),'ref' => 'statistique' ]) }}">
-                                    <div class="client mt-2">
-                                        <div class="image">
-                                            <img src="{{ asset('css/BO/asset/client.png') }}" alt="Image du client">
-                                        </div>
-                                        <div class="detail-client">
-                                            <p class="name">{{ $client->getFirst_name() }}</p>
-                                            <p class="terrain">Nombre de terrain : <span class="number">{{ $client->getNombre_terrains()}}</span></p>
-                                            
-                                        </div>
+                        @foreach($clients as $client)
+                            <a href="{{ route('fieldByClient_admin', ['id_client' => $client->getId_client(),'ref' => 'statistique' ]) }}">
+                                <div class="client mt-2">
+                                    <div class="image">
+                                        <img src="{{ asset('css/BO/asset/client.png') }}" alt="Image du client">
                                     </div>
-                                </a>
-                            @endforeach
+                                    <div class="detail-client">
+                                        <p class="name">{{ $client->getFirst_name() }}</p>
+                                        @if($client->getFieldOfClient($client->getId_client()) != null)
+                                            <p class="terrain">Nombre de terrain : <span class="number">{{ $client->getFieldOfClient($client->getId_client())->getNombre_terrains()}}</span></p>
+                                        @else
+                                            <p class="terrain">Nombre de terrain : <span class="number">0</span></p>
+                                        @endif
+
+                                    </div>
+                                </div>
+                            </a>
+                        @endforeach
+
 
                         </div>
                     </div>
