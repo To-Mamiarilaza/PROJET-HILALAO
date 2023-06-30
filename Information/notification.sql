@@ -14,7 +14,10 @@ INSERT INTO type_notification VALUES
 (10, 'Validation demande d'' adhesion'),
 (11, 'Validation demande d'' ajout de terrain'),
 (12, 'Réservation d'' utilisateur'),
-(13, 'Rappel de payement d''abonnement');
+(13, 'Rappel de payement d''abonnement'),
+(20, 'Demande d'' adhesion d''un client'),
+(21, 'Demande d'' ajout terrain'),
+(22, 'Payement d'' une abonnement');
 
 CREATE TABLE user_notification (
     id_user_notification SERIAL PRIMARY KEY,
@@ -129,3 +132,61 @@ SELECT cn.id_client_notification, cn.id_client, id_type_notification, date_notif
 FROM client_notification cn JOIN field_subscription_notification fs 
 ON cn.id_client_notification = fs.id_client_notification JOIN
 field f ON fs.id_field = f.id_field;
+
+
+-- NOTIFICATION POUR LES BACK OFFICES
+CREATE TABLE admin_notification (
+    id_admin_notification SERIAL PRIMARY KEY,
+    id_type_notification SERIAL,
+    date_notification TIMESTAMP,
+    etat SERIAL,
+    FOREIGN KEY(id_type_notification) REFERENCES type_notification(id_type_notification)
+);
+INSERT INTO admin_notification VALUES(DEFAULT, 20, '2023-06-29 18:00:00', 0);
+INSERT INTO admin_notification VALUES(DEFAULT, 21, '2023-06-29 18:00:00', 0);
+INSERT INTO admin_notification VALUES(DEFAULT, 22, '2023-06-29 18:00:00', 0);
+
+CREATE TABLE client_adhesion_notification (
+    id_admin_notification SERIAL,
+    id_client SERIAL,
+    FOREIGN KEY(id_admin_notification) REFERENCES admin_notification(id_admin_notification),
+    FOREIGN KEY(id_client) REFERENCES client(id_client)
+);
+INSERT INTO client_adhesion_notification VALUES(1, 1);
+
+CREATE TABLE field_adhesion_notification (
+    id_admin_notification SERIAL,
+    id_client SERIAL,
+    id_field SERIAL,
+    FOREIGN KEY(id_client) REFERENCES client(id_client),
+    FOREIGN KEY(id_field) REFERENCES field(id_field)
+);
+INSERT INTO field_adhesion_notification VALUES(2, 2, 3);
+
+CREATE TABLE subscription_payement_notification (
+    id_admin_notification SERIAL,
+    id_client SERIAL,
+    id_field SERIAL,
+    month INTEGER,
+    FOREIGN KEY(id_client) REFERENCES client(id_client),
+    FOREIGN KEY(id_field) REFERENCES field(id_field)
+);
+INSERT INTO subscription_payement_notification VALUES (3, 3, 1, 7);
+
+-- Crée un view pour le demande d'adhesion d'un client
+CREATE VIEW v_client_adhesion_notification AS
+SELECT an.id_admin_notification, an.id_type_notification, an.date_notification, an.etat, ca.id_client, c.first_name FROM 
+admin_notification an JOIN client_adhesion_notification ca ON an.id_admin_notification = ca.id_admin_notification
+JOIN client c ON ca.id_client = c.id_client;
+
+-- Crée un view pour lee demande d'ajout du terrain
+CREATE VIEW v_field_adhesion_notification AS
+SELECT an.id_admin_notification, an.id_type_notification, an.date_notification, an.etat, fa.id_client, c.first_name, f.id_field, f.name FROM 
+admin_notification an JOIN field_adhesion_notification fa ON an.id_admin_notification = fa.id_admin_notification
+JOIN client c ON fa.id_client = c.id_client JOIN field f ON fa.id_field = f.id_field;
+
+-- Crée un view pour les notifications de payements d'une abonnement
+CREATE VIEW v_subscription_notification AS
+SELECT an.id_admin_notification, an.id_type_notification, an.date_notification, an.etat, sp.id_client, c.first_name, f.id_field, f.name, sp.month FROM
+admin_notification an JOIN subscription_payement_notification sp ON an.id_admin_notification = sp.id_admin_notification
+JOIN client c ON sp.id_client = c.id_client JOIN field f ON sp.id_field = f.id_field;

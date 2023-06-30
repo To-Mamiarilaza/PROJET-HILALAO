@@ -2,25 +2,21 @@
 namespace App\Http\Controllers\FOC;
 
 use App\Http\Controllers\Controller;
-use App\Models\FOC\ClientNotification;
+use App\Models\FOC\BackOfficeNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
-class ClientNotificationController extends Controller
+class BackOfficeController extends Controller
 {
 	public function index(Request $request)
 	{
-		$idClient = 1; // ID de l'utilisateur (vous pouvez le remplacer par la valeur appropriée)
-
-        $notifications = ClientNotification::getAllClientNotification($idClient);
+        $notifications = BackOfficeNotification::getAllBackOfficeNotification();
         return view('FOC/testNotification', ['notifications' => $notifications]);	
 	}
 
 	public function changeNotificationState($idNotif) 
 	{
-		$idUserNotification = $idNotif;
-
-		ClientNotification::updateState($idUserNotification);
+		BackOfficeNotification::updateState($idNotif);
 
 		echo "Changement d'état effectué";
 	}

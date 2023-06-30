@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FOC\BackOfficeController;
 use App\Http\Controllers\FOC\ClientNotificationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FOC\LoginController;
@@ -37,9 +38,9 @@ Route::get('/disponibility', function() {
     return view('FOC/profil-terrain');
 });
 
-Route::get('/testNotification', [ClientNotificationController::class, 'index']);
+Route::get('/testNotification', [BackOfficeController::class, 'index']);
 
-Route::get('/changeNotificationState/{idNotif}', [ClientNotificationController::class, 'changeNotificationState']);
+Route::get('/changeNotificationState/{idNotif}', [BackOfficeController::class, 'changeNotificationState']);
 
 
 

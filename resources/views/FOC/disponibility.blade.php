@@ -55,7 +55,7 @@
             <input class="end-time" type="time" value="21:00">
             <input class="price" type="number" value="65000">
         </div>
-</div>
+    </div>
 
     @include('FOC/header')
     <div class="container mt-4">
@@ -69,7 +69,7 @@
 
         <!-- Formulaire d'envoie du nouveau paramètre -->
         <form action="" class="hidden-form" method="GET" id="send-form">
-            
+
         </form>
 
         <div class="parameter-insert mt-5" id="parameter-insert">

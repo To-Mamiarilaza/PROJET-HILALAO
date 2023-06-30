@@ -97,7 +97,11 @@ class ClientNotification
 
             case 13:
                 $mois = Carbon::create(null, $this->month, 1)->format('F');
-                $contenue = "Votre abonnement du mois <span class='fieldName'>" . $mois . " </span> sera expiré dans <span class='time-last'>  " .  $this->calculDureeDay() . " </span>";
+                if (Carbon::parse($this->dateNotification)->lt(Carbon::now())) {
+                    $contenue = "Votre abonnement du mois <span class='fieldName'>" . $mois . " </span> a été <span class='time-last'> expiré </span>";
+                } else {
+                    $contenue = "Votre abonnement du mois <span class='fieldName'>" . $mois . " </span> sera expiré dans <span class='time-last'>  " .  $this->calculDureeDay() . " </span>";
+                }
                 return $contenue;
                 break;
 

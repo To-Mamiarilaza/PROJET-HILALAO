@@ -15,7 +15,7 @@ class TestNotification extends Controller
 		$idUser = 3; // ID de l	'utilisateur (vous pouvez le remplacer par la valeur appropriée)
 
         $notifications = UserNotification::getAllUserNotification($idUser);
-
+		
         return view('FOC/testNotification', ['notifications' => $notifications]);	
 	}
 
