@@ -8,22 +8,43 @@
     <link rel="stylesheet" href="{{ asset('css/BO/assets/css/login.css') }}">
     <title>HILALAO | LOGIN</title>
 </head>
+
 <body>
     <div class="container box">
         <div class="row">
+        @php
+            $p = "Nom d'utilisateur";
+            $errorClass = ""; // Classe pour le champ d'erreur
+            if (isset($error)) {
+                $p = $error;
+                $errorClass = "form-content__input--error"; // Ajoutez la classe d'erreur
+            }
+        @endphp
+
+        <script>
+            var passwordField = document.getElementById('password');
+
+            @if (isset($error))
+            <div class="alert alert-danger">
+                {{ $error }}
+            </div>
+                passwordField.value = '{{ $error }}';
+                passwordField.classList.add('form-content__input--error');
+            @endif
+        </script>
             <h1 class="box__title">Log <span class="box__title--span">in</span></h1>
-            <form class="col-md-12 form-content" action="{{ route('login') }}">
-                <input class="form-content__input form-content__input--log" type="mail" placeholder="Nom d'utilisateur" name="mail" aria-label=".form-control-lg">
-                <input class="form-content__input form-content__input--log" type="password" placeholder="Mot de passe" name="password" aria-label=".form-control-lg" id="password">
+            <form class="col-md-12 form-content" method="POST" action="{{ route('login_admin') }}" >
+                @csrf
+                <input class="form-content__input form-content__input--log {{ $errorClass }}" type="mail" placeholder="{{ $p }}" name="mail" aria-label=".form-control-lg" required>
+                <input class="form-content__input form-content__input--log" type="password" placeholder="Mot de passe" name="password" aria-label=".form-control-lg" id="password" required>
                 <div class="form-content__checkbox">
                     <input type="checkbox" class="form-content__input form-content__input--showing-password" onclick="showPassword()">
                     <label for="form-content__label--showing-password">Show Password</label>
                 </div>
                 <button type="submit" class="form-content__input--submit">SIGN IN</button>
             </form>
-                
         </div>
-        <p>Don't have a account? <a href="{{ route('view_sign') }}">Sign up</a></p>
+        <p>Don't have a account? Sign up</p>
     </div>
 </body>
 

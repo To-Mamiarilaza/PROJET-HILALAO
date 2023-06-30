@@ -45,4 +45,16 @@ body {
   background-color: rgb(49, 180, 44);
   color: white;
   border: none;
+}
+
+.form-content__input--error::-moz-placeholder {
+  color: red;
+}
+
+.form-content__input--error:-ms-input-placeholder {
+  color: red;
+}
+
+.form-content__input--error::placeholder {
+  color: red;
 }/*# sourceMappingURL=login.css.map */

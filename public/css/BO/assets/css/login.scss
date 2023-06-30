@@ -60,5 +60,23 @@ body {
         }
         
     }
+    
+
+}
+
+.form-content__input--error::-webkit-input-placeholder {
+    color: red;
+}
+
+.form-content__input--error::-moz-placeholder {
+    color: red;
+}
+
+.form-content__input--error:-ms-input-placeholder {
+    color: red;
+}
+
+.form-content__input--error::placeholder {
+    color: red;
 
 }

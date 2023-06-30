@@ -1,0 +1,101 @@
+.reference {
+    position: relative;
+    display: flex;
+}
+
+.sidebar {
+    position: sticky;
+    top: 0;
+    width: 280px;
+    background: rgba(225, 122, 54, 0.6509803922);
+    height: 100vh;
+    padding: 20px;
+}
+
+.profile-name {
+    padding-left: 10px;
+}
+
+.profile-name p {
+    margin: 0 10px;
+}
+
+.profile-name .nom {
+    font-weight: 600;
+    color: white;
+    font-size: 18px;
+}
+
+.profile-name .profile {
+    font-weight: 400;
+    color: rgb(236, 236, 236);
+}
+
+.lien a {
+    text-decoration: none;
+    color: rgb(230, 230, 230);
+    display: block;
+}
+
+.lien a:hover {
+    color: white;
+}
+
+.lien ul {
+    list-style: none;
+    line-height: 50px;
+    padding: 0;
+}
+
+.lien li {
+    cursor: pointer;
+}
+
+.lien li:hover {
+    background-color: rgba(141, 93, 61, 0.65);
+}
+
+.checked {
+    color: white !important;
+    background-color: rgba(141, 93, 61, 0.65);
+}
+
+.lien i {
+    margin-right: 20px;
+    padding-left: 20px;
+}
+
+.accordion-item {
+    background-color: white;
+}
+
+.accordion-body li a {
+    color: rgba(225, 122, 54, 0.911) !important;
+}
+
+.accordion-body li a:hover {
+    color: #ffffff !important;
+    background-color: rgba(141, 93, 61, 0.65);
+}
+
+.accordion-body li:hover {
+    background-color: transparent;
+}
+
+/*# sourceMappingURL=statistique.css.map */
+
+.content {
+    background-color: rgb(240, 240, 240);
+    flex: 1;
+}
+
+.en-tete {
+    padding: 5px 40px;
+    background-color: rgba(225, 122, 54, 0.6509803922);
+    font-size: 20pt;
+    font-weight: 600;
+    letter-spacing: 5px;
+    color: white;
+    border-radius: 5px;
+    box-shadow: 3px 3px 5px lightgray;
+}

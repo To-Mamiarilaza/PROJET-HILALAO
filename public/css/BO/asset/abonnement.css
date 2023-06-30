@@ -1,0 +1,40 @@
+.first-line {
+  background-color: white;
+  box-shadow: 3px 3px 5px lightgray;
+  padding: 5px 15px;
+  border-radius: 5px;
+}
+.first-line .valider {
+  padding: 5px 25px;
+}
+.first-line h2 {
+  font-size: 18px;
+  color: #3176aa;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  border-bottom: solid #3176aa 1px;
+}
+.first-line .chart {
+  height: 350px;
+}
+
+.listes {
+  background-color: white;
+  box-shadow: 3px 3px 5px lightgray;
+  padding: 5px 15px;
+  border-radius: 5px;
+}
+.listes .tableau {
+  height: 320px;
+  overflow-y: auto;
+}
+.listes h3 {
+  font-size: 18px;
+  color: #3176aa;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  border-bottom: solid #3176aa 1px;
+}
+.listes thead {
+  color: rgb(202, 120, 65);
+}/*# sourceMappingURL=abonnement.css.map */

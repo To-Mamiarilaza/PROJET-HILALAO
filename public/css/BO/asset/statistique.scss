@@ -1,0 +1,120 @@
+.number-display {
+    background-color: white;
+    box-shadow: 3px 3px 5px lightgray;
+    font-weight: 500;
+    padding: 5px 15px;
+
+    .title {
+        margin: 5px 10px;
+        font-size: 18px;
+    }
+
+    .number {
+        margin: 5px 10px;
+        font-size: 30px;
+        letter-spacing: 2px;
+        color: #3176aa;
+    }
+}
+
+.chart {
+    background-color: white;
+    box-shadow: 3px 3px 5px lightgray;
+    padding: 5px 15px;
+    height: 450px;
+
+    h2 {
+        font-size: 18px;
+        color: #3176aa;
+        padding-bottom: 10px;
+        padding-top: 10px;
+        border-bottom: solid #3176aa 1px;
+    }
+
+    .filtre {
+        width: 80%;
+        display: flex;
+
+        select {
+            margin: 5px 10px;
+            height: 30px;
+            font-size: 15px;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+    }
+}
+
+.list-client {
+    background-color: white;
+    box-shadow: 3px 3px 5px lightgray;
+    padding: 5px 15px;
+    position: relative;
+    height: 450px;
+
+    h2 {
+        font-size: 18px;
+        color: #3176aa;
+        padding-bottom: 10px;
+        padding-top: 10px;
+        border-bottom: solid #3176aa 1px;
+        position: sticky;
+        z-index: 10;
+    }
+
+    .list-container {
+        height: 380px;
+        overflow: auto;
+
+        a {
+            text-decoration: none;
+        }
+
+        .client {
+            display: flex;
+            align-items: center;
+            background-color: rgb(233, 233, 233);
+            padding: 8px 15px;
+            border-radius: 5px;
+            margin-right: 10px;
+
+            &:hover {
+                background-color: rgb(168, 182, 187);
+            }
+
+            .image {
+                width: 40px;
+                height: 40px;
+        
+                img {
+                    height: 100%;
+                    width: 100%;
+                    background-color: white;
+                    border-radius: 100%;
+                }
+            }
+
+            .detail-client {
+                padding-left: 20px;
+
+                .name {
+                    margin: 0px 10px;
+                    color: #3176aa;
+                }
+
+                .terrain {
+                    margin: 0px 10px;
+                    font-weight: 500;
+                    font-size: 12px;
+                    color: #3176aa;
+                }
+
+                .number {
+                    font-size: 18px;
+                    color: rgb(202, 120, 65);
+                    margin-left: 10px;
+                }
+            }
+        }
+    }
+}
