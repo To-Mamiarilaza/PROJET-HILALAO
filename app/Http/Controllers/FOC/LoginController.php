@@ -24,19 +24,20 @@ class LoginController extends Controller
             $email = $request->input('email');
             $password = $request->input('password');
             $client = Client::login($password, $email);
-            if($client != null) {
+           // echo $client->getIdClient();
+           if($client != null) {
                 session()->put('clientConnected', $client);
                 return redirect()->to('/home-client');
             }
             else {
                 throw new Exception("Veuillez ressayer");
             }
-            
+
         } catch(Exception $e) {
             return view('FOC/login')->with('error', $e->getMessage());
-        }     
+        }
     }
-    
+
     public function signin(Request $request)
     {
         return view('FOC/signUp');
