@@ -17,6 +17,17 @@
 			echo '<td><div class="alert alert-'.$classe.'">' . $mois[$i] . '</div></td>';
 		}
 	}
+	function selectMonth() {
+		$mois = array(
+			"Janvier", "Février", "Mars", "Avril",
+			"Mai", "Juin", "Juillet", "Août",
+			"Septembre", "Octobre", "Novembre", "Décembre"
+		);
+
+		for ($i = 0; $i < count($mois); $i++) {
+			echo ' <option value="'. $i .'">' . $mois[$i] . '</option>';
+		}
+	}
 ?>
 
 <!DOCTYPE html>
@@ -99,9 +110,9 @@
 										<div class="col-md-8">
 											<select id="mois" class="form-control" required>
 												<option value="">Sélectionnez le mois</option>
-												<option value="1">Jan</option>
-												<option value="2">Fev</option>
-												<option value="3">Mar</option>
+												<?php
+													selectMonth();
+												?>
 											</select>
 										</div>
 									</div>
