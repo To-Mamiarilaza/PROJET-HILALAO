@@ -36,10 +36,10 @@ class DetailClientController extends Controller
         ]);
     }
 
-    public function modifierStatus($value, $id_client){
+    public function modifierStatus($value, $id_client,$ref){
         $modifier = new DetailClient();
         $all = $modifier->update_status($value, $id_client);
 
-        return redirect('/ValidationClient');
+        return redirect('/ValidationClient/validationClient');
     }
 }

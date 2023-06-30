@@ -52,7 +52,7 @@ Route::get('/ValidationClient/{ref}', [ValidationClientController::class,
 )->name('validationClient_admin');
 
 
-Route::get('/detailClient/{value}/{id_client}', [DetailClientController::class,
+Route::get('/detailClient/{value}/{id_client}/{ref}', [DetailClientController::class,
     'modifierStatus']
 )->name('DetailCLient_admin');
 
@@ -64,7 +64,7 @@ Route::get('/DetailTerrain/{id_terrain}/{ref}', [DetailTerrainController::class,
     'detailTerrain']
 )->name('detailTerrain_admin');
 
-Route::get('/DetailTerrain/{ref}', [DetailTerrainController::class,
+Route::get('/DetailTerrain', [DetailTerrainController::class,
     'detailFieldById']
 )->name('detail_field_admin');
 
