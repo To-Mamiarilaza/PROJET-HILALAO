@@ -1,0 +1,142 @@
+.dispo-titre {
+  font-size: 30px;
+  color: #33658A;
+  letter-spacing: 4px;
+}
+
+.dispo-p {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.hidden-form {
+  display: none;
+}
+
+.listes-parametres {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.listes-parametres .param-group ul {
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+  list-style: none;
+  margin-bottom: 0;
+}
+
+.listes-parametres .param-group .jour {
+  background-color: none;
+  color: #E17B36;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+  border: solid 2px #E17B36;
+}
+
+.listes-parametres .param-group .jour--checked {
+  background-color: #E17B36;
+  color: white;
+}
+
+.listes-parametres .param-group .hour {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+
+.listes-parametres .param-group .hour span {
+  margin: 0px 20px;
+  color: #33658A;
+}
+
+.listes-parametres .param-group .price {
+  display: flex;
+  align-items: center;
+  color: #E17B36;
+  font-weight: 600;
+}
+
+.listes-parametres .param-group .delete {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+}
+
+.listes-parametres .param-group .delete i {
+  color: rgb(218, 52, 52);
+}
+
+.parameter-insert {
+  width: 90%;
+}
+
+.parameter-insert ul {
+  display: flex;
+  justify-content: space-around;
+  padding: 0;
+  list-style: none;
+  margin-bottom: 0;
+}
+
+.parameter-insert .jour {
+  background-color: none;
+  color: #E17B36;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+  cursor: pointer;
+  border: solid 2px #E17B36;
+}
+
+.parameter-insert .jour:hover {
+  background-color: rgba(225, 122, 54, 0.7607843137);
+  color: white;
+}
+
+.parameter-insert .jour--checked {
+  background-color: #E17B36;
+  color: white;
+}
+
+.parameter-insert .jour--checked:hover {
+  background-color: rgba(225, 122, 54, 0.7607843137);
+  color: white;
+}
+
+.parameter-insert .parameter-title {
+  color: #33658A;
+  font-size: 14px;
+  font-weight: 500;
+  margin-left: 10px;
+}
+
+.parameter-insert .formulaire {
+  width: 40%;
+  padding: 15px;
+}
+
+.parameter-insert .ajout-button {
+  color: white;
+}
+
+.parameter-insert .ajout-button i {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.parameter-insert .error {
+  font-size: 12px;
+  margin: 0;
+  color: #d32222;
+  margin-top: 10px;
+}
+
+/*# sourceMappingURL=disponibility.css.map */

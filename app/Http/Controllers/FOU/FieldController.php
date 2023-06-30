@@ -15,14 +15,14 @@ class FieldController extends Controller
     public function detail($id_field) {
         $field = new FieldDetailled();
         $field->findById($id_field);
-        return view('FOU\profil-field', ['field' => $field]);
+        return view('FOU\profile-field', ['field' => $field]);
     }
     public function detailled($id_field, $date) {
         $field = new FieldDetailled();
         $field->findById($id_field);
         $availability = Availability::findByIdField($id_field, $date);
-        if (count($availability) == 0) return view('FOU\profil-field', ['field' => $field, 'availability_message' => "Ce terrain n'est pas disponible pour cette date"]);
-        return view('FOU\profil-field', ['field' => $field, 'availability' => $availability]);
+        if (count($availability) == 0) return view('FOU\profile-field', ['field' => $field, 'availability_message' => "Ce terrain n'est pas disponible pour cette date"]);
+        return view('FOU\profile-field', ['field' => $field, 'availability' => $availability]);
     }
 
     public function index($id_category = 0)
