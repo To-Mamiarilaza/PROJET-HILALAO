@@ -23,14 +23,15 @@ class DetailTerrainController extends Controller
             return $next($request);
         });
     }
-    public function detailTerrain($id_terrain)
+    public function detailTerrain($id_terrain,$ref)
     {
         $detail = new DetailTerrain();
         $all = $detail->getDetailTerrain($id_terrain);
 
         return view('BO.detailTerrain', [
             'all' => $all,
-            'validation' => 1
+            'validation' => 1,
+            'ref' => $ref
         ]);
     }
 

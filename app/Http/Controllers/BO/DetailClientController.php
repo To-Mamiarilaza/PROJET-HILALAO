@@ -25,13 +25,14 @@ class DetailClientController extends Controller
             return $next($request);
         });
     }
-    public function detailClient(Request $request, $id_client)
+    public function detailClient( $id_client,$ref)
     {
         $detail = new DetailClient();
         $all = $detail->getDetailClient($id_client);
 
         return view('BO.detailClient', [
-            'all' => $all
+            'all' => $all,
+            'ref' => $ref
         ]);
     }
 

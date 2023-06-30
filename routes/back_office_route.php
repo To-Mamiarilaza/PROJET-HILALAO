@@ -56,11 +56,11 @@ Route::get('/detailClient/{value}/{id_client}', [DetailClientController::class,
     'modifierStatus']
 )->name('DetailCLient_admin');
 
-Route::get('/DetailClient/{id_client}', [DetailClientController::class,
+Route::get('/DetailClient/{id_client}/{ref}', [DetailClientController::class,
     'detailClient']
 )->name('detailClient_admin');
 
-Route::get('/DetailTerrain/{id_terrain}', [DetailTerrainController::class,
+Route::get('/DetailTerrain/{id_terrain}/{ref}', [DetailTerrainController::class,
     'detailTerrain']
 )->name('detailTerrain_admin');
 
