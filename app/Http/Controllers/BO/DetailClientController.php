@@ -25,20 +25,21 @@ class DetailClientController extends Controller
             return $next($request);
         });
     }
-    public function detailClient(Request $request, $id_client)
+    public function detailClient( $id_client,$ref)
     {
         $detail = new DetailClient();
         $all = $detail->getDetailClient($id_client);
 
         return view('BO.detailClient', [
-            'all' => $all
+            'all' => $all,
+            'ref' => $ref
         ]);
     }
 
-    public function modifierStatus($value, $id_client){
+    public function modifierStatus($value, $id_client,$ref){
         $modifier = new DetailClient();
         $all = $modifier->update_status($value, $id_client);
 
-        return redirect('/ValidationClient');
+        return redirect('/ValidationClient/validationClient');
     }
 }

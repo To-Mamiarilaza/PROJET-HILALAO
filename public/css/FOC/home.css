@@ -1,4 +1,9 @@
-
+.titre {
+  font-size: 23px;
+  font-weight: 700;
+  letter-spacing: 5px;
+  color: #E17B36 !important;
+}
 
 .home-text {
   font-size: 16px;
