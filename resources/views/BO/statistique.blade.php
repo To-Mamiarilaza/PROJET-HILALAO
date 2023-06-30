@@ -68,6 +68,62 @@
                         <div id="selectedFields" ></div>
                     </div>
                 </div>
+
+                <div class="col-md-4 p-3">
+                    <div class="list-client">
+                        <h2>Statistique de terrain</h2>
+                        <div class="listes-client">
+
+                            <canvas id="Chart" width="350" height="350"></canvas>
+
+                            @php
+                                $labels = [];
+                                $data = [];
+                                $defaultColors = ['rgba(255, 99, 132, 0.6)', 'rgba(54, 162, 235, 0.6)', 'rgba(75, 192, 192, 0.6)', '#FFCBA2', '#FFF9A2', '#A493FF'];
+                                $defaultColorIndex = 0;
+                            @endphp
+
+                            @foreach ($all as $statistique)
+                                @php
+                                    $labels[] = $statistique->getCategory();
+                                    $data[] = $statistique->getId_field();
+                                    $backgroundColors[] = isset($defaultColors[$defaultColorIndex]) ? $defaultColors[$defaultColorIndex] : getRandomColor();
+                                    $defaultColorIndex = ($defaultColorIndex + 1) % count($defaultColors);
+                                @endphp
+                            @endforeach
+
+
+                            <script>
+                                var labels = @json($labels);
+                                var data = @json($data);
+                                var backgroundColors = @json($backgroundColors);
+
+                                var ctx = document.getElementById('Chart').getContext('2d');
+                                var chart = new Chart(ctx, {
+                                    type: 'pie',
+                                    data: {
+                                        labels: labels,
+                                        datasets: [{
+                                            data: data,
+                                            backgroundColor: backgroundColors
+                                        }]
+                                    },
+                                    options: {
+                                        responsive: true,
+                                        maintainAspectRatio: false,
+                                        title: {
+                                            display: true,
+                                            text: 'Statistique en rond'
+                                        }
+                                    }
+                                });
+                            </script>
+                            
+                        </div>
+                    </div>
+                </div>
+
+
                 <div class="col-md-6 p-3">
                     <div class="list-client">
                         <h2>Listes des Terrains</h2>
