@@ -4,6 +4,7 @@ namespace App\Http\Controllers\BO;
 use App\Models\BO\DetailTerrain;
 use Exception;
 use App\Http\Controllers\Controller;
+use App\Models\BO\DetailClient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -78,10 +79,12 @@ class DetailTerrainController extends Controller
 
     public function fieldByClient($id_client,$ref){
         $field = new DetailTerrain();
-        $all = $field->findByClient($id_client);
-
+        $client = new DetailClient();
+        $fields = $field->findByClient($id_client);
+        $clients = $client->getDetailClient($id_client);
         return view('BO.fieldFromClient', [
-            'all' => $all,
+            'client' => $clients,
+            'fields' => $fields,
             'ref' => $ref
         ]);
     }

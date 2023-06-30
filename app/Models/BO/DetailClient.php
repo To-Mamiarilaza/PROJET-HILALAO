@@ -137,10 +137,9 @@ class DetailClient
     public function getDetailClients(){
         try{
             $detail = "select c.id_client, c.first_name, c.last_name, c.phone_number, c.mail, c.address, c.birth_date, c.sign_up_date, cin.cin_number, cin.first_picture, cin.second_picture
-            ,count(field.id_client) as nombre_field
             from client c
             join cin on cin.id_cin = c.id_cin 
-            join field on field.id_client = c.id_client
+            where c.id_status = 1
             group by c.id_client,cin.cin_number, cin.first_picture, cin.second_picture";
 
             $details = DB::select($detail);
@@ -160,9 +159,30 @@ class DetailClient
                     $temp->setCin_number($result->cin_number);
                     $temp->setFirst_picture($result->first_picture);
                     $temp->setSecond_picture($result->second_picture);
-                    $temp->setNombre_terrains($result->nombre_field);
                     $res[] = $temp;
                 }
+            }
+            return $res;
+        }catch(Exception $e){
+            throw new Exception("Impossible d'avoir ");
+        }
+    }
+
+    public function getFieldOfClient($id_client){
+        try{
+            $detail = "select count(id_field) as nombre
+            from field f
+            where state = 1 and id_client = ".$id_client."
+            group by id_client";
+            $details = DB::select($detail);
+            $res =null;
+            
+            if (count($details) > 0) {
+                $result = $details[0];
+                $temp = new DetailClient();
+                $temp->setId_client($id_client);
+                $temp->setNombre_terrains($result->nombre);
+                $res = $temp;
             }
             return $res;
         }catch(Exception $e){

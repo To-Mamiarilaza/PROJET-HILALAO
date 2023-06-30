@@ -14,6 +14,8 @@ INSERT INTO client VALUES
 (DEFAULT, 'Andry', 'ANDRIAMAMITIANA', '0341451743', 'andry123@gmail.com', 'Lot 3 bis Iavoloha', '1987-01-12', 'andry-andry', 1, '2023-04-23', 2,'sary2.png'),
 (DEFAULT, 'Fitia', 'MIAROTIA', '0331754393', 'fitiaMia@gmail.com', 'Lot IAV 416', '1998-07-05', 'fitia@@', 1, '2023-10-07', 3, 'sary3.png');
 
+INSERT INTO client VALUES
+(DEFAULT, 'Minp', 'RAHERINIRINA', '0321531728', 'mino@gmail.com', 'Antananarivo', '2000-11-24', 'mino', 1, '2023-06-15', 1,'sary1.jpg'),
 -- Données pour les informations requis pour le terrain
 INSERT INTO category VALUES
 (DEFAULT, 'Foot à 11', 75000),
