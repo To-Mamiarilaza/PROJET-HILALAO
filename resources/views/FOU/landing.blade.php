@@ -21,7 +21,7 @@
                     une application web pour faciliter la recherche de terrain de sport.
                     Puis nous facilitons la réservation et le payement d'avance.
                 </p>
-                <a href="{{ route('list-field-all') }}" class="btn btn-warning">Chercher des terrains</a>
+                <a href="{{ route('list-field-all-fou') }}" class="btn btn-warning">Chercher des terrains</a>
             </div>
             <div class="col-md-6 p-2 accueil-img">
                 <img src="{{ asset('images/outils-sport.png') }}" alt="">
@@ -37,7 +37,7 @@
                     <div>
                         <h4>{{ $category->getCategory() }}</h4>
                         <p class="cat-desc">{{ $category->getDescription() }}</p>
-                        <a href="/list-field/{{ $category->getIdCategory() }}" class="btn btn-warning">Voir les terrains</a>
+                        <a href="{{ route('list-field-fou', ["id_category" => $category->getIdCategory()]) }}" class="btn btn-warning">Voir les terrains</a>
                     </div>
                 </div>
                 @endforeach
