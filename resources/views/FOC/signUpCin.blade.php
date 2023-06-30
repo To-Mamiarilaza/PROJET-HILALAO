@@ -29,19 +29,24 @@
 				</div>
 				<div class="row CIN_pictures">
 					<div class="col-md-4 input_pictures">
-						<h5 class="card-title">CIN recto</h5>
-						<input type="file" id="image-upload" style="display: none;">
-						<label for="image-upload" class="btn btn-primary btn-block">Sélectionner une image</label>
+						<div id="upload-container">
+							<h5 class="card-title">CIN recto</h5>
+							<label for="image-upload-recto" class="btn btn-primary btn-block" style="cursor: pointer;">Sélectionner une image</label>
+							<input type="file" id="image-upload-recto" style="display: none;" accept="image/*">
+						</div>
 					</div>
 					<div class="col-md-4 input_pictures">
-						<h5 class="card-title">CIN verso</h5>
-						<input type="file" id="image-upload" style="display: none;">
-						<label for="image-upload" class="btn btn-primary btn-block">Sélectionner une image</label>
+						<div id="upload-container mt-4">
+							<h5 class="card-title">CIN verso</h5>
+							<label for="image-upload-verso" class="btn btn-primary btn-block" style="cursor: pointer;">Sélectionner une image</label>
+							<input type="file" id="image-upload-verso" style="display: none;" accept="image/*">
+						</div>
 					</div>
 				</div>
 				<button type="submit" class="form-content__input--submit">SIGN IN</button>
 			</form>
 		</div>
 	</div>
+	@include('FOC/scriptPicture');
 </body>
 </html>
