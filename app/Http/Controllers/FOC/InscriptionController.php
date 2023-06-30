@@ -17,10 +17,11 @@ class InscriptionController extends Controller
         $picRecto = $this->upload($request, 'picRecto', 'image/CIN');
         $picVerso = $this->upload($request, 'picVerso', 'image/CIN');
 
+        //echo $picRecto;
         if ($picRecto && $picVerso) {
             try {
                 $cin = new Cin('default',$cinNumber, $picRecto, $picVerso);
-                $cin->create();
+                //$cin->create();
 
                 $lastCin = $cin->lastCinId();
                 $client = $request->session()->get('client');
@@ -49,16 +50,16 @@ class InscriptionController extends Controller
             if ($request->hasFile($name)) {
                 $file = $request->file($name);
                 $imageName = "";
-    
+
                 if ($file->isValid()) {
                     $extension = $file->getClientOriginalExtension();
                     $allowedExtensions = ['png', 'gif', 'jpg', 'jpeg', 'pdf'];
-    
+
                     if (in_array($extension, $allowedExtensions)) {
                         $path = public_path($cheminDestination);
                         $imageName = $file->getClientOriginalName();
                         $imageName = preg_replace('/([^.a-z0-9]+)/i', '-', $imageName);
-    
+
                         $file->move($path, $imageName);
                     } else {
                         $erreur = 'Vous devez uploader un fichier de type png, gif, jpg, jpeg ou pdf.';
@@ -70,12 +71,12 @@ class InscriptionController extends Controller
                 $erreur = 'Le fichier ' . $name . ' n\'a pas été soumis.';
                 echo $erreur;
             }
-    
+
         } catch (\Exception $e) {
-            return redirect()->back()->withErrors([$e->getMessage()])->withInput();            
+            return redirect()->back()->withErrors([$e->getMessage()])->withInput();
         }
     }
-    
+
     //Inserer client
     public function insertClient(Request $request)
     {
@@ -92,7 +93,7 @@ class InscriptionController extends Controller
         //$id_cin = null;
 
         try {
-            $client = new Client('default',$firstname, $lastname, $phone_number, $email, $address, $birth_date, $password, $status, 0, $customer_profile);
+            $client = new Client('default',$firstname, $lastname, $phone_number, $email, $address, $birth_date, $password, $status, 'default',0, $customer_profile);
             $request->session()->put('client', $client);
             if ($password == $confirmed_password) {
                 return view('FOC/signUpCin');
