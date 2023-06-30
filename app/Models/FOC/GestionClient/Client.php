@@ -21,7 +21,7 @@ class Client
     private $cin;
     private $customer_picture;
 
-    public function __construct($id_client, $first_name, $last_name, $phone_number, $mail, $address, $birth_date, $pwd, $status, $cin ,$customer_picture)
+    public function __construct($id_client, $first_name, $last_name, $phone_number, $mail, $address, $birth_date, $pwd, $status, $sign_up_date,$cin ,$customer_picture)
     {
         $this->id_client = $id_client;
         $this->setFirstName($first_name);
@@ -32,6 +32,7 @@ class Client
         $this->setBirthDate($birth_date);
         $this->setPwd($pwd);
         $this->setStatus($status);
+        $this->sign_up_date = ($sign_up_date);
         $this->cin = $cin;
         $this->setCustomerPicture($customer_picture);
     }
@@ -101,7 +102,7 @@ class Client
     {
         return $this->address;
     }
-    
+
     public function setAddress($address = "")
     {
         $this->address = $address;
@@ -111,7 +112,7 @@ class Client
     {
         return $this->cin;
     }
-    
+
     public function setCin($Cin = null)
     {
         $this->cin = $Cin;
@@ -159,7 +160,7 @@ class Client
     public static function lastClientId()
     {
         $result = DB::table('client')->orderBy('id_client', 'desc')->value('id_client');
-    
+
         return $result ? $result : null;
     }
 
@@ -173,7 +174,7 @@ class Client
             throw new \Exception("Erreur lors de la mise à jour de la photo du client : " . $e->getMessage());
         }
     }
-       
+
     //Recuperer toutes les clients
     public static function getAll()
     {
@@ -181,10 +182,10 @@ class Client
         $datas = array();
         $i = 0;
         foreach ($results as $row) {
-            $datas[$i] = new Client($row->id_client, $row->first_name, $row->last_name, $row->phone_number, $row->mail, $row->address, $row->birth_date, $row->pwd, Status::findById($row->id_status), $row->sign_up_date, Cin::findById($row->id_cin));
+            $datas[$i] = new Client($row->id_client, $row->first_name, $row->last_name, $row->phone_number, $row->mail, $row->address, $row->birth_date, $row->pwd, Status::findById($row->id_status), $row->sign_up_date, Cin::findById($row->id_cin), $row->customer_picture);
             $i++;
         }
-        
+
         return $datas;
     }
 
@@ -192,8 +193,8 @@ class Client
     public static function findByIdCin($idCin)
     {
         $results = DB::table('client')->where('id_cin', $idCin)->first();
-        
-        return new Client($results->id_client, $results->first_name, $results->last_name, $results->phone_number, $results->mail, $results->address, $results->birth_date, $results->pwd, Status::findById($results->id_status), $results->sign_up_date, Cin::findById($results->id_cin));
+
+        return new Client($results->id_client, $results->first_name, $results->last_name, $results->phone_number, $results->mail, $results->address, $results->birth_date, $results->pwd, Status::findById($results->id_status), $results->sign_up_date, Cin::findById($results->id_cin), $results->customer_picture);
     }
 
     //Sauvegarder un client dans la base
@@ -202,8 +203,8 @@ class Client
         try {
             $birthDate = new DateTime($this->birth_date);
             $formattedBirthDate = $birthDate->format('Y-m-d');
-            $req = "INSERT INTO client VALUES (DEFAULT, '%s', '%s', '%s', '%s', '%s', '%s', '%s', %d, DEFAULT, %d)";
-            $req = sprintf($req, $this->first_name, $this->last_name, $this->phone_number, $this->mail, $this->address, $formattedBirthDate, $this->pwd, $this->status->getIdStatus(), $this->cin->getIdCin());
+            $req = "INSERT INTO client VALUES (DEFAULT, '%s', '%s', '%s', '%s', '%s', '%s', '%s', %d, DEFAULT, %d, '%s')";
+            $req = sprintf($req, $this->first_name, $this->last_name, $this->phone_number, $this->mail, $this->address, $formattedBirthDate, $this->pwd, $this->status->getIdStatus(), $this->cin->getIdCin(), $this->getCustomerPicture());
             DB::insert($req);
         } catch (\Exception $e) {
             throw new \Exception("Erreur lors de la création du client : " . $e->getMessage());
@@ -216,12 +217,12 @@ class Client
         DB::table('client')
         ->where('id_client', $this->id_client)
         ->update([
-            'first_name' => $this->first_name, 
+            'first_name' => $this->first_name,
             'last_name' => $this->last_name,
-            'phone_number' => $this->phone_number, 
-            'mail' => $this->mail, 
-            'adress' => $this->address, 
-            'birth_date' => $this->birth_date, 
+            'phone_number' => $this->phone_number,
+            'mail' => $this->mail,
+            'adress' => $this->address,
+            'birth_date' => $this->birth_date,
             'pwd' => $this->pwd,
             'id_status' => $this->status->getIdstatus(),
             'sign_up_date' => $this->sign_up_date,
@@ -237,7 +238,7 @@ class Client
         ->delete();
     }
 
-    public static function login($pwd, $mail) 
+    public static function login($pwd, $mail)
     {
         try {
             $req = "SELECT * FROM client WHERE pwd = '%s' AND mail = '%s'";
@@ -246,11 +247,11 @@ class Client
             $i = 0;
             if($results) {
                 foreach ($results as $row) {
-                    return new Client($row->id_client, $row->first_name, $row->last_name, $row->phone_number, $row->mail, $row->address, $row->birth_date, $row->pwd, Status::findById($row->id_status), $row->sign_up_date, Cin::findById($row->id_cin));
+                    return new Client($row->id_client, $row->first_name, $row->last_name, $row->phone_number, $row->mail, $row->address, $row->birth_date, $row->pwd, Status::findById($row->id_status), $row->sign_up_date, Cin::findById($row->id_cin), $row->customer_picture);
                 }
             }
             throw new Exception("Veuillez ressayer");
-                
+
         } catch(Exception $e) {
 
         }
@@ -260,7 +261,6 @@ class Client
     public static function findById($id)
     {
         $results = DB::table('client')->where('id_client', $id)->first();
-    
-        return new Client($results->id_client, $results->first_name, $results->last_name, $results->phone_number, $results->mail, $results->address, $results->birth_date, $results->pwd, Status::findById($results->id_status), $results->sign_up_date, Cin::findById($results->id_cin));
-    }  
+        return new Client($results->id_client, $results->first_name, $results->last_name, $results->phone_number, $results->mail, $results->address, $results->birth_date, $results->pwd, Status::findById($results->id_status), $results->sign_up_date, Cin::findById($results->id_cin), $results->customer_picture);
+    }
 }

@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\BO\ValidationClientController;
-use App\Models\BO\ValidationClient;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BO\LoginController;
 use App\Http\Controllers\BO\CrudController;
@@ -9,7 +8,6 @@ use App\Http\Controllers\BO\StatistiqueController;
 use App\Models\BO\Statistique;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
-use App\Http\Controllers\BO\AbonnementController;
 use App\Http\Controllers\BO\DetailClientController;
 use App\Http\Controllers\BO\DetailTerrainController;
 
@@ -37,7 +35,7 @@ Route::get('/logout_admin', function () {
 })->name('log_out_admin');
 
 
-Route::post('/Check_admin', [LoginController::class,
+Route::post('/Check_admin', [App\Http\Controllers\BO\LoginController::class,
         'checkAccount']
 )->name('login_admin');
 
@@ -45,7 +43,7 @@ Route::get('/Statistique/{ref}', [StatistiqueController::class,
         'statistique']
 )->name('statistique_admin');
 
-Route::get('/Abonnement/{ref}', [AbonnementController::class,
+Route::get('/Abonnement/{ref}', [App\Http\Controllers\BO\AbonnementController::class,
     'abonnement']
 )->name('abonnement_admin');
 
@@ -54,7 +52,7 @@ Route::get('/ValidationClient/{ref}', [ValidationClientController::class,
 )->name('validationClient_admin');
 
 
-Route::get('/detailClient/{value}/{id_client}', [DetailClientController::class, 
+Route::get('/detailClient/{value}/{id_client}', [DetailClientController::class,
     'modifierStatus']
 )->name('DetailCLient_admin');
 
@@ -93,16 +91,16 @@ Route::post('/Sign_admin', [LoginController::class,
 
 Route::get('/all/{variable}', [CrudController::class, 'all'])->name('crud_admin');
 
-Route::get('/update/{variable}/{id}', [CrudController::class, 
+Route::get('/update/{variable}/{id}', [CrudController::class,
     'getViewUpdate'])->name('update_admin');
 
-Route::post('/updateByid', [CrudController::class, 
+Route::post('/updateByid', [CrudController::class,
     'update'])->name('updateByid_admin');
-    
+
 Route::get('/delete/{variable}/{id}', [CrudController::class,
     'all'])->name('delete_admin');
-    
-Route::post('/insert', [CrudController::class, 
+
+Route::post('/insert', [CrudController::class,
     'save'])->name('insert_admin');
 
 
@@ -146,7 +144,7 @@ Route::get('/terrains_admin', function () {
         $terrainsData = Statistique::getDataTerrainsMonth($mois,$annee,$category);
     }
     $data = Statistique::getDonneeNb($terrainsData);
-    
+
     // Retourner les données en format JSON
     return response()->json($data);
 });
