@@ -81,11 +81,11 @@
 			</div>
 			<div class="row">
 				<div class="row sub-fact-annee info-stat">
-					<div class="col-md-3">
+					<div class="col-md-4">
 						<p class="mt-3">Fin de votre abonnement dans</p>
 					</div>
-					<div class="col-md-1 info-limite-sub alert alert-danger" role="alert"><b>20 jours</b></div>
-					<div class="col-md-6 to-stat">
+					<div class="col-md-2 info-limite-sub alert alert-danger" role="alert"><b>20 jours</b></div>
+					<div class="col-md-5 to-stat">
 						<p class="mt-3">
 							Les terrains sont toujours parametrable selon leurs changements.<br>
 							Vous pouvez consulter ainsi les statistique ci-dessous</p>
