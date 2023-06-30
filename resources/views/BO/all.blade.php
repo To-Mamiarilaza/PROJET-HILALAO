@@ -9,6 +9,7 @@
         <ul>
             @foreach ($all as $account)
                 <li>{{ $account->getFirst_name() }} {{ $account->getName() }}</li>
+                <li>{{ $account->firstname }} {{ $account->name }}</li>
             @endforeach
         </ul>
     </body>

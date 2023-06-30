@@ -20,17 +20,17 @@
             <div class="lien">
         <ul>
             <li class="{{ $ref === 'statistique' ? 'checked' : '' }}">
-                <a href="{{ route('statistique', ['ref' => 'statistique']) }}">
+                <a href="{{ route('statistique_admin', ['ref' => 'statistique']) }}">
                     <i class="fas fa-chart-bar"></i> Statistique
                 </a>
             </li>
             <li class="{{ $ref === 'abonnement' ? 'checked' : '' }}">
-                <a href="{{ route('abonnement', ['ref' => 'abonnement']) }}">
+                <a href="{{ route('abonnement_admin', ['ref' => 'abonnement']) }}">
                     <i class="fas fa-credit-card"></i> Abonnement
                 </a>
             </li>
             <li class="{{ $ref === 'validationClient' ? 'checked' : '' }}">
-                <a href="{{ route('validationClient', ['ref' => 'validationClient']) }}">
+                <a href="{{ route('validationClient_admin', ['ref' => 'validationClient']) }}">
                     <i class="fas fa-clock"></i> Listes d'attentes
                 </a>
             </li>
@@ -50,9 +50,9 @@
                         aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
                             <ul>
-                                <li><a href="{{ route('crud', ['variable' => 'category']) }}">Catégories</a></li>
-                                <li><a href="{{ route('crud', ['variable' => 'subscription_state']) }}">Etat abonnement</a></li>
-                                <li><a href="{{ route('crud', ['variable' => 'field_type']) }}">Type de terrain</a></li>
+                                <li><a href="{{ route('crud_admin', ['variable' => 'category']) }}">Catégories</a></li>
+                                <li><a href="{{ route('crud_admin', ['variable' => 'subscription_state']) }}">Etat abonnement</a></li>
+                                <li><a href="{{ route('crud_admin', ['variable' => 'field_type']) }}">Type de terrain</a></li>
                             </ul>
                         </div>
                     </div>

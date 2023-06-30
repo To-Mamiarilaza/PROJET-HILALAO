@@ -44,8 +44,8 @@
                                 <p class="refused-text">Terrain refusé</p>
                             @endif
                         @elseif (isset($validation))
-                            <a href="{{ route('update_status', ['variable' => 1,'id_terrain' => $all->getId_terrain()]) }}" class="btn btn-warning">Valider</a>
-                            <a href="{{ route('update_status', ['variable' => 3,'id_terrain' => $all->getId_terrain()]) }}" class="btn btn-danger mx-4">Refuser</a>
+                            <a href="{{ route('update_status_admin', ['variable' => 1,'id_terrain' => $all->getId_terrain()]) }}" class="btn btn-warning">Valider</a>
+                            <a href="{{ route('update_status_admin', ['variable' => 3,'id_terrain' => $all->getId_terrain()]) }}" class="btn btn-danger mx-4">Refuser</a>
                         @endif
                     </div>
 
@@ -56,7 +56,7 @@
             <div class="abonnement mt-3">
                 <h2>Etat d'abonnement</h2>
                 <div class="mt-2">
-                    <form action="{{ route('detail_field')}}" class="form" method="GET">
+                    <form action="{{ route('detail_field_admin')}}" class="form" method="GET">
                         <div class="mt-3 px-4">
                             <div class="row">
                                 <input type="hidden" value="{{  $all->getId_terrain() }}" name="id_terrain"/>

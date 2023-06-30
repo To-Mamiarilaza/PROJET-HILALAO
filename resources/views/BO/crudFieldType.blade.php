@@ -28,7 +28,7 @@
                     <td><a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{{ $crud->getId_field_type() }}" data-field_type="{{ $crud->getField_type() }}"><i class="fas fa-trash-alt"></i></a></td>
                 </tr>
                 <!-- Modal pour modifier une catégorie -->
-                <form action="{{ route('updateByid') }}" method="post">
+                <form action="{{ route('updateByid_admin') }}" method="post">
                     @csrf
                     <div class="modal fade" id="updateModal{{ $crud->getId_field_type() }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
@@ -55,7 +55,7 @@
                     </div>
                 </form>
                 <!-- Modal pour supprimer une catégorie -->
-                <form action="{{ route('delete' , ['variable' => 'field_type','id' => $crud->getId_field_type()])}}" method="get">
+                <form action="{{ route('delete_admin' , ['variable' => 'field_type','id' => $crud->getId_field_type()])}}" method="get">
                     @csrf
                     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
@@ -88,7 +88,7 @@
     </div>
 </section>
 </div>
-<form action="{{ route('insert')}}" method="post">
+<form action="{{ route('insert_admin')}}" method="post">
     @csrf
     <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">

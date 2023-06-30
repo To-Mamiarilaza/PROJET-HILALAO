@@ -2,8 +2,8 @@
 @include('BO/nav') 
     
 <link rel="stylesheet" href="{{ asset('css/BO/asset/statistique.css') }}">
-<link rel="stylesheet" href="{{asset('js/chart.js')}}">
-    <script src="{{asset('js/chart.js')}}"></script>
+<!-- <link rel="stylesheet" href="{{asset('js/Chart.js')}}"> -->
+    <script src="{{asset('js/Chart.js')}}"></script>
 <body>
     
         <section class="content p-4">
@@ -129,7 +129,7 @@
                         <h2>Listes des Terrains</h2>
                         <div class="list-container">
                             @foreach($terrains as $terrain)
-                                <a href="{{ route('detail_field', ['id_terrain' => $terrain->getId_terrain() , 'annee' => 2023,'ref' => 'statistique']) }}">
+                                <a href="{{ route('detail_field_admin', ['id_terrain' => $terrain->getId_terrain() , 'annee' => 2023,'ref' => 'statistique']) }}">
                                     <div class="client mt-2">
                                         <div class="image">
                                             <img src="{{ asset('css/BO/asset/elgeco.jpg') }}" alt="Image du client">
@@ -150,7 +150,7 @@
                         <h2>Listes des clients</h2>
                         <div class="list-container">
                             @foreach($clients as $client)
-                                <a href="{{ route('fieldByClient', ['id_client' => $client->getId_client(),'ref' => 'statistique' ]) }}">
+                                <a href="{{ route('fieldByClient_admin', ['id_client' => $client->getId_client(),'ref' => 'statistique' ]) }}">
                                     <div class="client mt-2">
                                         <div class="image">
                                             <img src="{{ asset('css/BO/asset/client.png') }}" alt="Image du client">
@@ -318,7 +318,7 @@
     function getUtilisateursData(category, mois, annee) {
         return new Promise(function(resolve, reject) {
             $.ajax({
-                url: "/users?annee="+annee+"&mois="+mois+"&category="+category, // URL de votre endpoint pour récupérer les données des clients
+                url: "/users_admin?annee="+annee+"&mois="+mois+"&category="+category, // URL de votre endpoint pour récupérer les données des clients
                 method: "GET",
                 success: function(response) {
                     clientsData = response;
@@ -334,7 +334,7 @@
     function getClientsData(category, mois, annee) {
         return new Promise(function(resolve, reject) {
             $.ajax({
-                url: "/clients?annee="+annee+"&mois="+mois+"&category="+category, // URL de votre endpoint pour récupérer les données des clients
+                url: "/clients_admin?annee="+annee+"&mois="+mois+"&category="+category, // URL de votre endpoint pour récupérer les données des clients
                 method: "GET",
                 success: function(response) {
                     clientsData = response;
@@ -350,7 +350,7 @@
     function getTerrainsData(category, mois, annee) {
         return new Promise(function(resolve, reject) {
             $.ajax({
-                url: "/terrains?annee="+annee+"&mois="+mois+"&category="+category, // URL de votre endpoint pour récupérer les données des clients
+                url: "/terrains_admin?annee="+annee+"&mois="+mois+"&category="+category, // URL de votre endpoint pour récupérer les données des clients
                 method: "GET",
                 success: function(response) {
                     clientsData = response;

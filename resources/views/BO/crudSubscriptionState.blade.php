@@ -28,7 +28,7 @@
                     <td><a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{{ $crud->getId_subscription_state() }}" data-subscription_state="{{ $crud->getSubscription_state() }}"><i class="fas fa-trash-alt"></i></a></td>
                 </tr>
                 <!-- Modal pour modifier une catégorie -->
-                <form action="{{ route('updateByid') }}" method="post">
+                <form action="{{ route('updateByid_admin') }}" method="post">
                     @csrf
                     <div class="modal fade" id="updateModal{{ $crud->getId_subscription_state() }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
@@ -55,7 +55,7 @@
                     </div>
                 </form>
                 <!-- Modal pour supprimer une catégorie -->
-                <form action="{{ route('delete' , ['variable' => 'subscription_state','id' => $crud->getId_subscription_state()])}}" method="get">
+                <form action="{{ route('delete_admin' , ['variable' => 'subscription_state','id' => $crud->getId_subscription_state()])}}" method="get">
                     @csrf
                     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
@@ -88,7 +88,7 @@
     </div>
 </section>
 </div>
-<form action="{{ route('insert')}}" method="post">
+<form action="{{ route('insert_admin')}}" method="post">
     @csrf
     <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">

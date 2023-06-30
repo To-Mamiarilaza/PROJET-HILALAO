@@ -34,8 +34,8 @@
                                   <li><span>N° CIN :</span> {{ $all->getCin_number() }} </li>
                               </ul>
                               <div class="decision mt-4"> 
-                                  <a href="{{ route('DetailCLient', ['value' => 1 ,'id_client' => $all->getId_client() ]) }}" class="btn btn-warning">Valider</a>
-                                  <a href="{{ route('DetailCLient', ['value' => 3 ,'id_client' => $all->getId_client() ]) }}" class="btn btn-danger mx-2">Refuser</a>
+                                  <a href="{{ route('DetailCLient_admin', ['value' => 1 ,'id_client' => $all->getId_client() ]) }}" class="btn btn-warning">Valider</a>
+                                  <a href="{{ route('DetailCLient_admin', ['value' => 3 ,'id_client' => $all->getId_client() ]) }}" class="btn btn-danger mx-2">Refuser</a>
                               </div>
                           </div>
                       </div>

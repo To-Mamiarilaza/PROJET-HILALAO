@@ -1,0 +1,73 @@
+$principal-color: #E17B36;
+$secondar-color: #2A1F1D;
+$other-color-1: #33658A;
+$other-color-2: #EBF8B8;
+
+.reservation-title {
+    font-size: 30px;
+    letter-spacing: 3px;
+    color: $other-color-1;
+}
+
+.stat-number {
+    ul {
+        padding-left: 10px;
+        list-style: none;
+        font-size: 16px;
+        margin: 0;
+        line-height: 30px;
+
+        li {
+            font-weight: 400;
+
+            .important {
+                color: #2A1F1D;
+                font-weight: 500;
+                margin: 0 5px;
+            }
+        }
+    }
+}
+
+.chart-container {
+    height: 350px;
+    box-shadow: 3px 3px 5px #2a1f1d98;
+}
+
+.historique {
+    padding-left: 5%;
+    color: $other-color-1;
+
+    h5 {
+        padding-bottom: 10px;
+        text-decoration:underline;
+    }
+
+    table {
+        max-height: 500px;
+        overflow-y: auto;
+    }
+
+    .normal {
+        color: $principal-color;
+        font-weight: 500;
+    }
+
+    .retard {
+        color: $secondar-color;
+        font-weight: 500;
+    }
+
+    .user {
+        color: $other-color-1;
+        font-weight: 500;
+    }
+
+    .montant {
+        color: #b2d81b;
+    }
+}
+
+::-webkit-scrollbar {
+    display: none;
+}

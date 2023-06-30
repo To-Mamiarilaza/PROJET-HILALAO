@@ -9,7 +9,7 @@
     <title>HILALAO | LOGIN</title>
 </head>
 <body>
-    <form class="container box" action="{{ route('Sign') }}" method="POST">
+    <form class="container box" action="{{ route('Sign_admin') }}" method="POST">
     @csrf    
         <div class="row">
             <h1 class="box__title">Sign <span class="box__title--span">up </span></h1>

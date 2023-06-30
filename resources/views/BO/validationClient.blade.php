@@ -14,7 +14,7 @@
                 <h2>Listes des clients en attentes</h2>
                 <div class="listes-client">
                 @foreach ($all as $abonnement)
-                    <a href="{{ route('detailClient', ['id_client' => $abonnement->getId_client() ]) }}">
+                    <a href="{{ route('detailClient_admin', ['id_client' => $abonnement->getId_client() ]) }}">
                         <div class="client">
                             <img src="{{ asset('css/BO/asset/client.png')}}" alt="Image du client">
                                 <p class="nom">{{ $abonnement->getFirst_name() }}</p>
@@ -33,7 +33,7 @@
                         <div class="listes-client">
                         @foreach ($terrains as $terrain)
 
-                            <a href="{{ route('detailTerrain', ['id_terrain' => $terrain->getId_terrain() ]) }}">
+                            <a href="{{ route('detailTerrain_admin', ['id_terrain' => $terrain->getId_terrain() ]) }}">
                                 <div class="terrain">
                                     <img src="{{ asset('css/BO/asset/elgeco.jpg') }}" alt="Image du terrain">
                                     <div class="detail-terrain">
@@ -57,24 +57,3 @@
 </body>
 
 </html>
-<!-- <h1>Liste d'attente</h1>
-<table>
-    <thead>
-      <tr>
-        <th>Id client</th>
-        <th>Prenom</th>
-        <th>Nom</th>
-      </tr>
-    </thead>
-    <tbody>
-      @foreach ($all as $abonnement)
-      <tr>
-        <td>{{ $abonnement->getId_client() }}</td>
-        <td>{{ $abonnement->getFirst_name() }}</td>
-        <td>{{ $abonnement->getLast_name() }}</td>
-        <td><a href="{{ route('detailClient', ['id_client' => $abonnement->getId_client() ]) }}"><input type="button" value="Detail"></a></td>
-      </tr>
-      @endforeach
-
-    </tbody>
-</table> -->
