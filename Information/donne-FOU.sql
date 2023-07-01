@@ -29,8 +29,8 @@ INSERT INTO "public".status_client( id_status_client, status ) VALUES ( 2, 'En a
 INSERT INTO "public".subscription_state( id_subscription_state, subscription_state ) VALUES ( 1, 'Payer');
 INSERT INTO "public".type_picture( id_type_picture, type_picture ) VALUES ( 1, 'Profil');
 INSERT INTO "public".type_picture( id_type_picture, type_picture ) VALUES ( 2, 'Secondaire');
-INSERT INTO "public".users( id_users, first_name, last_name, birth_date, phone_number, mail, sign_up_date, pwd ) VALUES ( 1, 'Tiavina', 'Malalaniaina', '2004-07-08', '+261 32 66 131 80', 'tiavinaramia@gmail.com', '2023-06-08', 'tiavina');
-INSERT INTO "public".users( id_users, first_name, last_name, birth_date, phone_number, mail, sign_up_date, pwd ) VALUES ( 2, 'Maela', 'ANDRIAMAHERY', '1998-05-06', '+261 34 564 84', 'maela@gmail.com', '2023-06-10', 'MLLLLL');
+INSERT INTO "public".users(  first_name, last_name, birth_date, phone_number, mail, sign_up_date, pwd ) VALUES ( 1, 'Tiavina', 'Malalaniaina', '2004-07-08', '+261 32 66 131 80', 'tiavinaramia@gmail.com', '2023-06-08', 'tiavina');
+INSERT INTO "public".users(  first_name, last_name, birth_date, phone_number, mail, sign_up_date, pwd ) VALUES ( 2, 'Maela', 'ANDRIAMAHERY', '1998-05-06', '+261 34 564 84', 'maela@gmail.com', '2023-06-10', 'MLLLLL');
 INSERT INTO "public".client( id_client, first_name, last_name, phone_number, mail, address, birth_date, pwd, id_status, sign_up_date, id_cin ) VALUES ( 1, 'John', 'RAKOTOARISOA', '0321531728', 'john.rakoto@gmail.com', 'Antananarivo', '2000-11-24', 'john1234', 1, '2023-01-15 12:00:00 AM', 1);
 INSERT INTO "public".client( id_client, first_name, last_name, phone_number, mail, address, birth_date, pwd, id_status, sign_up_date, id_cin ) VALUES ( 2, 'Andry', 'ANDRIAMAMITIANA', '0341451743', 'andry123@gmail.com', 'Lot 3 bis Iavoloha', '1987-01-12', 'andry-andry', 1, '2023-04-23 12:00:00 AM', 2);
 INSERT INTO "public".client( id_client, first_name, last_name, phone_number, mail, address, birth_date, pwd, id_status, sign_up_date, id_cin ) VALUES ( 3, 'Fitia', 'MIAROTIA', '0331754393', 'fitiaMia@gmail.com', 'Lot IAV 416', '1998-07-05', 'fitia@@', 1, '2023-10-07 12:00:00 AM', 3);

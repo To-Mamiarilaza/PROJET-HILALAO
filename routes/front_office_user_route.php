@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Controllers\FOU\UserNotificationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FOU\InfoTerrain;
 use App\Http\Controllers\FOU\LogController;
@@ -33,4 +35,7 @@ Route::get('/test', [InfoTerrain::class, 'test']);
 
 //Profile Utilisateur
 Route::get('/profileUtilisateur', [InfoTerrain::class, 'profileUtilisateur']);
+
+Route::get('/changeUserNotificationState/{id_client_notification}', [UserNotificationController::class, 'changeNotificationState']);
+
 
