@@ -2,10 +2,9 @@
 namespace App\Http\Controllers\BO;
 
 use App\Models\BO\DetailTerrain;
-use Exception;
+use App\Models\BO\BackOfficeNotification;
 use App\Http\Controllers\Controller;
 use App\Models\BO\DetailClient;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
 
@@ -27,11 +26,13 @@ class DetailTerrainController extends Controller
     {
         $detail = new DetailTerrain();
         $all = $detail->getDetailTerrain($id_terrain);
-
+        
+        $notification = BackOfficeNotification::getAllBackOfficeNotification();
         return view('BO.detailTerrain', [
             'all' => $all,
             'validation' => 1,
-            'ref' => $ref
+            'ref' => $ref,
+            'notifications' => $notification
         ]);
     }
 
@@ -39,9 +40,12 @@ class DetailTerrainController extends Controller
     {
         $detail = new DetailTerrain();
         $all = $detail->getAllField();
+        
+        $notification = BackOfficeNotification::getAllBackOfficeNotification();
 
         return view('BO.listField', [
-            'all' => $all
+            'all' => $all,
+            'notifications' => $notification
         ]);
     }
 
@@ -56,11 +60,12 @@ class DetailTerrainController extends Controller
         $detail = new DetailTerrain();
         $all = $detail->getDetailTerrain($id_terrain);
         $month = $detail->getMonthTerrain($id_terrain,2023);
-    
+        $notification = BackOfficeNotification::getAllBackOfficeNotification();
         return view('BO.detailTerrain', [
             'all' => $all,
             'etat' => $etat,
-            'ref' => $ref
+            'ref' => $ref,
+            'notifications' => $notification
         ]);
     }
 
@@ -71,11 +76,13 @@ class DetailTerrainController extends Controller
         $ref = $_GET['ref'];
         $all = $detail->getDetailTerrain($id_terrain);
         $month = $detail->getMonthTerrain($id_terrain,$annee);
-    
+        
+        $notification = BackOfficeNotification::getAllBackOfficeNotification();
         return view('BO.detailTerrain', [
             'all' => $all,
             'month' => $month ? $month->getMonths() : [],
-            'ref' => $ref
+            'ref' => $ref,
+            'notification' => $notification
         ]);
     }
 
@@ -84,10 +91,13 @@ class DetailTerrainController extends Controller
         $client = new DetailClient();
         $fields = $field->findByClient($id_client);
         $clients = $client->getDetailClient($id_client);
+        
+        $notification = BackOfficeNotification::getAllBackOfficeNotification();
         return view('BO.fieldFromClient', [
             'client' => $clients,
             'fields' => $fields,
-            'ref' => $ref
+            'ref' => $ref,
+            'notifications' => $notification
         ]);
     }
 }

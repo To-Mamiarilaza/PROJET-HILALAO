@@ -8,7 +8,7 @@ use App\Models\BO\Category;
 use App\Models\BO\FieldType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
-
+use App\Models\BO\BackOfficeNotification;
 
 class CrudController extends Controller
 {
@@ -26,18 +26,19 @@ class CrudController extends Controller
     }
     private function getSelected($selected){
         $c = new CrudController();
+        $notification = BackOfficeNotification::getAllBackOfficeNotification();
         if($selected == 'category'){
             $model = new Category();
             $all = $model->getAllCategory();
-            return view('BO.crudCategory', ['all' => $all,'ref' => $selected]);
+            return view('BO.crudCategory', ['all' => $all,'ref' => $selected, 'notifications' => $notification]);
         }else if($selected == "subscription_state"){
             $model = new SubscriptionState();
             $all = $model->getAllSubscriptionState();
-            return view('BO.crudSubscriptionState', ['all' => $all,'ref' => $selected]);
+            return view('BO.crudSubscriptionState', ['all' => $all,'ref' => $selected, 'notifications' => $notification]);
         }else{
             $model = new FieldType();
             $all = $model->getAllFieldType();
-            return view('BO.crudFieldType', ['all' => $all,'ref' => $selected]);
+            return view('BO.crudFieldType', ['all' => $all,'ref' => $selected, 'notifications' => $notification]);
         }
         return null;
     }

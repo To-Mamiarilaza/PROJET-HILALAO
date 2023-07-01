@@ -25,7 +25,7 @@
                     <td>{{ $crud->getId_subscription_state() }}</td>
                     <td>{{ $crud->getSubscription_state() }}</td>
                     <td><a href="#" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#updateModal{{ $crud->getId_subscription_state() }}" data-id="{{ $crud->getId_subscription_state() }}" data-subscription_state="{{ $crud->getSubscription_state() }}"><i class="fas fa-cog"></i></a></td>
-                    <td><a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{{ $crud->getId_subscription_state() }}" data-subscription_state="{{ $crud->getSubscription_state() }}"><i class="fas fa-trash-alt"></i></a></td>
+                    <td><a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $crud->getId_subscription_state() }}" data-id="{{ $crud->getId_subscription_state() }}" data-subscription_state="{{ $crud->getSubscription_state() }}"><i class="fas fa-trash-alt"></i></a></td>
                 </tr>
                 <!-- Modal pour modifier une catégorie -->
                 <form action="{{ route('updateByid_admin') }}" method="post">
@@ -55,11 +55,13 @@
                     </div>
                 </form>
                 <!-- Modal pour supprimer une catégorie -->
-                <form action="{{ route('delete_admin' , ['variable' => 'subscription_state','id' => $crud->getId_subscription_state()])}}" method="get">
+                <form action="{{ route('delete_admin' )}}" method="post">
                     @csrf
-                    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="deleteModal{{ $crud->getId_subscription_state() }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
+                                <input type="hidden" name="variable" id="variable" class="form-control" value="field_type">
+                                <input type="hidden" name="id" id="variable" class="form-control" value="{{ $crud->getId_subscription_state() }}">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalLabel">Supprimer une catégorie</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

@@ -1,12 +1,12 @@
 <?php
 namespace App\Http\Controllers\BO;
 
-use Exception;
 use App\Http\Controllers\Controller;
 use App\Models\BO\Category;
 use App\Models\BO\DetailClient;
 use App\Models\BO\DetailTerrain;
 use App\Models\BO\Statistique;
+use App\Models\BO\BackOfficeNotification;
 use Illuminate\Support\Facades\Session;
 
 
@@ -38,6 +38,7 @@ class StatistiqueController extends Controller
         $terrain = $detail->getAllField();
         $field = new Statistique();
         $all = $field->StatField();
+        $notification = BackOfficeNotification::getAllBackOfficeNotification();
 
         
         return view('BO.statistique', [
@@ -48,7 +49,8 @@ class StatistiqueController extends Controller
             'clients' => $clients,
             'terrains' =>$terrain,
             'ref' => $ref,
-            'all' => $all
+            'all' => $all,
+            'notifications' => $notification
         ]);
     }
 }
