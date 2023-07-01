@@ -42,4 +42,23 @@
 }
 .regle ul {
   font-size: 12px;
+}
+
+.indication {
+  width: 60%;
+}
+.indication div div {
+  font-size: 10px;
+  text-align: center;
+  padding: 8px;
+}
+.indication div .non-paye {
+  background-color: rgb(255, 4, 4);
+  color: white;
+}
+.indication div .paye {
+  background-color: rgb(56, 233, 56);
+}
+.indication div .normal {
+  background-color: #faef5d;
 }/*# sourceMappingURL=subscription.css.map */

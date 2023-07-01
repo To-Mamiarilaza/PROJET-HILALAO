@@ -59,7 +59,24 @@
                         <div class="normal">Decembre</div>
                     </div>
                 </div>
-                <form action="" class="form my-5">
+                <div class="row indication mt-3">
+                    <div class="col-md-4 px-2">
+                        <div class="non-paye">
+                            Non payé
+                        </div>
+                    </div>
+                    <div class="col-md-4 px-2">
+                        <div class="normal">
+                            Normal
+                        </div>
+                    </div>
+                    <div class="col-md-4 px-2">
+                        <div class="paye">
+                            Payé
+                        </div>
+                    </div>
+                </div>
+                <form action="" class="form my-4">
                     <div class="row">
                         <div class="col-md-6">
                             <input type="number" placeholder="Annee" value="2023" class="form-control">

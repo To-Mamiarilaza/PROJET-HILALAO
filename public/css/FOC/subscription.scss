@@ -3,7 +3,7 @@ $secondar-color: #2A1F1D;
 $other-color-1: #33658A;
 $other-color-2: #EBF8B8;
 
-.title  {
+.title {
     color: #33658A;
 }
 
@@ -27,7 +27,7 @@ $other-color-2: #EBF8B8;
             padding: 12px 15px;
             font-weight: 600;
         }
-        
+
         .normal {
             background-color: #faef5d;
         }
@@ -56,5 +56,30 @@ $other-color-2: #EBF8B8;
 
     ul {
         font-size: 12px;
+    }
+}
+
+.indication {
+    width: 60%;
+
+    div {
+        div {
+            font-size: 10px;
+            text-align: center;
+            padding: 8px;
+        }
+
+        .non-paye {
+            background-color: rgb(255, 4, 4);
+            color: white;
+        }
+
+        .paye {
+            background-color: rgb(56, 233, 56);
+        }
+
+        .normal {
+            background-color: #faef5d;
+        }
     }
 }

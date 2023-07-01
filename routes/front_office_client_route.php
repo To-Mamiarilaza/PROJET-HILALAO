@@ -120,3 +120,7 @@ Route::POST('/loadPageDispoAndPricePost', [FieldController::class, 'loadPageDisp
 ->name('loadPageDispoAndPricePost');
 
 Route::GET('/deleteDisponibility', [FieldController::class, 'deleteDisponibility']);
+
+Route::get('/testSubscription', function () {
+    return view('FOC/subscription');
+});
