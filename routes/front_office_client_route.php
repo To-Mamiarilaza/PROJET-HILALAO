@@ -121,6 +121,6 @@ Route::POST('/loadPageDispoAndPricePost', [FieldController::class, 'loadPageDisp
 
 Route::GET('/deleteDisponibility', [FieldController::class, 'deleteDisponibility']);
 
-Route::get('/testSubscription', function () {
-    return view('FOC/subscription');
+Route::get('/compte', function () {
+    return view('FOC/compteClient');
 });
