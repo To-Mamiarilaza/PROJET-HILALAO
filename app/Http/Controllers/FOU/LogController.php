@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\FOU\Users;
 use App\Exceptions\UserException;
 use App\Models\FOU\UserReservation;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
 class LogController extends Controller
@@ -51,9 +52,15 @@ class LogController extends Controller
         return Redirect('/log/user');
     }
 
+    public function myAccount() {
+        if (Session::get("user") !== null) {
+            return Redirect("/user/account");
+        }
+        return Redirect("/log/user");
+    }
+
     public function info() {
         $user = Session::get("user");
-        var_dump($user->getIdUsers());
         $user = UserReservation::findReservationByIdUser($user->getIdUsers());
         return view('FOU/profil-user', ["user" => $user]);
     }

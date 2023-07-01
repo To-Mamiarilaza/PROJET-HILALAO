@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    @include('FOU.headerNotification')
+    @include('FOU.header-notification')
     <div class="container px-3">
         <div class="row mt-3">
             <div class="col-md-6 px-3 accueil-text mt-5">
@@ -105,6 +105,7 @@
             </div>
         </div>
     </div>
+    @include('template.Footer')
 </body>
 
 </html>

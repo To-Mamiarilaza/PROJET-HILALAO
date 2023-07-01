@@ -12,7 +12,7 @@
 </head>
 <html>
 <body>
-@include('template.Header')
+@include('FOU.header-notification')
 <div class="container contenu">
     <div class="row profile">
         <div class="col-md-3 profile-falseSidebar">
@@ -83,7 +83,7 @@
                                 <td>{{ $reservation->getReservationDate()->format('d F Y') }}</td>
                                 <td>
                                 <!-- <img src="lieu1.jpg" alt="Lieu 1"> -->
-                                <span>Futsal Andraharo</span>
+                                <span>{{ $reservation->getField()->getName() }}</span>
                                 </td>
                                 <td>Sport 1</td>
                                 <td>{{ $reservation->getStartTime()->format('H:i') }}</td>

@@ -13,7 +13,7 @@
     <title>Document</title>
 </head>
 <body>
-@include('template.Header')
+@include('FOU.header-notification')
 <div class="container">
     <div class="row contenu">
         <div class="col-md-7 list">
@@ -123,6 +123,7 @@
         </div>
     </div>
 </div>
+@include('Template.Footer')
 <script>
     var map = L.map('map').setView([-18.879190, 47.507905], 10);
 
