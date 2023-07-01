@@ -98,7 +98,7 @@ CREATE TABLE field_reservation_notification (
     FOREIGN KEY(id_field) REFERENCES field(id_field)
 );
 INSERT INTO field_reservation_notification VALUES(3, 2, 3);
-INSERT INTO field_reservation_notification VALUES(4, 3, 1);
+INSERT INTO field_reservation_notification VALUES(4, 1, 1);
 
 CREATE TABLE field_subscription_notification (
     id_client_notification SERIAL,
@@ -127,11 +127,11 @@ FROM client_notification cn JOIN field_reservation_notification fr ON cn.id_clie
 JOIN field f ON fr.id_field = f.id_field JOIN users u ON u.id_users = fr.id_user;
 
 -- View pour afficher les rappels de payement d'abonnement
-CREATE VIEW v_field_subscription_notification AS
+CREATE OR REPLACE VIEW v_field_subscription_notification AS
 SELECT cn.id_client_notification, cn.id_client, id_type_notification, date_notification, fs.id_field, name, month, cn.etat
 FROM client_notification cn JOIN field_subscription_notification fs 
 ON cn.id_client_notification = fs.id_client_notification JOIN
-field f ON fs.id_field = f.id_field;
+field f ON fs.id_field = f.id_field WHERE  cn.date_notification >= NOW() AND cn.date_notification <= NOW() + '10 days' OR cn.date_notification <= NOW();
 
 
 -- NOTIFICATION POUR LES BACK OFFICES
@@ -171,6 +171,7 @@ CREATE TABLE subscription_payement_notification (
     FOREIGN KEY(id_client) REFERENCES client(id_client),
     FOREIGN KEY(id_field) REFERENCES field(id_field)
 );
+
 INSERT INTO subscription_payement_notification VALUES (3, 3, 1, 7);
 
 -- Crée un view pour le demande d'adhesion d'un client

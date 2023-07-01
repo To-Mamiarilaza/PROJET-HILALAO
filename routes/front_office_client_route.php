@@ -7,6 +7,7 @@ use App\Http\Controllers\FOC\LoginController;
 use App\Http\Controllers\FOC\CustomerController;
 use App\Http\Controllers\FOC\InscriptionController;
 use App\Http\Controllers\FOC\TestNotification;
+use App\Http\Controllers\FOC\UserNotificationController;
 
 Route::get('/', function () {
 	return view('FOC/login');
@@ -33,14 +34,17 @@ Route::get('/home-client', function() {
     return view('FOC/home');
 });
 
-
 Route::get('/disponibility', function() {
     return view('FOC/profil-terrain');
 });
 
-Route::get('/testNotification', [BackOfficeController::class, 'index']);
+Route::get('/subscription', function() {
+    return view('FOC/subscription');
+});
 
-Route::get('/changeNotificationState/{idNotif}', [BackOfficeController::class, 'changeNotificationState']);
+Route::get('/testNotification', [ClientNotificationController::class, 'index']);
+
+Route::get('/changeNotificationState/{idNotif}', [ClientNotificationController::class, 'changeNotificationState']);
 
 
 

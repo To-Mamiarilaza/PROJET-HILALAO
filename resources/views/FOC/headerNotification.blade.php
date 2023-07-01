@@ -42,7 +42,7 @@
 
                                 <ul class="dropdown-menu dropdown-list" id="notification-list" aria-labelledby="dropdownMenuLink">
                                     @foreach($notifications as $notification)
-                                    <li><a class="dropdown-item" href="#" data-notification-id="{{ $notification->idAdminNotification }}" onclick="changeNotificationState(this)">{!! $notification->getContent() !!}</a></li>
+                                    <li><a class="dropdown-item" href="#" data-notification-id="{{ $notification->idClientNotification }}" onclick="changeNotificationState(this)">{!! $notification->getContent() !!}</a></li>
                                     @endforeach
                                 </ul>
                             </div>
