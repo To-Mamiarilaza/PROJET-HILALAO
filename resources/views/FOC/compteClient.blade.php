@@ -52,19 +52,6 @@
 				<!-- <div class="alert alert-warning"><i class="fas fa-user-check mx-3"></i> Client en attente</div> -->
 			</div>
 		</div>
-
-		<div class="cin mt-5">
-			<h4>PHOTO DU CIN</h4>
-			<hr>
-			<div class="cin-photos row my-4">
-				<div class="col-md-6">
-					<img src="{{asset('image/cin-photo.jpg')}}" alt="Photo du CIN verso">
-				</div>
-				<div class="col-md-6">
-					<img src="{{asset('image/cin-photo.jpg')}}" alt="Photo du CIN recto">
-				</div>
-			</div>
-		</div>
 	</div>
 
 
