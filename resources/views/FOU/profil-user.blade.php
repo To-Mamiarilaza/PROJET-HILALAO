@@ -18,24 +18,24 @@
         <div class="col-md-3 profile-falseSidebar">
             <div class="row profile-falseSidebar-photo ">
                 <img src="{{ asset('css/FOU/assets/image/lalaina.jpg') }}">
-            </div> 
+            </div>
             <div class="row profile-falseSidebar-sport">
-                <div class="row profile-falseSidebar-sport-title">  
+                <div class="row profile-falseSidebar-sport-title">
                     <div class="col-md-3 profile-falseSidebar-sport-title-texte"><p>SPORT</p></div>
                     <div class="col-md-9"><hr></div>
                 </div>
-                <div class="row profile-falseSidebar-sport-activite">  
-                    
+                <div class="row profile-falseSidebar-sport-activite">
+
                 </div>
-                
+
             </div>
-            
-        </div> 
+
+        </div>
         <div class="col-md-8 profile-texte">
             <div class="row profile-texte-biography">
                 <div class="row profile-texte-biography-name">
                     <div class="col-md-4 profile-texte-biography-name-prenom">
-                        <h4>To Mamiarilaza</h4>
+                        <h4>{{ $user->getFirstName() }} {{ $user->getLastName() }}</h4>
                     </div>
                     <div class="col-md-4 profile-texte-biography-name-localisation">
                         <i class="fa fa-map-marker"></i>
@@ -43,13 +43,13 @@
                     </div>
                     <div class="col-md-4 profile-texte-biography-name-authentifie">
                         <i class="fa fa-check-circle"></i>
-                    </div>        
+                    </div>
                 </div>
                 <div class="row profile-texte-biography-specialite">
                     <p>Football Player</p>
                 </div>
                 <div class="row profile-texte-biography-ranking">
-                    <p>RANKINGS</p> 
+                    <p>RANKINGS</p>
                     <div class="row profile-texte-biography-ranking-star">
                         <span class="fa fa-star checked"> </span>
                         <span class="fa fa-star checked"> </span>
@@ -57,12 +57,12 @@
                         <span class="fa fa-star"> </span>
                         <span class="fa fa-star"> </span>
                     </div>
-                </div>     
+                </div>
             </div>
             <div class="row profile-texte-reservation">
                 <div class="row  profile-texte-reservation-title">
                     <p>LISTE DES RESERVATIONS</p>
-                </div> 
+                </div>
                 <div class="profile-texte-reservation-liste">
                     <table>
                             <thead>
@@ -177,9 +177,9 @@
                         </tbody>
                     </table>
                 </div>
-            </div> 
+            </div>
         </div>
-    </div>        
+    </div>
 </div>
 @include('template.Footer')
 </body>

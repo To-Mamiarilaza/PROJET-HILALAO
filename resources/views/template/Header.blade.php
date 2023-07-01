@@ -9,7 +9,7 @@
                             <a class="nav-link active" aria-current="page" href="{{ route('landing') }}">Accueil</a>
                         </li>
                         <li class="nav-item mx-2">
-                            <a class="nav-link" href="{{ route('list-field-all') }}">Terrains</a>
+                            <a class="nav-link" href="{{ route('list-field-all-fou') }}">Terrains</a>
                         </li>
                         <li class="nav-item mx-2">
                             <a class="nav-link" href="">Mes réservations</a>
@@ -18,7 +18,7 @@
                             <a class="nav-link" href="#">Communauté</a>
                         </li>
                         <li class="nav-item mx-2">
-                            <a class="nav-link" href="">Mon Compte</a>
+                            <a class="nav-link" href="{{ route('profil-user') }}">Mon Compte</a>
                         </li>
                     </ul>
                     <div class="option-block mx-5">

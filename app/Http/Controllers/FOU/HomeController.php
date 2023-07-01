@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\FOU\Category;
 use App\Models\FOU\ListField;
 
-class HomeFOUController extends Controller
+class HomeController extends Controller
 {
     public function index()
     {

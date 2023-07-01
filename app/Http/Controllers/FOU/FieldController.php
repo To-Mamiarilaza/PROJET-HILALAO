@@ -12,7 +12,7 @@ use App\Models\FOU\InfoField;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
-class FieldFOUController extends Controller
+class FieldController extends Controller
 {
     public function detail($id_field) {
         $date = date('Y-m-d');

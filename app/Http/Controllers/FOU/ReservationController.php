@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use DateTime;
 
-class ReservationFOUController extends Controller
+class ReservationController extends Controller
 {
     public function index($id_field, $date = null)
     {

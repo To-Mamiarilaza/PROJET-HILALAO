@@ -9,7 +9,7 @@ use App\Models\FOU\Users;
 use App\Exceptions\UserException;
 use Illuminate\Support\Facades\Session;
 
-class LogFOUController extends Controller
+class LogController extends Controller
 {
 
     public function index() {
@@ -48,6 +48,11 @@ class LogFOUController extends Controller
     public function signout() {
         Session::remove("user");
         return Redirect('/log/user');
+    }
+
+    public function info() {
+        $user = Session::get("user");
+        return view('FOU/profil-user', ["user" => $user]);
     }
 }
 
