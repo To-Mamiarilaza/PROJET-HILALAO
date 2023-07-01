@@ -97,8 +97,8 @@ Route::get('/update/{variable}/{id}', [CrudController::class,
 Route::post('/updateByid', [CrudController::class,
     'update'])->name('updateByid_admin');
 
-Route::get('/delete/{variable}/{id}', [CrudController::class,
-    'all'])->name('delete_admin');
+Route::post('/delete', [CrudController::class,
+    'delete'])->name('delete_admin');
 
 Route::post('/insert', [CrudController::class,
     'save'])->name('insert_admin');

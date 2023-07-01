@@ -26,7 +26,7 @@
                     <td>{{ $crud->getCategory() }}</td>
                     <td>{{ $crud->getSubscribing_price() }}</td>
                     <td><a href="#" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#updateModal{{ $crud->getId_category() }}" data-id="{{ $crud->getId_category() }}" data-category="{{ $crud->getCategory() }}" data-price="{{ $crud->getSubscribing_price() }}"><i class="fas fa-cog"></i></a></td>
-                    <td><a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{{ $crud->getId_category() }}" data-category="{{ $crud->getCategory() }}"><i class="fas fa-trash-alt"></i></a></td>
+                    <td><a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $crud->getId_category() }}" data-id="{{ $crud->getId_category() }}" data-category="{{ $crud->getCategory() }}"><i class="fas fa-trash-alt"></i></a></td>
                 </tr>
                 <!-- Modal pour modifier une catégorie -->
                 <form action="{{ route('updateByid_admin') }}" method="post">
@@ -61,24 +61,18 @@
                     </div>
                 </form>
                 <!-- Modal pour supprimer une catégorie -->
-                <form action="{{ route('delete_admin', ['variable' => 'category', 'id' => $crud->getId_category()])}}" method="get">
+                <form action="{{ route('delete_admin') }}" method="post">
                     @csrf
-                    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="deleteModal{{ $crud->getId_category() }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Supprimer une catégorie</h5>
+                                    <h6 id="label">Voulez vous vraiment supprimer cette categorie <i id="categorie">{{ $crud->getCategory() }}</i> ?</h6>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
-                                <div class="modal-body">
-                                    <div class="mt-2">
-                                        <label for="id" class="form-label">ID</label>
-                                        <input type="text" class="form-control" readonly id="deleteId" name="id_category" value="{{ $crud->getId_category() }}">
-                                    </div>
-                                    <div class="mt-2">
-                                        <label for="category" class="form-label">Catégorie</label>
-                                        <input type="text" class="form-control" readonly id="deleteCategory" name="category" value="{{ $crud->getCategory() }}">
-                                    </div>
+                                <div class="mt-2">
+                                    <input type="hidden" name="variable" id="variable" class="form-control" value="category">
+                                    <input type="hidden" class="form-control" readonly id="updateId" name="id" value="{{ $crud->getId_category() }}">
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
