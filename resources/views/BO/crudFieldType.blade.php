@@ -25,7 +25,7 @@
                     <td>{{ $crud->getId_field_type() }}</td>
                     <td>{{ $crud->getField_type() }}</td>
                     <td><a href="#" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#updateModal{{ $crud->getId_field_type() }}" data-id="{{ $crud->getId_field_type() }}" data-field_type="{{ $crud->getField_type() }}"><i class="fas fa-cog"></i></a></td>
-                    <td><a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{{ $crud->getId_field_type() }}" data-field_type="{{ $crud->getField_type() }}"><i class="fas fa-trash-alt"></i></a></td>
+                    <td><a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $crud->getId_field_type() }}" data-id="{{ $crud->getId_field_type() }}" data-field_type="{{ $crud->getField_type() }}"><i class="fas fa-trash-alt"></i></a></td>
                 </tr>
                 <!-- Modal pour modifier une catégorie -->
                 <form action="{{ route('updateByid_admin') }}" method="post">
@@ -55,24 +55,18 @@
                     </div>
                 </form>
                 <!-- Modal pour supprimer une catégorie -->
-                <form action="{{ route('delete_admin' , ['variable' => 'field_type','id' => $crud->getId_field_type()])}}" method="get">
+                <form action="{{ route('delete_admin')}}" method="post">
                     @csrf
-                    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="deleteModal{{ $crud->getId_field_type() }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Supprimer un type de terrain</h5>
+                                    <h6 id="label">Voulez vous vraiment supprimer cette categorie <i id="categorie">{{ $crud->getField_type() }}</i> ?</h6>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
-                                <div class="modal-body">
-                                    <div class="mt-2">
-                                        <label for="id" class="form-label">ID</label>
-                                        <input type="text" class="form-control" readonly id="deleteId" name="id_field_type" value="{{ $crud->getId_field_type() }}">
-                                    </div>
-                                    <div class="mt-2">
-                                        <label for="field_type" class="form-label">Etat</label>
-                                        <input type="text" class="form-control" readonly id="deleteField_type" name="field_type" value="{{ $crud->getField_type() }}">
-                                    </div>
+                                <div class="mt-2">
+                                    <input type="hidden" name="variable" id="variable" class="form-control" value="category">
+                                    <input type="hidden" class="form-control" readonly id="updateId" name="id_category" value="{{ $crud->getId_field_type() }}">
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>

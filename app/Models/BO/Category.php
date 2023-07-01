@@ -9,6 +9,7 @@ class Category
     protected $id_category;
     protected $category;
     protected $subscribing_price;
+    protected $status;
 
     public function getId_category()
     {
@@ -37,6 +38,15 @@ class Category
         $this->subscribing_price = $value;
     }
 
+    public function getStatus()
+    {
+        return $this->status;
+    }
+    public function setStatus($value)
+    {
+        $this->status = $value;
+    }
+
     public function __construct()
     {
     }
@@ -44,7 +54,7 @@ class Category
     public function getAllCategory()
     {
         try{
-            $category = DB::select('SELECT * FROM category ');
+            $category = DB::select('SELECT * FROM category where status = 1');
             $res = array();
             foreach ($category as $result) {
                 $temp = new Category();
@@ -94,18 +104,16 @@ class Category
         }
     }
 
-    // public function delete(){
-    //     try{
-    //         $req = "delete ";
-    //         $category = $this->getCategory();
-    //         $subscribing_price = $this->getSubscribing_price();
-    //         $req = sprintf($req,$category,$subscribing_price);
-    //         DB::insert($req);
-
-    //     }catch(Exception $e){
-    //         $e->getMessage();
-    //     }
-    // }
+    public function delete(){
+        try{
+            $req = "update category set status = 10 where id_category = %s";
+            $id_category = $this->getId_category();
+            $req = sprintf($req, $id_category);
+            DB::update($req);
+        }catch(Exception $e){
+            throw new Exception("Supression non valider");
+        }
+    }
 
     public function update(){
         try{

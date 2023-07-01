@@ -7,6 +7,7 @@ class FieldType
 {
     protected $id_field_type;
     protected $field_type;
+    protected $status;
 
     public function getId_field_type()
     {
@@ -24,6 +25,15 @@ class FieldType
     public function setField_type($value)
     {
         $this->field_type = $value;
+    }
+
+    public function getStatus()
+    {
+        return $this->status;
+    }
+    public function setStatus($value)
+    {
+        $this->status = $value;
     }
 
     public function __construct()
@@ -73,5 +83,16 @@ class FieldType
         $field_type = $this->getField_type();
         $req = sprintf($req,$field_type,$id_field_type);
         DB::update($req);
+    }
+
+    public function delete(){
+        try{
+            $req = "update field_type set status = 10 where id_field_type = %s";
+            $field_type = $this->getId_field_type();
+            $req = sprintf($req, $field_type);
+            DB::update($req);
+        }catch(Exception $e){
+            throw new Exception("Supression non valider");
+        }
     }
 }

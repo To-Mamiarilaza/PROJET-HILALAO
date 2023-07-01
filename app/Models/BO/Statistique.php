@@ -74,6 +74,7 @@ class Statistique
             $req= "SELECT COUNT(id_client) AS nb, sign_up_date 
             FROM client
             WHERE EXTRACT(MONTH FROM sign_up_date) = %s
+            and id_status = 1
             AND EXTRACT(YEAR FROM sign_up_date) = %s
             GROUP BY sign_up_date
             ORDER BY sign_up_date;";
@@ -100,7 +101,7 @@ class Statistique
             $req = "SELECT EXTRACT(MONTH FROM sign_up_date) AS month,
             COUNT(id_client) AS nb_clients
             FROM client
-            WHERE EXTRACT(YEAR FROM sign_up_date) = %s
+            WHERE EXTRACT(YEAR FROM sign_up_date) = %s and id_status = 1
             GROUP BY EXTRACT(MONTH FROM sign_up_date)
             ORDER BY EXTRACT(MONTH FROM sign_up_date)";
             $req = sprintf($req,$annee);
@@ -175,6 +176,7 @@ class Statistique
             FROM field 
             WHERE EXTRACT(MONTH FROM insert_date) = %s
             AND EXTRACT(YEAR FROM insert_date) = %s
+            and state = 1
             GROUP BY insert_date
             ORDER BY insert_date;";
             if($category > 0){
@@ -211,6 +213,7 @@ class Statistique
             COUNT(id_field) AS nb_field
             FROM field
             WHERE EXTRACT(YEAR FROM insert_date) = %s
+            and state = 1
             GROUP BY EXTRACT(MONTH FROM insert_date)
             ORDER BY EXTRACT(MONTH FROM insert_date) ";
             if($category > 0){
