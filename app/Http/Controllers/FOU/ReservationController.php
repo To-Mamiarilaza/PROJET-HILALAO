@@ -40,4 +40,9 @@ class ReservationController extends Controller
         $reservation->save();
         return redirect('/field/detail/'.$id_field);
     }
+
+    public function calculPrix($id_field,$reservation_date, $start_time, $duration) {
+        $price = Reservation::calculPrix($id_field, $reservation_date, $start_time, $duration);
+        return $price;
+    }
 }

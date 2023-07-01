@@ -71,43 +71,7 @@
     }
 </script>
 <body>
-    <section class="menu">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light px-5">
-            <div class="container-fluid px-5 mx-5">
-                <a class="navbar-brand logo titre" href="#">HILALAO</a>
-                <div class="collapse navbar-collapse mx-5 navbar-links" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 liens">
-                        <li class="nav-item mx-2">
-                            <a class="nav-link active" aria-current="page" href="#">Accueil</a>
-                        </li>
-                        <li class="nav-item mx-2">
-                            <a class="nav-link" href="#">Terrains</a>
-                        </li>
-                        <li class="nav-item mx-2">
-                            <a class="nav-link" href="">Mes réservations</a>
-                        </li>
-                        <li class="nav-item mx-2">
-                            <a class="nav-link" href="#">Communauté</a>
-                        </li>
-                        <li class="nav-item mx-2">
-                            <a class="nav-link" href="">Mon Compte</a>
-                        </li>
-                    </ul>
-                    <div class="option-block mx-5">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#"><i class="fas fa-bell"></i></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#"><i class="fas fa-power-off"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </section>
-
+    @include('template.Header')
     <div class="container mt-4">
         <div class="row">
             <div class="col-md-6 p-3">
@@ -194,40 +158,47 @@
             </div>
         </div>
         <hr class="my-4">
+        @if ($field->getHaveUser() == true)
         <div class="reservation" id="reservation">
             <h2>RESERVATION DU TERRAIN</h2>
             <div class="row mt-5 mb-4">
                 <div class="col-md-4">
                     <h3>Votre réservation</h3>
-                    <form action="" class="form px-3">
+                    <div action="" class="form px-3">
                         <div class="mt-3">
-                            <label for="date" class="form-label">Date</label>
-                            <input type="date" id="date" class="form-control" name="reservation_date">
+                            <label for="reservation_date" class="form-label">Date</label>
+                            <input type="date" id="reservation_date" class="form-control" name="reservation_date">
                         </div>
                         <div class="mt-3">
-                            <label for="debut" class="form-label">Début</label>
-                            <input type="time" id="debut" class="form-control" name="start_time">
+                            <label for="start_time" class="form-label">Début</label>
+                            <input type="time" id="start_time" class="form-control" name="start_time">
                         </div>
                         <div class="mt-3">
-                            <label for="fin" class="form-label">Durée</label>
-                            <input type="number" id="fin" class="form-control" name="duration">
+                            <label for="duration" class="form-label">Durée</label>
+                            <input type="number" id="duration" class="form-control" name="duration">
                         </div>
                         <p class="erreur">Votre date de réservation est déja prise !</p>
                         <div class="valider mt-3">
-                            <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal">Valider</button>
+                            <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="modalReservation()">Valider</button>
                         </div>
-                    </form>
+                    </div>
                 </div>
                 <div class="col-md-8 calendar px-4">
                     <div id='calendar'></div>
                 </div>
             </div>
         </div>
+        @endif
 
     </div>
 
     <!-- Modal de validation du réservation-->
-    <form action="" class="form">
+    <form action="{{ route('reserve') }}" class="form" method="POST">
+        @csrf
+        <input type="hidden" name="id_field" value="{{ $field->getIdField() }}">
+        <input type="hidden" name="reservation_date" id="reservation_date-form">
+        <input type="hidden" name="start_time" id="start_time-form">
+        <input type="hidden" name="duration" id="duration-form">
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -236,12 +207,12 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body validation-reservation">
-                        <p><span class="little-title">Utilisateur :</span> To MAMIARILAZA</p>
-                        <p><span class="little-title">Réservation du terrain :</span> Elgeco plus</p>
-                        <p class="temp">Du <span class="date">07-11-23</span> de <span class="date">09:00 H</span> à <span class="date">10:00 H</span></p>
+                        <p><span class="little-title">Utilisateur :</span> {{ $field->getUsers()->getFirstName() }} {{ $field->getUsers()->getLastName() }}</p>
+                        <p><span class="little-title">Réservation du terrain :</span> {{ $field->getName() }}</p>
+                        <p class="temp">Du <span class="date" id="date-reservation"></span> de <span class="date" id="date-debut"> H</span> à <span class="date" id="date-fin"> H</span></p>
                         <div class="montant">
                             <label for="montant" class="form-label">Montant</label>
-                            <input type="text" value="50 000 AR" class="form-control" readonly>
+                            <input type="text" value="50 000 AR" class="form-control" id="montant-form" readonly >
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -291,6 +262,52 @@
 
     });
 </script>
+<script>
+
+    function modalReservation() {
+        var reservation_date_form = document.getElementById("reservation_date-form");
+        var start_time_form = document.getElementById("start_time-form");
+        var duration_form = document.getElementById("duration-form");
+        var montant = document.getElementById("montant-form");
+
+        var reservation_date = document.getElementById("reservation_date");
+        var start_time = document.getElementById("start_time");
+        var duration = document.getElementById("duration");
+
+        var item_reservation_date = document.getElementById("date-reservation");
+        var item_start_time = document.getElementById("date-debut");
+        var item_end_time = document.getElementById("date-fin");
+
+        reservation_date_form.value = reservation_date.value;
+        start_time_form.value = start_time.value;
+        duration_form.value = duration.value;
+        item_reservation_date.innerHTML = reservation_date.value;
+        item_start_time.innerHTML = start_time.value + " H";
+        item_end_time.innerHTML = "END";
+        montant.value = getPrix({{$field->getIdField()}}, reservation_date.value, start_time.value, duration.value);
+   }
+
+</script>
+<script>
+   function getPrix(id_field, reservation_date, start_time, duration) {
+        return new Promise(function(resolve, reject) {
+            $.ajax({
+                url: "/reservation/calcul_prix/"+id_field+"/"+reservation_date+"/"+start_time+"/"+duration,
+                method: "GET",
+                success: function(response) {
+                    clientData = response;
+                    resolve(response);
+                    var montant = document.getElementById("montant-form");
+                    montant.value = clientData + " AR";
+                },
+                error: function(xhr, status, error) {
+                    reject(error);
+                }
+            });
+        });
+   }
+</script>
+<script src="{{ asset('js/jquery.min.js') }}"></script>
 </body>
 
 </html>

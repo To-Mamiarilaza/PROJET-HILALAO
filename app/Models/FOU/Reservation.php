@@ -47,6 +47,17 @@ class Reservation {
         return $res;
     }
 
+    public static function calculPrix($id_field,$reservation_date , $start_time, $duration) {
+        $sql = "SELECT price*%s total_price FROM dispo_and_price WHERE id_field=%s AND id_day = EXTRACT(dow from DATE '%s')+1 AND start_time <= '%s' AND end_time >= '%s'";
+        $sql = sprintf($sql, $duration, $id_field, $reservation_date, $start_time, $start_time);
+        $dbs = DB::select($sql);
+        $res = 0;
+        foreach ($dbs as $db) {
+            $res = $db->total_price;
+        }
+        return $res;
+    }
+
     public static function findAll() {
         $sql = 'SELECT id_reservation, reservation_date, id_users, start_time, id_field, duration, end_time FROM "public".v_actif_reservation f ';
         $reservations_db = DB::select($sql);

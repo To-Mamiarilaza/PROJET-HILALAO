@@ -24,7 +24,7 @@ Route::get('/ListFields', [FieldController::class, 'index']);
 Route::get('/field/detail/{id_field}', [FieldController::class, 'detail'])->name('detail-field');
 Route::get('/field/detail/{id_field}/{date}', [FieldController::class, 'detailled'])->name('detailled-field');
 Route::get('/tester', [TestController::class, 'index'])->name('test');
-
+Route::get('*', [ReservationController::class, 'calculPrix']);
 
 Route::get('/infoTerrain/{id_field}', [InfoTerrain::class, 'index']);
 
