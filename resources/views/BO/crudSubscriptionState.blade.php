@@ -27,6 +27,30 @@
                     <td><a href="#" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#updateModal{{ $crud->getId_subscription_state() }}" data-id="{{ $crud->getId_subscription_state() }}" data-subscription_state="{{ $crud->getSubscription_state() }}"><i class="fas fa-cog"></i></a></td>
                     <td><a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $crud->getId_subscription_state() }}" data-id="{{ $crud->getId_subscription_state() }}" data-subscription_state="{{ $crud->getSubscription_state() }}"><i class="fas fa-trash-alt"></i></a></td>
                 </tr>
+
+                <!-- Modal pour supprimer une catégorie -->
+                <form action="{{ route('delete_admin')}}" method="post">
+                    @csrf
+                    <div class="modal fade" id="deleteModal{{ $crud->getId_subscription_state() }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h6 id="label">Voulez vous vraiment supprimer cette abonnement <i id="categorie">{{ $crud->getSubscription_state() }}</i> ?</h6>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="mt-2">
+                                    <input type="hidden" name="variable" id="variable" class="form-control" value="subscription_state">
+                                    <input type="hidden" class="form-control" readonly id="updateId" name="id" value="{{ $crud->getId_subscription_state() }}">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
                 <!-- Modal pour modifier une catégorie -->
                 <form action="{{ route('updateByid_admin') }}" method="post">
                     @csrf
@@ -54,28 +78,7 @@
                         </div>
                     </div>
                 </form>
-                <!-- Modal pour supprimer une catégorie -->
-                <form action="{{ route('delete_admin')}}" method="post">
-                    @csrf
-                    <div class="modal fade" id="deleteModal{{ $crud->getId_subscription_state() }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h6 id="label">Voulez vous vraiment supprimer cette categorie <i id="categorie">{{ $crud->getSubscription_state() }}</i> ?</h6>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="mt-2">
-                                    <input type="hidden" name="variable" id="variable" class="form-control" value="category">
-                                    <input type="hidden" class="form-control" readonly id="updateId" name="id_category" value="{{ $crud->getId_subscription_state() }}">
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                                    <button type="submit" class="btn btn-danger">Supprimer</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
+                
                 @endforeach
             </tbody>
         </table>

@@ -46,17 +46,18 @@ class CrudController extends Controller
         $c = new CrudController();
         try {
             $selected = $request->input('variable');
+            $id = $request->input('id');
             if($selected == "category"){
                 $model = new Category();
-                $model->setId_category($request->input('id_category'));
+                $model->setId_category($id);
                 $model->delete();   
             }else if($selected == "subscription_state") {
                 $model = new SubscriptionState();
-                $model->setId_subscription_state($request->input('id_subscription_state'));
+                $model->setId_subscription_state($id);
                 $model->delete(); 
             }else{
                 $model = new FieldType();
-                $model->setId_field_type($request->input('id_field_type'));
+                $model->setId_field_type($id);
                 $model->delete();
             }
             return $this->all($selected);

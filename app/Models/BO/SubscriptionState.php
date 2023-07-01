@@ -76,7 +76,7 @@ class SubscriptionState
 
     public function delete(){
         try{
-            $req = "update subscription_state set status = 10 where subscription_state = %s";
+            $req = "update subscription_state set status = 10 where status = %s";
             $subscription_state = $this->getId_subscription_state();
             $req = sprintf($req, $subscription_state);
             DB::update($req);

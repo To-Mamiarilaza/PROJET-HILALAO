@@ -72,7 +72,7 @@
                                 </div>
                                 <div class="mt-2">
                                     <input type="hidden" name="variable" id="variable" class="form-control" value="category">
-                                    <input type="hidden" class="form-control" readonly id="updateId" name="id_category" value="{{ $crud->getId_category() }}">
+                                    <input type="hidden" class="form-control" readonly id="updateId" name="id" value="{{ $crud->getId_category() }}">
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>

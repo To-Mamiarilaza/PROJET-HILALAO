@@ -42,7 +42,7 @@ class FieldType
 
     public function getAllFieldType()
     {
-        $field_type = DB::select('SELECT * FROM field_type ');
+        $field_type = DB::select('SELECT * FROM field_type where status = 1');
         $res = array();
         foreach ($field_type as $result) {
             $temp = new FieldType();

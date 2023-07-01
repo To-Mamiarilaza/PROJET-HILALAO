@@ -26,7 +26,31 @@
                     <td>{{ $crud->getField_type() }}</td>
                     <td><a href="#" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#updateModal{{ $crud->getId_field_type() }}" data-id="{{ $crud->getId_field_type() }}" data-field_type="{{ $crud->getField_type() }}"><i class="fas fa-cog"></i></a></td>
                     <td><a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $crud->getId_field_type() }}" data-id="{{ $crud->getId_field_type() }}" data-field_type="{{ $crud->getField_type() }}"><i class="fas fa-trash-alt"></i></a></td>
+
                 </tr>
+
+                <form action="{{ route('delete_admin') }}" method="post">
+                    @csrf
+                    <div class="modal fade" id="deleteModal{{ $crud->getId_field_type() }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h6 id="label">Voulez vous vraiment supprimer cette categorie <i id="categorie">{{ $crud->getField_type() }}</i> ?</h6>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="mt-2">
+                                    <input type="hidden" name="variable" id="variable" class="form-control" value="fied_type">
+                                    <input type="hidden" class="form-control" readonly id="updateId" name="id" value="{{ $crud->getId_field_type() }}">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                
                 <!-- Modal pour modifier une catégorie -->
                 <form action="{{ route('updateByid_admin') }}" method="post">
                     @csrf
@@ -49,28 +73,6 @@
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
                                     <button type="submit" class="btn btn-primary">Valider</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-                <!-- Modal pour supprimer une catégorie -->
-                <form action="{{ route('delete_admin')}}" method="post">
-                    @csrf
-                    <div class="modal fade" id="deleteModal{{ $crud->getId_field_type() }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h6 id="label">Voulez vous vraiment supprimer cette categorie <i id="categorie">{{ $crud->getField_type() }}</i> ?</h6>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="mt-2">
-                                    <input type="hidden" name="variable" id="variable" class="form-control" value="category">
-                                    <input type="hidden" class="form-control" readonly id="updateId" name="id_category" value="{{ $crud->getId_field_type() }}">
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                                    <button type="submit" class="btn btn-danger">Supprimer</button>
                                 </div>
                             </div>
                         </div>
