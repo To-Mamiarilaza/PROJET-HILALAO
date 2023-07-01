@@ -10,51 +10,21 @@
     <link rel="stylesheet" href="{{ asset('css/FOC/disponibility.css') }}">
     <title>Disponibilité et prix</title>
 </head>
+        @isset($error)
+			<div class="error">
+				<p style="color: red">{{ $error }}</p>
+			</div>
+		@endisset
+        <div class="hidden-form" id="hidden-form">
 
-<body>
-    <div class="hidden-form" id="hidden-form">
+	    @foreach ($dispoAndPrice as $item)
         <div class="group-input">
-            <input class="jour" type="number" value="1">
-            <input class="star-time" type="time" value="07:00">
-            <input class="end-time" type="time" value="18:00">
-            <input class="price" type="number" value="50000">
-        </div>
-        <div class="group-input">
-            <input class="jour" type="number" value="2">
-            <input class="star-time" type="time" value="07:00">
-            <input class="end-time" type="time" value="18:00">
-            <input class="price" type="number" value="50000">
-        </div>
-        <div class="group-input">
-            <input class="jour" type="number" value="3">
-            <input class="star-time" type="time" value="07:00">
-            <input class="end-time" type="time" value="18:00">
-            <input class="price" type="number" value="50000">
-        </div>
-        <div class="group-input">
-            <input class="jour" type="number" value="4">
-            <input class="star-time" type="time" value="07:00">
-            <input class="end-time" type="time" value="18:00">
-            <input class="price" type="number" value="50000">
-        </div>
-        <div class="group-input">
-            <input class="jour" type="number" value="5">
-            <input class="star-time" type="time" value="07:00">
-            <input class="end-time" type="time" value="18:00">
-            <input class="price" type="number" value="50000">
-        </div>
-        <div class="group-input">
-            <input class="jour" type="number" value="6">
-            <input class="star-time" type="time" value="07:00">
-            <input class="end-time" type="time" value="21:00">
-            <input class="price" type="number" value="65000">
-        </div>
-        <div class="group-input">
-            <input class="jour" type="number" value="7">
-            <input class="star-time" type="time" value="07:00">
-            <input class="end-time" type="time" value="21:00">
-            <input class="price" type="number" value="65000">
-        </div>
+            <input class="jour" type="number" value="{{ $item->getDay()->getIdDay() }}">
+            <input class="star-time" type="time" value="{{ $item->getStartTime() }}">
+            <input class="end-time" type="time" value="{{ $item->getEndTime() }}">
+            <input class="price" type="number" value="{{  $item->getPrice() }}">
+        </div>       
+        @endforeach
     </div>
 
     @include('FOC/header')
@@ -68,10 +38,9 @@
         </div>
 
         <!-- Formulaire d'envoie du nouveau paramètre -->
-        <form action="" class="hidden-form" method="GET" id="send-form">
-
+        <form action="{{ route('insertDiposAndPrice') }}" class="hidden-form" method="POST" id="send-form">
+        @csrf   
         </form>
-
         <div class="parameter-insert mt-5" id="parameter-insert">
             <p class="parameter-title">Choisir les jours concernées</p>
             <div class="row">
@@ -102,6 +71,11 @@
                     </div>
                 </div>
                 <p class="error"> <i class="fas fa-info-circle mx-3"></i> Ce paramètre existe déja</p>
+                @isset($errorInsert)
+                    <div class="error">
+                        <p style="color: red">{{ $errorInsert }}</p>
+                    </div>
+                @endisset
                 <button class="btn btn-info ajout-button mt-3" onclick="addNewParameter()"> <i class="fas fa-plus"></i> Ajouter paramètre </button>
             </div>
         </div>

@@ -9,13 +9,13 @@
             <div class="collapse navbar-collapse navbar-links" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Accueil</a>
+                        <a class="nav-link" href="/home">Accueil</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Tableau de Bord</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Mes Terrains</a>
+                        <a class="nav-link" href="{{ route('list-field') }}">Mes Terrains</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Mon compte</a>
@@ -40,7 +40,7 @@
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><i class="fas fa-power-off"></i></a>
+                            <a class="nav-link" href="{{ route('deconnect') }}"><i class="fas fa-power-off"></i></a>
                         </li>
                     </ul>
                 </div>
