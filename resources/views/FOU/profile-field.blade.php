@@ -212,7 +212,7 @@
                         <p class="temp">Du <span class="date" id="date-reservation"></span> de <span class="date" id="date-debut"> H</span> à <span class="date" id="date-fin"> H</span></p>
                         <div class="montant">
                             <label for="montant" class="form-label">Montant</label>
-                            <input type="text" value="50 000 AR" class="form-control" id="montant-form" readonly >
+                            <input type="text" class="form-control" id="montant-form" name="montant" readonly >
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -298,7 +298,7 @@
                     clientData = response;
                     resolve(response);
                     var montant = document.getElementById("montant-form");
-                    montant.value = clientData + " AR";
+                    montant.value = clientData;
                 },
                 error: function(xhr, status, error) {
                     reject(error);

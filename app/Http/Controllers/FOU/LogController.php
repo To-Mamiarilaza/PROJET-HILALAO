@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\FOU\Users;
 use App\Exceptions\UserException;
+use App\Models\FOU\UserReservation;
 use Illuminate\Support\Facades\Session;
 
 class LogController extends Controller
@@ -52,6 +53,8 @@ class LogController extends Controller
 
     public function info() {
         $user = Session::get("user");
+        var_dump($user->getIdUsers());
+        $user = UserReservation::findReservationByIdUser($user->getIdUsers());
         return view('FOU/profil-user', ["user" => $user]);
     }
 }

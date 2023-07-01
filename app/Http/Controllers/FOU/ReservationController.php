@@ -36,10 +36,12 @@ class ReservationController extends Controller
         $reservation_date = $request->input('reservation_date');
         $start_time = $request->input('start_time');
         $duration = $request->input('duration');
-        $reservation = Reservation::prepareReservation($id_field, $id_users, $reservation_date, $start_time, $duration);
+        $montant = $request->input('montant');
+        $reservation = Reservation::prepareReservation($id_field, $id_users, $reservation_date, $start_time, $duration, $montant);
         $reservation->save();
         return redirect('/field/detail/'.$id_field);
     }
+
 
     public function calculPrix($id_field,$reservation_date, $start_time, $duration) {
         $price = Reservation::calculPrix($id_field, $reservation_date, $start_time, $duration);

@@ -33,7 +33,6 @@ class FieldUser extends FieldDetailled {
         $field = new FieldUser();
         $field->findById($id_field);
         $field->setHaveUser(false);
-        var_dump($field);
         $field->setUsersReservations([]);
         $field->setOthersReservations(Reservation::findByIdField($id_field));
         $field->setDirectReservations(Reservation::findDirectReservationByIdField($id_field));

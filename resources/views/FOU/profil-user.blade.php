@@ -77,102 +77,21 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($user->getReservations() as $reservation)
+
                             <tr>
-                                <td>01/07/2023</td>
+                                <td>{{ $reservation->getReservationDate()->format('d F Y') }}</td>
                                 <td>
                                 <!-- <img src="lieu1.jpg" alt="Lieu 1"> -->
                                 <span>Futsal Andraharo</span>
                                 </td>
                                 <td>Sport 1</td>
-                                <td>09:00</td>
-                                <td>11:00</td>
+                                <td>{{ $reservation->getStartTime()->format('H:i') }}</td>
+                                <td>{{ $reservation->getEndTime()->format('H:i') }}</td>
                                 <td><div class="detail-icon"><i class="fas fa-eye"></i></div></td>
                                 <td><div class="cancel-icon"><i class="fas fa-times"></i></div></td>
                             </tr>
-                            <tr>
-                                <td>01/07/2023</td>
-                                <td>
-                                <!-- <img src="lieu1.jpg" alt="Lieu 1"> -->
-                                <span>Futsal Andraharo</span>
-                                </td>
-                                <td>Sport 1</td>
-                                <td>09:00</td>
-                                <td>11:00</td>
-                                <td><div class="detail-icon"><i class="fas fa-eye"></i></div></td>
-                                <td><div class="cancel-icon"><i class="fas fa-times"></i></div></td>
-                            </tr>
-                            <tr>
-                                <td>01/07/2023</td>
-                                <td>
-                                <!-- <img src="lieu1.jpg" alt="Lieu 1"> -->
-                                <span>Futsal Andraharo</span>
-                                </td>
-                                <td>Sport 1</td>
-                                <td>09:00</td>
-                                <td>11:00</td>
-                                <td><div class="detail-icon"><i class="fas fa-eye"></i></div></td>
-                                <td><div class="cancel-icon"><i class="fas fa-times"></i></div></td>
-                            </tr>
-                            <tr>
-                                <td>01/07/2023</td>
-                                <td>
-                                <!-- <img src="lieu1.jpg" alt="Lieu 1"> -->
-                                <span>Futsal Andraharo</span>
-                                </td>
-                                <td>Sport 1</td>
-                                <td>09:00</td>
-                                <td>11:00</td>
-                                <td><div class="detail-icon"><i class="fas fa-eye"></i></div></td>
-                                <td><div class="cancel-icon"><i class="fas fa-times"></i></div></td>
-                            </tr>
-                            <tr>
-                                <td>01/07/2023</td>
-                                <td>
-                                <!-- <img src="lieu1.jpg" alt="Lieu 1"> -->
-                                <span>Futsal Andraharo</span>
-                                </td>
-                                <td>Sport 1</td>
-                                <td>09:00</td>
-                                <td>11:00</td>
-                                <td><div class="detail-icon"><i class="fas fa-eye"></i></div></td>
-                                <td><div class="cancel-icon"><i class="fas fa-times"></i></div></td>
-                            </tr>
-                            <tr>
-                                <td>01/07/2023</td>
-                                <td>
-                                <!-- <img src="lieu1.jpg" alt="Lieu 1"> -->
-                                <span>Futsal Andraharo</span>
-                                </td>
-                                <td>Sport 1</td>
-                                <td>09:00</td>
-                                <td>11:00</td>
-                                <td><div class="detail-icon"><i class="fas fa-eye"></i></div></td>
-                                <td><div class="cancel-icon"><i class="fas fa-times"></i></div></td>
-                            </tr>
-                            <tr>
-                                <td>01/07/2023</td>
-                                <td>
-                                <!-- <img src="lieu1.jpg" alt="Lieu 1"> -->
-                                <span>Futsal Andraharo</span>
-                                </td>
-                                <td>Sport 1</td>
-                                <td>09:00</td>
-                                <td>11:00</td>
-                                <td><div class="detail-icon"><i class="fas fa-eye"></i></div></td>
-                                <td><div class="cancel-icon"><i class="fas fa-times"></i></div></td>
-                            </tr>
-                            <tr>
-                                <td>01/07/2023</td>
-                                <td>
-                                <!-- <img src="lieu1.jpg" alt="Lieu 1"> -->
-                                <span>Futsal Andraharo</span>
-                                </td>
-                                <td>Sport 1</td>
-                                <td>09:00</td>
-                                <td>11:00</td>
-                                <td><div class="detail-icon"><i class="fas fa-eye"></i></div></td>
-                                <td><div class="cancel-icon"><i class="fas fa-times"></i></div></td>
-                            </tr>
+                            @endforeach
                             <!-- Ajoutez ici d'autres lignes de réservation -->
                         </tbody>
                     </table>
