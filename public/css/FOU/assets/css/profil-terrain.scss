@@ -1,0 +1,198 @@
+$principal-color: #E17B36;
+$secondar-color: #2A1F1D;
+$other-color-1: #33658A;
+
+.image {
+    img {
+        width: 100%;
+        height: 500px;
+    }
+}
+
+.nom-terrain {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 10px;
+    border-bottom: solid $principal-color 1px;
+
+    img {
+        width: 60px;
+        height: 60px;
+    }
+
+    h1 {
+        margin: 0;
+        margin-left: 20px;
+        color: $other-color-1;
+        font-size: 30px;
+    }
+}
+
+.images {
+    display: flex;
+    justify-content: space-between;
+
+    img {
+        width: 200px;
+        height: 200px;
+        padding: 10px;
+    }
+}
+
+.note {
+    font-weight: 600;
+
+    .liste {
+        display: flex;
+        justify-content: space-between;
+        width: 30%;
+        font-size: 20px;
+        color: #ff9900;
+    }
+
+    .reserver {
+        margin-left: 20%;
+
+        a {
+            text-decoration: none;
+        }
+
+        font-size: 14px;
+        color: #338a49;
+
+        i {
+            font-size: 20px;
+            margin-right: 10px;
+        }
+    }
+}
+
+.caracteristique {
+    thead {
+        color: #2A1F1D;
+        font-weight: 700;
+    }
+
+    tbody {
+        tr {
+            border-bottom: none;
+        }
+
+        td {
+            border-bottom: none;
+        }
+    }
+}
+
+hr {
+    color: #E17B36;
+    opacity: 1 !important;
+}
+
+.description {
+    font-weight: 400;
+    font-size: 16px;
+    color: #2A1F1D;
+}
+
+.localisation {
+    h2 {
+        font-size: 23px;
+        color: $principal-color;
+        border-bottom: solid 1px $principal-color;
+        padding-bottom: 8px;
+        text-align: center;
+    }
+
+    .map {
+        box-shadow: 4px 4px 5px lightgray;
+        width: 100%;
+        height: 400px;
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+}
+
+.tarif {
+    h2 {
+        font-size: 23px;
+        color: $principal-color;
+        border-bottom: solid 1px $principal-color;
+        padding-bottom: 8px;
+        text-align: center;
+    }
+
+}
+
+.reservation {
+    h2 {
+        color: #E17B36;
+        letter-spacing: 5px;
+        text-align: center;
+        font-size: 25px;
+    }
+
+    h3 {
+        font-size: 19px;
+        background-color: $other-color-1;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        padding: 10px;
+        text-align: center;
+        color: white;
+    }
+
+    .erreur {
+        color: rgb(228, 70, 70);
+        font-size: 13px;
+        font-weight: 600;
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .valider {
+        display: flex;
+        justify-content: center;
+
+        button {
+            width: 50%;
+            text-align: center;
+            font-weight: 600;
+            color: white;
+            background-color: #33658A;
+            border: none;
+            height: 43px;
+        }
+    }
+
+    .calendar {
+        height: 500px;
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+}
+
+.validation-reservation {
+    .little-title {
+        color: #33658A !important;
+        font-size: 18px;
+        font-weight: 600;
+        margin-right: 20px;
+    }
+    
+    .temp {
+
+        .date {
+            color: #E17B36;
+            margin-left: 8px;
+            margin-right: 8px;
+            font-size: 14px;
+        }
+    }
+}

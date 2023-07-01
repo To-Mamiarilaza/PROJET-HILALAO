@@ -1,0 +1,25 @@
+.menu {
+  box-shadow: 3px 3px 5px rgba(42, 31, 29, 0.231372549);
+}
+
+.navbar-links {
+  margin-left: 10% !important;
+  display: flex !important;
+}
+
+.navbar-links ul li {
+  margin-left: 20px;
+  margin-right: 20px;
+  font-weight: 600;
+}
+
+.navbar-links ul li a:hover {
+  color: #E17B36 !important;
+}
+
+.titre {
+  font-size: 23px;
+  font-weight: 700;
+  letter-spacing: 5px;
+  color: #E17B36 !important;
+} /*# sourceMappingURL=header.css.map */

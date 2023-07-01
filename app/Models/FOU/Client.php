@@ -37,6 +37,7 @@ class Client {
             $client->setSignUpDate($client_db[0]->sign_up_date);
             $client->setCIN(CIN::findById($client_db[0]->id_cin));
         }
+        return $client;
     }
 
     public function getIdClient() {

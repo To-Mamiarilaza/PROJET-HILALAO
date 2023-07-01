@@ -1,4 +1,4 @@
-@include('BO/header') 
+@include('BO/header')
 @include('BO/nav')
 
 <link rel="stylesheet" href="{{ asset('css/BO/asset/attente.css') }}">
