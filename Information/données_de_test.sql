@@ -10,10 +10,12 @@ INSERT INTO cin VALUES
 (DEFAULT, '119 105 250 300', 'client3_cin_picture1.png', 'client3_cin_picture2.png');
 
 INSERT INTO client VALUES
-(DEFAULT, 'John', 'RAKOTOARISOA', '0321531728', 'john.rakoto@gmail.com', 'Antananarivo', '2000-11-24', 'john1234', 1, '2023-01-15', 1),
-(DEFAULT, 'Andry', 'ANDRIAMAMITIANA', '0341451743', 'andry123@gmail.com', 'Lot 3 bis Iavoloha', '1987-01-12', 'andry-andry', 1, '2023-04-23', 2),
-(DEFAULT, 'Fitia', 'MIAROTIA', '0331754393', 'fitiaMia@gmail.com', 'Lot IAV 416', '1998-07-05', 'fitia@@', 1, '2023-10-07', 3);
+(DEFAULT, 'John', 'RAKOTOARISOA', '0321531728', 'john.rakoto@gmail.com', 'Antananarivo', '2000-11-24', 'john1234', 1, '2023-01-15', 1,'sary1.jpg'),
+(DEFAULT, 'Andry', 'ANDRIAMAMITIANA', '0341451743', 'andry123@gmail.com', 'Lot 3 bis Iavoloha', '1987-01-12', 'andry-andry', 1, '2023-04-23', 2,'sary2.png'),
+(DEFAULT, 'Fitia', 'MIAROTIA', '0331754393', 'fitiaMia@gmail.com', 'Lot IAV 416', '1998-07-05', 'fitia@@', 1, '2023-10-07', 3, 'sary3.png');
 
+INSERT INTO client VALUES
+(DEFAULT, 'Minp', 'RAHERINIRINA', '0321531728', 'mino@gmail.com', 'Antananarivo', '2000-11-24', 'mino', 1, '2023-06-15', 1,'sary1.jpg'),
 -- Données pour les informations requis pour le terrain
 INSERT INTO category VALUES
 (DEFAULT, 'Foot à 11', 75000),
@@ -55,7 +57,9 @@ insert into field values
 	(DEFAULT,	2,				1,			'Basket Betongolo',			1,				2,					2,			'Terrain fait pour tous et libre a tous',		'Betongolo Antananarivo',	-18.904924,	47.541774,	'2023-02-20',	'Field_Files/1/Proprio.zip'),
 	(DEFAULT,	2,				2,			'Terrain Antsahamasina',	1,				2,					2,			'Terrain approprier au entrainement de club',	'3FW9+J8M, Antananarivo',	-18.903418,	47.468301,	'2023-01-14',	'Field_Files/2/Proprio.zip'),
 	(DEFAULT,	3,				2,			'Foot Elgeco plus',			1,				2,					2,			'Terrain synthetique et bien eclaire pour vous','3FW9+J8M, Antananarivo',	-18.904924,	47.541774,	'2023-01-09',	'Field_Files/3/Proprio.zip'),
-	(DEFAULT,	1,				3,			'Foot Domaine Alasora',		1,				2,					2,			'Terrain approprier au entrainement de club',	'3FW9+J8M, Antananarivo',	-18.904924,	47.541774,	'2023-03-27',	'Field_Files/4/Proprio.zip');
+	(DEFAULT,	1,				3,			'Foot Domaine Alasora',		1,				2,					2,			'Terrain approprier au entrainement de club',	'3FW9+J8M, Antananarivo',	-18.904924,	47.541774,	'2023-03-27',	'Field_Files/4/Proprio.zip'),
+	
+	(DEFAULT,	34,				3,			'Tennis Amboanjobe',		6,				1,					1,			'Terrain pour tous',	'3FW9+J8M, Amboanjobe',	-18.904924,	47.541774,	'2023-03-27',	'Field_Files/5/Proprio.zip');
 
 insert into picture values
 -- 	(id_picture,	picture,			id_type_picture,	id_field)
@@ -63,6 +67,14 @@ insert into picture values
 	(DEFAULT,		'Terrain2.jpg',		1,					2),
 	(DEFAULT,		'Terrain3.jpg',		2,					3),
 	(DEFAULT,		'Terrain4.jpg',		2,					4);
+
+
+insert into picture values
+-- 	(id_picture,	picture,			id_type_picture,	id_field)
+	(DEFAULT,		'Terrain5.jpg',		2,					1),
+	(DEFAULT,		'Terrain6.jpg',		2,					2),
+	(DEFAULT,		'Terrain7.jpg',		1,					3),
+	(DEFAULT,		'Terrain8.jpg',		1,					4);
 
 INSERT INTO dispo_and_price VALUES
 (DEFAULT, 1, '08:00:00', '19:00:00', 1, 30000),
@@ -113,8 +125,14 @@ insert into subscription_state(subscription_state)
 values
 ('Payer');
 
-insert into subscription(id_field, subscription_date, start_date, duration, id_subscription_state)
+insert into subscription(id_field, start_date, duration, id_subscription_state)
 values
+
+(1, '06-06-2023', 1, 1),
+(2, '06-06-2023', 2, 1),
+(3, '06-06-2023', 1, 1),
+(4, '06-06-2023', 1, 1);
+
 (1, DEFAULT, '06-06-2023', 1, 1),
 (2, DEFAULT, '06-06-2023', 2, 1),
 (3, DEFAULT, '06-06-2023', 1, 1),
@@ -133,6 +151,5 @@ INSERT INTO "public".reservation
 VALUES
 ( '2023-06-20', 1, '09:00', 1, 2 ),
 ( '2023-05-20', 1, '09:00', 1, 2 ),
-
 
 

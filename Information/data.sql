@@ -1,5 +1,5 @@
-CREATe DATABASE hilalao;
-\c hilalao;
+CREATE DATABASE hilalao;
+\c hilalao
 
 CREATE SEQUENCE "public".abonnement_notification_id_abonnement_notification_seq START WITH 1 INCREMENT BY 1;
 
@@ -140,6 +140,7 @@ CREATE  TABLE "public".client (
 	id_status            integer  NOT NULL  ,
 	sign_up_date         timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL  ,
 	id_cin               integer    ,
+	customer_picture	 varchar,
 	CONSTRAINT pk_client PRIMARY KEY ( id_client ),
 	CONSTRAINT fk_client_cin FOREIGN KEY ( id_cin ) REFERENCES "public".cin( id_cin )   ,
 	CONSTRAINT fk_client_status_client FOREIGN KEY ( id_status ) REFERENCES "public".status_client( id_status_client )
@@ -245,6 +246,62 @@ CREATE  TABLE "public".dispo_and_price (
 	CONSTRAINT fk_dispo_and_price_field FOREIGN KEY ( id_field ) REFERENCES "public".field( id_field )
  );
 
+-- view BO
+create view v_select_all_abonnement as
+select f.name, c.category, cl.first_name as client, c.subscribing_price as price
+from field f
+join category c on c.id_category = f.id_category
+join client cl on cl.id_client = f.id_client
+
+CREATE VIEW v_select_all_from_abonnement as
+select f.name, c.category, cl.first_name as client, c.subscribing_price as price,  start_date, duration, start_date + INTERVAL '1 month' * duration AS end_date 
+from field f
+join category c on c.id_category = f.id_category
+join client cl on cl.id_client = f.id_client
+join subscription s on s.id_field = f.id_field
+join subscription_state ss on ss.id_subscription_state = s.id_subscription_state
+
+select f.name, c.category, cl.first_name as client, c.subscribing_price as price,  start_date, duration, start_date + INTERVAL '1 month' * duration AS end_date 
+from field f
+join category c on c.id_category = f.id_category
+join client cl on cl.id_client = f.id_client
+join subscription s on s.id_field = f.id_field
+join subscription_state ss on ss.id_subscription_state = s.id_subscription_state
+where start_date <= DATE('06-06-2023') and  (start_date + INTERVAL '1 month' * duration) >= DATE('06-06-2023')
+
+
+select f.name, c.category, cl.first_name as client, c.subscribing_price as price,  start_date, duration, start_date + INTERVAL '1 month' * duration AS end_date 
+from field f
+join category c on c.id_category = f.id_category
+join client cl on cl.id_client = f.id_client
+join subscription s on s.id_field = f.id_field
+join subscription_state ss on ss.id_subscription_state = s.id_subscription_state
+where c.category = selectedCategorie and  EXTRACT(MONTH FROM start_date) = selectedMonth AND EXTRACT(YEAR FROM start_date) = selectedYear
+
+select f.name, c.category, cl.first_name as client, c.subscribing_price as price,  start_date, duration, start_date + INTERVAL '1 month' * duration AS end_date 
+from field f
+join category c on c.id_category = f.id_category
+join client cl on cl.id_client = f.id_client
+join subscription s on s.id_field = f.id_field
+join subscription_state ss on ss.id_subscription_state = s.id_subscription_state
+where c.category = $selectedCategorie and  EXTRACT(MONTH FROM start_date) = $selectedMonth AND EXTRACT(YEAR FROM start_date) = $selectedYear
+
+
+
+
+SELECT f.id_field, f.name
+FROM field f
+LEFT JOIN subscription s ON f.id_field = s.id_field
+WHERE s.id_field IS NULL;
+
+
+
+update client set id_status = 3 where id_client = 
+--vue cin client
+CREATE or replace view v_clientCin as 
+	select c.id_client,c.first_name,c.last_name,c.address,c.phone_number,c.mail,c.birth_date,ci.id_cin,ci.cin_number,ci.first_picture,ci.second_picture from client c
+	join cin as ci
+	on c.id_cin = ci.id_cin;
 --FO Sprint1 (Liste Terrain)
 
 --Vue pour la liste de tous les terrains,

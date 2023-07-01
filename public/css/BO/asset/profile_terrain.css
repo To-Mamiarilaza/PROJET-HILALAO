@@ -1,0 +1,100 @@
+@charset "UTF-8";
+.detail-terrain {
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 3px 3px 5px lightgray;
+  padding-left: 20px;
+}
+.detail-terrain .images .profil-image img {
+  width: 100%;
+  height: 250px;
+  padding: 5px;
+}
+.detail-terrain .images .secondar-image {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.detail-terrain .images .secondar-image img {
+  width: 33.3333333333%;
+  height: 100px;
+  padding: 5px;
+}
+.detail-terrain .description h2 {
+  color: #3176aa;
+  font-size: 23px;
+  padding: 8px 0px;
+  border-bottom: solid 1px #3176aa;
+}
+.detail-terrain .description ul {
+  list-style: none;
+  padding: 0;
+  line-height: 35px;
+}
+.detail-terrain .description ul li {
+  font-size: 18px;
+}
+.detail-terrain .description ul li span {
+  font-weight: 600;
+  margin-right: 10px;
+}
+.detail-terrain .description .desc-text h3 {
+  font-size: 20px;
+  color: rgb(128, 128, 128);
+}
+.detail-terrain .description .buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 30%;
+}
+.detail-terrain .description .buttons a {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.detail-terrain .description .buttons .accepted-text {
+  color: green;
+  font-size: large;
+}
+.detail-terrain .description .buttons .refused-text {
+  color: red;
+  font-size: large;
+}
+
+.abonnement {
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 3px 3px 5px lightgray;
+}
+.abonnement h2 {
+  margin: 0;
+  padding: 8px 20px;
+  background-color: #3176aa;
+  font-size: 20px;
+  color: white;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.abonnement form {
+  width: 50%;
+}
+.abonnement .etats ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.abonnement .etats ul li {
+  padding: 10px 18px;
+  background-color: rgb(87, 194, 87);
+  margin-top: 10px;
+  font-size: 11px;
+  color: white;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 20px;
+  width: 90px;
+}
+.abonnement .etats ul .non-payé {
+  background-color: rgb(228, 91, 91) !important;
+}/*# sourceMappingURL=profile_terrain.css.map */

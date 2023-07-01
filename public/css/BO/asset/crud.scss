@@ -1,0 +1,25 @@
+
+.contenue {
+    padding: 15px 20px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 3px 3px 5px lightgray;
+
+    .ajout {
+        color: white;
+
+        i {
+            margin-right: 20px;
+        }
+    } 
+
+    h2 {
+        font-size: 23px;
+        color: #3176aa;
+    }
+
+    table {
+        width: 60% !important;
+    }
+}
+

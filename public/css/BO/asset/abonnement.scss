@@ -1,0 +1,47 @@
+
+.first-line {
+    background-color: white;
+    box-shadow: 3px 3px 5px lightgray;
+    padding: 5px 15px;
+    border-radius: 5px;
+
+    .valider {
+        padding: 5px 25px;
+    }
+
+    h2 {
+        font-size: 18px;
+        color: #3176aa;
+        padding-bottom: 10px;
+        padding-top: 10px;
+        border-bottom: solid #3176aa 1px;
+    }
+
+    .chart {
+        height: 350px;
+    }
+}
+
+.listes {
+    background-color: white;
+    box-shadow: 3px 3px 5px lightgray;
+    padding: 5px 15px;
+    border-radius: 5px;
+
+    .tableau {
+        height: 320px;
+        overflow-y: auto;
+    }
+
+    h3 {
+        font-size: 18px;
+        color: #3176aa;
+        padding-bottom: 10px;
+        padding-top: 10px;
+        border-bottom: solid #3176aa 1px;
+    }
+
+    thead {
+        color: rgb(202, 120, 65);
+    }
+}
