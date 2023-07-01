@@ -111,7 +111,7 @@
                     </div>
                     <div class="col-md-5 my-2">
                         <div class="border p-3">
-                            <a href="">
+                            <a href="{{ route('subscriptionPage') }}">
                                 <i class="fas fa-credit-card mx-3"></i>
                                 Abonnement
                             </a>
@@ -162,7 +162,7 @@
                 <div class="modal-body">
                     <p>Voulez vous vraiment supprimé votre terrain ?</p>
                     <div class="choix d-flex">
-                        <a href="" class="btn btn-danger px-3 mx-2">OUI</a>
+                        <a href="{{ route('deleteField') }}" class="btn btn-danger px-3 mx-2">OUI</a>
                         <a href="" class="btn btn-info px-3 mx-2">NON</a>
                     </div>
                 </div>
@@ -215,11 +215,9 @@
                 </div>
                 <div class="modal-body">
                     <ul class="list-group list-unavailability mb-3">
-                        <li class="list-group-item"> <span>01/10/23</span> de <span> 10:00 H </span> à <span>14:00 H</span> <a href=""><i class="fas fa-times"></i></a> </li>
-                        <li class="list-group-item"> <span>24/06/23</span> de <span> 00:00 H </span> à <span>24:00 H</span> <a href=""><i class="fas fa-times"></i></a> </li>
-                        <li class="list-group-item"> <span>25/06/23</span> de <span> 00:00 H </span> à <span>24:00 H</span> <a href=""><i class="fas fa-times"></i></a> </li>
-                        <li class="list-group-item"> <span>26/06/23</span> de <span> 00:00 H </span> à <span>24:00 H</span> <a href=""><i class="fas fa-times"></i></a> </li>
-                        <li class="list-group-item"> <span>27/06/23</span> de <span> 04:00 H </span> à <span>12:00 H</span> <a href=""><i class="fas fa-times"></i></a> </li>
+                    @foreach ($indispo as $item)
+                        <li class="list-group-item"> <span>{{ $item->getUnavailabilityDate() }}</span> de <span>{{ $item->getStartTime() }} H </span> à <span>{{ $item->getEndTime() }} H</span> <a href="/deleteIndispo?idIndispo={{ $item->getIdUnavailability() }}"><i class="fas fa-times"></i></a> </li>
+                    @endforeach
                     </ul>
                     <a href="" class="link my-4" data-bs-toggle="modal" data-bs-target="#new-indisponible" data-bs-dismiss="modal">Marquer des indisponibilités</a>
                 </div>
@@ -240,8 +238,9 @@
                 </div>
                 <div class="modal-body">
                     <ul class="list-group list-unavailability mb-3">
-                        <li class="list-group-item"> <span>01/10/23</span> à <span> 05/10/23 </span> : <span> 20 %</span> <a href=""><i class="fas fa-times"></i></a> </li>
-                        <li class="list-group-item"> <span>10/10/23</span> à <span> 20/10/23 </span> : <span> 10 %</span> <a href=""><i class="fas fa-times"></i></a> </li>
+                    @foreach ($discount as $item)
+                        <li class="list-group-item"> <span>{{ $item->getStart() }}</span> à <span>{{ $item->getEnd() }}</span> : <span>{{ $item->getDiscount() }} %</span> <a href="/deleteDiscount?idDiscount={{ $item->getIdDiscount() }}"><i class="fas fa-times"></i></a> </li>
+                    @endforeach
                     </ul>
                 </div>
                 <div class="modal-footer">
@@ -253,7 +252,8 @@
 
 
     <!-- Modal pour Insertion indisponibilités à longue durée -->
-    <form action="" method="">
+    <form action="{{ route('insertIndispo') }}" method="POST">
+        @csrf
         <div class="modal fade" id="long-unavailability" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -266,12 +266,12 @@
                         <div class="insertion">
                             <div class="form-group mt-3">
                                 <label for="new-date" class="form-label">Date Début</label>
-                                <input type="date" class="form-control" id="date-debut">
+                                <input type="date" class="form-control" id="date-debut" name="date-debut">
                             </div>
 
                             <div class="form-group mt-3">
                                 <label for="new-date" class="form-label">Date Fin</label>
-                                <input type="date" class="form-control" id="date-fin">
+                                <input type="date" class="form-control" id="date-fin" name="date-fin">
                             </div>
                             <p class="error"><i class="fas fa-info-circle mx-2"></i> Afficher l'erreur ici</p>
                         </div>
@@ -286,7 +286,8 @@
     </form>
 
     <!-- Modal pour marquer des remises -->
-    <form action="" class="form">
+    <form action="{{ route('addRemise') }}" class="form" method="POST">
+    @csrf    
         <div class="modal fade" id="add-remise" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -300,19 +301,19 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="heure-debut" class="form-label">Date début</label>
-                                        <input type="date" class="form-control" id="heure-debut" name="">
+                                        <input type="date" class="form-control" id="heure-debut" name="date-debut">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="heure-fin" class="form-label">Date fin</label>
-                                        <input type="date" class="form-control" id="heure-fin" name="">
+                                        <input type="date" class="form-control" id="heure-fin" name="date-fin">
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group mt-3">
                                 <label for="new-date" class="form-label">Remise</label>
-                                <input type="number" class="form-control" id="new-date" placeholder="Remise">
+                                <input type="number" class="form-control" id="new-date" placeholder="Remise" name="remise">
                             </div>
                             <p class="error"><i class="fas fa-info-circle mx-2"></i> Afficher l'erreur ici</p>
                             <div class="my-3">
@@ -331,7 +332,8 @@
     </form>
 
     <!-- Modal pour ajouter une nouvelle indisponibilité -->
-    <form action="" class="form">
+    <form action="{{ route('insertIndispo') }}" class="form" method="POST">
+        @csrf
         <div class="modal fade" id="new-indisponible" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -344,19 +346,19 @@
                         <div class="insertion">
                             <div class="form-group">
                                 <label for="new-date" class="form-label">Date</label>
-                                <input type="date" class="form-control" id="new-date">
+                                <input type="date" class="form-control" id="new-date" name="date-debut">
                             </div>
                             <div class="row mt-3">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="heure-debut" class="form-label">Heure début</label>
-                                        <input type="time" class="form-control" id="heure-debut">
+                                        <input type="time" class="form-control" id="heure-debut" name="heure-debut">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="heure-fin" class="form-label">Heure fin</label>
-                                        <input type="time" class="form-control" id="heure-fin">
+                                        <input type="time" class="form-control" id="heure-fin" name="heure-fin">
                                     </div>
                                 </div>
                             </div>

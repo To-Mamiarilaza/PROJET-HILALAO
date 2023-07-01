@@ -14,7 +14,19 @@
 			// permet d'attribuer la classe appropriée en utilisant l'opérateur modulo % pour assurer que la classe revient
 			// à la première couleur lorsque $i dépasse la taille du tableau $couleurs.
 			$classe = $couleurs[$i % count($couleurs)];
+			echo $classe;
 			echo '<td><div class="alert alert-'.$classe.'">' . $mois[$i] . '</div></td>';
+		}
+	}
+	function selectMonth() {
+		$mois = array(
+			"Janvier", "Février", "Mars", "Avril",
+			"Mai", "Juin", "Juillet", "Août",
+			"Septembre", "Octobre", "Novembre", "Décembre"
+		);
+
+		for ($i = 0; $i < count($mois); $i++) {
+			echo ' <option value="'. $i .'">' . $mois[$i] . '</option>';
 		}
 	}
 ?>
@@ -32,25 +44,26 @@
 	<title>HILALAO | CLIENT - ABONNEMENT</title>
 </head>
 <body>
-	@include('FOC/header');
+	@include('FOC/header')
 
 	<section>
 		<div class="container mt-5">
 			<div class="row justify-content-center fonction-list">
 				<h1>Abonnement et payement</h1>
 				<div class="row sub-fact-annee">
-					<form>
+					<form action="{{ route('searchByYear') }}" method="POST">
+						@csrf
 						<div class="col-md-4 btn-group" role="group">
 							<div class="col-md-2">
 								<label for="annee" class="control-label"><b>Annee</b></label>
 							</div>
 							<div class="col-md-6">
-								<select id="annee" class="form-control" required>
+								<select id="annee" class="form-control" name="year" required>
 									<option value="">Selectionner l'annee</option>
-									<option value="1">2020</option>
-									<option value="2">2021</option>
-									<option value="3">2022</option>
-									<option value="4">2023</option>
+									<option value="2020">2020</option>
+									<option value="2021">2021</option>
+									<option value="2022">2022</option>
+									<option value="2023">2023</option>
 								</select>
 							</div>
 						</div>
@@ -59,11 +72,10 @@
 				</div>
 				<div class="col-md-12">
 					<table class="table table-bordered">
-						{{-- ATAO BOUCLE LE MOIS --}}
 						<tr>
-							<?php
-								printMonth();
-							?>
+						@foreach ($vueAbo as $item)
+						<td><div class="alert alert-{{ $item->getColor() }}">{{ $item->getMonth()->getValue() }}</div></td>
+                        @endforeach
 						</tr>
 					</table>
 				</div>
@@ -73,7 +85,7 @@
 					<div class="col-md-3">
 						<p class="mt-3">Fin de votre abonnement dans</p>
 					</div>
-					<div class="col-md-1 info-limite-sub alert alert-danger" role="alert"><b>20 jours</b></div>
+					<div class="col-md-1 info-limite-sub alert alert-danger" role="alert"><b>{{ $lastSubscription->getDayRest() }} jours</b></div>
 					<div class="col-md-6 to-stat">
 						<p class="mt-3">
 							Les terrains sont toujours parametrable selon leurs changements.<br>
@@ -99,9 +111,9 @@
 										<div class="col-md-8">
 											<select id="mois" class="form-control" required>
 												<option value="">Sélectionnez le mois</option>
-												<option value="1">Jan</option>
-												<option value="2">Fev</option>
-												<option value="3">Mar</option>
+												<?php
+													selectMonth();
+												?>
 											</select>
 										</div>
 									</div>

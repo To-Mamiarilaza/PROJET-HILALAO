@@ -26,7 +26,7 @@
                         Vous pourrez parcourir rapidement et facilement l'ensemble de vos terrains.
                         Nous vous permettons de mieux gérer votre terrain. Commençons par voir tous vos terrains.
                     </p>
-                    <a href="{{ route('list-field') }}" class="btn btn-warning mt-3">Voir les terrains</a>
+                    <a href="{{ route('list-fieldFoc') }}" class="btn btn-warning mt-3">Voir les terrains</a>
                 </div>
                 <div class="col-md-6 image-place">
                     <img src="{{ asset('image/home-client.jpg') }}" alt="Image d'accueil">

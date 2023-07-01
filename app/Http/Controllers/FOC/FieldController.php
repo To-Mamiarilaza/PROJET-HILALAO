@@ -15,6 +15,8 @@ use App\Models\FOC\GestionTerrain\Infrastructure;
 use App\Models\FOC\GestionTerrain\Light;
 use App\Models\FOC\GestionTerrain\PictureField;
 use App\Models\FOC\GestionTerrain\Day;
+use App\Models\FOC\GestionTerrain\Discount;
+use App\Models\FOC\GestionTerrain\Unavailability;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Http;
 use Carbon\Carbon;
@@ -43,11 +45,17 @@ class FieldController extends Controller
         $field = Field::findById($idField);
         $profilePictureField = PictureField::getPictureProfile($field);
         $secondPicture = PictureField::getSecondPictureField($field);
+        $dispo = DispoAndPrice::getAllDispoField($field);
+        $indispo = Unavailability::getAllIndispoField($field);
+        $discount = Discount::getAllDiscountField($field);
         Session::put('field', $field);
         return view('FOC/profile-field')->with([
             'field' => $field,
             'profilePicture' => $profilePictureField,
             'secondPictures' => $secondPicture,
+            'dispo' => $dispo,
+            'indispo' => $indispo,
+            'discount' => $discount,
         ]);
     }
 
@@ -139,7 +147,7 @@ class FieldController extends Controller
         $lightId = $data['light'];
         $light = Light::findById($lightId);
 
-        //supprimer les donnees de la session
+        //supprimer les donnees de la session field
         Session::forget('field');
 
         //La date d'insertion
@@ -151,7 +159,7 @@ class FieldController extends Controller
         $longitude = $data['longitude'];
         $adresse = $data['adresse'];
 
-        $field = new Field('default',$category,$clientConnected,$name,$surface,$infrastructure,$light,'',$adresse, $latitude, $longitude, $dateFormatee, $file);
+        $field = new Field('default',$category,$clientConnected,$name,$surface,$infrastructure,$light,'',$adresse, $latitude, $longitude, $dateFormatee, $file, 1);
         $field->create($clientConnected);
 
         return redirect()->route('list-field');
@@ -261,15 +269,16 @@ class FieldController extends Controller
 
     //Charger la page de disponibilite et prix
     public function loadPageDispoAndPrice($error = null) {
+        $field = Session::get('field');
         if(isset($_GET['error'])) {
-            $allDispo=DispoAndPrice::getAll();
+            $allDispo=DispoAndPrice::getAllDispoField($field);
             return view('FOC/disponibility')->with([
                 'dispoAndPrice' => $allDispo,
                 'errorInsert' =>  $_GET['error'],
             ]);
         }
         else {
-            $allDispo=DispoAndPrice::getAll();
+            $allDispo=DispoAndPrice::getAllDispoField($field);
             return view('FOC/disponibility')->with([
                 'dispoAndPrice' => $allDispo,
             ]);
@@ -284,7 +293,7 @@ class FieldController extends Controller
             $starTime = $request->input("star-time");
             $endTime = $request->input("end-time");
             $price = $request->input("price");
-            $allDisposAndPrice = DispoAndPrice::getAll();
+            $allDisposAndPrice = DispoAndPrice::getAllDispoField($field);
             for($i = 0; $i < count($jour); $i++) {
                 $dispoAndPrice = new DispoAndPrice('default',Day::findById($jour[$i]),$starTime[0],$endTime[0],$field,$price[0]);
                 if(DispoAndPrice::checkInsert($allDisposAndPrice,$dispoAndPrice)) {
@@ -319,8 +328,96 @@ class FieldController extends Controller
         catch(\Exception $e){
             echo $e->getMessage();           
         }
+    }
 
-        
+    //Inserer une indisponibilite
+    public function insertIndispo(Request $request) {
+        $field = Session::get('field');
+
+        if($request->input("date-fin") != null) {
+    
+            $dateDebut = $request->input('date-debut');
+            $dateFin = $request->input('date-fin');
+            $date1 = Carbon::parse($dateDebut);
+            $date2 = Carbon::parse($dateFin);
+            
+            while($date1->lessThanOrEqualTo($date2)) {
+                $unavaibility = new Unavailability("default",$field,$dateDebut, '08:00:00', '19:00:00');
+                $unavaibility->create();
+                $dateDebut = Carbon::parse($dateDebut)->addDay();
+                $date1 = Carbon::parse($dateDebut);
+            }
+        }
+        else {
+            $date = $request->input("date-debut");
+            $starTime = $request->input("heure-debut");
+            $endTime = $request->input("heure-fin");
+    
+            $unavaibility = new Unavailability("default",$field,$date, $starTime, $endTime);
+            $unavaibility->create();
+        }
+       
+        return redirect()->route('profile-field', ['idField' => $field->getIdField()]);    
+    }
+
+    //Ajouter une remise
+    public function addRemise(Request $request) {
+        $field = Session::get('field');
+        $startDate = $request->input("date-debut");
+        $endDate = $request->input("date-fin");
+        $discount = $request->input("remise");
+        $discount = new Discount('default', $field, $startDate, $endDate, $discount);
+        $discount->create();
+        return redirect()->route('profile-field', ['idField' => $field->getIdField()]);  
+    }
+
+    //Supprimer une indisponibilite
+    public function deleteIndispo() {
+        try{
+            $field = Session::get('field');
+            if(isset($_GET['idIndispo'])) {
+                $indispo = Unavailability::findById($_GET['idIndispo']);
+                echo $indispo->getIdUnavailability();
+                $indispo->delete();
+                return redirect()->route('profile-field', ['idField' => $field->getIdField()]); 
+            } 
+            else {
+                throw new Exception("Requete invalide");
+            }
+        }
+        catch(\Exception $e){
+            echo $e->getMessage();           
+        }
+    }
+
+    //Supprimer une remise
+     public function deleteDiscount() {
+        try{
+            $field = Session::get('field');
+            if(isset($_GET['idDiscount'])) {
+                $discount = Discount::findById($_GET['idDiscount']);
+                $discount->delete();
+                return redirect()->route('profile-field', ['idField' => $field->getIdField()]); 
+            } 
+            else {
+                throw new Exception("Requete invalide");
+            }
+        }
+        catch(\Exception $e){
+            echo $e->getMessage();           
+        }
+    }
+
+    //Supprimer un terrain
+    public function deleteField() {
+        $field = Session::get('field');
+        $field->setState(3);
+        $field->deleteField();
+
+        //supprimer les donnees de la session
+        Session::forget('field');
+
+        return redirect()->route('list-fieldFoc'); 
     }
 }
 ?>

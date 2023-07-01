@@ -2,6 +2,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FOC\LoginController;
 use App\Http\Controllers\FOC\InscriptionController;
+use App\Http\Controllers\FOC\SuiviAboController;
 use App\Models\FOC\SuiviReservation\Reservation_field;
 use App\Http\Controllers\FOC\ReservationController;
 use App\Http\Controllers\FOC\FieldController;
@@ -88,8 +89,8 @@ Route::get('/stat-terrain', function() {
     return view('FOC/statistic-field');
 });
 
-Route::get('/list-field', [FieldController::class, 'listField'])
-->name('list-field');
+Route::get('/list-fieldFoc', [FieldController::class, 'listField'])
+->name('list-fieldFoc');
 
 Route::get('/profile-field/{idField}', [FieldController::class, 'profileField'])
 ->name('profile-field');
@@ -117,3 +118,31 @@ Route::POST('/loadPageDispoAndPricePost', [FieldController::class, 'loadPageDisp
 ->name('loadPageDispoAndPricePost');
 
 Route::GET('/deleteDisponibility', [FieldController::class, 'deleteDisponibility']);
+
+//Inserer une indisponibilite
+Route::POST('insertIndispo', [FieldController::class, 'insertIndispo'])
+->name('insertIndispo');
+
+//Ajouter une remise
+Route::POST('addRemise', [FieldController::class, 'addRemise'])
+->name('addRemise');
+
+//Supprimer une indisponibilite
+Route::GET('deleteIndispo', [FieldController::class, 'deleteIndispo'])
+->name('deleteIndispo');
+
+//Supprimer une remise
+Route::GET('deleteDiscount', [FieldController::class, 'deleteDiscount'])
+->name('deleteDiscount');
+
+//Supprimer un terrain
+Route::GET('deleteField', [FieldController::class, 'deleteField'])
+->name('deleteField');
+
+//Pagee d'abonnement
+Route::GET('subscriptionPage', [SuiviAboController::class, 'subscriptionPage'])
+->name('subscriptionPage');
+
+//Rechercher l'abonnement dans l'aannee
+Route::POST('searchByYear', [SuiviAboController::class, 'subscriptionPage'])
+->name('searchByYear');

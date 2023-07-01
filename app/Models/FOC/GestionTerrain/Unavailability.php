@@ -41,6 +41,11 @@ class Unavailability
         $this->unavailability_date = $value;
     }
 
+    public function getUnavailabilityDate()
+    {
+        return $this->unavailability_date;
+    }
+
     public function getStartTime()
     {
         return $this->start_time;
@@ -75,19 +80,33 @@ class Unavailability
         return $datas;
     }
 
+    //Recuperer toutes les indisponibilites d'un terrain
+    public static function getAllIndispoField($field)
+    {
+        $results = DB::select('SELECT * FROM unavailability WHERE id_field='.$field->getIdField());
+        $datas = array();
+        $i = 0;
+        foreach ($results as $row) {
+            $datas[$i] = new Unavailability($row->id_unavailability, Field::findById($row->id_field),  $row->unavailability_date, $row->start_time, $row->end_time);
+            $i++;
+        }
+         
+        return $datas;
+    }
+
     //Recuperer les indisponibilites correspondant au parametre id
     public static function findById($id)
     {
         $results = DB::table('unavailability')->where('id_unavailability', $id)->first();
         
-        return new Unavailability($results->id_dispo_and_price, Field::findById($results->id_field), $results->unavailability_date, $results->start_time, $results->end_time);
+        return new Unavailability($results->id_unavailability, Field::findById($results->id_field), $results->unavailability_date, $results->start_time, $results->end_time);
     }
 
     //Sauvegarder une indisponibilite dans la base
     public function create()
     {
         $req = "INSERT INTO unavailability VALUES ( default, %d, '%s', '%s', '%s')";
-           $req = sprintf($req,$this->field->id_field,$this->unavailability_date,$this->start_time,$this->end_time);
+           $req = sprintf($req,$this->field->getIdField(),$this->unavailability_date,$this->start_time,$this->end_time);
            DB::insert($req);
        }
    
