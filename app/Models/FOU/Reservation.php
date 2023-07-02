@@ -12,6 +12,7 @@ class Reservation {
     private $users;
     private $start_time;
     private $id_field;
+    private $field;
     private $duration;
     private $end_time;
     private $date_heure_reservation;
@@ -204,6 +205,12 @@ class Reservation {
     public function setMontant($values) {
         $this->montant = $values;
     }
+    public function getField() {
+        return $this->field;
+    }
+    public function setField($values) {
+        $this->field = $values;
+    }
 
     public static function settingDBResult($result) {
         $temp = new Reservation();
@@ -213,6 +220,7 @@ class Reservation {
         $temp->setUsers(Users::SfindById($result->id_users));
         $temp->setStartTime(DateTime::createFromFormat('H:i:s', $result->start_time));
         $temp->setIdField($result->id_field);
+        $temp->setField(FieldDetailled::sfindByIdWithoutReservation($result->id_field));
         $temp->setDuration($result->duration);
         $temp->setEndTime(DateTime::createFromFormat('H:i:s', $result->end_time));
         $temp->setDateHeureReservation(new Availability(DateTime::createFromFormat('Y-M-d', $result->reservation_date), DateTime::createFromFormat('H:i:s',$result->start_time), DateTime::createFromFormat('H:i:s', $result->end_time)));

@@ -9,6 +9,7 @@ use App\Models\FOU\Category;
 use App\Models\FOU\Field;
 use App\Models\FOU\FieldUser;
 use App\Models\FOU\InfoField;
+use App\Models\FOU\UserNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -20,17 +21,26 @@ class FieldController extends Controller
         if (Session::get("user") !== null) {
             $users = Session::get("user");
             $field = FieldUser::Sfind( $id_field, $users->getIdUsers());
+            $notifications = UserNotification::getAllUserNotification($users->getIdUsers());
+            return view('FOU\profile-field', ['field' => $field, 'date' => $date, 'notifications' => $notifications]);
         } else {
             $field = FieldUser::findReservation($id_field);
+            return view('FOU\profile-field', ['field' => $field, 'date' => $date]);
         }
-        return view('FOU\profile-field', ['field' => $field, 'date' => $date]);
     }
     public function detailled($id_field, $date) {
         $field = new FieldDetailled();
         $field->findById($id_field);
         $availability = Availability::findByIdField($id_field, $date);
+        if(Session::get("user") !== null) {
+            $user = Session::get("user");
+            $notifications = UserNotification::getAllUserNotification($user->getIdUsers());
+            if (count($availability) == 0) return view('FOU\profile-field', ['field' => $field, 'availability_message' => "Ce terrain n'est pas disponible pour cette date"]);
+            return view('FOU\profile-field', ['field' => $field, 'availability' => $availability, 'notifications' => $notifications]);
+        }
         if (count($availability) == 0) return view('FOU\profile-field', ['field' => $field, 'availability_message' => "Ce terrain n'est pas disponible pour cette date"]);
         return view('FOU\profile-field', ['field' => $field, 'availability' => $availability]);
+
     }
 
     public function index($id_category = 0)
@@ -41,10 +51,13 @@ class FieldController extends Controller
         } else {
             $fields = FieldDetailled::findByCategory($id_category);
         }
-        $infoField = new InfoField();
-        $info = $infoField->allinfoField();
         $filters = Field::getFilters();
-        return view('FOU\list-terrain', ['fields' => $fields, 'categories' => $categories, 'id_category' => $id_category, 'filters' => $filters, 'infos' => $info]);
+        if (Session::get("user") !== null) {
+            $user = Session::get("user");
+            $notifications = UserNotification::getAllUserNotification($user->getIdUsers());
+            return view('FOU\list-terrain', ['fields' => $fields, 'categories' => $categories, 'id_category' => $id_category, 'filters' => $filters, 'notifications' => $notifications]);
+        }
+        return view('FOU\list-terrain', ['fields' => $fields, 'categories' => $categories, 'id_category' => $id_category, 'filters' => $filters]);
     }
 
     public function filter(Request $request) {
@@ -58,7 +71,12 @@ class FieldController extends Controller
         $filters = Field::getFilters();
         $fields = FieldDetailled::filtre($id_category, $id_infrastructure, $id_field_type, $id_light, $date_reservation, $time, $tri);
         $categories = Category::findAll();
-        return view('Fou\list-terrain', ['fields' => $fields, 'categories' => $categories, 'id_category' => $id_category, 'filters' => $filters]);
+        if (Session::get("user") !== null) {
+            $user = Session::get("user");
+            $notifications = UserNotification::getAllUserNotification($user->getIdUsers());
+            return view('FOU\list-terrain', ['fields' => $fields, 'categories' => $categories, 'id_category' => $id_category, 'filters' => $filters, 'notifications' => $notifications]);
+        }
+        return view('FOU\list-terrain', ['fields' => $fields, 'categories' => $categories, 'id_category' => $id_category, 'filters' => $filters]);
     }
 
 }

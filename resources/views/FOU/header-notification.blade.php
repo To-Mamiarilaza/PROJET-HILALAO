@@ -2,25 +2,23 @@
 <section class="menu">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand mx-5 titre" href="#">HILALAO</a>
+            <a class="navbar-brand mx-5 titre" href="{{ route('landing') }}">HILALAO</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse navbar-links" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Accueil</a>
+                        <a class="nav-link" href="{{ route('landing') }}">Accueil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Tableau de Bord</a>
+                        <a class="nav-link" href="{{ route('list-field-all-fou') }}">Terrain</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Mes Terrains</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Mon compte</a>
+                        <a class="nav-link" href="{{ route('myAccount') }}">Mon compte</a>
                     </li>
                 </ul>
+                @if (isset($notifications))
                 <div class="option-block d-flex mx-5">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
@@ -48,10 +46,11 @@
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><i class="fas fa-power-off"></i></a>
+                            <a class="nav-link" href="{{ route('log-out') }}"><i class="fas fa-power-off"></i></a>
                         </li>
                     </ul>
                 </div>
+                @endif
             </div>
         </div>
     </nav>

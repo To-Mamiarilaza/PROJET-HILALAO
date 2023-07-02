@@ -6,6 +6,7 @@ use App\Http\Controllers\FOU\InfoTerrain;
 use App\Http\Controllers\FOU\LogController;
 use App\Http\Controllers\FOU\TestController;
 
+Route::get('/user/toAccount', [LogController::class, 'myAccount'])->name('myAccount');
 Route::get('/list-field/{id_category}', [App\Http\Controllers\FOU\FieldController::class, 'index'])->name('list-field-fou');
 Route::get('/list-field', [App\Http\Controllers\FOU\FieldController::class, 'index'])->name('list-field-all-fou');
 Route::get('/field/calendar/{id_field}', [App\Http\Controllers\FOU\ReservationController::class, 'index'])->name('reserve');
