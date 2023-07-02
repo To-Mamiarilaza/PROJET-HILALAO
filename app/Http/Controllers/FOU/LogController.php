@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\FOU\Users;
 use App\Exceptions\UserException;
 use App\Models\FOU\UserReservation;
+use App\Models\FOU\UserNotification;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
@@ -62,7 +63,8 @@ class LogController extends Controller
     public function info() {
         $user = Session::get("user");
         $user = UserReservation::findReservationByIdUser($user->getIdUsers());
-        return view('FOU/profil-user', ["user" => $user]);
+        $notifications = UserNotification::getAllUserNotification($user->getIdUsers());
+        return view('FOU/profil-user', ["user" => $user, "notifications" => $notifications]);
     }
 }
 

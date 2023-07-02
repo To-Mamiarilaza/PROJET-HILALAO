@@ -93,6 +93,9 @@
             </div>
             <hr>
             <div class="allTerrain">
+                @if (count($fields) == 0)
+                <p>Nous ne disposons pas de terrain de ce genre</p>
+                @endif
                 @foreach ($fields as $field)
                 <div class="row list-terrain" style="margin-top:2%" >
                     <div class="col-md-4 list-terrain-image">
