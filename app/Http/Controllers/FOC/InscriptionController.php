@@ -26,7 +26,9 @@ class InscriptionController extends Controller
                 $client = $request->session()->get('client');
                 $client->setCin($lastCin);
                 $client->create();
-                return view('FOC/ProfilClient', ['client' => $client, 'cin' => $cin]);
+                $idclient = $client->lastClientId();
+                $clients = $client->findById($idclient);
+                return view('FOC/ProfilClient', ['client' => $clients, 'cin' => $cin]);
             } catch (\Exception $e) {
                 $error = $e->getMessage();
                 echo $error;
@@ -85,7 +87,6 @@ class InscriptionController extends Controller
         $birth_date = $request->input('birth_date');
         $password = $request->input('password');
         $confirmed_password = $request->input('confirmed_password');
-        //dd($request->all());
         $customer_profile = $this->upload($request, 'profilPicture', 'image/Client');
         $status = Status::findById(2);
         //$id_cin = null;

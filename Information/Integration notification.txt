@@ -1,0 +1,8 @@
+Pour intégrer le module notification :
+
+Notification au  niveau Front Office User :
+0. Lors d'une réservation d'une utilisateur, il faut insérer dans le table user_notification
+1. Ajouter dans vos modèles : le UserNotification.php
+2. Dans le Controlleur entrant dans le page concernée, appellée : UserNotification::getAllUserNotification($idUser) , on ajoute en argument l'id de l'utilisateur;
+3. Passé le variables contenant le notification dans le view sous le nom de 'notifications'
+4. Ajouter dans le route : Route::get('/changeNotificationState/{idNotif}', [TestNotification::class, 'changeNotificationState']);

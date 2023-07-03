@@ -1,4 +1,7 @@
-<?php 
+<?php
+
+use App\Http\Controllers\FOC\BackOfficeController;
+use App\Http\Controllers\FOC\ClientNotificationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FOC\LoginController;
 use App\Http\Controllers\FOC\InscriptionController;

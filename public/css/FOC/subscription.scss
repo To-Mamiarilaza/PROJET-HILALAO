@@ -1,0 +1,85 @@
+$principal-color: #E17B36;
+$secondar-color: #2A1F1D;
+$other-color-1: #33658A;
+$other-color-2: #EBF8B8;
+
+.title {
+    color: #33658A;
+}
+
+.histo-title {
+    color: #E17B36;
+    font-size: 18px;
+    letter-spacing: 3px;
+    text-align: center;
+    padding-bottom: 8px;
+    border-bottom: solid 1px #E17B36;
+}
+
+.date-rappel {
+    font-weight: 600;
+}
+
+.calendrier {
+    div {
+        div {
+            text-align: center;
+            padding: 12px 15px;
+            font-weight: 600;
+        }
+
+        .normal {
+            background-color: #faef5d;
+        }
+
+        .paye {
+            background-color: rgb(56, 233, 56);
+        }
+
+        .non-paye {
+            background-color: rgb(255, 4, 4);
+            color: white;
+        }
+    }
+}
+
+.erreur {
+    color: rgb(247, 107, 107);
+    font-size: 13px;
+}
+
+.regle {
+    .regle-title {
+        color: #33658A;
+        font-size: 14px;
+    }
+
+    ul {
+        font-size: 12px;
+    }
+}
+
+.indication {
+    width: 60%;
+
+    div {
+        div {
+            font-size: 10px;
+            text-align: center;
+            padding: 8px;
+        }
+
+        .non-paye {
+            background-color: rgb(255, 4, 4);
+            color: white;
+        }
+
+        .paye {
+            background-color: rgb(56, 233, 56);
+        }
+
+        .normal {
+            background-color: #faef5d;
+        }
+    }
+}
