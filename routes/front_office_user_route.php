@@ -34,4 +34,7 @@ Route::get('/test', [InfoTerrain::class, 'test']);
 
 //Profile Utilisateur
 Route::get('/profileUtilisateur', [InfoTerrain::class, 'profileUtilisateur']);
+Route::get('/recu',function() {
+    return view("FOU/Facture");
+});
 
