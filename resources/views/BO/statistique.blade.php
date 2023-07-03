@@ -46,7 +46,6 @@
                             </select>
                             <select onchange="updateSelectedFields()" class="form-select" name="mois" id="mois" value="00">
                                 <option value="00">Tout les mois</option>
-                                <option value="00">Toutes les mois</option>
                                 <option value="01">Janvier</option>
                                 <option value="02">Février</option>
                                 <option value="03">Mars</option>
@@ -239,10 +238,6 @@
         // Ajouter le champ sélectionné
         if (selectedValueCategory) {
             var selectedField = document.createElement("p");
-            if(selectedValueMois === "00" ){
-                selectedField.textContent = "Graphique de la catégorie: " + selectedValueCategory + " tout les mois  de l'Année: " + selectedValueAnnee;
-            }
-            selectedField.textContent = "Graphique de la catégorie: " + selectedValueCategory + " Mois: " + selectedValueMois + "/ Année: " + selectedValueAnnee;
             selectedFieldsElement.appendChild(selectedField);
         }
         

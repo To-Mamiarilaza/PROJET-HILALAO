@@ -43,6 +43,30 @@ class CrudController extends Controller
         return null;
     }
 
+    public function delete(Request $request){
+        $c = new CrudController();
+        try {
+            $selected = $request->input('variable');
+            $id = $request->input('id');
+            if($selected == "category"){
+                $model = new Category();
+                $model->setId_category($id);
+                $model->delete();   
+            }else if($selected == "subscription_state") {
+                $model = new SubscriptionState();
+                $model->setId_subscription_state($id);
+                $model->delete(); 
+            }else{
+                $model = new FieldType();
+                $model->setId_field_type($id);
+                $model->delete();
+            }
+            return $this->all($selected);
+        } catch (\Throwable $th) {
+            dd($th->getMessage());
+        }
+    }
+
     public function update(Request $request){
         $c = new CrudController();
         try {

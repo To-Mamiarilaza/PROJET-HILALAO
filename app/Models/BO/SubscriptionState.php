@@ -7,6 +7,7 @@ class SubscriptionState
 {
     public $id_subscription_state;
     public $subscription_state;
+    private $status;
 
     public function getId_subscription_state()
     {
@@ -26,13 +27,20 @@ class SubscriptionState
         $this->subscription_state = $value;
     }
 
+    public function getStatus() {
+        return $this->status;
+    }
+    public function setStatus($value) {
+        $this->status = $value;
+    }
+
     public function __construct()
     {
     }
 
     public function getAllSubscriptionState()
     {
-        $field_type = DB::select('SELECT * FROM subscription_state ');
+        $field_type = DB::select('SELECT * FROM subscription_state where status = 1');
         $res = array();
         foreach ($field_type as $result) {
             $temp = new SubscriptionState();
@@ -64,6 +72,17 @@ class SubscriptionState
         $subscription_state = $this->getSubscription_state();
         $req = sprintf($req,$subscription_state);
         DB::insert($req);
+    }
+
+    public function delete(){
+        try{
+            $req = "update subscription_state set status = 10 where status = %s";
+            $subscription_state = $this->getId_subscription_state();
+            $req = sprintf($req, $subscription_state);
+            DB::update($req);
+        }catch(Exception $e){
+            throw new Exception("Supression non valider");
+        }
     }
 
     public function update(){
