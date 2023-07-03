@@ -51,10 +51,6 @@ body {
   color: red;
 }
 
-.form-content__input--error:-ms-input-placeholder {
-  color: red;
-}
-
 .form-content__input--error::placeholder {
   color: red;
 }/*# sourceMappingURL=login.css.map */

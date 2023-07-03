@@ -3,14 +3,8 @@ hr {
   height: 1px;
 }
 
-body {
-  font-family: Helvetica;
-}
-
 .contenu {
   margin-top: 2%;
-  margin-left: 0%;
-  margin-left: -7%;
 }
 
 /* Largeur de la barre de défilement */
@@ -35,7 +29,7 @@ body {
 }
 
 .allTerrain {
-  max-height: 50%;
+  max-height: 60%;
   overflow-y: auto;
 }
 

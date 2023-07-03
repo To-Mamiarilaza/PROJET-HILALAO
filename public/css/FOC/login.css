@@ -1,5 +1,6 @@
 body {
   background-color: #E17B37;
+  background-image: url("../image/bg-log.jpg");
   padding: auto;
   padding-top: 100px;
 }
@@ -16,10 +17,6 @@ body {
 }
 .box__title--span {
   color: #2A1F1D;
-}
-
-.control-label {
-  margin-top: 46px;
 }
 
 .form-content {
@@ -49,11 +46,3 @@ body {
   color: white;
   border: none;
 }/*# sourceMappingURL=login.css.map */
-
-.error {
-  padding-top: 3%;
-  margin-bottom: -5%;
-  font-size: 18px;
-  font-family: var(--bs-font-sans-serif);
-  /* background-color: rgb(94, 92, 92); */
-}
