@@ -15,13 +15,13 @@
     @include('FOC/header')
     <div class="container">
         <h1 class="reservation-title my-3">Réservations du terrain</h1>
+        @if (isset($reservationFields) && count($reservationFields) >0 )          
         <div class="direct-reservation">
             <button class="btn btn-info text-white" data-bs-toggle="modal" data-bs-target="#reservation-directe "> <i class="fas fa-pen mx-2"></i> Réservation directe</button>
             <a href="{{ route('selectByWeek') }}" class="btn btn-info text-white"> Filtre par semaines </a>
             <a href="{{ route('selectAll') }}" class="btn btn-info text-white"> Toutes les reservations </a>
         </div>
         <div class="row mt-3">
-        @if (isset($reservationFields))          
             <div class="col-md-4 list-reservation">
                 <h5>Les réservations le plus proches</h5>
                 <div class="liste-display mt-3">
@@ -43,19 +43,23 @@
                     @endforeach
                 </div>
             </div>
-        @endisset
+            
             <div class="col-md-8 calendrier">
                 <h5>Calendrier de réservation</h5>
                 <div id="calendar" class="mt-3">
-
+                    
                 </div>
             </div>
-
+            
         </div>
     </div>
-
+    @endisset
+    @if (count($reservationFields) < 0) 
+        <h5>Vous n'avez aucune réservation</h5>
+    @endif
+    
     <!-- Modal pour insérer une réservation en directe -->
-    <form action=" {{ route('insert') }}" method="GET" class="form">
+    <form action=" {{ route('insert') }} " method="GET" class="form">
         <div class="modal fade" id="reservation-directe" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">

@@ -225,7 +225,7 @@ class Client
             'pwd' => $this->pwd,
             'id_status' => $this->status->getIdstatus(),
             'sign_up_date' => $this->sign_up_date,
-            'sign_up_date' => $this->cin->getIdin()
+            'id_cin' => $this->cin->getIdin()
         ]);
     }
 

@@ -12,10 +12,10 @@
                         <a class="nav-link" href="/home">Accueil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Tableau de Bord</a>
+                        <a class="nav-link" href="/filtreBoard">Tableau de Bord</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="">Mes Terrains</a>
+                        <a class="nav-link" href="{{ route('list-fieldFOC') }}">Mes Terrains</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Mon compte</a>
