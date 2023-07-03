@@ -27,7 +27,7 @@ class FieldController extends Controller
         $fields = Field::getFieldsClientConnectedById($clientConnected->getIdClient());
         $profilePictureField = PictureField::getPictureProfileField($fields);
         $fields = Field::getPicProfileEachField($fields, $profilePictureField);
-       
+
         //Charger toutes les categories du terrain
         $categoryField = Category::getAll();
 
@@ -78,13 +78,13 @@ class FieldController extends Controller
     public function addField(Request $request) {
         try {
             if($request->input('latitude') != null && $request->input('longitude') != null && $request->input('adresseResult') != null) {
-            
+
                 $name = $request->input('nameField');
                 $category = $request->input('category');
                 $surface = $request->input('surface');
                 $infrastructure = $request->input('infrastructure');
                 $light = $request->input('light');
-        
+
                 $latitude = $request->input('latitude');
                 $longitude = $request->input('longitude');
                 $adresseResult = $request->input('adresseResult');
@@ -99,7 +99,7 @@ class FieldController extends Controller
                     'longitude' => $longitude,
                     'adresse' => $adresseResult,
                 ];
-            
+
                 Session::put('field', $data);
 
                 return view('FOC/addFieldFile');
@@ -107,10 +107,10 @@ class FieldController extends Controller
             else {
                 throw new Exception("Veuillez saisir en premier votre adresse");
             }
-            
+
         } catch(Exception $e) {
            echo $e->getMessage();
-        } 
+        }
     }
 
 
@@ -157,7 +157,7 @@ class FieldController extends Controller
         return redirect()->route('list-field');
     }
 
-      
+
     public function uploader(Request $request, $name, $cheminDestination, $nameFile)
     {
         try{
@@ -166,9 +166,9 @@ class FieldController extends Controller
                 $file = $request->file($name);
                 $extension = $file->getClientOriginalExtension();
                 $allowedExtensions = ['png', 'gif', 'jpg', 'jpeg', 'pdf'];
-        
+
                 if (in_array($extension, $allowedExtensions)) {
-                    $newFileName = $nameFile .''. $this->generateUniqueSequence($cheminDestination) . '.' . $extension;                   
+                    $newFileName = $nameFile .''. $this->generateUniqueSequence($cheminDestination) . '.' . $extension;
                     $file->move(public_path($cheminDestination), $newFileName);
 
                     //echo "tafiditra";
@@ -178,12 +178,12 @@ class FieldController extends Controller
                     $erreur = 'Vous devez uploader un fichier de type png, gif, jpg, jpeg ou pdf.';
                 }
             }
-        
+
             return $imageName;
         }
         catch(\Exception $e){
             //throw $e;
-            return redirect()->back()->withErrors([$e->getMessage()])->withInput();            
+            return redirect()->back()->withErrors([$e->getMessage()])->withInput();
         }
     }
 
@@ -233,7 +233,7 @@ class FieldController extends Controller
         $fields = Field::searchMultiCritere($nom, $category);
         $profilePictureField = PictureField::getPictureProfileField($fields);
         $fields = Field::getPicProfileEachField($fields, $profilePictureField);
-       
+
         //Charger toutes les categories du terrain
         $categoryField = Category::getAll();
 
@@ -295,7 +295,7 @@ class FieldController extends Controller
                 }
             }
         }
-        catch(\Exception $e){           
+        catch(\Exception $e){
             return redirect()->route('loadPageDispoAndPriceGet', ['error' =>  $e->getMessage()]);
         }
         return redirect()->route('loadPageDispoAndPriceGet');
@@ -304,7 +304,7 @@ class FieldController extends Controller
     //Supprimer une disponibilite
     public function deleteDisponibility() {
         try{
-           
+
             $disposSame = DispoAndPrice::getDisposSame($_GET['start'], $_GET['end'], $_GET['price']);
             if($disposSame != null) {
                 foreach($disposSame as $item) {
@@ -317,10 +317,10 @@ class FieldController extends Controller
             }
         }
         catch(\Exception $e){
-            echo $e->getMessage();           
+            echo $e->getMessage();
         }
 
-        
+
     }
 }
 ?>

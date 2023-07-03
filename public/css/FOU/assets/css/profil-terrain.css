@@ -1,0 +1,158 @@
+.image img {
+  width: 100%;
+  height: 500px;
+}
+
+.nom-terrain {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 10px;
+  border-bottom: solid #E17B36 1px;
+}
+.nom-terrain img {
+  width: 60px;
+  height: 60px;
+}
+.nom-terrain h1 {
+  margin: 0;
+  margin-left: 20px;
+  color: #33658A;
+  font-size: 30px;
+}
+
+.images {
+  display: flex;
+  justify-content: space-between;
+}
+.images img {
+  width: 200px;
+  height: 200px;
+  padding: 10px;
+}
+
+.note {
+  font-weight: 600;
+}
+.note .liste {
+  display: flex;
+  justify-content: space-between;
+  width: 30%;
+  font-size: 20px;
+  color: #ff9900;
+}
+.note .reserver {
+  margin-left: 20%;
+  font-size: 14px;
+  color: #338a49;
+}
+.note .reserver a {
+  text-decoration: none;
+}
+.note .reserver i {
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+.caracteristique thead {
+  color: #2A1F1D;
+  font-weight: 700;
+}
+.caracteristique tbody tr {
+  border-bottom: none;
+}
+.caracteristique tbody td {
+  border-bottom: none;
+}
+
+hr {
+  color: #E17B36;
+  opacity: 1 !important;
+}
+
+.description {
+  font-weight: 400;
+  font-size: 16px;
+  color: #2A1F1D;
+}
+
+.localisation h2 {
+  font-size: 23px;
+  color: #E17B36;
+  border-bottom: solid 1px #E17B36;
+  padding-bottom: 8px;
+  text-align: center;
+}
+.localisation .map {
+  box-shadow: 4px 4px 5px lightgray;
+  width: 100%;
+  height: 400px;
+}
+.localisation .map img {
+  width: 100%;
+  height: 100%;
+}
+
+.tarif h2 {
+  font-size: 23px;
+  color: #E17B36;
+  border-bottom: solid 1px #E17B36;
+  padding-bottom: 8px;
+  text-align: center;
+}
+
+.reservation h2 {
+  color: #E17B36;
+  letter-spacing: 5px;
+  text-align: center;
+  font-size: 25px;
+}
+.reservation h3 {
+  font-size: 19px;
+  background-color: #33658A;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding: 10px;
+  text-align: center;
+  color: white;
+}
+.reservation .erreur {
+  color: rgb(228, 70, 70);
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 20px;
+  text-align: center;
+}
+.reservation .valider {
+  display: flex;
+  justify-content: center;
+}
+.reservation .valider button {
+  width: 50%;
+  text-align: center;
+  font-weight: 600;
+  color: white;
+  background-color: #33658A;
+  border: none;
+  height: 43px;
+}
+.reservation .calendar {
+  height: 500px;
+}
+.reservation .calendar img {
+  width: 100%;
+  height: 100%;
+}
+
+.validation-reservation .little-title {
+  color: #33658A !important;
+  font-size: 18px;
+  font-weight: 600;
+  margin-right: 20px;
+}
+.validation-reservation .temp .date {
+  color: #E17B36;
+  margin-left: 8px;
+  margin-right: 8px;
+  font-size: 14px;
+}/*# sourceMappingURL=profil-terrain.css.map */

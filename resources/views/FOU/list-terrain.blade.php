@@ -13,7 +13,7 @@
     <title>Document</title>
 </head>
 <body>
-@include('template.Header')
+@include('FOU.header-notification')
 <div class="container">
     <div class="row contenu">
         <div class="col-md-7 list">
@@ -93,6 +93,9 @@
             </div>
             <hr>
             <div class="allTerrain">
+                @if (count($fields) == 0)
+                <p>Nous ne disposons pas de terrain de ce genre</p>
+                @endif
                 @foreach ($fields as $field)
                 <div class="row list-terrain" style="margin-top:2%" >
                     <div class="col-md-4 list-terrain-image">
@@ -123,6 +126,7 @@
         </div>
     </div>
 </div>
+@include('Template.Footer')
 <script>
     var map = L.map('map').setView([-18.879190, 47.507905], 10);
 

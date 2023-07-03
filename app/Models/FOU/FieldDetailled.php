@@ -112,6 +112,19 @@ class FieldDetailled extends Field{
         $this->executingQuery($sql);
     }
 
+
+
+    public static function sfindByIdWithoutReservation($id, $date = null) {
+        $model = new FieldDetailled();
+        $sql = "SELECT id_field, id_category, category, subscribing_price, id_client, name, id_field_type, field_type, id_infrastructure, infrastructure, id_light, light, description, address, latitude, longitude, insert_date, field_files FROM v_field_detailled WHERE id_field=%s";
+        $sql = sprintf($sql, $id);
+        $field_db = DB::select($sql);
+        if (count($field_db) != 0) {
+            $model->settingDBResultWithoutReservation($field_db[0]);
+            if ($date != null) $model->setAvailability(Availability::findByIdField($id, $date));
+        }
+        return $model;
+    }
     public static function sfindById($id, $date = null) {
         $model = new FieldDetailled();
         $sql = "SELECT id_field, id_category, category, subscribing_price, id_client, name, id_field_type, field_type, id_infrastructure, infrastructure, id_light, light, description, address, latitude, longitude, insert_date, field_files FROM v_field_detailled WHERE id_field=%s";
@@ -200,6 +213,15 @@ class FieldDetailled extends Field{
         $this->setLight($result->light);
         $this->setAvailability(Availability::findByIdField($result->id_field));
         $this->setReservations(Reservation::findActifReservationByIdField($result->id_field));
+    }
+    protected function settingDBResultWithoutReservation($result) {
+        parent::settingDBResult($result);
+        $this->setCategory($result->category);
+        $this->setClient(Client::findbyId($result->id_client));
+        $this->setFieldType($result->field_type);
+        $this->setInfrastructure($result->infrastructure);
+        $this->setLight($result->light);
+        $this->setAvailability(Availability::findByIdField($result->id_field));
     }
 }
 ?>

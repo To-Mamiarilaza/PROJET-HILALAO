@@ -1,0 +1,35 @@
+.foot {
+  height: 200px;
+  background-color: #e17b36;
+  margin-top: 5%;
+  color: white;
+}
+.foot-contenu {
+  padding-top: 1%;
+}
+.foot-contenu-logo {
+  text-align: center;
+  margin-top: 20px;
+}
+.foot-contenu-reseau {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  margin-left: 2%;
+  margin-top: 2%;
+}
+.foot-contenu-reseau i {
+  margin-right: 2%;
+  font-size: 120%;
+}
+.foot-contenu-copyright {
+  justify-content: center;
+  text-align: center;
+  display: flex;
+  flex-wrap: nowrap;
+  margin-top: 2%;
+}
+.foot-contenu-copyright i {
+  margin-top: 3px;
+  margin-right: 5px;
+}/*# sourceMappingURL=footer.css.map */
