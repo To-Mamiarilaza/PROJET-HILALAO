@@ -96,20 +96,21 @@ class CrudController extends Controller
 
     public function getViewUpdate($selected,$id){
         $c = new CrudController();
+        $notification = BackOfficeNotification::getAllBackOfficeNotification();
         try {
 
             if($selected == "category"){
                 $model = new Category();
                 $model = $model->getCategoryById($id);
-                return view('BO.crudUpdateCategory', ['model'=>$model,'ref' => $selected]);    
+                return view('BO.crudUpdateCategory', ['model'=>$model,'ref' => $selected, 'notifications' => $notification]);    
             }else if($selected == "subscription_state"){
                 $model = new SubscriptionState();
                 $model = $model->getSubscriptionStateById($id);
-                return view('BO.crudUpdateSubscription', ['model'=>$model,'ref' => $selected]);   
+                return view('BO.crudUpdateSubscription', ['model'=>$model,'ref' => $selected, 'notifications' => $notification]);   
             }else{
                 $model = new FieldType();
                 $model = $model->getFieldTypeById($id);
-                return view('BO.crudUpdateFieldType', ['model'=>$model,'ref' => $selected]);   
+                return view('BO.crudUpdateFieldType', ['model'=>$model,'ref' => $selected, 'notifications' => $notification]);   
             }
         } catch (\Throwable $th) {
             dd($th->getMessage());

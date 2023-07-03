@@ -82,7 +82,7 @@ class DetailTerrainController extends Controller
             'all' => $all,
             'month' => $month ? $month->getMonths() : [],
             'ref' => $ref,
-            'notification' => $notification
+            'notifications' => $notification
         ]);
     }
 

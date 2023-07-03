@@ -33,7 +33,7 @@ class ValidationClientController extends Controller
         return view('BO.validationClient', [
             'all' => $all,'terrains' => $terrains,
             'ref' => $ref,
-            'notification' => $notification
+            'notifications' => $notification
         ]);
     }
 }
