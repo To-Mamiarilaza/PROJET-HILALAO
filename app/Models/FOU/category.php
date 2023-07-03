@@ -9,7 +9,7 @@ class Category{
     private $description;
 
     public static function findAll() {
-        $sql = "SELECT id_category, category, subscribing_price, description FROM category";
+        $sql = "SELECT id_category, category, subscribing_price, description FROM category WHERE status=1";
         $categories_db = DB::select($sql);
         $res = array();
         foreach ($categories_db as $category_db) {
