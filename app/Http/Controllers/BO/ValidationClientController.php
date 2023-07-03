@@ -1,13 +1,10 @@
 <?php
 namespace App\Http\Controllers\BO;
 
-use App\Models\BO\Abonnement;
-use App\Models\BO\Category;
+use App\Models\BO\BackOfficeNotification;
 use App\Models\BO\DetailTerrain;
 use App\Models\BO\ValidationClient;
-use Exception;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
 
@@ -31,10 +28,12 @@ class ValidationClientController extends Controller
         $all = $validation->getPendingClient();
         $terrain = new DetailTerrain();
         $terrains = $terrain->getDetailTerrains();
-
+        
+        $notification = BackOfficeNotification::getAllBackOfficeNotification();
         return view('BO.validationClient', [
             'all' => $all,'terrains' => $terrains,
-            'ref' => $ref
+            'ref' => $ref,
+            'notifications' => $notification
         ]);
     }
 }

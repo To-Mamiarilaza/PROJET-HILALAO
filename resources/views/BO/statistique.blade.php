@@ -4,8 +4,8 @@
     use App\Models\BO\DetailClient;
 @endphp
 <link rel="stylesheet" href="{{ asset('css/BO/asset/statistique.css') }}">
-<!-- <link rel="stylesheet" href="{{asset('js/Chart.js')}}"> -->
     <script src="{{asset('js/Chart.js')}}"></script>
+    <script src="{{asset('js/BO/jquery.min.js')}}"></script>
 <body>
     
         <section class="content p-4">

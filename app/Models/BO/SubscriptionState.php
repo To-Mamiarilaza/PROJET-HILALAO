@@ -2,6 +2,7 @@
 
 namespace App\Models\BO;
 use Illuminate\Support\Facades\DB;
+use Psy\Readline\Hoa\Console;
 
 class SubscriptionState
 {
@@ -53,7 +54,7 @@ class SubscriptionState
     
     public function getSubscriptionStateById($id)
     {
-        $req = sprintf("SELECT * FROM SubscriptionState WHERE id_subscription_state = %s", $id);
+        $req = sprintf("SELECT * FROM subscription_state WHERE id_subscription_state = %s", $id);
         $res = DB::select($req);
         
         if (count($res) > 0) {
@@ -76,9 +77,10 @@ class SubscriptionState
 
     public function delete(){
         try{
-            $req = "update subscription_state set status = 10 where status = %s";
+            $req = "update subscription_state set status = 10 where id_subscription_state = %s";
             $subscription_state = $this->getId_subscription_state();
             $req = sprintf($req, $subscription_state);
+            echo $req;
             DB::update($req);
         }catch(Exception $e){
             throw new Exception("Supression non valider");

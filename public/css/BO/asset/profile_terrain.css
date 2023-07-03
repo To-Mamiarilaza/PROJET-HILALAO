@@ -51,6 +51,9 @@
   padding-left: 20px;
   padding-right: 20px;
 }
+.detail-terrain .description .buttons .download {
+  margin-right: 20px;
+}
 .detail-terrain .description .buttons .accepted-text {
   color: green;
   font-size: large;

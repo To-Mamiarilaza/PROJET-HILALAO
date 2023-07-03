@@ -6,7 +6,7 @@ use App\Http\Controllers\BO\LoginController;
 use App\Http\Controllers\BO\CrudController;
 use App\Http\Controllers\BO\StatistiqueController;
 use App\Models\BO\Statistique;
-use Illuminate\Http\Request;
+use App\Http\Controllers\BO\BackOfficeController;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\BO\DetailClientController;
 use App\Http\Controllers\BO\DetailTerrainController;
@@ -149,5 +149,7 @@ Route::get('/terrains_admin', function () {
     return response()->json($data);
 });
 
+Route::get('/BackOfficeNotification/{id_notification}', [BackOfficeController::class,
+    'changeNotificationState'])->name('notification_admin');
 
 ?>

@@ -78,7 +78,37 @@
                         </div>
                     </div>
                 </form>
-                
+                <!-- Modal pour supprimer une catégorie -->
+                <form action="{{ route('delete_admin' )}}" method="post">
+                    @csrf
+                    <div class="modal fade" id="deleteModal{{ $crud->getId_subscription_state() }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <input type="hidden" name="variable" id="variable" class="form-control" value="field_type">
+                                <input type="hidden" name="id" id="variable" class="form-control" value="{{ $crud->getId_subscription_state() }}">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Supprimer une catégorie</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="mt-2">
+                                        <label for="id" class="form-label">ID</label>
+                                        <input type="text" class="form-control" readonly id="deleteId" name="id_subscription_state" value="{{ $crud->getId_subscription_state() }}">
+                                    </div>
+                                    <div class="mt-2">
+                                        <label for="category" class="form-label">Etat</label>
+                                        <input type="text" class="form-control" readonly id="deleteubscription_state" name="subscription_state" value="{{ $crud->getSubscription_state() }}">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
                 @endforeach
             </tbody>
         </table>

@@ -7,6 +7,7 @@ use Exception;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use App\Models\BO\BackOfficeNotification;
 
 
 class AbonnementController extends Controller
@@ -43,6 +44,8 @@ class AbonnementController extends Controller
                 return redirect()->back()->with('error', 'Une erreur s\'est produite lors du tri des abonnements.');
             }
         }
+        $notification = BackOfficeNotification::getAllBackOfficeNotification();
+
         return view('BO.abonnement', [
             'all' => $all,
             'categories' => $categories,
@@ -51,7 +54,8 @@ class AbonnementController extends Controller
             'selectedYear' => $selectedYear,
             'selectedPayed' => $selectedPayed,
             'donnee' => json_encode($model->avoir_label($donnee_de_paiement)),
-            'ref' => $ref
+            'ref' => $ref,
+            'notifications' => $notification
         ]);
     }
 }

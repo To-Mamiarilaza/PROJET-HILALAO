@@ -21,6 +21,7 @@ class DetailTerrain
     private $first_picture;
     private $second_picture;
     private $sign_up_date;
+    private $field_files;
 
     public function getFirst_name() {
         return $this->first_name;
@@ -48,6 +49,13 @@ class DetailTerrain
     }
     public function setLast_name($value) {
         $this->last_name = $value;
+    }
+
+    public function getField_files() {
+        return $this->field_files;
+    }
+    public function setField_files($value) {
+        $this->field_files = $value;
     }
 
     public function getName() {
@@ -173,7 +181,7 @@ class DetailTerrain
     public function getDetailTerrain($id_terrain){
         try{
             $detail = "select f.id_field, c.first_name, c.last_name, c.phone_number, c.mail, f.address, f.name , f.insert_date, 
-            cat.category,f.insert_date,f.description
+            cat.category,f.insert_date,f.description,f.field_files
             from field f
             join client c on c.id_client = f.id_client
             join category cat on cat.id_category = f.id_category
@@ -194,6 +202,7 @@ class DetailTerrain
                 $temp->setCategory($result->category);
                 $temp->setId_terrain($result->id_field);
                 $temp->setDescription($result->description);
+                $temp->setField_files($result->field_files);
                 return $temp;
             }
         }catch(Exception $e){

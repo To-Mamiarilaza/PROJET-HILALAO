@@ -35,7 +35,6 @@
                                 {{ $all->getDescription() }}
                             </p>
                         </div>
-
                         <div class="buttons">
                         @if (isset($etat))
                             @if ($etat == 1)
@@ -44,9 +43,11 @@
                                 <p class="refused-text">Terrain refusé</p>
                             @endif
                         @elseif (isset($validation))
+                            <a href = "{{ asset('image/fileField/' . $all->getField_files()) }}" class= "btn btn-primary download ">Telecharger les dossiers</a>
                             <a href="{{ route('update_status_admin', ['variable' => 1,'id_terrain' => $all->getId_terrain(),'ref' => 'validationClient']) }}" class="btn btn-warning">Valider</a>
                             <a href="{{ route('update_status_admin', ['variable' => 3,'id_terrain' => $all->getId_terrain(),'ref' => 'validationClient']) }}" class="btn btn-danger mx-4">Refuser</a>
                         @endif
+                        </div>
                     </div>
 
                 </div>
