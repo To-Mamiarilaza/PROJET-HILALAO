@@ -2,7 +2,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FOC\LoginController;
 use App\Http\Controllers\FOC\InscriptionController;
-use App\Models\FOC\SuiviReservation\Reservation_field;
+//use App\Models\FOC\SuiviReservation\Reservation_field;
 use App\Http\Controllers\FOC\ReservationController;
 use App\Http\Controllers\FOC\FieldController;
 
@@ -27,6 +27,8 @@ Route::post('/insertClient', [InscriptionController::class, 'insertClient'])
 Route::post('/CIN-Client', [InscriptionController::class, 'insertCIN'])
 ->name('signinnext');
 
+Route::get('/filtre', [ReservationController::class, 'filtre'])
+->name('filtre');
 
 Route::get('/selectByWeek', [ReservationController::class, 'getReservationOneWeek'])
 ->name('selectByWeek');
@@ -36,7 +38,6 @@ Route::get('/selectAllReservation', [ReservationController::class, 'getAllReserv
 
 Route::get('/insertDirectReservation', [ReservationController::class, 'insertDirectReservation'])
 ->name('insert');
-
 
 Route::get('/home', function () {
     return view('FOC/home');
@@ -82,14 +83,24 @@ Route::get('/home-client', function() {
 Route::get('/profilClient', function() {
     return view('FOC/profilClient');
 });
+
+// Route::get('/board', function() {
+//     return view('FOC/board');
+// });
 // ---------------------------------------
+
+Route::post('/stat-terrainFOC', [ReservationController::class, 'filtre'])
+->name('stat-terrainFOC');
+
+Route::get('/filtreBoard', [ReservationController::class, 'filtreBoard'])
+->name('filtreBoard');
 
 Route::get('/stat-terrain', function() {
     return view('FOC/statistic-field');
 });
 
-Route::get('/list-field', [FieldController::class, 'listField'])
-->name('list-field');
+Route::get('/list-fieldFOC', [FieldController::class, 'listField'])
+->name('list-fieldFOC');
 
 Route::get('/profile-field/{idField}', [FieldController::class, 'profileField'])
 ->name('profile-field');

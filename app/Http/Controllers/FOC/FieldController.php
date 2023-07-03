@@ -154,7 +154,7 @@ class FieldController extends Controller
         $field = new Field('default',$category,$clientConnected,$name,$surface,$infrastructure,$light,'',$adresse, $latitude, $longitude, $dateFormatee, $file);
         $field->create($clientConnected);
 
-        return redirect()->route('list-field');
+        return redirect()->route('list-fieldFOC');
     }
 
       
