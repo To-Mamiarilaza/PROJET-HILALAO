@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models\FOU;
 
 use Illuminate\Support\Facades\DB;
@@ -15,8 +14,9 @@ class UserNotification
     public $idTypeNotification;
     public $dateNotification;
     public $etat;
+    public $start_time;
 
-    public function __construct($idUserNotification, $idUser, $idField, $nameField, $idTypeNotification, $dateNotification, $etat)
+    public function __construct($idUserNotification, $idUser, $idField, $nameField, $idTypeNotification, $dateNotification, $etat, $start_time=null)
     {
         $this->idUserNotification = $idUserNotification;
         $this->idUser = $idUser;
@@ -25,9 +25,17 @@ class UserNotification
         $this->idTypeNotification = $idTypeNotification;
         $this->dateNotification = $dateNotification;
         $this->etat = $etat;
+        $this->start_time = $start_time;
     }
 
-    // Changer l'état du notification 
+    public function save() {
+        $sql = "INSERT INTO user_notification (id_user, id_field, id_type_notification, date_notification, etat) VALUES (%s, %s, %s, '%s', %s)";
+        $sql = sprintf($sql, $this->idUser, $this->idField, $this->idTypeNotification, $this->dateNotification.' '.$this->start_time, $this->etat);
+        DB::insert($sql);
+    }
+
+
+    // Changer l'état du notification
     public static function updateState($idUserNotification)
     {
         $sql = "UPDATE user_notification SET ETAT = 1 WHERE id_user_notification = %d";
@@ -36,11 +44,11 @@ class UserNotification
     }
 
 
-    // Calcul la durée en minute du 
+    // Calcul la durée en minute du
     public function calculDuree()
     {
         $now = Carbon::now();
-        $now->addHours(2);      // Réglage du fuseau horaire à remédier;
+        // $now->addHours(2);      // Réglage du fuseau horaire à remédier;
         $notification = Carbon::parse($this->dateNotification);
 
         $interval = $now->diff($notification);
@@ -57,7 +65,7 @@ class UserNotification
     public function getContent()
     {
         switch ($this->idTypeNotification) {
-            case 1:         // Rappel de réservation ou retard de réservation 
+            case 1:         // Rappel de réservation ou retard de réservation
                 $now = Carbon::now();
                 $now->addHours(2);      // Réglage du fuseau horaire à remédier;
 
@@ -85,7 +93,7 @@ class UserNotification
     }
 
 
-    // Fonction pour prendre les notifications de rappel de réservation ou de retard de l'utilisateur 
+    // Fonction pour prendre les notifications de rappel de réservation ou de retard de l'utilisateur
     public static function getAllRappelNotification($idUser)
     {
         // Requete pour prendre les notifications de rappel de réservation qui aura lieu dans 30 min
@@ -140,7 +148,7 @@ class UserNotification
         return $notifications;
     }
 
-    public static function getAllUserNotification($idUser) 
+    public static function getAllUserNotification($idUser)
     {
         $rappels = UserNotification::getAllRappelNotification($idUser);
         $missings = UserNotification::getAllMissingNotification($idUser);
