@@ -261,6 +261,37 @@
         marker.bindPopup(terrain.name).openPopup();
 
     });
+
+
+    var latitude;
+    var longitude;
+    if ("geolocation" in navigator) {
+        // La géolocalisation est disponible
+        navigator.geolocation.getCurrentPosition(function(position) {
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
+        console.log("Latitude : " + latitude + ", Longitude: " + longitude);
+        markerPers = L.marker([latitude, longitude]).addTo(map);
+        markerPers.bindPopup("Moi").openPopup();
+
+        // Créer une icône personnalisée avec la couleur rouge
+        var redIcon = L.icon({
+            iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+            shadowSize: [41, 41],
+            shadowAnchor: [12, 41]
+        });
+
+        // Changer l'icône du marqueur en utilisant l'icône personnalisée rouge
+        markerPers.setIcon(redIcon);
+        });
+    } else {
+        // La géolocalisation n'est pas disponible sur ce navigateur
+        console.log("La géolocalisation n'est pas disponible.");
+    }
 </script>
 <script>
 
