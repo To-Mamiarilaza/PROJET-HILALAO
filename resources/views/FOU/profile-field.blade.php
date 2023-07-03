@@ -71,7 +71,7 @@
     }
 </script>
 <body>
-    @include('template.Header')
+    @include('FOU.header-notification')
     <div class="container mt-4">
         <div class="row">
             <div class="col-md-6 p-3">

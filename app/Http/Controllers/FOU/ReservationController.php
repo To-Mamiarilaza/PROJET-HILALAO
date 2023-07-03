@@ -4,7 +4,9 @@ namespace App\Http\Controllers\FOU;
 
 use App\Http\Controllers\Controller;
 use App\Models\FOU\FieldUser;
+use App\Models\FOU\UserNotification;
 use App\Models\FOU\Reservation;
+use DateInterval;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
@@ -39,6 +41,8 @@ class ReservationController extends Controller
         $montant = $request->input('montant');
         $reservation = Reservation::prepareReservation($id_field, $id_users, $reservation_date, $start_time, $duration, $montant);
         $reservation->save();
+        $notif = new UserNotification(0, $id_users, $id_field, "", 1, $reservation_date, 0, $start_time);
+        $notif->save();
         return redirect('/field/detail/'.$id_field);
     }
 
