@@ -84,33 +84,6 @@
     </div>
 </section>
 </div>
-<form action="{{ route('delete', ['variable' => $ref, 'id' => null]) }}" method="POST">
-    @csrf
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Supprimer une catégorie</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="mt-2">
-                        <label for="etat" class="form-label">ID</label>
-                        <input type="text" class="form-control" readonly id="deleteId" name="id">
-                    </div>
-                    <div class="mt-2">
-                        <label for="etat" class="form-label">Catégorie</label>
-                        <input type="text" class="form-control" readonly id="deleteCategory" name="category">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                    <button type="submit" class="btn btn-danger">Supprimer</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</form>
 <form action="{{ route('insert_admin')}}" method="post">
     @csrf
     <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
