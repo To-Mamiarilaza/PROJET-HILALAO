@@ -14,6 +14,10 @@ use DateTime;
 
 class ReservationController extends Controller
 {
+    public function facturer($id_reservation) {
+        return View('FOU/facture');
+    }
+
     public function index($id_field, $date = null)
     {
         if ($date === null) {
