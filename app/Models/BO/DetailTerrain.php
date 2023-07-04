@@ -14,6 +14,7 @@ class DetailTerrain
     private $insert_date;
     private $category;
     private $id_terrain;
+    private $id_client;
     private $description;
     private $months;
     private $picture;
@@ -42,6 +43,13 @@ class DetailTerrain
     }
     public function setId_terrain($value) {
         $this->id_terrain = $value;
+    }
+
+    public function getId_client() {
+        return $this->id_client;
+    }
+    public function setId_client($value) {
+        $this->id_client = $value;
     }
 
     public function getLast_name() {
@@ -147,7 +155,8 @@ class DetailTerrain
         try{
             $detail = "SELECT
             f.id_field,
-            EXTRACT(MONTH FROM DATE_TRUNC('month', generate_series(s.start_date, s.start_date + (s.duration || ' month')::interval - INTERVAL '1 day', '1 month'))) AS month
+            EXTRACT(MONTH FROM DATE_TRUNC('month', generate_series(s.start_date, s.start_date + (s.duration || ' month')::interval - 
+            INTERVAL '1 day', '1 month'))) AS month
             FROM
                 field f
                 JOIN category c ON c.id_category = f.id_category
@@ -157,7 +166,8 @@ class DetailTerrain
                 f.id_field = ".$id_terrain."
             GROUP BY
                 f.id_field,
-                EXTRACT(MONTH FROM DATE_TRUNC('month', generate_series(s.start_date, s.start_date + (s.duration || ' month')::interval - INTERVAL '1 day', '1 month')))
+                EXTRACT(MONTH FROM DATE_TRUNC('month', generate_series(s.start_date, s.start_date + (s.duration || ' month')::interval - 
+                INTERVAL '1 day', '1 month')))
             ORDER BY
                 f.id_field ASC,
                 month ASC;";
@@ -180,7 +190,7 @@ class DetailTerrain
 
     public function getDetailTerrain($id_terrain){
         try{
-            $detail = "select f.id_field, c.first_name, c.last_name, c.phone_number, c.mail, f.address, f.name , f.insert_date, 
+            $detail = "select f.id_client, f.id_field, c.first_name, c.last_name, c.phone_number, c.mail, f.address, f.name , f.insert_date, 
             cat.category,f.insert_date,f.description,f.field_files
             from field f
             join client c on c.id_client = f.id_client
@@ -200,6 +210,7 @@ class DetailTerrain
                 $temp->setInsert_date($result->insert_date);
                 $temp->setName($result->name);
                 $temp->setCategory($result->category);
+                $temp->setId_client($result->id_client);
                 $temp->setId_terrain($result->id_field);
                 $temp->setDescription($result->description);
                 $temp->setField_files($result->field_files);

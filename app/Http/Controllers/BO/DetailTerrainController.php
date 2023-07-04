@@ -53,6 +53,13 @@ class DetailTerrainController extends Controller
         $detail = new DetailTerrain();
         $detail->update_status($variable,$id_terrain);// Appeler la fonction detailTerrain avec la variable d'état
         $etat = $variable; // Valeur de l'état à passer à la fonction detailTerrain
+        $terrain = new DetailTerrain();
+        $id_client = $terrain->getDetailTerrain($id_terrain)->getId_client();
+        BackOfficeNotification::insert_client_notification($id_client,11);
+        if($variable !=1){
+            $variable = 0;
+        }
+        BackOfficeNotification::insert_field_validation($id_terrain,$variable);
         return $this->detailTerrainWithEtat($id_terrain, $etat,$ref);
     }
     

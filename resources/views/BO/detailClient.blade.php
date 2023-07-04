@@ -20,9 +20,6 @@
                                   <img src="{{ asset('css/BO/image/' . $all->getFirst_picture()) }}" alt="Photo du CIN avant">
                                   <img src="{{ asset('css/BO/image/' . $all->getSecond_picture()) }}" alt="Photo du CIN arrière">
                               </div>
-
-
-    
                           </div>
                           <div class="information">
                               <ul>

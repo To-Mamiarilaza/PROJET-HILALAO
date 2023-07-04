@@ -16,8 +16,7 @@ class BackOfficeController extends Controller
 	public function changeNotificationState($idNotif) 
 	{
 		BackOfficeNotification::updateState($idNotif);
-
-		echo "Changement d'état effectué";
+		
 	}
 }
 ?>

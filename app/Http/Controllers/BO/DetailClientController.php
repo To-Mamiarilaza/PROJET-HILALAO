@@ -35,9 +35,13 @@ class DetailClientController extends Controller
     }
 
     public function modifierStatus($value, $id_client){
-        $modifier = new DetailClient();
+        $modifier = new DetailClient();;
         $modifier->update_status($value, $id_client);
-
+        if($value !=1){
+            $value = 0;
+        }
+        BackOfficeNotification::insert_client_notification($id_client,10);
+        BackOfficeNotification::insert_client_validation($value);
         return redirect('/ValidationClient/validationClient');
     }
 }

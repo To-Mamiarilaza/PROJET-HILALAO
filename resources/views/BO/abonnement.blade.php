@@ -3,7 +3,11 @@
 
 
 <link rel="stylesheet" href="{{ asset('css/BO/asset/abonnement.css') }}">
+<<<<<<< Updated upstream
 <script src="{{asset('js/Chart.js')}}"></script>
+=======
+    <script src="{{asset('js/Chart.js')}}"></script>
+>>>>>>> Stashed changes
 <section class="content p-4">
             <div class="en-tete mt-2">
                 ABONNEMENT
