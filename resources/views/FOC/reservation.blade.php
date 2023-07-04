@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    @include('FOC/header')
+    @include('FOC/headerNotification');
     <div class="container">
         <h1 class="reservation-title my-3">Réservations du terrain</h1>
         <div class="direct-reservation">

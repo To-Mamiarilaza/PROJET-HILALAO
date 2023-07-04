@@ -13,7 +13,7 @@
 </head>
 
 <body>
-	@include('FOC/header');
+	@include('FOC/headerNotification');
 
 	<div class="container mt-4 content">
 		<h4 class="entete"><i class="fas fa-star mx-3"></i> Profile</h4>

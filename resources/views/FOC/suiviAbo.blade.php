@@ -44,8 +44,7 @@
 	<title>HILALAO | CLIENT - ABONNEMENT</title>
 </head>
 <body>
-	@include('FOC/header')
-
+	@include('FOC/headerNotification');
 	<section>
 		<div class="container mt-5">
 			<div class="row justify-content-center fonction-list">

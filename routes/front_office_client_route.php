@@ -78,9 +78,9 @@ Route::get('/subscription-facture', function() {
     return view('FOC/subscription-facture');
 });
 
-Route::get('/home-client', function() {
-    return view('FOC/home');
-});
+Route::GET('/homeClient', [LoginController::class, 'homeClient'])
+->name('homeClient');
+
 
 // ---------------------------------------
 Route::get('/profilClient', function() {
@@ -146,6 +146,13 @@ Route::GET('deleteField', [FieldController::class, 'deleteField'])
 Route::GET('subscriptionPage', [SuiviAboController::class, 'subscriptionPage'])
 ->name('subscriptionPage');
 
+//Pagee d'abonnement
+Route::GET('changeClientNotificationState/{idNotif}', [ClientNotificationController::class, 'changeNotificationState']);
+
 //Rechercher l'abonnement dans l'aannee
 Route::POST('searchByYear', [SuiviAboController::class, 'subscriptionPage'])
 ->name('searchByYear');
+
+//inserer une abonnement
+Route::POST('insertSubscription', [SuiviAboController::class, 'insertSubscription'])
+->name('insertSubscription');

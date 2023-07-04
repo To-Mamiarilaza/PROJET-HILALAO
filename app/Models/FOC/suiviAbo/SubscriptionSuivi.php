@@ -2,10 +2,10 @@
 
 namespace App\Models\FOC\suiviAbo;
 
-use App\Http\Controllers\FOC\SuiviAboController;
 use Illuminate\Support\Facades\DB;
 use App\Models\FOC\GestionTerrain\Field;
 use Carbon\Carbon;
+use App\Models\FOC\GestionClient\Client;
 
 class SubscriptionSuivi
 {
@@ -171,7 +171,7 @@ class SubscriptionSuivi
     public static function isAbo($allAbo, $vueAbo) {
         foreach($allAbo as $item) {
             if(SubscriptionSuivi::getMonth($item->getStartDate()) == $vueAbo->getMonth()->getIdMonth()) {
-                $vueAbo->setColor("info");
+                $vueAbo->setColor("paye");
                 $vueAbo->setAbo($item);
                 
                 return $vueAbo;
@@ -185,8 +185,10 @@ class SubscriptionSuivi
     public static function isMonthEquals($year1, $month1, $date2) { 
         $mois1 = Carbon::createFromDate($year1, $month1, 1);
         $mois2 = Carbon::createFromDate(SubscriptionSuivi::getYear($date2), SubscriptionSuivi::getMonth($date2), 1);
+        $date1 = explode(' ', $mois1);
+        $date2 = explode(' ', $mois2);
 
-        if ($mois1->eq($mois2)) {
+        if ( $date1[0] == $date2[0]) {
             return true;
         } 
 
@@ -198,7 +200,7 @@ class SubscriptionSuivi
         $mois1 = Carbon::createFromDate($year1, $month1, 1);
         $mois2 = Carbon::createFromDate(SubscriptionSuivi::getYear($date2), SubscriptionSuivi::getMonth($date2), 1);
 
-        if ($mois1->gt($mois2)) {
+        if ($mois1->lessThan($mois2)) {
             return true;
         } 
 
@@ -210,13 +212,33 @@ class SubscriptionSuivi
         $mois1 = Carbon::createFromDate($year1, $month1, 1);
         $mois2 = Carbon::createFromDate(SubscriptionSuivi::getYear($date2), SubscriptionSuivi::getMonth($date2), 1);
 
-        if ($mois1->lt($mois2)) {
+        if ($mois1->greaterThan($mois2)) {
+            // $date1 est supérieure à $date2
             return true;
         }
 
         return false;
     }    
 
-
+     //Effectuer un paiment d'abonnement
+    public function create($client)
+    {
+        try {
+            $req = "INSERT INTO subscription VALUES (DEFAULT, %d, '%s', '%s', %d, %d)";
+            $req = sprintf($req, $this->getField()->getIdField(), $this->getSubscriptionDate(), $this->getStartDate(), $this->getDuration(), $this->getSubscriptionState()->getIdSubscriptionState());
+            $month = SubscriptionSuivi::getMonth($this->getStartDate());
+            DB::insert($req);
+            //$lastFieldInsert = Field::getLastInsertFieldByClient($client);
+            $insertAdmin = "INSERT INTO admin_notification VALUEs (DEFAULT, 22, now(), 0)";
+            DB::insert($insertAdmin);
+            $lastAdminNotify = Client::getLastInsertAdminNotif();
+            $insertFieldNotif = "INSERT INTO subscription_payement_notification VALUES(".$lastAdminNotify->id_admin_notification.", ".$client->getIdClient().", ".$this->getField()->getIdField().", ".$month.")";
+            DB::insert($insertFieldNotif);
+    
+        
+        } catch (\Exception $e) {
+            throw new \Exception("Erreur lors de paiment d'abonnement : ".$e->getMessage());
+        }
+    }
 }
 ?>

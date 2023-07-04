@@ -18,7 +18,7 @@
                         <a class="nav-link" href="{{ route('list-fieldFoc') }}">Mes Terrains</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Mon compte</a>
+                        <a class="nav-link" href="">Mon compte</a>
                     </li>
                 </ul>
                 <div class="option-block d-flex mx-5">

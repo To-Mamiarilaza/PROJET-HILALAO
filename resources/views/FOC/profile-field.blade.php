@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    @include('FOC/header')
+    @include('FOC/headerNotification')
 
     <div class="container mt-4">
         <div class="row gx-5">
@@ -77,6 +77,9 @@
                             <p class="parameter-hour">10:00 H à 13:00 H <span class="parameter-price">50 000 Ar</span> </p>
                         </div>
                     </div>
+                    @isset($error)
+                        <p class="error"> <i class="fas fa-info-circle mx-3"></i>{{ $error }}</p>
+                    @endisset
                     <a href="{{ route('loadPageDispoAndPriceGet') }}" class="btn btn-warning mt-3">Paramétrer disponibilité et prix</a>
                     <a href="" class="btn btn-warning my-3" data-bs-toggle="modal" data-bs-target="#new-indisponible">Marquer des indisponibilités</a> <br>
                 </div>
@@ -192,7 +195,9 @@
                                 <label for="file" class="form-label">Choisir l'image pour remplacer l'existant</label>
                                 <input type="file" id="file" class="form-control" name="image">
                                 <input type="hidden" name="idImage"/>
-                                <p class="error"><i class="fas fa-info-circle mx-2"></i> Afficher l'erreur ici</p>
+                                @isset($error)
+                                <p class="error"> <i class="fas fa-info-circle mx-3"></i>{{ $error }}</p>
+                                @endisset
                             </div>
                         </div>
                     </div>
@@ -273,7 +278,9 @@
                                 <label for="new-date" class="form-label">Date Fin</label>
                                 <input type="date" class="form-control" id="date-fin" name="date-fin">
                             </div>
-                            <p class="error"><i class="fas fa-info-circle mx-2"></i> Afficher l'erreur ici</p>
+                            @isset($error)
+                                <p class="error"> <i class="fas fa-info-circle mx-3"></i>{{ $error }}</p>
+                            @endisset
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -315,7 +322,9 @@
                                 <label for="new-date" class="form-label">Remise</label>
                                 <input type="number" class="form-control" id="new-date" placeholder="Remise" name="remise">
                             </div>
-                            <p class="error"><i class="fas fa-info-circle mx-2"></i> Afficher l'erreur ici</p>
+                            @isset($error)
+                                <p class="error"> <i class="fas fa-info-circle mx-3"></i>{{ $error }}</p>
+                            @endisset
                             <div class="my-3">
                                 <a href="" class="link my-3" data-bs-toggle="modal" data-bs-target="#list-remise" data-bs-dismiss="modal">Voir listes des remises</a>
                             </div>
@@ -362,7 +371,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <p class="error"><i class="fas fa-info-circle mx-2"></i> Afficher l'erreur ici</p>
+                            @isset($error)
+                                <p class="error"> <i class="fas fa-info-circle mx-3"></i>{{ $error }}</p>
+                            @endisset
                             <div class="my-3">
                                 <a href="" class="link my-3" data-bs-toggle="modal" data-bs-target="#long-unavailability" data-bs-dismiss="modal">Indisponibilités à longue durée</a>
                             </div>

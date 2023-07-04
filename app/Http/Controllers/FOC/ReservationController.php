@@ -6,12 +6,16 @@ use App\Models\FOC\SuiviReservation\Reservation_field;
 use App\Models\FOC\SuiviReservation\DirectReservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use App\Models\FOC\ClientNotification;
 
 class ReservationController extends Controller
 {
 
     public function getReservationOneWeek()
     {
+        $clientConnected = session()->get('clientConnected');
+        $notifications = ClientNotification::getAllClientNotification($clientConnected->getIdClient());
+       
         $data = Session::get('field');
             $start_time = '10:00';
             $end_time = '11:30';
@@ -73,7 +77,10 @@ class ReservationController extends Controller
 
             $reservationFields = $reservationField->getReservationsOneWeek($data->getIdField());
 
-            return view('FOC/reservation', ['reservationFields' => $reservationFields]);
+            return view('FOC/reservation', [
+                'reservationFields' => $reservationFields,
+                'notifications' => $notifications,
+            ]);
     }
 
     public function insertDirectReservation(Request $request)
@@ -95,6 +102,9 @@ class ReservationController extends Controller
     }
     public function getAllReservation()
     {
+            $clientConnected = session()->get('clientConnected');
+            $notifications = ClientNotification::getAllClientNotification($clientConnected->getIdClient());
+       
             $data = Session::get('field');
             $start_time = '10:00';
             $end_time = '11:30';
@@ -156,7 +166,10 @@ class ReservationController extends Controller
 
             $reservationFields = $reservationField->getReservationsWithFields($data->getIdField());
 
-            return view('FOC/reservation', ['reservationFields' => $reservationFields]);
+            return view('FOC/reservation', [
+                'reservationFields' => $reservationFields,
+                'notifications' => $notifications,
+            ]);
         } 
     }
 ?>

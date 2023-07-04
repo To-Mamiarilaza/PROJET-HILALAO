@@ -9,13 +9,13 @@
             <div class="collapse navbar-collapse navbar-links" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Accueil</a>
+                        <a class="nav-link" href="/home">Accueil</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Tableau de Bord</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Mes Terrains</a>
+                        <a class="nav-link" href="{{ route('list-fieldFoc') }}">Mes Terrains</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Mon compte</a>
@@ -59,6 +59,7 @@
 
 <script>
     function changeNotificationState(element) {
+        alert("Test");
         var container = element.closest('li');
         container.remove();
 
@@ -81,7 +82,7 @@
             }
         };
 
-        xhr.open('GET', 'http://127.0.0.1:8000/changeNotificationState/' + notificationId, true);
+        xhr.open('GET', 'http://127.0.0.1:8000/changeClientNotificationState/' + notificationId, true);
 
         xhr.send();
     }

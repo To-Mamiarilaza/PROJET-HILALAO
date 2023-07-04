@@ -181,7 +181,7 @@ class Client
         $datas = array();
         $i = 0;
         foreach ($results as $row) {
-            $datas[$i] = new Client($row->id_client, $row->first_name, $row->last_name, $row->phone_number, $row->mail, $row->address, $row->birth_date, $row->pwd, Status::findById($row->id_status), $row->sign_up_date, Cin::findById($row->id_cin));
+            $datas[$i] = new Client($row->id_client, $row->first_name, $row->last_name, $row->phone_number, $row->mail, $row->address, $row->birth_date, $row->pwd, Status::findById($row->id_status), $row->sign_up_date, Cin::findById($row->id_cin), $row->customer_picture);
             $i++;
         }
         
@@ -193,7 +193,7 @@ class Client
     {
         $results = DB::table('client')->where('id_cin', $idCin)->first();
         
-        return new Client($results->id_client, $results->first_name, $results->last_name, $results->phone_number, $results->mail, $results->address, $results->birth_date, $results->pwd, Status::findById($results->id_status), $results->sign_up_date, Cin::findById($results->id_cin));
+        return new Client($results->id_client, $results->first_name, $results->last_name, $results->phone_number, $results->mail, $results->address, $results->birth_date, $results->pwd, Status::findById($results->id_status), $results->sign_up_date, Cin::findById($results->id_cin), $results->customer_picture);
     }
 
     //Sauvegarder un client dans la base
@@ -204,12 +204,25 @@ class Client
             $formattedBirthDate = $birthDate->format('Y-m-d');
             $req = "INSERT INTO client VALUES (DEFAULT, '%s', '%s', '%s', '%s', '%s', '%s', '%s', %d, DEFAULT, %d)";
             $req = sprintf($req, $this->first_name, $this->last_name, $this->phone_number, $this->mail, $this->address, $formattedBirthDate, $this->pwd, $this->status->getIdStatus(), $this->cin->getIdCin());
+            $insertAdmin = "INSERT INTO admin_notification VALUEs (DEFAULT, 20, now(), 0)";
             DB::insert($req);
+            DB::insert($insertAdmin);
+            $lastAdminNotify = Client::getLastInsertAdminNotif();
+            $insertClientAdhesion = "INSERT INTO client_adhesion_notification VALUES(".$lastAdminNotify->id_admin_notification.", ".$lastAdminNotify->id_client.")";
+            DB::insert($insertClientAdhesion);
         } catch (\Exception $e) {
             throw new \Exception("Erreur lors de la création du client : " . $e->getMessage());
         }
     }
 
+    //Avoir le dernier insertion dans admin_notification
+    public static function getLastInsertAdminNotif() {
+        $req = "SELECT * FROM admin_notification ORDER BY id_admin_notification DESC LIMIT 1";
+        $result = DB::select($req);
+        foreach ($result as $row) {
+            return $row;
+        }
+    }
     //Mettre a jour un client
     public function update()
     {
@@ -246,13 +259,12 @@ class Client
             $i = 0;
             if($results) {
                 foreach ($results as $row) {
-                    return new Client($row->id_client, $row->first_name, $row->last_name, $row->phone_number, $row->mail, $row->address, $row->birth_date, $row->pwd, Status::findById($row->id_status), $row->sign_up_date, Cin::findById($row->id_cin));
+                    return new Client($row->id_client, $row->first_name, $row->last_name, $row->phone_number, $row->mail, $row->address, $row->birth_date, $row->pwd, Status::findById($row->id_status), $row->sign_up_date, Cin::findById($row->id_cin), $row->customer_picture);
                 }
             }
             throw new Exception("Veuillez ressayer");
                 
         } catch(Exception $e) {
-
         }
     }
 
@@ -261,6 +273,6 @@ class Client
     {
         $results = DB::table('client')->where('id_client', $id)->first();
     
-        return new Client($results->id_client, $results->first_name, $results->last_name, $results->phone_number, $results->mail, $results->address, $results->birth_date, $results->pwd, Status::findById($results->id_status), $results->sign_up_date, Cin::findById($results->id_cin));
+        return new Client($results->id_client, $results->first_name, $results->last_name, $results->phone_number, $results->mail, $results->address, $results->birth_date, $results->pwd, Status::findById($results->id_status), $results->sign_up_date, Cin::findById($results->id_cin),  $results->customer_picture);
     }  
 }

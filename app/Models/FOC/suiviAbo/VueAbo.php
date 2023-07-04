@@ -54,22 +54,24 @@ class VueAbo
         $allAbo = SubscriptionSuivi::getAllSubscriptionField($field, $year);
         $firstAbo = SubscriptionSuivi::getStartSubscriptionField($field);
 
-        foreach($vueAbo as $item) {
-            if((SubscriptionSuivi::isMonth1SupToMonth2($year, $item->getMonth()->getIdMonth(), $firstAbo->getStartDate())==true || SubscriptionSuivi::isMonthEquals($year, $item->getMonth()->getIdMonth(), $firstAbo->getStartDate()) == true) && (SubscriptionSuivi::isMonth1InfToMonth2($year, $item->getMonth()->getIdMonth(), $dateNow) == true || (SubscriptionSuivi::isMonthEquals($year, $item->getMonth()->getIdMonth(), $dateNow)))) {
-                if(SubscriptionSuivi::IsAbo($allAbo, $item) != null) {
-                    $item = SubscriptionSuivi::IsAbo($allAbo, $item);
+        if($firstAbo != null) {
+            foreach($vueAbo as $item) {
+                if((SubscriptionSuivi::isMonth1SupToMonth2($year, $item->getMonth()->getIdMonth(), $firstAbo->getStartDate())==true || SubscriptionSuivi::isMonthEquals($year, $item->getMonth()->getIdMonth(), $firstAbo->getStartDate()) == true) && (SubscriptionSuivi::isMonth1InfToMonth2($year, $item->getMonth()->getIdMonth(), $dateNow) == true || (SubscriptionSuivi::isMonthEquals($year, $item->getMonth()->getIdMonth(), $dateNow)))) {
+                    if(SubscriptionSuivi::IsAbo($allAbo, $item) != null) {
+                        $item = SubscriptionSuivi::IsAbo($allAbo, $item);
+                    }
+                    else {
+                        $item->setColor("non-paye");
+                    }
                 }
-                else {
-                    $item->setColor("danger");
+                else if((SubscriptionSuivi::isMonth1SupToMonth2($year, $item->getMonth()->getIdMonth(), $dateNow)==true)) {
+                    if(SubscriptionSuivi::IsAbo($allAbo, $item) != null) {
+                        $item = SubscriptionSuivi::IsAbo($allAbo, $item);
+                    }
                 }
-            }
-            else if((SubscriptionSuivi::isMonth1SupToMonth2($year, $item->getMonth()->getIdMonth(), $dateNow)==true)) {
-                if(SubscriptionSuivi::IsAbo($allAbo, $item) != null) {
-                    $item = SubscriptionSuivi::IsAbo($allAbo, $item);
-                }
-            }
-            else {}
-        }  
+                else {}
+            }  
+        }
 
         return $vueAbo;
     }
@@ -80,7 +82,7 @@ class VueAbo
         $allMonth = Month::getAllMonth();
         $i = 0;
         foreach($allMonth as $month) {
-            $vueAbo[$i] = new VueAbo($month, null, "default");
+            $vueAbo[$i] = new VueAbo($month, null, "normal");
             $i++;
         }
 

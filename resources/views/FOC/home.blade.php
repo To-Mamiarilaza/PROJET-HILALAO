@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    @include('FOC/header');
+    @include('FOC/headerNotification');
 
     <section>
         <div class="container mt-5">

@@ -201,7 +201,14 @@ class Field {
         $req = "INSERT INTO field VALUES ( %s, %d, %d, '%s', %d, %d, %d, '%s', '%s', %f, %f, '%s', '%s', 1)";
         $req = sprintf($req,$this->id_field,$this->category->getIdCategory(),$this->client->getIdClient(),$this->name,$this->field_type->getIdFieldType(),$this->infrastructure->getIdInfrastructure(),$this->light->getIdLight(),$this->description,$this->address,$this->latitude,$this->longitude, $this->insert_date, $this->field_files);
         DB::insert($req);
+        $lastFieldInsert = Field::getLastInsertFieldByClient($client);
+        $insertAdmin = "INSERT INTO admin_notification VALUEs (DEFAULT, 21, now(), 0)";
+        DB::insert($insertAdmin);
         $field = Field::getLastInsertFieldByClient($client);
+        $lastAdminNotify = Client::getLastInsertAdminNotif();
+        $insertFieldNotif = "INSERT INTO field_adhesion_notification VALUES(".$lastAdminNotify->id_admin_notification.", ".$client->getIdClient().", ".$lastFieldInsert->getIdField().")";
+        DB::insert($insertFieldNotif);
+
         $pictureProfileField = new PictureField('default', 'terrainInconnu.jpg',TypePicture::findById(1),  $field);
         $pictureSecond1 = new PictureField('default', 'terrainInconnu.jpg',TypePicture::findById(2),  $field);
         $pictureSecond2 = new PictureField('default', 'terrainInconnu.jpg',TypePicture::findById(2),  $field);
