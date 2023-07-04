@@ -10,7 +10,7 @@ class Filter {
 
 
     public static function find($name_filter) {
-        $sql = "SELECT id_%s as id, %s as val FROM %s";
+        $sql = "SELECT id_%s as id, %s as val FROM %s WHERE status=1";
         $sql = sprintf($sql, $name_filter, $name_filter, $name_filter);
         $filters_db = DB::select($sql);
         $filters = [];

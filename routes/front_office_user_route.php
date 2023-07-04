@@ -27,6 +27,7 @@ Route::get('/tester', [TestController::class, 'index'])->name('test');
 Route::get('/reservation/calcul_prix/{id_field}/{date_reservation}/{start_time}/{duration}', [App\Http\Controllers\FOU\ReservationController::class, 'calculPrix']);
 Route::get('/user/account', [LogController::class, 'info'])->name('profil-user');
 Route::get('/infoTerrain/{id_field}', [InfoTerrain::class, 'index']);
+Route::get('/field/reservation/cancel/{id_reservation}', [App\Http\Controllers\FOU\ReservationController::class, 'cancel'])->name('cancel-reservation');
 
 Route::get('/carte', [InfoTerrain::class, 'afficheCarte']);
 

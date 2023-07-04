@@ -22,7 +22,7 @@ class FieldController extends Controller
             $users = Session::get("user");
             $field = FieldUser::Sfind( $id_field, $users->getIdUsers());
             $notifications = UserNotification::getAllUserNotification($users->getIdUsers());
-            return view('FOU\profile-field', ['field' => $field, 'date' => $date, 'notifications' => $notifications]);
+            return view('FOU\profile-field', ['field' => $field, 'date' => $date, 'notifications' => $notifications, 'haveuser' => true]);
         } else {
             $field = FieldUser::findReservation($id_field);
             return view('FOU\profile-field', ['field' => $field, 'date' => $date]);

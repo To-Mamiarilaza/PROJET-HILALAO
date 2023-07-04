@@ -23,10 +23,17 @@ class ReservationController extends Controller
         if (Session::get("user") !== null) {
             $users = Session::get("user");
             $field = FieldUser::Sfind( $id_field, $users->getIdUsers());
+            return view('FOU\calendar' , ['field' => $field, 'date' => $date, 'haveUser' => true]);
         } else {
             $field = FieldUser::findReservation($id_field);
+            return view('FOU\calendar' , ['field' => $field, 'date' => $date]);
         }
-        return view('FOU\calendar' , ['field' => $field], ['date' => $date]);
+    }
+
+    public function cancel($id_reservation) {
+        $reservation = Reservation::findById($id_reservation);
+        $reservation->cancel();
+        return Redirect("/user/account");
     }
 
     public function reserve(Request $request) {
