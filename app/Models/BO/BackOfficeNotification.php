@@ -39,26 +39,28 @@ class BackOfficeNotification
     public function getContent()
     {
         switch ($this->idTypeNotification) {
-            case 20:         // NOtification validation demande d'adhesion
+            case 20:         // Notification validation demande d'adhésion
                 $date = Carbon::parse($this->dateNotification)->format('Y-m-j');
-                $contenue = "Le client <span class='fieldName'> $this->clientName </span> a fait une demande d'adhesion le <span class='time-prevision'> $date </span>";
+                $contenue = "<a href=\"" . route('detailClient_admin', ['id_client' => $this->idClient,'ref' => 'validationClient' ]) . "\">Le client <span class='fieldName'> $this->clientName </span> a fait une demande d'adhésion le <span class='time-prevision'> $date </span> </a>";
                 return $contenue;
                 break;
-
-            case 21:         // NOtification validation demande d'adhesion
+    
+            case 21:         // Notification validation demande d'adhésion
                 $date = Carbon::parse($this->dateNotification)->format('Y-m-j');
-                $contenue = "Le client <span class='fieldName'> $this->clientName </span> demande l'ajout du terrain <span class='fieldName'> $this->nameField </span> le <span class='time-prevision'> $date </span>";
+                $contenue = "<a href=\"" . route('detail_field_admin', ['id_terrain' => $this->idField,'ref' => 'validationClient' ]) . "\">Le client <span class='fieldName'> $this->clientName </span> demande l'ajout du terrain <span class='fieldName'> $this->nameField </span> le <span class='time-prevision'> $date </span></a>";
                 return $contenue;
                 break;
-
-            case 22:         // NOtification validation demande d'adhesion
+    
+            case 22:         // Notification validation demande d'adhésion
                 $mois = Carbon::create(null, $this->month, 1)->format('F');
                 $date = Carbon::parse($this->dateNotification)->format('Y-m-j');
-                $contenue = "Le client <span class='fieldName'> $this->clientName </span> a payé l'abonnement du mois <span class='fieldName'>$mois</span> du terrain <span class='fieldName'> $this->nameField </span> le <span class='time-prevision'> $date </span>";
+                $contenue = "<a href=\"\">Le client <span class='fieldName'> $this->clientName </span> a payé l'abonnement du mois <span class='fieldName'>$mois</span> du terrain <span class='fieldName'> $this->nameField </span> le <span class='time-prevision'> $date </span></a>";
                 return $contenue;
                 break;
         }
     }
+    
+
 
     // Fonction pour prendre les notification de demande d'ajout de terrain
     public static function getSubscriptionNotification()

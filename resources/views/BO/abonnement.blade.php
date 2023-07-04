@@ -3,6 +3,7 @@
 
 
 <link rel="stylesheet" href="{{ asset('css/BO/asset/abonnement.css') }}">
+<script src="{{asset('js/Chart.js')}}"></script>
 <section class="content p-4">
             <div class="en-tete mt-2">
                 ABONNEMENT
@@ -88,6 +89,7 @@
                                 <td>Début</td>
                                 <td>Fin</td>
                                 <td>Durée</td>
+                                <td>Prix Total</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -100,6 +102,7 @@
                             <td>{{ $abonnement->getStart_date() }}</td>
                             <td>{{ $abonnement->getEnd_date() }}</td>
                             <td>{{ $abonnement->getDuration() }}</td>
+                            <td>{{ $abonnement->getDuration()*$abonnement->getPrice() }}</td>
                           </tr>
                           @endforeach
                            

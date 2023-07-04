@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers\FOC;
+namespace App\Http\Controllers\BO;
 
 use App\Http\Controllers\Controller;
 use App\Models\BO\BackOfficeNotification;
