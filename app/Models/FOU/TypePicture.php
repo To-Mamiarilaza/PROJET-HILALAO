@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\FOC\GestionTerrain;
+namespace App\Models\FOU;
 use Illuminate\Support\Facades\DB;
 
 class TypePicture
@@ -36,7 +36,7 @@ class TypePicture
             $datas[$i] = new TypePicture($row->id_type_picture, $row->type_picture);
             $i++;
         }
-        
+
         return $datas;
     }
 
@@ -44,7 +44,7 @@ class TypePicture
     public static function findById($id)
     {
         $results = DB::table('type_picture')->where('id_type_picture', $id)->first();
-        
+
         return new TypePicture($results->id_type_picture, $results->type_picture);
     }
 }

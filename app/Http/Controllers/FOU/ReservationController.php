@@ -31,6 +31,9 @@ class ReservationController extends Controller
     }
 
     public function cancel($id_reservation) {
+        $reservation = Reservation::findById($id_reservation);
+        $reservation->cancel();
+        return Redirect("/user/account");
     }
 
     public function reserve(Request $request) {

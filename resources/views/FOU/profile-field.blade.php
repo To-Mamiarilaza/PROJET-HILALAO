@@ -85,9 +85,9 @@
                     <h1>{{ $field->getName() }}</h1>
                 </div>
                 <div class="images mt-3">
-                    <img src="{{ asset($field->getPictures()) }}" alt="Image secondaire du terrain">
-                    <img src="{{ asset('./images/elgeco.jpg') }}" alt="Image secondaire du terrain">
-                    <img src="{{ asset('./images/elgeco.jpg') }}" alt="Image secondaire du terrain">
+                    @foreach ($field->getPictures() as $picture)
+                    <img src="{{ asset('image/pictureField/'.$picture->getPicture()) }}" alt="Image secondaire du terrain">
+                    @endforeach
                 </div>
                 <div class="note p-3">
                     <p>Note du terrain <span class="reserver"><a href="#reservation"><i class="fas fa-edit"></i>

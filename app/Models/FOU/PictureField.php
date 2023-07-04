@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\FOC\GestionTerrain;
+namespace App\Models\FOU;
 use Illuminate\Support\Facades\DB;
 
 class PictureField
