@@ -4,6 +4,7 @@ namespace App\Models\FOU;
 use App\Exceptions\SecurityException;
 use Illuminate\Support\Facades\DB;
 use DateTime;
+use Exception;
 
 class Reservation {
     private $id_reservation;
@@ -18,6 +19,7 @@ class Reservation {
     private $date_heure_reservation;
     private $montant;
     private $isPast;
+    private $reference;
 
     public static function prepareReservation($id_field, $id_users,$reservation_date, $start_time, $duration, $montant) {
         $reservation = new Reservation();
@@ -41,7 +43,7 @@ class Reservation {
     }
 
     public static function findByIdField($id) {
-        $sql = 'SELECT id_reservation, reservation_date, id_users, start_time, id_field, duration, end_time, price FROM "public".v_actif_reservation f WHERE id_field = %s';
+        $sql = 'SELECT id_reservation, reservation_date, id_users, start_time, id_field, duration, end_time, price, reference FROM "public".v_actif_reservation f WHERE id_field = %s';
         $sql = sprintf($sql, $id);
         $reservations_db = DB::select($sql);
         $res = array();
@@ -51,7 +53,7 @@ class Reservation {
         return $res;
     }
     public static function findById($id) {
-        $sql = 'SELECT id_reservation, reservation_date, id_users, start_time, id_field, duration, end_time, price FROM "public".v_reservation_detailled f WHERE id_reservation = %s';
+        $sql = 'SELECT id_reservation, reservation_date, id_users, start_time, id_field, duration, end_time, price, reference FROM "public".v_reservation_detailled f WHERE id_reservation = %s';
         $sql = sprintf($sql, $id);
         $reservations_db = DB::select($sql);
         $res = null;
@@ -73,7 +75,7 @@ class Reservation {
     }
 
     public static function findAll() {
-        $sql = 'SELECT id_reservation, reservation_date, id_users, start_time, id_field, duration, end_time, price FROM "public".v_actif_reservation f ';
+        $sql = 'SELECT id_reservation, reservation_date, id_users, start_time, id_field, duration, end_time, price, reference FROM "public".v_actif_reservation f ';
         $reservations_db = DB::select($sql);
         $res = array();
         foreach ($reservations_db as $reservation_db) {
@@ -83,7 +85,7 @@ class Reservation {
     }
 
     public static function findOthersReservation($id_users, $id_field) {
-        $sql = 'SELECT id_reservation, reservation_date, id_users, start_time, id_field, duration, end_time, price FROM "public".v_actif_reservation f WHERE id_field = %s AND id_users != %s';
+        $sql = 'SELECT id_reservation, reservation_date, id_users, start_time, id_field, duration, end_time, price,reference FROM "public".v_actif_reservation f WHERE id_field = %s AND id_users != %s';
         $sql = sprintf($sql, $id_field, $id_users);
         $reservations_db = DB::select($sql);
         $res = array();
@@ -100,7 +102,7 @@ class Reservation {
     }
 
     public static function findDirectReservationByIdField($id_field) {
-        $sql = 'SELECT id_direct_reservation, reservation_date, client_name, start_time, id_field, duration, end_time FROM "public".v_direct_reservation f WHERE id_field = %s';
+        $sql = 'SELECT id_direct_reservation, reservation_date, client_name, start_time, id_field, duration, end_time, reference FROM "public".v_direct_reservation f WHERE id_field = %s';
         $sql = sprintf($sql, $id_field);
         $reservations_db = DB::select($sql);
         $res = array();
@@ -124,11 +126,11 @@ class Reservation {
 
     public static function findUsersReservation($id_users, $id_field = null) {
         if ($id_field == null) {
-            $sql = 'SELECT id_reservation, reservation_date, id_users, start_time, id_field, duration, end_time, price FROM "public".v_actif_reservation f WHERE id_users = %s AND state!=3 ORDER BY reservation_date desc';
+            $sql = 'SELECT id_reservation, reservation_date, id_users, start_time, id_field, duration, end_time, price, reference FROM "public".v_actif_reservation f WHERE id_users = %s AND state!=3 ORDER BY reservation_date desc';
             $sql = sprintf($sql, $id_users);
         }
         else {
-            $sql = 'SELECT id_reservation, reservation_date, id_users, start_time, id_field, duration, end_time, price FROM "public".v_actif_reservation f WHERE id_field = %s AND id_users = %s AND state!=3 ORDER BY reservation_date desc';
+            $sql = 'SELECT id_reservation, reservation_date, id_users, start_time, id_field, duration, end_time, price, reference FROM "public".v_actif_reservation f WHERE id_field = %s AND id_users = %s AND state!=3 ORDER BY reservation_date desc';
             $sql = sprintf($sql, $id_field, $id_users);
         }
         $reservations_db = DB::select($sql);
@@ -140,7 +142,7 @@ class Reservation {
     }
 
     public static function findActifReservationByIdField($id_field) {
-        $sql = 'SELECT id_reservation, reservation_date, id_users, start_time, id_field, duration, end_time,price FROM "public".v_actif_reservation f WHERE id_field = %s';
+        $sql = 'SELECT id_reservation, reservation_date, id_users, start_time, id_field, duration, end_time,price, reference FROM "public".v_actif_reservation f WHERE id_field = %s';
         $sql = sprintf($sql, $id_field);
         $reservations_db = DB::select($sql);
         $res = array();
@@ -151,7 +153,7 @@ class Reservation {
     }
 
     public function findActifReservation() {
-        $sql = 'SELECT id_reservation, reservation_date, id_users, start_time, id_field, duration, end_time, price FROM "public".v_actif_reservation f';
+        $sql = 'SELECT id_reservation, reservation_date, id_users, start_time, id_field, duration, end_time, price, reference FROM "public".v_actif_reservation f';
         $reservations_db = DB::select($sql);
         $res = array();
         foreach ($reservations_db as $reservation_db) {
@@ -235,6 +237,12 @@ class Reservation {
     public function setIsPast($values) {
         $this->isPast = $values;
     }
+    public function getReference() {
+        return $this->reference;
+    }
+    public function setReference($values) {
+        $this->reference = $values;
+    }
 
     public static function settingDBResult($result) {
         $temp = new Reservation();
@@ -249,6 +257,7 @@ class Reservation {
         $temp->setEndTime(DateTime::createFromFormat('H:i:s', $result->end_time));
         $temp->setDateHeureReservation(new Availability(DateTime::createFromFormat('Y-M-d', $result->reservation_date), DateTime::createFromFormat('H:i:s',$result->start_time), DateTime::createFromFormat('H:i:s', $result->end_time)));
         $temp->setMontant($result->price);
+        $temp->setReference($result->reference);
         return $temp;
     }
 

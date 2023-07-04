@@ -11,6 +11,7 @@ Route::get('/list-field/{id_category}', [App\Http\Controllers\FOU\FieldControlle
 Route::get('/list-field', [App\Http\Controllers\FOU\FieldController::class, 'index'])->name('list-field-all-fou');
 Route::get('/field/calendar/{id_field}', [App\Http\Controllers\FOU\ReservationController::class, 'index'])->name('reserve');
 Route::get('/field/calendar/{id_field}/{date}', [App\Http\Controllers\FOU\ReservationController::class, 'index'])->name('reserve-date');
+Route::post('/field/list/search/{id_category}', [App\Http\Controllers\FOU\FieldController::class, 'search'])->name('search-field');
 Route::post('/reserve', [App\Http\Controllers\FOU\ReservationController::class, 'reserve'])->name('reserve');
 Route::get('/info-field/{id_field}', [InfoTerrain::class, 'index'])->name('info-field');
 Route::get('/carte', [InfoTerrain::class, 'afficheCarte']);

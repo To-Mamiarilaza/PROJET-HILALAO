@@ -17,7 +17,7 @@
     <div class="row profile">
         <div class="col-md-3 profile-falseSidebar">
             <div class="row profile-falseSidebar-photo ">
-                <img src="{{ asset('css/FOU/assets/image/lalaina.jpg') }}">
+                <img src="{{ asset('image/image/client0.jpg') }}">
             </div>
             <div class="row profile-falseSidebar-sport">
                 <div class="row profile-falseSidebar-sport-title">

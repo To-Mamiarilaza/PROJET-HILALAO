@@ -9,7 +9,6 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <title>Document</title>
 </head>
-@include('template.Header')
 <div class="container content">
     <div class="row content-facturation">
         <div class="row head">
@@ -17,31 +16,31 @@
                 <div class="row head-us-logo">
                     <div class="col-md-2 head-us-logo-photo">
                         <h1>H</h1>
-                    </div> 
+                    </div>
                     <div class="col-md-4 head-us-logo-title">
                         <h3>Hilalao</h3>
-                    </div> 
-                </div> 
+                    </div>
+                </div>
                 <div class="row head-us-mail">
-                    <p><a href="#">hilalaomdg@gmail.com</a></p>
+                    <p><a href="#">tiavinaramia@gmail.com</a></p>
                 </div>
                 <div class="row head-us-numero">
                     <p>+261 34 18 237 12</p>
-                </div>                
+                </div>
             </div>
             <div class="col-md-5 head-client">
-                <h5>URBAN Futsal Andraharo</h5>
-                <p> ADRESSE : <span class="head-client-styleP">Andraharo Ivandry</p> 
-                <p> TELEPHONE : <span class="head-client-styleP">+261 33 478 12</p>
-                <p> MAIL : <span class="head-client-styleP"><a href="#">futsalandr@gmail.com</a></p>     
+                <h5>{{ $field->getName() }}</h5>
+                <p> ADRESSE : <span class="head-client-styleP">{{ $field->getClient()->getAddress() }}</p>
+                <p> TELEPHONE : <span class="head-client-styleP">{{ $field->getClient()->getPhoneNumber() }}</p>
+                <p> MAIL : <span class="head-client-styleP"><a href="#">{{ $field->getClient()->getMail() }}</a></p>
             </div>
-            <hr>  
-        </div>  
+            <hr>
+        </div>
         <div class="row detailFacture">
             <div class="col-md-4 detailFacture-utilisateur">
                 <p class="detailFacture-utilisateur-P">FACTURE POUR</p>
-                <p>To Mamiarilaza</p>
-                <p class="detailFacture-utilisateur-mail">tomamy@gmail.com</p>
+                <p>{{ $reservation->getUsers()->getFirstName() }} {{ $reservation->getUsers()->getLastName() }}</p>
+                <p class="detailFacture-utilisateur-mail">{{ $reservation->getUsers()->getMail() }}</p>
             </div>
             <div class="col-md-6 detailFacture-reservation">
                 <div class="row">
@@ -54,11 +53,11 @@
                         <p>Horraire : </p>
                     </div>
                     <div class="col-md-4 detailFacture-reservation-value">
-                        <p>RES001789</p>
-                        <p>Foot 7x7</p>
-                        <p>7 Aout 2023</p>
-                        <p>14h - 16h</p>
-                    </div> 
+                        <p>{{ $reservation->getReference() }}</p>
+                        <p>{{ $reservation->getField()->getCategory() }}</p>
+                        <p>{{ $reservation->getReservationDate()->format('d F Y') }}</p>
+                        <p>{{ $reservation->getStartTime()->format('H:i') }}h - {{ $reservation->getEndTime()->format('H:i') }}h</p>
+                    </div>
                     <hr>
                 </div>
                 <div class="row detailFacture-reservation-payement">
@@ -68,22 +67,22 @@
                         <p>Reste a Payer :</p>
                     </div>
                     <div class="col-md-5 detailFacture-reservation-payement-prix">
-                        <p>120.000</p>
-                        <p>60.000</p>
-                        <p>60.000</p>
+                        <p>{{ $reservation->getMontant() * 2 }}</p>
+                        <p>{{ $reservation->getMontant() }}</p>
+                        <p>{{ $reservation->getMontant() }}</p>
                     </div>
                     <div class="col-md-2 detailFacture-reservation-payement-Ar">
                         <p>Ar</p>
                         <p>Ar</p>
                         <p>Ar</p>
-                    </div> 
-                </div>        
-            </div> 
-        </div>   
+                    </div>
+                </div>
+            </div>
+        </div>
         <hr style="
     margin-top: -16%;
 ">
-    </div>        
+    </div>
 </div>
 </body>
 </html>
