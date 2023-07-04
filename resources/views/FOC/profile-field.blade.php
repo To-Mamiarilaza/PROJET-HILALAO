@@ -103,7 +103,7 @@
                     </div>
                     <div class="col-md-5 my-2">
                         <div class="border p-3">
-                            <a href ="{{ route('selectAll') }}">
+                            <a href ="{{ route('selectReservation') }}">
                                 <i class="fas fa-calendar-alt mx-3"></i>
                                 Suivie de réservation
                             </a>

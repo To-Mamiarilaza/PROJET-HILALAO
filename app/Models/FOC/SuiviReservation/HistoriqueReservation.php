@@ -98,6 +98,11 @@ class HistoriqueReservation
 
     }
 
+    public function updateReservation($state, $id_reservation){
+        $req = "update reservation set state = ".$state." where id_reservation = ".$id_reservation;
+        DB::update($req);
+    }
+
     public function __construct( $first_name, $last_name, $reservation_date, $start, $duration, $price, $state)
     {
         $this->setFirstName($first_name);
@@ -108,13 +113,16 @@ class HistoriqueReservation
         $this->setPrice($price);
         $this->setState($state);
     }
+
     public function getEtatLettre()
     {
         $etat = "";
         if ($this->getState() == 2)
-            $etat = "Retard";
+            $etat = "En retard";
         else if ($this->getState() == 1)
-            $etat = "Normale";
+            $etat = "Valider";
+        else if($this->getState() == 3) 
+            $etat = "Annuler";
         return $etat;
     }
 

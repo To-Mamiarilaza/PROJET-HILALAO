@@ -34,9 +34,10 @@
                             <div class="col-md-8 reservation-detail">
                                 <ul>
                                     <li>Le <span class="important">{{ date('d F Y', strtotime($reservation->getReservationDate())) }}</span>
- de <span class="important">{{ date('H:i', strtotime($reservation->getStart())) }}</span> à <span class="important">{{ $reservation->getEnd() }}</span></li>
+                                    de <span class="important">{{ date('H:i', strtotime($reservation->getStart())) }}</span> à <span class="important">{{ $reservation->getEnd() }}</span></li>
                                     <li>Payé : <span class="important">{{ $reservation->getPrice()*(0.5) }} Ar</span> Reste : <span class="important">{{ $reservation->getPrice() - $reservation->getPrice()*(0.5) }} Ar</span> </li>
-                                    <li>Par <span class="important">{{ $reservation->getFirstName() }} {{ $reservation->getLastName() }}</span></li>
+                                    <li>Par <span class="important">{{ $reservation->getFirstName() }} {{ $reservation->getLastName() }}</span> </br> Références : <span class="important"> {{ $reservation->getReference() }} </span> </br> 
+                                    <span> Statue : </span> <span class="important"> {{ $reservation->getEtatLettre() }} </span> </br> <a href="/gererReservation/{{ $reservation->getIdReservation() }}"> ## </a> </li>
                                 </ul>
                             </div>
                         </div>
@@ -126,7 +127,7 @@
                     {
                         title: '{{ $reservation->getFirstName() }} {{ $reservation->getLastName() }}',
                         start: new Date('{{ $reservation->getReservationDate() }}' + 'T{{ $reservation->getStart() }}'),
-                        end: new Date('{{ $reservation->getReservationDate() }}' + 'T{{ Carbon\Carbon::parse($reservation->getStart())->addHours($reservation->getDuration()) }}'),
+                        end: new Date('{{ $reservation->getReservationDate() }}' + 'T{{ $reservation->getEnd() }}'),
                     },
                     @endforeach
                 ]

@@ -15,41 +15,45 @@
 <body>
 	@include('FOC/header');
 
+
 	<div class="container mt-4 content">
 		<h4 class="entete"><i class="fas fa-star mx-3"></i> Profile</h4>
 
 		<div class="row mt-5">
 			<div class="col-md-4 image p-1">
-				<img src="{{ asset('image/user.jpg') }}" alt="Image du client">
+				<img src="{{ asset('image/Client/'.$client->getCustomerPicture()) }}" alt="Image du client">
 			</div>
 			<div class="offset-md-1 col-md-5 detail">
 				<div class="mt-2">
 					<label for="first" class="form-label">First Name</label>
-					<p>To</p>
+					<p>{{$client -> getFirstName()}}</p>
 				</div>
 				<div class="mt-2">
 					<label for="first" class="form-label">Last Name</label>
-					<p>MAMIARILAZA</p>
+					<p>{{$client -> getLastName()}}</p>
 				</div>
 				<div class="mt-2">
 					<label for="first" class="form-label">Mail</label>
-					<p>mamiarilaza.to@gmail.com</p>
+					<p>{{$client -> getMail()}}</p>
 				</div>
 				<div class="mt-2">
 					<label for="first" class="form-label">Phone Number</label>
-					<p>034 14 517 43</p>
+					<p>{{$client -> getPhoneNumber()}}</p>
 				</div>
 				<div class="mt-2">
 					<label for="first" class="form-label">Adresse</label>
-					<p>Lot 238 bis Iavoloha</p>
+					<p>{{$client -> getAdress()}}</p>
 				</div>
 				<div class="mt-2">
 					<label for="first" class="form-label">Birthdate</label>
-					<p>07 juillet 2004</p>
+					<p>{{ $client -> getBirthDate() }}</p>
 				</div>
-				<div class="alert alert-success"><i class="fas fa-user-check mx-3"></i> Client validé</div>
-				<!-- Si client en attente décoché ceci -->
-				<!-- <div class="alert alert-warning"><i class="fas fa-user-check mx-3"></i> Client en attente</div> -->
+				@if ($client -> getStatus() -> getIdStatus() == 1)
+					<div class="alert alert-success"><i class="fas fa-user-check mx-3"></i> Client validé</div>
+				@endif
+				@if ($client -> getStatus() -> getIdStatus() == 2)
+					<div class="alert alert-warning"><i class="fas fa-user-check mx-3"></i> Client en attente</div>
+				@endif
 			</div>
 		</div>
 
@@ -58,10 +62,10 @@
 			<hr>
 			<div class="cin-photos row my-4">
 				<div class="col-md-6">
-					<img src="{{asset('image/cin-photo.jpg')}}" alt="Photo du CIN verso">
+					<img src="{{ asset('image/CIN/'.$cin->getFirstPicture()) }}" alt="Photo du CIN verso">
 				</div>
 				<div class="col-md-6">
-					<img src="{{asset('image/cin-photo.jpg')}}" alt="Photo du CIN recto">
+					<img src="{{ asset('image/CIN/'.$cin->getSecondPicture()) }}" alt="Photo du CIN recto">
 				</div>
 			</div>
 		</div>

@@ -13,42 +13,38 @@ class BoardReservation
     public function getIdField($id_client)
     {
         $listIdField = [];
-        $req = "select field_id from v_reservation_detailled_field where id_client = " . $id_client;
+        $req = "select distinct field_id from v_reservation_detailled_field where id_client = " . $id_client;
+        //echo $req;
         $result = DB::select($req);
         foreach ($result as $results) {
             $listIdField[] = $results->field_id;
         }
+        // echo count($listIdField);
         return $listIdField;
     }
 
     public function getNomTerrain($id_client)
     {
         $nomFields = [];
-        $listeFields = $this->getIdField($id_client);
-        foreach ($listeFields as $listes) {
-            $req = "select distinct field_name from v_reservation_detailled_field where id_client = " . $id_client . " and field_id = " . $listes;
-
-            $result = DB::select($req);
-            foreach ($result as $results) {
-                $nomFields[] = $results->field_name;
-            }
-            return $nomFields;
+        $req = "select distinct field_name from v_reservation_detailled_field where id_client = " . $id_client;
+        //echo $req;
+        $result = DB::select($req);
+        foreach ($result as $results) {
+            $nomFields[] = $results->field_name;
         }
+        return $nomFields;
     }
 
     public function getIdFieldClient($id_client)
     {
         $numberField = [];
         $listeFields = $this->getIdField($id_client);
-        foreach ($listeFields as $listes) {
-            $req = "select distinct field_id from v_reservation_detailled_field where id_client = " . $id_client . " and field_id = " . $listes;
-
-            $result = DB::select($req);
-            foreach ($result as $results) {
-                $numberField[] = $results->field_id;
-            }
-            return $numberField;
+        $req = "select field_id from v_reservation_detailled_field where id_client = " . $id_client;
+        $result = DB::select($req);
+        foreach ($result as $results) {
+            $numberField[] = $results->field_id;
         }
+        return $numberField;
     }
 
     public function getNombreReservationByIdField($id_field)
@@ -147,7 +143,7 @@ class BoardReservation
             FROM v_reservation_detailled_field
             WHERE id_client = " . $id_client . "
             AND EXTRACT(YEAR FROM reservation_date) = " . $year . ";";
-            echo $req;
+            //echo $req;
             $result = DB::select($req);
             foreach ($result as $results) {
                 $numberReservation = $results->nombrereservation;

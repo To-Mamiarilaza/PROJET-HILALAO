@@ -29,13 +29,14 @@ SELECT
       rv.field_name,
       rv.field_description,
       rv.field_address,
-      rv.state
+      rv.state,
+      rv.reference
 FROM v_info_field rf
 JOIN v_detailled_reservation rv ON rf.id_field = rv.id_field;
 
 --requete pour avoir l'historique de reservation de chaque terrain
 create view v_historique_reservation as 
-select count(id_day) as nombreReservation,sum(price) as montant,id_day,first_name,last_name,reservation_date,start,duration,price,state 
+select count(id_day) as nombreReservation,sum(price) as montant,id_day,first_name,last_name,reservation_date,start,duration,price,state,reference 
   from v_reservation_detailled_field 
   group by id_users, id_day, first_name,last_name,reservation_date,start,duration,price,state;
 
@@ -67,7 +68,7 @@ FROM v_detailled_reservation
 WHERE reservation_date >= CURRENT_DATE AND reservation_date < CURRENT_DATE + INTERVAL '7 days';
 
 CREATE OR REPLACE VIEW v_detailled_reservation AS
-SELECT r.id_users, r.id_reservation, r.reservation_date, r.start_time as start, r.duration,r.state,r.price,u.first_name, u.last_name, u.birth_date, u.phone_number, u.mail,f.id_field,
+SELECT r.id_users, r.id_reservation, r.reservation_date, r.start_time as start, r.duration,r.state,r.price,u.first_name, u.last_name, u.birth_date, u.phone_number, u.mail,f.id_field,r.reference,
        f.name AS field_name, f.description AS field_description, f.address AS field_address
 FROM reservation r
 JOIN users u ON r.id_users = u.id_users

@@ -30,6 +30,9 @@ Route::post('/insertClient', [InscriptionController::class, 'insertClient'])
 Route::post('/CIN-Client', [InscriptionController::class, 'insertCIN'])
 ->name('signinnext');
 
+Route::get('/getClient', [InscriptionController::class, 'getClient'])
+->name('getClient');
+
 Route::get('/filtre', [ReservationController::class, 'filtre'])
 ->name('filtre');
 
@@ -39,11 +42,25 @@ Route::get('/selectByWeek', [ReservationController::class, 'getReservationOneWee
 Route::get('/selectAllReservation', [ReservationController::class, 'getAllReservation'])
 ->name('selectAll');
 
+Route::get('/selectReservation', [ReservationController::class, 'getReservationNearBy'])
+->name('selectReservation');
+
 Route::get('/insertDirectReservation', [ReservationController::class, 'insertDirectReservation'])
 ->name('insert');
 
+Route::post('/updateReservation', [ReservationController::class, 'updateEtatReservation'])
+->name('updateReservation');
+
 Route::get('/home', function () {
     return view('FOC/home');
+});
+
+Route::get('/gererReservation/{idReservation}', function ($idReservation) {
+    return view('FOC/gererReservation',["idReservation" => $idReservation]);
+});
+
+Route::get('/profileClient', function () {
+    return view('FOC/compteClient');
 });
 
 Route::get('/list-field', function () {

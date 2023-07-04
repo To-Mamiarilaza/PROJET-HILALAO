@@ -11,16 +11,26 @@ use Illuminate\Support\Facades\Session;
 
 class ReservationController extends Controller
 {
+
+    public function updateEtatReservation(Request $request){
+        $etat = $request->input('etatReservation');
+        $idReservation = $request->input('idReservation');
+        $histo = new HistoriqueReservation("Rakoto", "bila", "2023-06-28", "02:00:00", 1, 5000, 2);
+        $histo->updateReservation($etat, $idReservation);
+        return redirect('/selectAllReservation');
+    }
+
     public function filtreBoard(Request $request){
         $board = new BoardReservation("","","");
 
         $client = Session::get('clientConnected');
-        $data = Session::get('field');
+
         $mois = $request->input('mois');
         $annee = $request->input('annee');
 
         $filtreBoard = $board->filtreBoard($mois,$annee,$client->getIdClient());
         $filtreB = $board->getNombreField($annee,$mois,$client->getIdClient());
+ 
         //echo $client->getIdClient();
 
         $prices = [];
@@ -34,6 +44,7 @@ class ReservationController extends Controller
             $field = $item;
             $nbrField[] = $field;
         }
+        //echo count($nbrField);
 
         //echo count($nbrField);
         $nbrRes = [];
@@ -47,8 +58,15 @@ class ReservationController extends Controller
         $ReservationFieldClient = $board->getIdFieldClient($client->getIdClient());
         
         $NomFields = $board->getNomTerrain($client->getIdClient());
-        
-        $proportionFields[] = ((count($ReservationFieldClient)*100)/(count($nbrRes))); 
+        // foreach ($NomFields as $nom) {
+        //     echo $nom;
+        // }
+        // echo count($ReservationFieldClient)*100;
+        // echo count($nbrRes);
+        $proportionFields[] = ((count($ReservationFieldClient)*100)/count($nbrRes));
+        //echo count($proportionFields); 
+
+        //echo $proportionFields;
         //echo $filtreBoard['numberField'];
         return view('FOC/board',[
             'nombreReservation' => $nbrRes,
@@ -129,7 +147,9 @@ class ReservationController extends Controller
             '10:00',
             1,
             $field_description,
-            $field_address
+            $field_address,
+            'RF00321320',
+            1
         );
 
         $reservationFields = $reservationField->getReservationsOneWeek($data->getIdField());
@@ -154,6 +174,68 @@ class ReservationController extends Controller
             return $this->getAllReservation();
         }
     }
+
+    public function getReservationNearBy()
+    {
+        $data = Session::get('field');
+        $rf_id_field = 1;
+        $price = 10000;
+        $field_id = 1;
+        $field_name = 'Terrain de football';
+        $field_category = 'Sports';
+        $subscribing_price = 5000;
+        $field_type = 'Outdoor';
+        $infrastructure = 'Stade';
+        $light = 'Non';
+        $address = '123 Rue du Terrain';
+        $longitude = 45.123456;
+        $latitude = -73.654321;
+        $description = 'Un terrain de football de qualité';
+        $id_reservation = 1;
+        $reservation_date = '2023-06-01';
+        $first_name = 'John';
+        $last_name = 'Doe';
+        $birth_date = '1990-01-01';
+        $phone_number = '0123456789';
+        $mail = 'john.doe@example.com';
+        $field_description = 'Un terrain de football de qualité';
+        $field_address = '123 Rue du Terrain';
+
+        $reservationField = new Reservation_field(
+            1,
+            $rf_id_field,
+            $price,
+            $field_id,
+            $field_name,
+            $field_category,
+            $subscribing_price,
+            $field_type,
+            $infrastructure,
+            $light,
+            $address,
+            $longitude,
+            $latitude,
+            $description,
+            $id_reservation,
+            $reservation_date,
+            $first_name,
+            $last_name,
+            $birth_date,
+            $phone_number,
+            $mail,
+            '10:00',
+            1,
+            $field_description,
+            $field_address,
+            'RF00321320',
+            1
+        );
+
+        $reservationFields = $reservationField->getReservationNearBy($data->getIdField());
+
+        return view('FOC/reservation', ['reservationFields' => $reservationFields]);
+    }
+
     public function getAllReservation()
     {
         $data = Session::get('field');
@@ -205,10 +287,13 @@ class ReservationController extends Controller
             '10:00',
             1,
             $field_description,
-            $field_address
+            $field_address,
+            'RF00321320',
+            1
         );
 
         $reservationFields = $reservationField->getReservationsWithFields($data->getIdField());
+
         return view('FOC/reservation', ['reservationFields' => $reservationFields]);
     }
 }
