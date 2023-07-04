@@ -85,7 +85,7 @@
                     <h1>{{ $field->getName() }}</h1>
                 </div>
                 <div class="images mt-3">
-                    <img src="{{ asset('./images/elgeco.jpg') }}" alt="Image secondaire du terrain">
+                    <img src="{{ asset($field->getPictures()) }}" alt="Image secondaire du terrain">
                     <img src="{{ asset('./images/elgeco.jpg') }}" alt="Image secondaire du terrain">
                     <img src="{{ asset('./images/elgeco.jpg') }}" alt="Image secondaire du terrain">
                 </div>
@@ -158,9 +158,9 @@
             </div>
         </div>
         <hr class="my-4">
-        @if ($field->getHaveUser() == true)
-        <div class="reservation" id="reservation">
-            <h2>RESERVATION DU TERRAIN</h2>
+        @if (isset($haveuser))
+            <div class="reservation" id="reservation">
+                <h2>RESERVATION DU TERRAIN</h2>
             <div class="row mt-5 mb-4">
                 <div class="col-md-4">
                     <h3>Votre réservation</h3>
@@ -187,11 +187,10 @@
                     <div id='calendar'></div>
                 </div>
             </div>
+            @endif
         </div>
-        @endif
-
     </div>
-
+    @if (isset($haveuser))
     <!-- Modal de validation du réservation-->
     <form action="{{ route('reserve') }}" class="form" method="POST">
         @csrf
@@ -223,6 +222,7 @@
             </div>
         </div>
     </form>
+    @endif
 
     <script src="{{ asset('css/FOU/assets/js/disponibility.js') }}"></script>
     <script src="{{ asset('css/FOU/assets/js/bootstrap.bundle.min.js') }}"></script>

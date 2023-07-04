@@ -49,6 +49,16 @@ class Reservation {
         }
         return $res;
     }
+    public static function findById($id) {
+        $sql = 'SELECT id_reservation, reservation_date, id_users, start_time, id_field, duration, end_time, price FROM "public".v_reservation_detailled f WHERE id = %s';
+        $sql = sprintf($sql, $id);
+        $reservations_db = DB::select($sql);
+        $res = null;
+        foreach ($reservations_db as $reservation_db) {
+            $res = Reservation::settingDBResult($reservation_db);
+        }
+        return $res;
+    }
 
     public static function calculPrix($id_field,$reservation_date , $start_time, $duration) {
         $sql = "SELECT price*%s total_price FROM dispo_and_price WHERE id_field=%s AND id_day = EXTRACT(dow from DATE '%s')+1 AND start_time <= '%s' AND end_time >= '%s'";
@@ -80,6 +90,12 @@ class Reservation {
             $res[] = Reservation::settingDBResult($reservation_db);
         }
         return $res;
+    }
+
+    public function cancelReservation() {
+        $sql = "UPDATE reservation SET state=3 WHERE id_reservation=%s";
+        $sql = sprintf($sql, $this->getIdField());
+        DB::update($sql);
     }
 
     public static function findDirectReservationByIdField($id_field) {

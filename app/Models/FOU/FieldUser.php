@@ -14,6 +14,10 @@ class FieldUser extends FieldDetailled {
         parent::__construct();
     }
 
+    public function checkReservation(Reservation $reservation) {
+        $date_reservation = $reservation->getReservationDate();
+    }
+
     public static function Sfind($id_field, $id_users) {
         $field = new FieldUser();
         $field->find($id_field, $id_users);
