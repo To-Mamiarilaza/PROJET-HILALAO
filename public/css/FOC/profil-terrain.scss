@@ -19,6 +19,10 @@ $other-color-2: #EBF8B8;
     }
 }
 
+.hidden-form {
+    display: none;
+}
+
 .dispo {
     &__titre {
         color: $other-color-1;
@@ -27,8 +31,9 @@ $other-color-2: #EBF8B8;
     }
 
     .list-parametre {
-        max-height: 150px;
-        overflow-x: auto;
+        max-height: 200px;
+        overflow-y: auto;
+        overflow-x: hidden;
 
         .parametre {
             width: 80%;
@@ -39,10 +44,10 @@ $other-color-2: #EBF8B8;
                 padding: 0;
                 list-style: none;
                 margin-bottom: 10px;
-            } 
+            }
 
             .jour {
-                background-color:none;
+                background-color: none;
                 color: $principal-color;
                 width: 30px;
                 height: 30px;
@@ -94,8 +99,10 @@ $other-color-2: #EBF8B8;
         line-height: 30px;
         font-weight: 600;
         letter-spacing: 2px;
+
         li {
             font-size: 18px;
+
             span {
                 margin-left: 15px;
                 font-weight: 400;
