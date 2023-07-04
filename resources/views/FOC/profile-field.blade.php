@@ -33,50 +33,60 @@
                         @endforeach
                     </div>
                 </div>
+
+                <div class="hidden-form" id="hidden-form">
+                    <div class="group-input">
+                        <input class="jour" type="number" value="1">
+                        <input class="star-time" type="time" value="05:00">
+                        <input class="end-time" type="time" value="18:00">
+                        <input class="price" type="number" value="50000">
+                    </div>
+                    <div class="group-input">
+                        <input class="jour" type="number" value="2">
+                        <input class="star-time" type="time" value="05:00">
+                        <input class="end-time" type="time" value="18:00">
+                        <input class="price" type="number" value="50000">
+                    </div>
+                    <div class="group-input">
+                        <input class="jour" type="number" value="3">
+                        <input class="star-time" type="time" value="05:00">
+                        <input class="end-time" type="time" value="18:00">
+                        <input class="price" type="number" value="50000">
+                    </div>
+                    <div class="group-input">
+                        <input class="jour" type="number" value="4">
+                        <input class="star-time" type="time" value="05:00">
+                        <input class="end-time" type="time" value="18:00">
+                        <input class="price" type="number" value="50000">
+                    </div>
+                    <div class="group-input">
+                        <input class="jour" type="number" value="5">
+                        <input class="star-time" type="time" value="05:00">
+                        <input class="end-time" type="time" value="18:00">
+                        <input class="price" type="number" value="50000">
+                    </div>
+                    <div class="group-input">
+                        <input class="jour" type="number" value="6">
+                        <input class="star-time" type="time" value="05:00">
+                        <input class="end-time" type="time" value="21:00">
+                        <input class="price" type="number" value="65000">
+                    </div>
+                    <div class="group-input">
+                        <input class="jour" type="number" value="7">
+                        <input class="star-time" type="time" value="05:00">
+                        <input class="end-time" type="time" value="21:00">
+                        <input class="price" type="number" value="65000">
+                    </div>
+                </div>
+
                 <div class="dispo">
                     <h3 class="dispo__titre mt-3"> DISPONIBILITE ET PRIX</h3>
                     <p class="dispo_text">Liste de vos paramètrage du terrains. Les disponibilités et prix sont affichée dessus : </p>
-                    <div class="list-parametre">
+                    
+                    <div class="list-parametre listes-parametres tarif-detail" id="listes-parametres">
 
-                        <div class="parametre">
-                            <ul>
-                                <li class="jour jour--checked">L</li>
-                                <li class="jour jour--checked">M</li>
-                                <li class="jour jour--checked">M</li>
-                                <li class="jour jour--checked">J</li>
-                                <li class="jour jour--checked">V</li>
-                                <li class="jour">S</li>
-                                <li class="jour">D</li>
-                            </ul>
-                            <p class="parameter-hour">10:00 H à 13:00 H <span class="parameter-price">50 000 Ar</span> </p>
-                        </div>
-
-                        <div class="parametre">
-                            <ul>
-                                <li class="jour">L</li>
-                                <li class="jour">M</li>
-                                <li class="jour">M</li>
-                                <li class="jour">J</li>
-                                <li class="jour">V</li>
-                                <li class="jour jour--checked">S</li>
-                                <li class="jour jour--checked">D</li>
-                            </ul>
-                            <p class="parameter-hour">08:00 H à 13:00 H <span class="parameter-price">80 000 Ar</span> </p>
-                        </div>
-
-                        <div class="parametre">
-                            <ul>
-                                <li class="jour jour--checked">L</li>
-                                <li class="jour jour--checked">M</li>
-                                <li class="jour jour--checked">M</li>
-                                <li class="jour jour--checked">J</li>
-                                <li class="jour jour--checked">V</li>
-                                <li class="jour">S</li>
-                                <li class="jour">D</li>
-                            </ul>
-                            <p class="parameter-hour">10:00 H à 13:00 H <span class="parameter-price">50 000 Ar</span> </p>
-                        </div>
                     </div>
+
                     <a href="{{ route('loadPageDispoAndPriceGet') }}" class="btn btn-warning mt-3">Paramétrer disponibilité et prix</a>
                     <a href="" class="btn btn-warning my-3" data-bs-toggle="modal" data-bs-target="#new-indisponible">Marquer des indisponibilités</a> <br>
                 </div>
@@ -103,7 +113,7 @@
                     </div>
                     <div class="col-md-5 my-2">
                         <div class="border p-3">
-                            <a href ="{{ route('selectAll') }}">
+                            <a href="{{ route('selectAll') }}">
                                 <i class="fas fa-calendar-alt mx-3"></i>
                                 Suivie de réservation
                             </a>
@@ -175,7 +185,7 @@
 
     <!-- Modal pour changer les photos du terrain -->
     <form enctype="multipart/form-data" id="updatePhotoForm" action="{{ route('editImageProfile') }}" method="POST" class="updatePhoto">
-    @csrf   
+        @csrf
         <div class="modal fade" id="updatePhoto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -191,7 +201,7 @@
                             <div class="col-md-7">
                                 <label for="file" class="form-label">Choisir l'image pour remplacer l'existant</label>
                                 <input type="file" id="file" class="form-control" name="image">
-                                <input type="hidden" name="idImage"/>
+                                <input type="hidden" name="idImage" />
                                 <p class="error"><i class="fas fa-info-circle mx-2"></i> Afficher l'erreur ici</p>
                             </div>
                         </div>
@@ -215,9 +225,9 @@
                 </div>
                 <div class="modal-body">
                     <ul class="list-group list-unavailability mb-3">
-                    @foreach ($indispo as $item)
+                        @foreach ($indispo as $item)
                         <li class="list-group-item"> <span>{{ $item->getUnavailabilityDate() }}</span> de <span>{{ $item->getStartTime() }} H </span> à <span>{{ $item->getEndTime() }} H</span> <a href="/deleteIndispo?idIndispo={{ $item->getIdUnavailability() }}"><i class="fas fa-times"></i></a> </li>
-                    @endforeach
+                        @endforeach
                     </ul>
                     <a href="" class="link my-4" data-bs-toggle="modal" data-bs-target="#new-indisponible" data-bs-dismiss="modal">Marquer des indisponibilités</a>
                 </div>
@@ -238,9 +248,9 @@
                 </div>
                 <div class="modal-body">
                     <ul class="list-group list-unavailability mb-3">
-                    @foreach ($discount as $item)
+                        @foreach ($discount as $item)
                         <li class="list-group-item"> <span>{{ $item->getStart() }}</span> à <span>{{ $item->getEnd() }}</span> : <span>{{ $item->getDiscount() }} %</span> <a href="/deleteDiscount?idDiscount={{ $item->getIdDiscount() }}"><i class="fas fa-times"></i></a> </li>
-                    @endforeach
+                        @endforeach
                     </ul>
                 </div>
                 <div class="modal-footer">
@@ -287,7 +297,7 @@
 
     <!-- Modal pour marquer des remises -->
     <form action="{{ route('addRemise') }}" class="form" method="POST">
-    @csrf    
+        @csrf
         <div class="modal fade" id="add-remise" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -378,6 +388,7 @@
     </form>
 
     <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/FOC/disponibility2.js') }}"></script>
     <script>
         // Fonction pour mettre à jour l'image à modifier
         function updatePhoto(element) {
@@ -393,10 +404,10 @@
             var form = document.getElementById('updatePhotoForm');
             //Recuperer la valeur de l'input correspondant au name
             var inputField = form.querySelector('input[name="idImage"]');
-            
+
             // Mettre à jour la valeur de l'input avec la photo
             inputField.value = idImage;
-            
+
         }
     </script>
 </body>
