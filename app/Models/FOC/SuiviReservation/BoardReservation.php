@@ -13,11 +13,11 @@ class BoardReservation
     public function getIdField($id_client)
     {
         $listIdField = [];
-        $req = "select distinct field_id from v_reservation_detailled_field where id_client = " . $id_client;
+        $req = "select distinct id_field from v_reservation_detailled_field where id_client = " . $id_client;
         //echo $req;
         $result = DB::select($req);
         foreach ($result as $results) {
-            $listIdField[] = $results->field_id;
+            $listIdField[] = $results->id_field;
         }
         // echo count($listIdField);
         return $listIdField;
@@ -39,10 +39,10 @@ class BoardReservation
     {
         $numberField = [];
         $listeFields = $this->getIdField($id_client);
-        $req = "select field_id from v_reservation_detailled_field where id_client = " . $id_client;
+        $req = "select id_field from v_reservation_detailled_field where id_client = " . $id_client;
         $result = DB::select($req);
         foreach ($result as $results) {
-            $numberField[] = $results->field_id;
+            $numberField[] = $results->id_field;
         }
         return $numberField;
     }
@@ -52,7 +52,7 @@ class BoardReservation
         $nombreField = 0;
         $req = "SELECT count(id_reservation) as nombreReservation
         FROM v_reservation_detailled_field
-        WHERE field_id = " . $id_field . ";";
+        WHERE id_field = " . $id_field . ";";
         $result = DB::select($req);
         foreach ($result as $results) {
             $nombreField = $results->nombrereservation;

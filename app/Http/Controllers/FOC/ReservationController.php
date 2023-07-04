@@ -63,7 +63,8 @@ class ReservationController extends Controller
         // }
         // echo count($ReservationFieldClient)*100;
         // echo count($nbrRes);
-        $proportionFields[] = ((count($ReservationFieldClient)*100)/count($nbrRes));
+        if (count($nbrRes) == 0) $proportionFields[] = [0];
+        else $proportionFields[] = ((count($ReservationFieldClient)*100)/count($nbrRes));
         //echo count($proportionFields); 
 
         //echo $proportionFields;
