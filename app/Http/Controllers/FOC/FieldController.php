@@ -56,6 +56,8 @@ class FieldController extends Controller
         $dispo = DispoAndPrice::getAllDispoField($field);
         $indispo = Unavailability::getAllIndispoField($field);
         $discount = Discount::getAllDiscountField($field);
+        $allDispo=DispoAndPrice::getAllDispoField($field);
+
         $notifications = ClientNotification::getAllClientNotification($clientConnected->getIdClient());
         Session::put('field', $field);
 
@@ -68,6 +70,7 @@ class FieldController extends Controller
             'discount' => $discount,
             'error' => $error,
             'notifications' => $notifications,
+            'dispoAndPrice' => $allDispo,
         ]);
     }
 
@@ -278,6 +281,7 @@ class FieldController extends Controller
     //Modifier une image
     public function editImage(Request $request) {
         $file = $this->uploadImage($request, 'image', 'picField', 'image/pictureField/');
+        echo "io";
         echo $request->input('idImage');
         //Avoir sa photo actuel
         $pictureNow = PictureField::findById($request->input('idImage'));
@@ -289,7 +293,7 @@ class FieldController extends Controller
         $pictureNow->update();
 
         return redirect()->route('profile-field', ['idField' => $pictureNow->getField()->getIdField()]);
-    }
+       }
 
     //Charger la page de disponibilite et prix
     public function loadPageDispoAndPrice($error = null) {

@@ -11,7 +11,7 @@
                 @if(Session::get('clientConnected')->getStatus()->getIdStatus() != 1 )
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="/home" onclick="return false;">Accueil </a>
+                        <a class="nav-link" href="{{ route('homeClient') }}" onclick="return false;">Accueil </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/filtreBoard" onclick="return false;">Tableau de Bord</a>
@@ -27,7 +27,7 @@
                 @if(Session::get('clientConnected')->getStatus()->getIdStatus() == 1 )
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="/home">Accueil</a>
+                        <a class="nav-link" href="{{ route('homeClient') }}">Accueil</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/filtreBoard">Tableau de Bord</a>

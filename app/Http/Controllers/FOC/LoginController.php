@@ -25,9 +25,17 @@ class LoginController extends Controller
             $password = $request->input('password');
             $client = Client::login($password, $email);
             if($client != null) {
-                session()->put('clientConnected', $client);
-                return redirect()->route('homeClient');
-                ;
+                echo "status";
+                echo $client->getStatus()->getIdStatus();
+                echo $client->getFirstName();
+                if($client->isValidate()) {
+                    session()->put('clientConnected', $client);
+                    return redirect()->route('homeClient');
+                }
+                else {
+                    session()->put('clientConnected', $client);
+                    return redirect()->route('getClient');
+                }
             }
             else {
                 throw new Exception("Veuillez ressayer");

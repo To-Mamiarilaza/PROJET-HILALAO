@@ -283,4 +283,12 @@ class Client
         return new Client($results->id_client, $results->first_name, $results->last_name, $results->phone_number, $results->mail, $results->address, $results->birth_date, $results->pwd, Status::findById($results->id_status), $results->sign_up_date, Cin::findById($results->id_cin),  $results->customer_picture);
     }  
 
+    //Recuperer le status du client
+    public function isValidate() {
+        if($this->getStatus()->getIdStatus() == 1 ) {
+            return true;
+        }
+         
+        return false;
+    }
 }

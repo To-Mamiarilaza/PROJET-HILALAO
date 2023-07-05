@@ -237,8 +237,6 @@
                                 <p class="error"> <i class="fas fa-info-circle mx-3"></i>{{ $error }}</p>
                                 @endisset
 
-                                <input type="hidden" name="idImage" />
-
                             </div>
                         </div>
                     </div>
@@ -271,49 +269,15 @@
                     </div>
                 </div>
 
-                <div class="hidden-form" id="hidden-form">
+                <div class="hidden-form" id="hidden-form">           
+                    @foreach ($dispoAndPrice as $item)
                     <div class="group-input">
-                        <input class="jour" type="number" value="1">
-                        <input class="star-time" type="time" value="05:00">
-                        <input class="end-time" type="time" value="18:00">
-                        <input class="price" type="number" value="50000">
-                    </div>
-                    <div class="group-input">
-                        <input class="jour" type="number" value="2">
-                        <input class="star-time" type="time" value="05:00">
-                        <input class="end-time" type="time" value="18:00">
-                        <input class="price" type="number" value="50000">
-                    </div>
-                    <div class="group-input">
-                        <input class="jour" type="number" value="3">
-                        <input class="star-time" type="time" value="05:00">
-                        <input class="end-time" type="time" value="18:00">
-                        <input class="price" type="number" value="50000">
-                    </div>
-                    <div class="group-input">
-                        <input class="jour" type="number" value="4">
-                        <input class="star-time" type="time" value="05:00">
-                        <input class="end-time" type="time" value="18:00">
-                        <input class="price" type="number" value="50000">
-                    </div>
-                    <div class="group-input">
-                        <input class="jour" type="number" value="5">
-                        <input class="star-time" type="time" value="05:00">
-                        <input class="end-time" type="time" value="18:00">
-                        <input class="price" type="number" value="50000">
-                    </div>
-                    <div class="group-input">
-                        <input class="jour" type="number" value="6">
-                        <input class="star-time" type="time" value="05:00">
-                        <input class="end-time" type="time" value="21:00">
-                        <input class="price" type="number" value="65000">
-                    </div>
-                    <div class="group-input">
-                        <input class="jour" type="number" value="7">
-                        <input class="star-time" type="time" value="05:00">
-                        <input class="end-time" type="time" value="21:00">
-                        <input class="price" type="number" value="65000">
-                    </div>
+                        <input class="jour" type="number" value="{{ $item->getDay()->getIdDay() }}">
+                        <input class="star-time" type="time" value="{{ $item->getStartTime() }}">
+                        <input class="end-time" type="time" value="{{ $item->getEndTime() }}">
+                        <input class="price" type="number" value="{{  $item->getPrice() }}">
+                    </div>       
+                    @endforeach
                 </div>
 
                 <div class="dispo">
@@ -417,6 +381,8 @@
 
             // Mettre à jour la valeur de l'input avec la photo
             inputField.value = idImage;
+            console.log("value");
+            console.log(idImage);
 
         }
     </script>

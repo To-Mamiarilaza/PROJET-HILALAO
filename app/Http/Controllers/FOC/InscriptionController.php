@@ -10,9 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\FOC\ClientNotification;
 
 class InscriptionController extends Controller
-{
-
-    
+{   
     //Inserer cin
     public function insertCIN(Request $request)
     {
