@@ -27,7 +27,6 @@ class LoginController extends Controller
             if($client != null) {
                 session()->put('clientConnected', $client);
                 return redirect()->route('homeClient');
-                ;
             }
             else {
                 throw new Exception("Veuillez ressayer");

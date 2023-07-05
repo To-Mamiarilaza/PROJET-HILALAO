@@ -33,7 +33,7 @@ class InscriptionController extends Controller
                 $cin = new Cin('default', $cinNumber, $picRecto, $picVerso);
                 $cin->create();
                 $lastCin = $cin->lastCinId();
-                $client = $request->session()->get('client');
+                $client = $request->session()->get('clientConnected');
                 $client->setCin($lastCin);
 
                 $client->create();
@@ -56,18 +56,15 @@ class InscriptionController extends Controller
     public function getClient(Request $request){
         $clientConnected = session()->get('clientConnected');
         $notifications = ClientNotification::getAllClientNotification($clientConnected->getIdClient());
-   
-        $client = $request->session()->get('client');
+
         $cin = $request->session()->get('cin');
-        $idclient = $client->lastClientId();
-        $clients = $client->findById($idclient->id_client);
-        $request->session()->put('clientConnected', $clients);
+        $clients = $clientConnected->findById($clientConnected->getIdClient());
         
 
-        return view('FOC/compteClient', ['client' => $client, 
-        'cin' => $cin,
-        'notifications' => $notifications,
-    ]);
+        return view('FOC/compteClient', ['client' => $clients, 
+            'cin' => $cin,
+            'notifications' => $notifications,
+        ]);
     }
     
     //Uploaedr un fichier
