@@ -48,7 +48,7 @@
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><i class="fas fa-power-off"></i></a>
+                            <a class="nav-link" href="{{ route('deconnect') }}"><i class="fas fa-power-off"></i></a>
                         </li>
                     </ul>
                 </div>
