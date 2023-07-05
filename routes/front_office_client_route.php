@@ -121,8 +121,8 @@ Route::get('/stat-terrain', function() {
     return view('FOC/statistic-field');
 });
 
-Route::get('/list-fieldFoc', [FieldController::class, 'listField'])
-->name('list-fieldFoc');
+Route::get('/list-fieldFOC', [FieldController::class, 'listField'])
+->name('list-fieldFOC');
 
 Route::get('/profile-field/{idField}', [FieldController::class, 'profileField'])
 ->name('profile-field');

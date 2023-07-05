@@ -21,7 +21,7 @@
                             <a class="nav-link" href="{{ route('list-fieldFOC') }}" onclick="return false;">Mes Terrains</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" onclick="return false;">Mon compte</a>
+                            <a class="nav-link" href="/getClient" onclick="return false;">Mon compte</a>
                         </li>
                     </ul>
                 @endif
@@ -37,7 +37,7 @@
                             <a class="nav-link" href="{{ route('list-fieldFOC') }}">Mes Terrains</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Mon compte</a>
+                            <a class="nav-link" href="/getClient">Mon compte</a>
                         </li>
                     </ul>
                 @endif

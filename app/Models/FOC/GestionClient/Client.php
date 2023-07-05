@@ -33,7 +33,7 @@ class Client
         $this->setPwd($pwd);
         $this->setStatus($status);
         $this->sign_up_date = $sign_up_date;
-        $this->cin = $cin->getIdCin();
+        $this->cin = $cin;
         $this->setCustomerPicture($customer_picture);
     }
 
@@ -182,6 +182,7 @@ class Client
         $datas = array();
         $i = 0;
         foreach ($results as $row) {
+            
             $datas[$i] = new Client($row->id_client, $row->first_name, $row->last_name, $row->phone_number, $row->mail, $row->address, $row->birth_date, $row->pwd, Status::findById($row->id_status), $row->sign_up_date, Cin::findById($row->id_cin), $row->customer_picture);
             $i++;
         }
@@ -203,8 +204,9 @@ class Client
         try {
             $birthDate = new DateTime($this->birth_date);
             $formattedBirthDate = $birthDate->format('Y-m-d');
-            $req = "INSERT INTO client VALUES (DEFAULT, '%s', '%s', '%s', '%s', '%s', '%s', '%s', %d, DEFAULT, %d)";
-            $req = sprintf($req, $this->first_name, $this->last_name, $this->phone_number, $this->mail, $this->address, $formattedBirthDate, $this->pwd, $this->status->getIdStatus(), $this->cin->getIdCin());
+            //$id_client, $first_name, $last_name, $phone_number, $mail, $address, $birth_date, $pwd, $status, $sign_up_date, $cin ,$customer_picture
+            $req = "INSERT INTO client VALUES (DEFAULT, '%s', '%s', '%s', '%s', '%s', '%s', '%s', %d, DEFAULT, %d, '%s')";
+            $req = sprintf($req, $this->first_name, $this->last_name, $this->phone_number, $this->mail, $this->address, $formattedBirthDate, $this->pwd, $this->status->getIdStatus(), $this->cin, $this->getCustomerPicture());
             $insertAdmin = "INSERT INTO admin_notification VALUEs (DEFAULT, 20, now(), 0)";
             DB::insert($req);
             DB::insert($insertAdmin);

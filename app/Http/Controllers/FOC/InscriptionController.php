@@ -5,6 +5,7 @@ use App\Models\FOC\GestionClient\Client;
 use App\Models\FOC\GestionClient\Cin;
 use App\Models\FOC\GestionClient\Status;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 
@@ -16,27 +17,30 @@ class InscriptionController extends Controller
     public function insertCIN(Request $request)
     {
         
-        $cinNumber = $request->input('cinNumber');
-        $picRecto = $this->upload($request, 'recto', 'image/CIN');
-        $picVerso = $this->upload($request, 'verso', 'image/CIN');
-
-        echo $picRecto;
         try {
             //echo $picRecto;
+            $cinNumber = $request->input('cinNumber');
+            $picRecto = $this->upload($request, 'recto', 'image/CIN');
+            $picVerso = $this->upload($request, 'verso', 'image/CIN');
+    
+            echo $picRecto;
 
             if ($picRecto && $picVerso) {
                 $cin = new Cin('default', $cinNumber, $picRecto, $picVerso);
                 $cin->create();
 
-                $lastCin = $cin->lastCinId();
-                $client = $request->session()->get('client');
-                $client->setCin($lastCin);
-                $client->create();
+                 $lastCin = $cin->lastCinId();
+                 $client = $request->session()->get('client');
+                 $client->setCin($lastCin->getIdCin());
+                 $client->create();
+
+                //Session::forget('cin');
 
                 $request->session()->put('cin', $lastCin);
 
                 //return redirect('/selectAllReservation');
                 return redirect('/getClient');
+
                 
             } else {
                 // Gérer l'erreur de téléchargement des fichiers ici
