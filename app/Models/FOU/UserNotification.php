@@ -4,6 +4,7 @@ namespace App\Models\FOU;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Date;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Session;
 
 class UserNotification
 {
@@ -32,6 +33,21 @@ class UserNotification
         $sql = "INSERT INTO user_notification (id_user, id_field, id_type_notification, date_notification, etat) VALUES (%s, %s, %s, '%s', %s)";
         $sql = sprintf($sql, $this->idUser, $this->idField, $this->idTypeNotification, $this->dateNotification.' '.$this->start_time, $this->etat);
         DB::insert($sql);
+
+        $field = new FieldDetailled();
+        $field->findById($this->idField);
+        $sql = "INSERT INTO client_notification (id_client, id_type_notification, etat) VALUES (%s, %s, %s) RETURNING id_client_notification";
+        $sql = sprintf($sql,$field->getClient()->getIdClient(), 12, 0);
+        $db = DB::selectOne($sql);
+        $id_client_notification = $db->id_client_notification;
+
+        $idUser = Session::get("user")->getIdUsers();
+
+        $sql = "INSERT INTO field_reservation_notification (id_client_notification, id_user, id_field) VALUES (%s, %s, %s)";
+        $sql = sprintf($sql, $id_client_notification, $idUser, $field->getIdField());
+        DB::insert($sql);
+
+
     }
 
 

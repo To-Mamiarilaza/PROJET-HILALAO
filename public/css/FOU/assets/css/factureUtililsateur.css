@@ -1,0 +1,118 @@
+.content {
+  height: 550px;
+  margin-top: 2%;
+}
+.content-facturation {
+  margin-left: 20%;
+  margin-right: 20%;
+  height: 100%;
+}
+
+.head {
+  margin-left: 0;
+  margin-right: 0;
+  height: 23%;
+  padding: 0;
+}
+.head hr {
+  width: 100%;
+  margin-top: 1%;
+}
+.head-us {
+  height: 100%;
+}
+.head-us-logo {
+  margin-top: 10%;
+  height: 40%;
+  padding: 0;
+}
+.head-us-logo-photo {
+  height: 100%;
+  padding: 0;
+  background-color: #e17b36;
+  text-align: center;
+  color: white;
+}
+.head-us-logo-photo img {
+  height: 100%;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.head-us-logo-title {
+  padding: 0;
+  margin-left: 5%;
+  padding-top: 2%;
+}
+.head-us-mail {
+  margin-top: 1%;
+}
+.head-us-mail p {
+  padding: 0;
+  font-size: small;
+}
+.head-us-numero {
+  margin-top: -3%;
+}
+.head-us-numero p {
+  padding: 0;
+  font-size: small;
+}
+.head-client {
+  height: 100%;
+  margin-left: auto;
+  padding: 0;
+  text-align: right;
+}
+.head-client-styleP {
+  text-decoration: underline;
+}
+.head-client p {
+  font-size: small;
+}
+
+.detailFacture {
+  height: 53%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  line-height: 70%;
+}
+.detailFacture-utilisateur {
+  height: 100%;
+  padding: 0;
+}
+.detailFacture-utilisateur-P {
+  color: rgb(187, 187, 187);
+}
+.detailFacture-utilisateur-mail {
+  font-size: small;
+}
+.detailFacture-reservation {
+  height: 100%;
+  margin-left: auto;
+}
+.detailFacture-reservation-label {
+  text-align: left;
+  height: 100%;
+}
+.detailFacture-reservation-value {
+  margin-left: auto;
+  text-align: right;
+  padding: 0;
+  height: 100%;
+}
+.detailFacture-reservation-payement {
+  height: 50%;
+}
+.detailFacture-reservation-payement-title {
+  margin-left: 2%;
+}
+.detailFacture-reservation-payement-prix {
+  text-align: right;
+  padding: 0;
+}
+.detailFacture-reservation-payement-Ar {
+  text-align: right;
+  padding: 0;
+}/*# sourceMappingURL=factureUtililsateur.css.map */
