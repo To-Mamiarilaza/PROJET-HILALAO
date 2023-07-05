@@ -21,7 +21,7 @@ class Client
     private $cin;
     private $customer_picture;
 
-    public function __construct($id_client, $first_name, $last_name, $phone_number, $mail, $address, $birth_date, $pwd, $status, $cin ,$customer_picture)
+    public function __construct($id_client, $first_name, $last_name, $phone_number, $mail, $address, $birth_date, $pwd, $status, $sign_up_date, $cin ,$customer_picture)
     {
         $this->id_client = $id_client;
         $this->setFirstName($first_name);
@@ -32,7 +32,8 @@ class Client
         $this->setBirthDate($birth_date);
         $this->setPwd($pwd);
         $this->setStatus($status);
-        $this->cin = $cin;
+        $this->sign_up_date = $sign_up_date;
+        $this->$cin = $cin;
         $this->setCustomerPicture($customer_picture);
     }
 
@@ -114,8 +115,8 @@ class Client
     
     public function setCin($Cin = null)
     {
-        $this->cin = $Cin;
         if ($Cin == null) throw new \Exception("Cin vide");
+        $this->cin = $Cin;
     }
 
     public function getBirthDate()
@@ -238,7 +239,7 @@ class Client
             'pwd' => $this->pwd,
             'id_status' => $this->status->getIdstatus(),
             'sign_up_date' => $this->sign_up_date,
-            'sign_up_date' => $this->cin->getIdin()
+            'id_cin' => $this->cin->getIdin()
         ]);
     }
 

@@ -45,6 +45,6 @@ class Status
     {
         $results = DB::table('status_client')->where('id_status_client', $id)->first();
         
-        return  new Status($results->id_status_client, $results->status);
+        return new Status($results->id_status_client, $results->status);
     }
 }

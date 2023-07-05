@@ -6,13 +6,11 @@ use DateTime;
 
 class Reservation_field
 {
-    private $id_day;
+    private $state;
     private $id_client;
-    private $start_time;
-    private $end_time;
     private $rf_id_field;
     private $price;
-    private $field_id;
+    private $id_field;
     private $field_name;
     private $field_category;
     private $subscribing_price;
@@ -32,20 +30,19 @@ class Reservation_field
     private $mail;
     private $start;
     private $duration;
-    private $rv_field_name;
     private $field_description;
     private $field_address;
+    private $reference;
 
-    public function getIdDay()
+    public function getState()
     {
-        return $this->id_day;
+        return $this->state;
     }
 
-    public function setIdDay($id_Day)
+    public function setState($state)
     {
-        $this->id_day = $id_Day;
+        $this->state = $state;
     }
-
     public function getIdClient()
     {
         return $this->id_client;
@@ -54,26 +51,6 @@ class Reservation_field
     public function setIdClient($id_client)
     {
         $this->id_client = $id_client;
-    }
-
-    public function getStartTime()
-    {
-        return $this->start_time;
-    }
-
-    public function setStartTime($start_time)
-    {
-        $this->start_time = $start_time;
-    }
-
-    public function getEndTime()
-    {
-        return $this->end_time;
-    }
-
-    public function setEndTime($end_time)
-    {
-        $this->end_time = $end_time;
     }
 
     public function getRfIdField()
@@ -93,17 +70,18 @@ class Reservation_field
 
     public function setPrice($price)
     {
+        $price = number_format($price, 0, ',', ' ');
         $this->price = $price;
     }
 
     public function getFieldId()
     {
-        return $this->field_id;
+        return $this->id_field;
     }
 
-    public function setFieldId($field_id)
+    public function setFieldId($id_field)
     {
-        $this->field_id = $field_id;
+        $this->id_field = $id_field;
     }
 
     public function getFieldName()
@@ -296,29 +274,30 @@ class Reservation_field
         $this->duration = $Duration;
     }
 
+    public function getEtatLettre()
+    {
+        $etat = "";
+        if ($this->getState() == 2)
+            $etat = "En retard";
+        else if ($this->getState() == 1)
+            $etat = "Valider";
+        else if($this->getState() == 3) 
+            $etat = "Annuler";
+        return $etat;
+    }
+
     public function getEnd()
     {
-        $timestamp = $this->getStart();
-        $hoursToAdd = $this->getDuration();
+        $hoursToAdd = Self::getDuration();
 
         // Convertir le timestamp en un format exploitable
-        $time = strtotime($timestamp);
+        $time = strtotime(Self::getStart());
 
         // Ajouter l'heure spécifiée
         $newTime = date('H:i', strtotime("+{$hoursToAdd} hours", $time));
 
         return $newTime; // Affiche le nouveau timestamp avec l'heure ajoutée
 
-    }
-
-    public function getRvFieldName()
-    {
-        return $this->rv_field_name;
-    }
-
-    public function setRvFieldName($rv_field_name)
-    {
-        $this->rv_field_name = $rv_field_name;
     }
 
     public function getFieldDescription()
@@ -341,15 +320,23 @@ class Reservation_field
         $this->field_address = $field_address;
     }
 
+    public function getReference()
+    {
+        return $this->reference;
+    }
+
+    public function setReference($reference)
+    {
+        $this->reference = $reference;
+    }
+
 
     public function __construct(
-        $id_day,
+
         $id_client,
-        $start_time,
-        $end_time,
         $rf_id_field,
         $price,
-        $field_id,
+        $id_field,
         $field_name,
         $field_category,
         $subscribing_price,
@@ -369,17 +356,15 @@ class Reservation_field
         $mail,
         $start,
         $duration,
-        $rv_field_name,
         $field_description,
-        $field_address
+        $field_address,
+        $reference,
+        $state
     ) {
-        $this->id_day = $id_day;
         $this->id_client = $id_client;
-        $this->start_time = $start_time;
-        $this->end_time = $end_time;
         $this->rf_id_field = $rf_id_field;
         $this->price = $price;
-        $this->field_id = $field_id;
+        $this->id_field = $id_field;
         $this->field_name = $field_name;
         $this->field_category = $field_category;
         $this->subscribing_price = $subscribing_price;
@@ -399,54 +384,26 @@ class Reservation_field
         $this->mail = $mail;
         $this->start = $start;
         $this->duration = $duration;
-        $this->rv_field_name = $rv_field_name;
         $this->field_description = $field_description;
         $this->field_address = $field_address;
+        $this->reference = $reference;
+        $this->state = $state;
     }
-
-    public function getDay(){
-
-        $dateTime = new DateTime($this->getReservationDate());
-        $jourSemaineFrancais = $dateTime->format('l');
-
-        if($jourSemaineFrancais == "Monday") return "Lundi";
-        else if($jourSemaineFrancais == "Tuesday") return "Mardi";
-        else if($jourSemaineFrancais == "Wednesday") return "Mercredi";
-        else if($jourSemaineFrancais == "Thursday") return "Jeudi";
-        else if($jourSemaineFrancais == "Friday") return "Vendredi";
-        else if($jourSemaineFrancais == "Saturday") return "Samedi";
-        else if($jourSemaineFrancais == "Sunday") return "Dimanche";
-    }
-    public function getExactDay() /* Prends l'id du jour de la date de reservation */
+    
+    public function getReservationByIdField($id_field)
     {
-        $day = self::getDay();
-
-        $result = DB::table('day')
-            ->where('day', $day)
-            ->value('id_day');
-        return $result ? $result : null;
-    }
-
-    public function getReservationsOneWeek($id_client)
-    {
-        $exactDay = self::getExactDay();
+        //$exactDay = self::getExactDay();
         $results = DB::table('v_reservation_detailled_field')
-            ->where('id_client', $id_client)
-            ->where('reservation_date', '>=', DB::raw('CURRENT_DATE'))
-            ->where('reservation_date', '<', DB::raw("CURRENT_DATE + INTERVAL '7 days'"))
-            ->where('id_day', $exactDay)
+            ->where('id_field', $id_field)
             ->get();
 
         $reservations = [];
         foreach ($results as $result) {
             $reservation = new Reservation_field(
-                $result->id_day,
                 $result->id_client,
-                $result->start_time,
-                $result->end_time,
                 $result->rf_id_field,
                 $result->price,
-                $result->field_id,
+                $result->id_field,
                 $result->field_name,
                 $result->field_category,
                 $result->subscribing_price,
@@ -466,37 +423,55 @@ class Reservation_field
                 $result->mail,
                 $result->start,
                 $result->duration,
-                $result->rv_field_name,
                 $result->field_description,
-                $result->field_address
+                $result->field_address,
+                $result->reference,
+                $result->state
             );
             $reservations[] = $reservation;
         }
 
         return $reservations;
     }
-    
 
-    public function getReservationsWithFields($id_client)
+    public function getDay()
     {
-        $exactDay = self::getExactDay();
+
+        $dateTime = new DateTime($this->getReservationDate());
+        $jourSemaineFrancais = $dateTime->format('l');
+
+        if ($jourSemaineFrancais == "Monday")
+            return "Lundi";
+        else if ($jourSemaineFrancais == "Tuesday")
+            return "Mardi";
+        else if ($jourSemaineFrancais == "Wednesday")
+            return "Mercredi";
+        else if ($jourSemaineFrancais == "Thursday")
+            return "Jeudi";
+        else if ($jourSemaineFrancais == "Friday")
+            return "Vendredi";
+        else if ($jourSemaineFrancais == "Saturday")
+            return "Samedi";
+        else if ($jourSemaineFrancais == "Sunday")
+            return "Dimanche";
+    }
+
+    public function getReservationsOneWeek($id_field)
+    {
         $results = DB::table('v_reservation_detailled_field')
-            ->where('id_client', $id_client)
-            // ->where('reservation_date', '>=', DB::raw('CURRENT_DATE'))
-            // ->where('reservation_date', '<', DB::raw("CURRENT_DATE + INTERVAL '7 days'"))
-            ->where('id_day', $exactDay)
+            ->where('id_field', $id_field)
+            ->where('reservation_date', '>=', DB::raw('CURRENT_DATE'))
+            ->where('reservation_date', '<', DB::raw("CURRENT_DATE + INTERVAL '7 days'"))
+            ->orderBy('reservation_date','desc')
             ->get();
 
         $reservations = [];
         foreach ($results as $result) {
             $reservation = new Reservation_field(
-                $result->id_day,
                 $result->id_client,
-                $result->start_time,
-                $result->end_time,
                 $result->rf_id_field,
                 $result->price,
-                $result->field_id,
+                $result->id_field,
                 $result->field_name,
                 $result->field_category,
                 $result->subscribing_price,
@@ -516,9 +491,98 @@ class Reservation_field
                 $result->mail,
                 $result->start,
                 $result->duration,
-                $result->rv_field_name,
                 $result->field_description,
-                $result->field_address
+                $result->field_address,
+                $result->reference,
+                $result->state
+            );
+            $reservations[] = $reservation;
+        }
+
+        return $reservations;
+    }
+
+    public function getReservationNearBy($id_field)
+    {
+        $results = DB::table('v_reservation_detailled_field')
+            ->where('id_field', $id_field)
+            ->orderBy('reservation_date','desc')
+            ->get();
+
+        $reservations = [];
+        foreach ($results as $result) {
+            $reservation = new Reservation_field(
+                $result->id_client,
+                $result->rf_id_field,
+                $result->price,
+                $result->id_field,
+                $result->field_name,
+                $result->field_category,
+                $result->subscribing_price,
+                $result->field_type,
+                $result->infrastructure,
+                $result->light,
+                $result->address,
+                $result->longitude,
+                $result->latitude,
+                $result->description,
+                $result->id_reservation,
+                $result->reservation_date,
+                $result->first_name,
+                $result->last_name,
+                $result->birth_date,
+                $result->phone_number,
+                $result->mail,
+                $result->start,
+                $result->duration,
+                $result->field_description,
+                $result->field_address,
+                $result->reference,
+                $result->state
+            );
+            $reservations[] = $reservation;
+        }
+
+        return $reservations;
+    }
+
+    public function getReservationsWithFields($id_field)
+    {
+        $results = DB::table('v_reservation_detailled_field')
+            ->where('id_field', $id_field)
+            ->orderBy('reservation_date','desc')
+            ->get();
+
+        $reservations = [];
+        foreach ($results as $result) {
+            $reservation = new Reservation_field(
+                $result->id_client,
+                $result->rf_id_field,
+                $result->price,
+                $result->id_field,
+                $result->field_name,
+                $result->field_category,
+                $result->subscribing_price,
+                $result->field_type,
+                $result->infrastructure,
+                $result->light,
+                $result->address,
+                $result->longitude,
+                $result->latitude,
+                $result->description,
+                $result->id_reservation,
+                $result->reservation_date,
+                $result->first_name,
+                $result->last_name,
+                $result->birth_date,
+                $result->phone_number,
+                $result->mail,
+                $result->start,
+                $result->duration,
+                $result->field_description,
+                $result->field_address,
+                $result->reference,
+                $result->state
             );
             $reservations[] = $reservation;
         }

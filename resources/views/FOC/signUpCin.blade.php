@@ -41,14 +41,14 @@
 						<div id="upload-container">
 							<h5 class="card-title">CIN recto</h5>
 							<label for="image-upload-recto" class="btn btn-primary btn-block" style="cursor: pointer;">Sélectionner une image</label>
-							<input type="file" id="image-upload-recto" style="display: none;" accept="image/*">
+							<input type="file" id="image-upload-recto" name="recto" style="display: none;">
 						</div>
 					</div>
 					<div class="col-md-4 input_pictures">
 						<div id="upload-container mt-4">
 							<h5 class="card-title">CIN verso</h5>
 							<label for="image-upload-verso" class="btn btn-primary btn-block" style="cursor: pointer;">Sélectionner une image</label>
-							<input type="file" id="image-upload-verso" style="display: none;" accept="image/*">
+							<input type="file" id="image-upload-verso" name="verso" style="display: none;">
 						</div>
 					</div>
 				</div>
@@ -56,6 +56,5 @@
 			</form>
 		</div>
 	</div>
-	@include('FOC/scriptPicture');
 </body>
 </html>

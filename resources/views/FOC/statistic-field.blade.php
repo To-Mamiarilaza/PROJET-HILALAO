@@ -18,30 +18,38 @@
             <div class="col-md-5">
                 <div class="stat-number">
                     <ul>
-                        <li>Nombre de réservations : <span class="important">28</span></li>
-                        <li>Montant d'argent reçue : <span class="important">1 820 000 Ar</span></li>
+                        <li>Nombre de réservations : <span class="important">{{ count($historiques) }}</span></li>
+                        <li>Montant d'argent reçue : <span class="important">{{ number_format(array_sum($prices)*1000, 0, ',', ' ') }}Ar</span></li>
                     </ul>
                 </div>
-                <form action="" class="form mt-3">
+                <form action="{{ route('filtre') }}" class="form mt-3" method="GET">
+                    @csrf
                     <div class="row mb-3">
                         <div class="col-md-4">
-                            <select name="" id="" class="form-select">
+                            <select name="mois" id="" class="form-select">
                                 <option value="">Tous les mois</option>
-                                <option value="">Janvier</option>
-                                <option value="">Février</option>
-                                <option value="">Mars</option>
-                                <option value="">Avril</option>
-                                <option value="">Mai</option>
+                                <option value="1">Janvier</option>
+                                <option value="2">Fevrier</option>
+                                <option value="3">Mars</option>
+                                <option value="4">Avril</option>
+                                <option value="5">Mai</option>
+                                <option value="6">Juin</option>
+                                <option value="7">Juillet</option>
+                                <option value="8">Aout</option>
+                                <option value="9">Septembre</option>
+                                <option value="10">Octobre</option>
+                                <option value="11">Novembre</option>
+                                <option value="12">Decembre</option>
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <select name="" id="" class="form-select">
+                            <select name="annee" id="" class="form-select">
                                 <option value="">Tous les années</option>
-                                <option value="">2023</option>
-                                <option value="">2022</option>
-                                <option value="">2021</option>
-                                <option value="">2020</option>
-                                <option value="">2019</option>
+                                <option value="2023">2023</option>
+                                <option value="2022">2022</option>
+                                <option value="2021">2021</option>
+                                <option value="2020">2020</option>
+                                <option value="2019">2019</option>
                             </select>
                         </div>
                         <div class="col-md-3">
@@ -53,7 +61,8 @@
                     <canvas id="myChart"></canvas>
                 </div>
             </div>
-    
+            
+            @if(isset($historiques) && count($historiques) > 0)
             <div class="col-md-7 historique">
                 <h5>Historique de réservations</h5>
                 <table class="table">
@@ -67,84 +76,60 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="user">To Mamiarilaza</td>
-                            <td>10/02/23</td>
-                            <td>10:00 H <span class="espacement mx-3"> à </span> 12:00 H</td>
-                            <td class="montant">120 000 Ar</td>
-                            <td class="retard">Retard</td>
-                        </tr>
-                        <tr>
-                            <td class="user">Avaha Mino</td>
-                            <td>11/02/23</td>
-                            <td>07:00 H <span class="espacement mx-3"> à </span> 08:00 H</td>
-                            <td class="montant">65 000 Ar</td>
-                            <td class="normal">Normal</td>
-                        </tr>
-                        <tr>
-                            <td class="user">Ben</td>
-                            <td>10/02/23</td>
-                            <td>10:00 H <span class="espacement mx-3"> à </span> 12:00 H</td>
-                            <td class="montant">120 000 Ar</td>
-                            <td class="retard">Retard</td>
-                        </tr>
-                        <tr>
-                            <td class="user">Tiavina Malalaniaina</td>
-                            <td>11/02/23</td>
-                            <td>07:00 H <span class="espacement mx-3"> à </span> 08:00 H</td>
-                            <td class="montant">65 000 Ar</td>
-                            <td class="normal">Normal</td>
-                        </tr>
-                        <tr>
-                            <td class="user">Ben</td>
-                            <td>10/02/23</td>
-                            <td>10:00 H <span class="espacement mx-3"> à </span> 12:00 H</td>
-                            <td class="montant">120 000 Ar</td>
-                            <td class="retard">Retard</td>
-                        </tr>
-                        <tr>
-                            <td class="user">Tiavina Malalaniaina</td>
-                            <td>11/02/23</td>
-                            <td>07:00 H <span class="espacement mx-3"> à </span> 08:00 H</td>
-                            <td class="montant">65 000 Ar</td>
-                            <td class="normal">Normal</td>
-                        </tr>
-                        
+                        @foreach ($historiques as $histoReservation)
+                            <tr>
+                                <td class="user">{{ $histoReservation->getFirstName() }} {{ $histoReservation->getLastName() }}</td>
+                                <td> {{ $histoReservation->getReservationDate() }} </td>
+                                <td>{{ $histoReservation->getStart() }} H <span class="espacement mx-3"> à </span> {{ $histoReservation->getEnd() }} H</td>
+                                <td class="montant"> {{ $histoReservation->getPrice() }} Ar</td>
+                                <td class="{{ $histoReservation->getEtatLettre() }}"> {{ $histoReservation->getEtatLettre() }} </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
+        @endif
+        
+            {{-- @if(count($historiques) < 0)
+                    <h5> Vous n'avez aucun reservations </h5>
+            @endisset --}}
         </div>
     </div>
 
     <script src="{{ asset('chartJS/chart.js') }}"></script>
     <script>
-        drawChart();
-
-        function drawChart() {
-            // Chart pour le courbe de variation
-            // Données de variation de salaire
-            const labels = ["Jan", "Fév", "Mar", "Avr", "Mai", "Jun"];
+        var dataPrices = [];
+        @foreach ($prices as $p)
+            dataPrices.push('{{ $p }}');
+        @endforeach
+    
+        // Appel de la fonction drawChart en passant les données nécessaires
+        drawChart(dataPrices);
+    
+        function drawChart(dataPrices) {
+            // Convertir les prix en tableau de nombres
+            var pricesArray = dataPrices.map(function(price) {
+                return parseInt(price.replace(/ /g, ''));
+            });
+    
+            // Labels pour les mois
+            const labels = ["Jan", "Fév", "Mar", "Avr", "Mai", "Jun", "jul", "aout", "sept", "oct", "nov", "dec"];
+    
+            // Dataset pour le nombre de réservations
             const dataset1 = {
                 label: "Nombre de réservation",
-                data: [40, 20, 35, 23, 50, 63],
+                data: pricesArray,
                 backgroundColor: "rgba(54, 162, 235, 0.5)",
                 borderColor: "rgba(54, 162, 235, 1)",
                 borderWidth: 1
             };
-            const dataset2 = {
-                label: "Montant obtenue",
-                data: [1800, 2100, 2300, 2200, 2400, 2600],
-                backgroundColor: "rgba(255, 99, 132, 0.5)",
-                borderColor: "rgba(255, 99, 132, 1)",
-                borderWidth: 1
-            };
-
+    
             // Configuration du graphique
             const config = {
                 type: "line",
                 data: {
                     labels: labels,
-                    datasets: [dataset1, dataset2]
+                    datasets: [dataset1]
                 },
                 options: {
                     responsive: true,
@@ -154,16 +139,23 @@
                             beginAtZero: true,
                             title: {
                                 display: true,
-                                text: "Réservations et montant obtenues"
+                                text: "Montant obtenus"
                             }
                         }
                     }
                 }
             };
+    
             // Création du graphique
             const myChart = new Chart(document.getElementById("myChart"), config);
         }
     </script>
+    
+    
+    
+    
+    
+    
 </body>
 
 </html>
