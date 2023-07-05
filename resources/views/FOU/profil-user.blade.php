@@ -17,7 +17,7 @@
     <div class="row profile">
         <div class="col-md-3 profile-falseSidebar">
             <div class="row profile-falseSidebar-photo ">
-                <img src="{{ asset('css/FOU/assets/image/lalaina.jpg') }}">
+                <img src="{{ asset('image/image/client0.jpg') }}">
             </div>
             <div class="row profile-falseSidebar-sport">
                 <div class="row profile-falseSidebar-sport-title">
@@ -89,7 +89,7 @@
                                 <td>{{ $reservation->getStartTime()->format('H:i') }}</td>
                                 <td>{{ $reservation->getEndTime()->format('H:i') }}</td>
                                 @if (!$reservation->getIsPast())
-                                <td><div class="detail-icon"><i class="fas fa-eye"></i></div></td>
+                                <td><a href="{{ route('facture-reservation', ['id_reservation' => $reservation->getIdReservation()]) }}"><div class="detail-icon"><i class="fas fa-eye"></i></div></a></td>
                                 <td><a href="{{ route('cancel-reservation', ['id_reservation'=>$reservation->getIdReservation()]) }}"><div class="cancel-icon"><i class="fas fa-times"></i></div></td>
                                 @endif
                             </tr>

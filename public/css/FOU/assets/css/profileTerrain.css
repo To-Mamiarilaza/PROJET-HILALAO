@@ -72,38 +72,51 @@ body {
   color: #e17b36;
 }
 .booking-date {
-  height: 90%;
+  width: 96%;
+  height: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-y: scroll;
+  margin-left: 7px;
+}
+
+.creneau {
+  height: 42px;
+  width: 100%;
+}
+.creneau-horraire {
+  height: 100%;
   margin-top: -1%;
 }
-.booking-date-disponibilite {
+.creneau-horraire-disponibilite {
   height: 100%;
   margin-left: 0;
 }
-.booking-date-disponibilite-title {
+.creneau-horraire-disponibilite-title {
   height: 10%;
   margin-left: -1;
 }
-.booking-date-disponibilite-allDate {
+.creneau-horraire-disponibilite-allDate {
   height: 90%;
   margin-left: 0;
   margin-left: -3%;
 }
-.booking-date-creneau {
+.creneau-horraire-creneau {
   height: 100%;
 }
-.booking-date-creneau-title {
+.creneau-horraire-creneau-title {
   height: 10%;
   color: #e17b36;
 }
-.booking-date-creneau-horraire {
+.creneau-horraire-creneau-horraire {
   margin: auto;
   text-align: left;
 }
-.booking-date-creneau-horraire-plageHorrairePrice {
+.creneau-horraire-creneau-horraire-plageHorrairePrice {
   height: 10%;
   margin-top: 2%;
 }
-.booking-date-creneau-horraire-plageHorraireMarginTop {
+.creneau-horraire-creneau-horraire-plageHorraireMarginTop {
   height: 10%;
 }
 

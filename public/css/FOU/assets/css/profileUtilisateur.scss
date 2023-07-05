@@ -24,9 +24,10 @@ $border : 1px $borderRadius solid;
             // margin: auto;
             img{
                 width: 100%;
-                height: 100%;
                 object-fit: cover;
-                object-position: top;
+                object-position: center;
+
+
             }
         }
         &-sport{
@@ -35,7 +36,7 @@ $border : 1px $borderRadius solid;
             // border: 1px $border-color solid;
             &-title{
                 // border: 1px black solid;
-                height: 10%;  
+                height: 10%;
                 display: flex;
                 flex-wrap: nowrap;
                 &-texte{
@@ -104,12 +105,12 @@ $border : 1px $borderRadius solid;
                         display: inline-block;
                         margin-right: -96%;
                       }
-            
+
                       .checked{
                         color: orange;
                       }
                 }
-            
+
                p{
                 color: $border-color;
                }
@@ -136,46 +137,46 @@ $border : 1px $borderRadius solid;
                   width: 100%;
                   border-collapse: collapse;
                 }
-                
+
                 th,
                 td {
                   padding: 10px;
                   text-align: left;
                 }
-                
+
                 th {
                   background-color: #f2f2f2;
                 }
-                
+
                 td:first-child {
                   width: 10%;
                 }
-                
+
                 td:nth-child(2) {
                   width: 30%;
                 }
-                
+
                 td:nth-child(2) img {
                   max-width: 100%;
                   height: auto;
                 }
-                
+
                 td:nth-child(2) span {
                   display: block;
                   margin-top: 5px;
                 }
-                
+
                 td:nth-child(3),
                 td:nth-child(4),
                 td:nth-child(5) {
                   width: 15%;
                 }
-                
+
                 td:last-child,
                 td:nth-child(7) {
                   width: 10%;
                 }
-                
+
                 .detail-icon,
                 .cancel-icon {
                   width: 32px;
@@ -188,15 +189,15 @@ $border : 1px $borderRadius solid;
                   cursor: pointer;
                   transition: color 0.3s;
                 }
-                
+
                 .detail-icon:hover {
                   color: #388e3c;
                 }
-                
+
                 .cancel-icon {
                   color: #f44336;
                 }
-                
+
                 .cancel-icon:hover {
                   color: #d32f2f;
                 }
@@ -206,5 +207,4 @@ $border : 1px $borderRadius solid;
 }
 
 
-  
- 
+

@@ -23,6 +23,14 @@
                 </div>
             </div>
             <hr>
+            <div class="row list-titre">
+                <form action="{{ route('search-field', ['id_category' => $id_category]) }}" method="post">
+                    @csrf
+                    <input type="search" name="search" id="">
+                    <input type="submit" value="Rechercher">
+                </form>
+            </div>
+            <hr>
             <div class="row list-filtre">
                 <div class="col-md-10 list-filtre-category">
                     <nav class="navbar navbar-expand-lg navbar-light custom-navbar">

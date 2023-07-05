@@ -1,6 +1,7 @@
-@include('BO/header') 
+@include('BO/header')
 @include('BO/nav')
 
+<script src="{{asset('js/Chart.js')}}"></script>
 
 <link rel="stylesheet" href="{{ asset('css/BO/asset/abonnement.css') }}">
     <script src="{{asset('js/Chart.js')}}"></script>
@@ -29,7 +30,7 @@
                                             <select name="annee" id="mois" class="form-select">
                                                 @for($annee = 2023; $annee <= 2033; $annee++)
                                                   <option value="{{ $annee }}">{{ $annee }}</option>
-                                                @endfor  
+                                                @endfor
                                             </select>
                                         </div>
                                     </div>
@@ -69,7 +70,7 @@
                     </div>
                     <div class="col-md-6">
                         <h2>Montant obtenue</h2>
-                        <div class="chart">        
+                        <div class="chart">
                           <canvas id="myChart" width="30"></canvas>
                         </div>
                     </div>
@@ -105,7 +106,7 @@
                             <td>{{ $abonnement->getDuration()*$abonnement->getPrice() }}</td>
                           </tr>
                           @endforeach
-                           
+
                         </tbody>
                     </table>
                 </div>
@@ -153,8 +154,7 @@
                 }
             }
         });
-    </script>  
+    </script>
 </body>
 
 </html>
-    

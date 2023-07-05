@@ -11,6 +11,7 @@ Route::get('/list-field/{id_category}', [App\Http\Controllers\FOU\FieldControlle
 Route::get('/list-field', [App\Http\Controllers\FOU\FieldController::class, 'index'])->name('list-field-all-fou');
 Route::get('/field/calendar/{id_field}', [App\Http\Controllers\FOU\ReservationController::class, 'index'])->name('reserve');
 Route::get('/field/calendar/{id_field}/{date}', [App\Http\Controllers\FOU\ReservationController::class, 'index'])->name('reserve-date');
+Route::post('/field/list/search/{id_category}', [App\Http\Controllers\FOU\FieldController::class, 'search'])->name('search-field');
 Route::post('/reserve', [App\Http\Controllers\FOU\ReservationController::class, 'reserve'])->name('reserve');
 Route::get('/info-field/{id_field}', [InfoTerrain::class, 'index'])->name('info-field');
 Route::get('/carte', [InfoTerrain::class, 'afficheCarte']);
@@ -28,6 +29,7 @@ Route::get('/reservation/calcul_prix/{id_field}/{date_reservation}/{start_time}/
 Route::get('/user/account', [LogController::class, 'info'])->name('profil-user');
 Route::get('/infoTerrain/{id_field}', [InfoTerrain::class, 'index']);
 Route::get('/field/reservation/cancel/{id_reservation}', [App\Http\Controllers\FOU\ReservationController::class, 'cancel'])->name('cancel-reservation');
+Route::get('/field/reservation/facture/{id_reservation}', [App\Http\Controllers\FOU\ReservationController::class, 'facturer'])->name('facture-reservation');
 
 Route::get('/carte', [InfoTerrain::class, 'afficheCarte']);
 

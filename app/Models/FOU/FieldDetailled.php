@@ -1,6 +1,7 @@
 <?php
 namespace App\Models\FOU;
 
+use App\Models\FOU\PictureField;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 
@@ -19,7 +20,23 @@ class FieldDetailled extends Field{
     {
         parent::__construct();
     }
-
+    public static function search($text, $id_category) {
+        if ($id_category == 0) {
+            $sql = "SELECT v.id_field, v.id_category, v.category, v.subscribing_price, v.id_client, v.name, v.id_field_type, v.field_type, v.id_infrastructure, v.infrastructure, v.id_light, v.light, v.description, v.address, v.latitude, v.longitude, v.insert_date, v.field_files FROM v_field_detailled AS v WHERE name LIKE '%s%s%s' OR address LIKE '%s%s%s'";
+            $sql = sprintf($sql, '%' , $text, '%', '%', $text, '%');
+        } else {
+            $sql = "SELECT v.id_field, v.id_category, v.category, v.subscribing_price, v.id_client, v.name, v.id_field_type, v.field_type, v.id_infrastructure, v.infrastructure, v.id_light, v.light, v.description, v.address, v.latitude, v.longitude, v.insert_date, v.field_files FROM v_field_detailled AS v WHERE (name LIKE '%s%s%s' OR address LIKE '%s%s%s') AND id_category=%s";
+            $sql = sprintf($sql, '%' , $text, '%', '%', $text, '%', $id_category);
+        }
+        $field_db = DB::select($sql);
+        $res = array();
+        foreach ($field_db as $field_db) {
+            $temp = new FieldDetailled();
+            $temp->settingDBResult($field_db);
+            $res[] = $temp;
+        }
+        return $res;
+    }
 
     public static function filtre($id_category = '%', $id_infrastructure_array = [], $id_field_type_array = [], $id_light_array = [] , $date_reservation = null, $time = null , $tri = 'asc') {
         $sql = FieldDetailled::filtreQuery($id_category, $id_field_type_array, $id_light_array, $id_infrastructure_array, $date_reservation, $time , $tri);

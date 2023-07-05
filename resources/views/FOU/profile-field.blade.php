@@ -177,7 +177,7 @@
                             <label for="duration" class="form-label">Durée</label>
                             <input type="number" id="duration" class="form-control" name="duration">
                         </div>
-                        <p class="erreur">Votre date de réservation est déja prise !</p>
+                        {{-- <p class="erreur">Votre date de réservation est déja prise !</p> --}}
                         <div class="valider mt-3">
                             <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="modalReservation()">Valider</button>
                         </div>

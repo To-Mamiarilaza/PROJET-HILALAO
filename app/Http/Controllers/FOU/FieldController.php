@@ -15,6 +15,18 @@ use Illuminate\Support\Facades\Session;
 
 class FieldController extends Controller
 {
+    public function search(Request $request, $id_category=0) {
+        $text = $request->input("search");
+        $categories = Category::findAll();
+        $fields = FieldDetailled::search($text, $id_category);
+        $filters = Field::getFilters();
+        if (Session::get("user") !== null) {
+            $user = Session::get("user");
+            $notifications = UserNotification::getAllUserNotification($user->getIdUsers());
+            return view('FOU\list-terrain', ['fields' => $fields, 'categories' => $categories, 'id_category' => $id_category, 'filters' => $filters, 'notifications' => $notifications]);
+        }
+        return view('FOU\list-terrain', ['fields' => $fields, 'categories' => $categories, 'id_category' => $id_category, 'filters' => $filters]);
+    }
     public function detail($id_field) {
         $date = date('Y-m-d');
         $users = null;
