@@ -8,6 +8,7 @@ use App\Models\FOC\SuiviReservation\HistoriqueReservation;
 use App\Models\FOC\SuiviReservation\BoardReservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use App\Models\FOC\ClientNotification;
 
 class ReservationController extends Controller
 {
@@ -99,6 +100,9 @@ class ReservationController extends Controller
 
     public function getReservationOneWeek()
     {
+        $clientConnected = session()->get('clientConnected');
+        $notifications = ClientNotification::getAllClientNotification($clientConnected->getIdClient());
+       
         $data = Session::get('field');
         $rf_id_field = 1;
         $price = 10000;
@@ -155,7 +159,10 @@ class ReservationController extends Controller
 
         $reservationFields = $reservationField->getReservationsOneWeek($data->getIdField());
 
-        return view('FOC/reservation', ['reservationFields' => $reservationFields]);
+            return view('FOC/reservation', [
+                'reservationFields' => $reservationFields,
+                'notifications' => $notifications,
+            ]);
     }
 
     public function insertDirectReservation(Request $request)
@@ -239,29 +246,35 @@ class ReservationController extends Controller
 
     public function getAllReservation()
     {
-        $data = Session::get('field');
-        $rf_id_field = 1;
-        $price = 10000;
-        $field_id = 1;
-        $field_name = 'Terrain de football';
-        $field_category = 'Sports';
-        $subscribing_price = 5000;
-        $field_type = 'Outdoor';
-        $infrastructure = 'Stade';
-        $light = 'Non';
-        $address = '123 Rue du Terrain';
-        $longitude = 45.123456;
-        $latitude = -73.654321;
-        $description = 'Un terrain de football de qualité';
-        $id_reservation = 1;
-        $reservation_date = '2023-06-01';
-        $first_name = 'John';
-        $last_name = 'Doe';
-        $birth_date = '1990-01-01';
-        $phone_number = '0123456789';
-        $mail = 'john.doe@example.com';
-        $field_description = 'Un terrain de football de qualité';
-        $field_address = '123 Rue du Terrain';
+            $clientConnected = session()->get('clientConnected');
+            $notifications = ClientNotification::getAllClientNotification($clientConnected->getIdClient());
+       
+            $data = Session::get('field');
+            $start_time = '10:00';
+            $end_time = '11:30';
+            $rf_id_field = 1;
+            $price = 10000;
+            $field_id = 1;
+            $field_name = 'Terrain de football';
+            $field_category = 'Sports';
+            $subscribing_price = 5000;
+            $field_type = 'Outdoor';
+            $infrastructure = 'Stade';
+            $light = 'Non';
+            $address = '123 Rue du Terrain';
+            $longitude = 45.123456;
+            $latitude = -73.654321;
+            $description = 'Un terrain de football de qualité';
+            $id_reservation = 1;
+            $reservation_date = '2023-06-01';
+            $first_name = 'John';
+            $last_name = 'Doe';
+            $birth_date = '1990-01-01';
+            $phone_number = '0123456789';
+            $mail = 'john.doe@example.com';
+            $rv_field_name = 'Terrain de football';
+            $field_description = 'Un terrain de football de qualité';
+            $field_address = '123 Rue du Terrain';
 
         $reservationField = new Reservation_field(
             1,
@@ -295,7 +308,10 @@ class ReservationController extends Controller
 
         $reservationFields = $reservationField->getReservationsWithFields($data->getIdField());
 
-        return view('FOC/reservation', ['reservationFields' => $reservationFields]);
+            return view('FOC/reservation', [
+                'reservationFields' => $reservationFields,
+                'notifications' => $notifications,
+            ]);
+        } 
     }
-}
 ?>

@@ -80,6 +80,20 @@ class Discount
         return $datas;
     }
 
+    //Recuperer toutes les Remises d'un terrain
+    public static function getAllDiscountField($field)
+    {
+        $results = DB::select('SELECT * FROM discount WHERE id_field='.$field->getIdField());
+        $datas = array();
+        $i = 0;
+        foreach ($results as $row) {
+            $datas[$i] = new Discount($row->id_discount, Field::findById($row->id_field), $row->start, $row->end, $row->discount);
+            $i++;
+        }
+         
+        return $datas;
+     }
+
     //Recuperer les remises correspondant au parametre id
     public static function findById($id)
     {
@@ -92,7 +106,7 @@ class Discount
     public function create()
     {
         $req = "INSERT INTO discount VALUES ( default, %d, '%s', '%s', %d)";
-           $req = sprintf($req,$this->field->id_field,$this->start,$this->end,$this->discount);
+           $req = sprintf($req,$this->field->getIdField(),$this->start,$this->end,$this->discount);
            DB::insert($req);
        }
    
@@ -103,7 +117,7 @@ class Discount
         ->where('id_discount', $this->id_discount)
         ->update([
             'id_discount' => $this->id_discount,
-            'id_field' => $this->field->id_field,
+            'id_field' => $this->field->getIdField(),
             'start' => $this->start,
             'end' => $this->end,
             'discount' => $this->discount,

@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    @include('FOC/header')
+    @include('FOC/headerNotification');
     <div class="container">
         <h1 class="reservation-title my-4">Statistiques de réservations du terrain</h1>
         <div class="row">

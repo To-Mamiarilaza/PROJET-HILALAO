@@ -10,7 +10,7 @@
     <title>Listes des terrains</title>
 </head>
 <body>
-    @include('FOC/header')
+@include('FOC/headerNotification');
     <div class="container">
         <h1 class="accueil-text mt-4">Listes des terrains</h1>
         <p>Voila la liste de vos terrain, vous pouvez les gérer ici</p>

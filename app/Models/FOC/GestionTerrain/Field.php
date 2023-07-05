@@ -19,9 +19,10 @@ class Field {
     private $insert_date;
     private $field_files;
     private $pictureProfile;
+    private $state;
 
 
-    public function __construct($id_field, $category, $client, $name, $field_type, $infrastructure, $light, $description, $address, $latitude, $longitude, $insert_date, $field_files)
+    public function __construct($id_field, $category, $client, $name, $field_type, $infrastructure, $light, $description, $address, $latitude, $longitude, $insert_date, $field_files, $state)
     {
         $this->id_field = $id_field;
         $this->category = $category;
@@ -37,6 +38,7 @@ class Field {
         $this->insert_date = $insert_date;
         $this->field_files = $field_files;
         $this->pictureProfile = "";
+        $this->state = $state;
     }
 
 //Encapsulation
@@ -135,15 +137,21 @@ class Field {
         $this->pictureProfile = $values;
     }
 
+    public function getState() {
+        return $this->state;
+    }
+    public function setState($values) {
+        $this->state = $values;
+    }
 ///Fonctions de classe
     //Recuperer toutes les terrain
     public static function getAll()
     {
-        $results = DB::select('SELECT * FROM field');
+        $results = DB::select('SELECT * FROM field WHERE state!=3');
         $datas = array();
         $i = 0;
         foreach ($results as $row) {
-            $datas[$i] =  new Field($row->id_field, Category::findById($row->id_category), Client::findById($row->id_client), $row->name, FieldType::findById($row->id_field_type), Infrastructure::findById($row->id_infrastructure), Light::findById($row->id_light), $row->description, $row->address, $row->latitude, $row->longitude,  $row->insert_date,  $row->field_files);
+            $datas[$i] =  new Field($row->id_field, Category::findById($row->id_category), Client::findById($row->id_client), $row->name, FieldType::findById($row->id_field_type), Infrastructure::findById($row->id_infrastructure), Light::findById($row->id_light), $row->description, $row->address, $row->latitude, $row->longitude,  $row->insert_date,  $row->field_files, $row->state);
             $i++;
         }
         
@@ -153,11 +161,13 @@ class Field {
     //Recuperer toutes les terrain du client connecte
     public static function getFieldsClientConnectedById($idClientConnected)
     {
-        $results = DB::select('SELECT * FROM field WHERE id_client = '.$idClientConnected);
+        $sql = "SELECT * FROM field WHERE id_client=%d AND state!=3";
+        $sql = sprintf($sql,$idClientConnected);
+        $results = DB::select($sql);
         $datas = array();
         $i = 0;
         foreach ($results as $row) {
-            $datas[$i] =  new Field($row->id_field, Category::findById($row->id_category), Client::findById($row->id_client), $row->name, FieldType::findById($row->id_field_type), Infrastructure::findById($row->id_infrastructure), Light::findById($row->id_light), $row->description, $row->address, $row->latitude, $row->longitude,  $row->insert_date,  $row->field_files);
+            $datas[$i] =  new Field($row->id_field, Category::findById($row->id_category), Client::findById($row->id_client), $row->name, FieldType::findById($row->id_field_type), Infrastructure::findById($row->id_infrastructure), Light::findById($row->id_light), $row->description, $row->address, $row->latitude, $row->longitude,  $row->insert_date,  $row->field_files, $row->state);
             $i++;
         }
           
@@ -168,9 +178,8 @@ class Field {
     public static function findById($id)
     {
         $results = DB::table('field')->where('id_field', $id)->first();
-        $infra =Light::findById($results->id_light);
 
-        return  new Field($results->id_field,  Category::findById($results->id_category), Client::findById($results->id_client), $results->name, FieldType::findById($results->id_field_type), Infrastructure::findById($results->id_infrastructure), Light::findById($results->id_light), $results->description, $results->address, $results->latitude, $results->longitude,  $results->insert_date,  $results->field_files);
+        return  new Field($results->id_field,  Category::findById($results->id_category), Client::findById($results->id_client), $results->name, FieldType::findById($results->id_field_type), Infrastructure::findById($results->id_infrastructure), Light::findById($results->id_light), $results->description, $results->address, $results->latitude, $results->longitude,  $results->insert_date,  $results->field_files, $results->state);
     }
 
     public static function getLastInsertFieldByClient($client) {
@@ -180,7 +189,7 @@ class Field {
         $results = DB::select($req);
         $result = null;
         foreach ($results as $row) {
-            $result =  new Field($row->id_field, Category::findById($row->id_category), Client::findById($row->id_client), $row->name, FieldType::findById($row->id_field_type), Infrastructure::findById($row->id_infrastructure), Light::findById($row->id_light), $row->description, $row->address, $row->latitude, $row->longitude,  $row->insert_date,  $row->field_files);
+            $result =  new Field($row->id_field, Category::findById($row->id_category), Client::findById($row->id_client), $row->name, FieldType::findById($row->id_field_type), Infrastructure::findById($row->id_infrastructure), Light::findById($row->id_light), $row->description, $row->address, $row->latitude, $row->longitude,  $row->insert_date,  $row->field_files, $row->state);
         }
           
          return $result;
@@ -189,10 +198,17 @@ class Field {
     //Sauvegarder un terrain dans la base
     public function create($client)
     {
-        $req = "INSERT INTO field VALUES ( %s, %d, %d, '%s', %d, %d, %d, '%s', '%s', %f, %f, '%s', '%s')";
+        $req = "INSERT INTO field VALUES ( %s, %d, %d, '%s', %d, %d, %d, '%s', '%s', %f, %f, '%s', '%s', 1)";
         $req = sprintf($req,$this->id_field,$this->category->getIdCategory(),$this->client->getIdClient(),$this->name,$this->field_type->getIdFieldType(),$this->infrastructure->getIdInfrastructure(),$this->light->getIdLight(),$this->description,$this->address,$this->latitude,$this->longitude, $this->insert_date, $this->field_files);
         DB::insert($req);
+        $lastFieldInsert = Field::getLastInsertFieldByClient($client);
+        $insertAdmin = "INSERT INTO admin_notification VALUEs (DEFAULT, 21, now(), 0)";
+        DB::insert($insertAdmin);
         $field = Field::getLastInsertFieldByClient($client);
+        $lastAdminNotify = Client::getLastInsertAdminNotif();
+        $insertFieldNotif = "INSERT INTO field_adhesion_notification VALUES(".$lastAdminNotify->id_admin_notification.", ".$client->getIdClient().", ".$lastFieldInsert->getIdField().")";
+        DB::insert($insertFieldNotif);
+
         $pictureProfileField = new PictureField('default', 'terrainInconnu.jpg',TypePicture::findById(1),  $field);
         $pictureSecond1 = new PictureField('default', 'terrainInconnu.jpg',TypePicture::findById(2),  $field);
         $pictureSecond2 = new PictureField('default', 'terrainInconnu.jpg',TypePicture::findById(2),  $field);
@@ -207,15 +223,15 @@ class Field {
      public function update()
      {
          DB::table('field')
-         ->where('id_fiels', $this->id_field)
+         ->where('id_field', $this->id_field)
          ->update([
              'id_field' => $this->id_field, 
-             'id_category' => $this->category->id_category,
-             'id_client' => $this->client->id_client, 
+             'id_category' => $this->category->getIdategory(),
+             'id_client' => $this->client->getIdClient(), 
              'name' => $this->name, 
-             'id_field_type' => $this->field_type->id_field_type, 
-             'id_infrastructe' => $this->infrastructure->id_infrastructure, 
-             'id_light' => $this->light->id_light,
+             'id_field_type' => $this->field_type->getIdFieldType(), 
+             'id_infrastructure' => $this->infrastructure->getIdInfrastructure(), 
+             'id_light' => $this->light->getIdight(),
              'description' => $this->description,
              'address' => $this->address,
              'latitude' => $this->latitude,
@@ -236,13 +252,13 @@ class Field {
     //Rchercehe multicritere
     public static function searchMultiCritere($critere, $idCategory) {
         
-        $req = "SELECT * FROM field WHERE name like '%s%s%s' AND id_category = %d";
+        $req = "SELECT * FROM field WHERE name like '%s%s%s' AND id_category = %d AND state!=3";
         $req = sprintf($req,'%',$critere,'%',$idCategory);
         $results = DB::select($req);
         $datas = array();
         $i = 0;
         foreach ($results as $row) {
-            $datas[$i] =  new Field($row->id_field, Category::findById($row->id_category), Client::findById($row->id_client), $row->name, FieldType::findById($row->id_field_type), Infrastructure::findById($row->id_infrastructure), Light::findById($row->id_light), $row->description, $row->address, $row->latitude, $row->longitude,  $row->insert_date,  $row->field_files);
+            $datas[$i] =  new Field($row->id_field, Category::findById($row->id_category), Client::findById($row->id_client), $row->name, FieldType::findById($row->id_field_type), Infrastructure::findById($row->id_infrastructure), Light::findById($row->id_light), $row->description, $row->address, $row->latitude, $row->longitude,  $row->insert_date,  $row->field_files, $row->state);
             $i++;
         }
           
@@ -262,5 +278,29 @@ class Field {
 
         return $fields;
     }
+
+     //Supprimer un terrain
+     public function deleteField()
+     {
+         DB::table('field')
+         ->where('id_field', $this->id_field)
+         ->update([
+             'id_field' => $this->id_field, 
+             'id_category' => $this->category->getIdCategory(),
+             'id_client' => $this->client->getIdClient(), 
+             'name' => $this->name, 
+             'id_field_type' => $this->field_type->getIdFieldType(), 
+             'id_infrastructure' => $this->infrastructure->getIdInfrastructure(), 
+             'id_light' => $this->light->getIdLight(),
+             'description' => $this->description,
+             'address' => $this->address,
+             'latitude' => $this->latitude,
+             'longitude' => $this->longitude,
+             'insert_date' => $this->insert_date,
+             'field_files' => $this->field_files,
+             'state' => 3,
+         ]);
+     }
+ 
 }
 ?>

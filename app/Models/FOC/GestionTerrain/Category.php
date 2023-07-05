@@ -45,7 +45,7 @@ class Category
     //Recuperer toutes les category
     public static function getAll()
     {
-        $results = DB::select('SELECT * FROM category');
+        $results = DB::select('SELECT * FROM category WHERE status=1');
         $datas = array();
         $i = 0;
         foreach ($results as $row) {

@@ -8,14 +8,19 @@
   cursor: pointer;
 }
 
+.hidden-form {
+  display: none;
+}
+
 .dispo__titre {
   color: #33658A;
   letter-spacing: 5px;
   font-size: 20px;
 }
 .dispo .list-parametre {
-  max-height: 150px;
-  overflow-x: auto;
+  max-height: 200px;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 .dispo .list-parametre .parametre {
   width: 80%;

@@ -11,7 +11,7 @@
     <title>HILALAO | TERRAIN - UPLOAD FILE</title>
 </head>
 <body>
-    @include('FOC/header');
+@include('FOC/headerNotification');
 
     <section>
         <div class="container mt-5">
@@ -34,7 +34,7 @@
                             <form enctype="multipart/form-data" action="{{ route('addFieldFile') }}" method="POST" class="col-md-12 form-content">
                                 @csrf
                                 <div class="row info-terrain">
-                                    <div class="col-md-6">
+                                    <div class="col-md-6">         
                                         <label for="dossierTerrain" class="control-label"><b>Dossier a fournir</b></label>
                                     </div>
                                     <div class="col-md-6">
