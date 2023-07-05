@@ -18,7 +18,7 @@
                             <a class="nav-link" href="/filtreBoard" onclick="return false;">Tableau de Bord</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('list-fieldFOC') }}" onclick="return false;">Mes Terrains</a>
+                            <a class="nav-link" href="{{ route('list-fieldFoc') }}" onclick="return false;">Mes Terrains</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#" onclick="return false;">Mon compte</a>

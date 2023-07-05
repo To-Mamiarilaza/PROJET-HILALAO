@@ -33,7 +33,7 @@ class Client
         $this->setPwd($pwd);
         $this->setStatus($status);
         $this->sign_up_date = $sign_up_date;
-        $this->cin = $cin->getIdCin();
+        $this->cin = $cin;
         $this->setCustomerPicture($customer_picture);
     }
 
@@ -159,7 +159,7 @@ class Client
 
     public static function lastClientId()
     {
-        $result = DB::table('client')->orderBy('id_client', 'desc')->value('id_client');
+        $result = DB::table('client')->orderBy('id_client', 'desc')->first();
     
         return $result ? $result : null;
     }
@@ -203,15 +203,21 @@ class Client
         try {
             $birthDate = new DateTime($this->birth_date);
             $formattedBirthDate = $birthDate->format('Y-m-d');
-            $req = "INSERT INTO client VALUES (DEFAULT, '%s', '%s', '%s', '%s', '%s', '%s', '%s', %d, DEFAULT, %d)";
-            $req = sprintf($req, $this->first_name, $this->last_name, $this->phone_number, $this->mail, $this->address, $formattedBirthDate, $this->pwd, $this->status->getIdStatus(), $this->cin->getIdCin());
+            $req = "INSERT INTO client VALUES (DEFAULT, '%s', '%s', '%s', '%s', '%s', '%s', '%s', %d, DEFAULT,%d, '%s')";
+            $req = sprintf($req, $this->first_name, $this->last_name, $this->phone_number, $this->mail, $this->address, $formattedBirthDate, $this->pwd, $this->status->getIdStatus(), $this->cin->getIdCin(), $this->getCustomerPicture());
             $insertAdmin = "INSERT INTO admin_notification VALUEs (DEFAULT, 20, now(), 0)";
+
             DB::insert($req);
             DB::insert($insertAdmin);
+            $idLastClientInsert = Client::lastClientId();
             $lastAdminNotify = Client::getLastInsertAdminNotif();
-            $insertClientAdhesion = "INSERT INTO client_adhesion_notification VALUES(".$lastAdminNotify->id_admin_notification.", ".$lastAdminNotify->id_client.")";
+
+            $insertClientAdhesion = "INSERT INTO client_adhesion_notification VALUES(".$lastAdminNotify->id_admin_notification.", ".$idLastClientInsert->id_client.")";
+            echo "io";
+
             DB::insert($insertClientAdhesion);
         } catch (\Exception $e) {
+            echo $e->getMessage();
             throw new \Exception("Erreur lors de la création du client : " . $e->getMessage());
         }
     }
@@ -276,4 +282,5 @@ class Client
     
         return new Client($results->id_client, $results->first_name, $results->last_name, $results->phone_number, $results->mail, $results->address, $results->birth_date, $results->pwd, Status::findById($results->id_status), $results->sign_up_date, Cin::findById($results->id_cin),  $results->customer_picture);
     }  
+
 }
