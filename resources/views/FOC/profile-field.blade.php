@@ -14,6 +14,240 @@
 <body>
     @include('FOC/headerNotification')
 
+    <!-- Modal pour ajouter une nouvelle indisponibilité -->
+    <form action="{{ route('insertIndispo') }}" class="form" method="POST">
+        @csrf
+        <div class="modal fade" id="new-indisponible" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Marquer une indisponibilité</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p class="unavailability-p">Les indisponibilités doit être établie 2 semaines avant au moins</p>
+                        <div class="insertion">
+                            <div class="form-group">
+                                <label for="new-date" class="form-label">Date</label>
+                                <input type="date" class="form-control" id="new-date" name="date-debut">
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="heure-debut" class="form-label">Heure début</label>
+                                        <input type="time" class="form-control" id="heure-debut" name="heure-debut">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="heure-fin" class="form-label">Heure fin</label>
+                                        <input type="time" class="form-control" id="heure-fin" name="heure-fin">
+                                    </div>
+                                </div>
+                            </div>
+                            @isset($error)
+                            <p class="error"> <i class="fas fa-info-circle mx-3"></i>{{ $error }}</p>
+                            @endisset
+                            <div class="my-3">
+                                <a href="" class="link my-3" data-bs-toggle="modal" data-bs-target="#long-unavailability" data-bs-dismiss="modal">Indisponibilités à longue durée</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Valider</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!-- Modal pour afficher les unavailability -->
+    <div class="modal fade" id="list-unavailability" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Date indisponible</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group list-unavailability mb-3">
+                        @foreach ($indispo as $item)
+                        <li class="list-group-item"> <span>{{ $item->getUnavailabilityDate() }}</span> de <span>{{ $item->getStartTime() }} H </span> à <span>{{ $item->getEndTime() }} H</span> <a href="/deleteIndispo?idIndispo={{ $item->getIdUnavailability() }}"><i class="fas fa-times"></i></a> </li>
+                        @endforeach
+                    </ul>
+                    <a href="" class="link my-4" data-bs-toggle="modal" data-bs-target="#new-indisponible" data-bs-dismiss="modal">Marquer des indisponibilités</a>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal pour afficher les remises -->
+    <div class="modal fade" id="list-remise" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Remise</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group list-unavailability mb-3">
+                        @foreach ($discount as $item)
+                        <li class="list-group-item"> <span>{{ $item->getStart() }}</span> à <span>{{ $item->getEnd() }}</span> : <span>{{ $item->getDiscount() }} %</span> <a href="/deleteDiscount?idDiscount={{ $item->getIdDiscount() }}"><i class="fas fa-times"></i></a> </li>
+                        @endforeach
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal pour marquer des remises -->
+    <form action="{{ route('addRemise') }}" class="form" method="POST">
+        @csrf
+        <div class="modal fade" id="add-remise" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ajout de remise</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="insertion">
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="heure-debut" class="form-label">Date début</label>
+                                        <input type="date" class="form-control" id="heure-debut" name="date-debut">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="heure-fin" class="form-label">Date fin</label>
+                                        <input type="date" class="form-control" id="heure-fin" name="date-fin">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group mt-3">
+                                <label for="new-date" class="form-label">Remise</label>
+                                <input type="number" class="form-control" id="new-date" placeholder="Remise" name="remise">
+                            </div>
+                            @isset($error)
+                            <p class="error"> <i class="fas fa-info-circle mx-3"></i>{{ $error }}</p>
+                            @endisset
+                            <div class="my-3">
+                                <a href="" class="link my-3" data-bs-toggle="modal" data-bs-target="#list-remise" data-bs-dismiss="modal">Voir listes des remises</a>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Valider</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!-- Modal pour Insertion indisponibilités à longue durée -->
+    <form action="{{ route('insertIndispo') }}" method="POST">
+        @csrf
+        <div class="modal fade" id="long-unavailability" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Marquer une indisponibilité à longue durée</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p class="unavailability-p">Les indisponibilités doit être établie 2 semaines avant au moins</p>
+                        <div class="insertion">
+                            <div class="form-group mt-3">
+                                <label for="new-date" class="form-label">Date Début</label>
+                                <input type="date" class="form-control" id="date-debut" name="date-debut">
+                            </div>
+
+                            <div class="form-group mt-3">
+                                <label for="new-date" class="form-label">Date Fin</label>
+                                <input type="date" class="form-control" id="date-fin" name="date-fin">
+                            </div>
+                            @isset($error)
+                            <p class="error"> <i class="fas fa-info-circle mx-3"></i>{{ $error }}</p>
+                            @endisset
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Valider</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!-- Modal pour valider la suppression d'un terrain -->
+    <div class="modal fade" id="suppression" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Suppression d'un terrain</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Voulez vous vraiment supprimé votre terrain ?</p>
+                    <div class="choix d-flex">
+                        <a href="{{ route('deleteField') }}" class="btn btn-danger px-3 mx-2">OUI</a>
+                        <a href="" class="btn btn-info px-3 mx-2">NON</a>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal pour changer les photos du terrain -->
+    <form enctype="multipart/form-data" id="updatePhotoForm" action="{{ route('editImageProfile') }}" method="POST" class="updatePhoto">
+        @csrf
+        <div class="modal fade" id="updatePhoto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Changer les photos du terrain</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <img id="recentPhoto" src="{{ asset('image/elgeco.jpg') }}" alt="Image à changer">
+                            </div>
+                            <div class="col-md-7">
+                                <label for="file" class="form-label">Choisir l'image pour remplacer l'existant</label>
+                                <input type="file" id="file" class="form-control" name="image">
+
+                                <input type="hidden" name="idImage" />
+                                @isset($error)
+                                <p class="error"> <i class="fas fa-info-circle mx-3"></i>{{ $error }}</p>
+                                @endisset
+
+                                <input type="hidden" name="idImage" />
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Valider</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
     <div class="container mt-4">
         <div class="row gx-5">
             <div class="col-md-4">
@@ -82,7 +316,7 @@
                 <div class="dispo">
                     <h3 class="dispo__titre mt-3"> DISPONIBILITE ET PRIX</h3>
                     <p class="dispo_text">Liste de vos paramètrage du terrains. Les disponibilités et prix sont affichée dessus : </p>
-                    
+
                     <div class="list-parametre listes-parametres tarif-detail" id="listes-parametres">
 
                     </div>
@@ -112,7 +346,7 @@
                     </div>
                     <div class="col-md-5 my-2">
                         <div class="border p-3">
-                            <a href ="{{ route('selectReservation') }}">
+                            <a href="{{ route('selectReservation') }}">
                                 <i class="fas fa-calendar-alt mx-3"></i>
                                 Suivie de réservation
                             </a>
@@ -159,238 +393,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Modal pour valider la suppression d'un terrain -->
-    <div class="modal fade" id="suppression" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Suppression d'un terrain</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Voulez vous vraiment supprimé votre terrain ?</p>
-                    <div class="choix d-flex">
-                        <a href="{{ route('deleteField') }}" class="btn btn-danger px-3 mx-2">OUI</a>
-                        <a href="" class="btn btn-info px-3 mx-2">NON</a>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal pour changer les photos du terrain -->
-    <form enctype="multipart/form-data" id="updatePhotoForm" action="{{ route('editImageProfile') }}" method="POST" class="updatePhoto">
-        @csrf
-        <div class="modal fade" id="updatePhoto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Changer les photos du terrain</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-md-5">
-                                <img id="recentPhoto" src="{{ asset('image/elgeco.jpg') }}" alt="Image à changer">
-                            </div>
-                            <div class="col-md-7">
-                                <label for="file" class="form-label">Choisir l'image pour remplacer l'existant</label>
-                                <input type="file" id="file" class="form-control" name="image">
-
-                                <input type="hidden" name="idImage"/>
-                                @isset($error)
-                                <p class="error"> <i class="fas fa-info-circle mx-3"></i>{{ $error }}</p>
-                                @endisset
-
-                                <input type="hidden" name="idImage" />
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Valider</button>
-                </div>
-            </div>
-        </div>
-    </form>
-
-    <!-- Modal pour afficher les unavailability -->
-    <div class="modal fade" id="list-unavailability" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Date indisponible</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <ul class="list-group list-unavailability mb-3">
-                        @foreach ($indispo as $item)
-                        <li class="list-group-item"> <span>{{ $item->getUnavailabilityDate() }}</span> de <span>{{ $item->getStartTime() }} H </span> à <span>{{ $item->getEndTime() }} H</span> <a href="/deleteIndispo?idIndispo={{ $item->getIdUnavailability() }}"><i class="fas fa-times"></i></a> </li>
-                        @endforeach
-                    </ul>
-                    <a href="" class="link my-4" data-bs-toggle="modal" data-bs-target="#new-indisponible" data-bs-dismiss="modal">Marquer des indisponibilités</a>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal pour afficher les remises -->
-    <div class="modal fade" id="list-remise" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Remise</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <ul class="list-group list-unavailability mb-3">
-                        @foreach ($discount as $item)
-                        <li class="list-group-item"> <span>{{ $item->getStart() }}</span> à <span>{{ $item->getEnd() }}</span> : <span>{{ $item->getDiscount() }} %</span> <a href="/deleteDiscount?idDiscount={{ $item->getIdDiscount() }}"><i class="fas fa-times"></i></a> </li>
-                        @endforeach
-                    </ul>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- Modal pour Insertion indisponibilités à longue durée -->
-    <form action="{{ route('insertIndispo') }}" method="POST">
-        @csrf
-        <div class="modal fade" id="long-unavailability" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Marquer une indisponibilité à longue durée</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p class="unavailability-p">Les indisponibilités doit être établie 2 semaines avant au moins</p>
-                        <div class="insertion">
-                            <div class="form-group mt-3">
-                                <label for="new-date" class="form-label">Date Début</label>
-                                <input type="date" class="form-control" id="date-debut" name="date-debut">
-                            </div>
-
-                            <div class="form-group mt-3">
-                                <label for="new-date" class="form-label">Date Fin</label>
-                                <input type="date" class="form-control" id="date-fin" name="date-fin">
-                            </div>
-                            @isset($error)
-                                <p class="error"> <i class="fas fa-info-circle mx-3"></i>{{ $error }}</p>
-                            @endisset
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Valider</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
-
-    <!-- Modal pour marquer des remises -->
-    <form action="{{ route('addRemise') }}" class="form" method="POST">
-        @csrf
-        <div class="modal fade" id="add-remise" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Ajout de remise</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="insertion">
-                            <div class="row mt-3">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="heure-debut" class="form-label">Date début</label>
-                                        <input type="date" class="form-control" id="heure-debut" name="date-debut">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="heure-fin" class="form-label">Date fin</label>
-                                        <input type="date" class="form-control" id="heure-fin" name="date-fin">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group mt-3">
-                                <label for="new-date" class="form-label">Remise</label>
-                                <input type="number" class="form-control" id="new-date" placeholder="Remise" name="remise">
-                            </div>
-                            @isset($error)
-                                <p class="error"> <i class="fas fa-info-circle mx-3"></i>{{ $error }}</p>
-                            @endisset
-                            <div class="my-3">
-                                <a href="" class="link my-3" data-bs-toggle="modal" data-bs-target="#list-remise" data-bs-dismiss="modal">Voir listes des remises</a>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Valider</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
-
-    <!-- Modal pour ajouter une nouvelle indisponibilité -->
-    <form action="{{ route('insertIndispo') }}" class="form" method="POST">
-        @csrf
-        <div class="modal fade" id="new-indisponible" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Marquer une indisponibilité</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p class="unavailability-p">Les indisponibilités doit être établie 2 semaines avant au moins</p>
-                        <div class="insertion">
-                            <div class="form-group">
-                                <label for="new-date" class="form-label">Date</label>
-                                <input type="date" class="form-control" id="new-date" name="date-debut">
-                            </div>
-                            <div class="row mt-3">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="heure-debut" class="form-label">Heure début</label>
-                                        <input type="time" class="form-control" id="heure-debut" name="heure-debut">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="heure-fin" class="form-label">Heure fin</label>
-                                        <input type="time" class="form-control" id="heure-fin" name="heure-fin">
-                                    </div>
-                                </div>
-                            </div>
-                            @isset($error)
-                                <p class="error"> <i class="fas fa-info-circle mx-3"></i>{{ $error }}</p>
-                            @endisset
-                            <div class="my-3">
-                                <a href="" class="link my-3" data-bs-toggle="modal" data-bs-target="#long-unavailability" data-bs-dismiss="modal">Indisponibilités à longue durée</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Valider</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
 
     <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/FOC/disponibility2.js') }}"></script>
