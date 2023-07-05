@@ -31,6 +31,7 @@ class LoginController extends Controller
             Session::put('account_admin', $account);
             Session::save();
             $statistiqueController = app(StatistiqueController::class);
+            echo "---------------";
             return $statistiqueController->statistique('statistique');
         } catch (Exception $e) {
             $errorMessage = $e->getMessage();

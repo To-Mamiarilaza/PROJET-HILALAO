@@ -41,7 +41,7 @@
                     <input type="checkbox" class="form-content__input form-content__input--showing-password" onclick="showPassword()">
                     <label for="form-content__label--showing-password">Show Password</label>
                 </div>
-                <button type="submit" class="form-content__input--submit">SIGN IN</button>
+                <button type="submit" class="form-content__input--submit">LOGIN IN</button>
             </form>
         </div>
         <p>Don't have a account? Sign up</p>
