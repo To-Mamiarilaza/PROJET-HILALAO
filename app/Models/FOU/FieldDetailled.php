@@ -1,5 +1,6 @@
 <?php
 namespace App\Models\FOU;
+
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,6 +13,7 @@ class FieldDetailled extends Field{
     private $light;
     private $availability;
     private $reservations;
+    private $pictures;
 
     public function __construct()
     {
@@ -197,6 +199,12 @@ class FieldDetailled extends Field{
     public function setReservations($values) {
         $this->reservations = $values;
     }
+    public function getPictures() {
+        return $this->pictures;
+    }
+    public function setPictures($values) {
+        $this->pictures = $values;
+    }
 
     public function getDisponibility() {
         $availability = [];
@@ -213,6 +221,7 @@ class FieldDetailled extends Field{
         $this->setLight($result->light);
         $this->setAvailability(Availability::findByIdField($result->id_field));
         $this->setReservations(Reservation::findActifReservationByIdField($result->id_field));
+        $this->setPictures(PictureField::getPictureField($this));
     }
     protected function settingDBResultWithoutReservation($result) {
         parent::settingDBResult($result);
@@ -222,6 +231,7 @@ class FieldDetailled extends Field{
         $this->setInfrastructure($result->infrastructure);
         $this->setLight($result->light);
         $this->setAvailability(Availability::findByIdField($result->id_field));
+        $this->setPictures(PictureField::getPictureField($this));
     }
 }
 ?>

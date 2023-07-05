@@ -88,8 +88,10 @@
                                 <td>Sport 1</td>
                                 <td>{{ $reservation->getStartTime()->format('H:i') }}</td>
                                 <td>{{ $reservation->getEndTime()->format('H:i') }}</td>
+                                @if (!$reservation->getIsPast())
                                 <td><div class="detail-icon"><i class="fas fa-eye"></i></div></td>
-                                <td><div class="cancel-icon"><i class="fas fa-times"></i></div></td>
+                                <td><a href="{{ route('cancel-reservation', ['id_reservation'=>$reservation->getIdReservation()]) }}"><div class="cancel-icon"><i class="fas fa-times"></i></div></td>
+                                @endif
                             </tr>
                             @endforeach
                             <!-- Ajoutez ici d'autres lignes de réservation -->

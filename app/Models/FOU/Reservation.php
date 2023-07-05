@@ -17,6 +17,7 @@ class Reservation {
     private $end_time;
     private $date_heure_reservation;
     private $montant;
+    private $isPast;
 
     public static function prepareReservation($id_field, $id_users,$reservation_date, $start_time, $duration, $montant) {
         $reservation = new Reservation();
@@ -46,6 +47,16 @@ class Reservation {
         $res = array();
         foreach ($reservations_db as $reservation_db) {
             $res[] = Reservation::settingDBResult($reservation_db);
+        }
+        return $res;
+    }
+    public static function findById($id) {
+        $sql = 'SELECT id_reservation, reservation_date, id_users, start_time, id_field, duration, end_time, price FROM "public".v_reservation_detailled f WHERE id_reservation = %s';
+        $sql = sprintf($sql, $id);
+        $reservations_db = DB::select($sql);
+        $res = null;
+        foreach ($reservations_db as $reservation_db) {
+            $res = Reservation::settingDBResult($reservation_db);
         }
         return $res;
     }
@@ -82,6 +93,12 @@ class Reservation {
         return $res;
     }
 
+    public function cancel() {
+        $sql = "UPDATE reservation SET state=3 WHERE id_reservation=%s";
+        $sql = sprintf($sql, $this->getIdReservation());
+        DB::update($sql);
+    }
+
     public static function findDirectReservationByIdField($id_field) {
         $sql = 'SELECT id_direct_reservation, reservation_date, client_name, start_time, id_field, duration, end_time FROM "public".v_direct_reservation f WHERE id_field = %s';
         $sql = sprintf($sql, $id_field);
@@ -107,11 +124,11 @@ class Reservation {
 
     public static function findUsersReservation($id_users, $id_field = null) {
         if ($id_field == null) {
-            $sql = 'SELECT id_reservation, reservation_date, id_users, start_time, id_field, duration, end_time, price FROM "public".v_actif_reservation f WHERE id_users = %s';
+            $sql = 'SELECT id_reservation, reservation_date, id_users, start_time, id_field, duration, end_time, price FROM "public".v_actif_reservation f WHERE id_users = %s AND state!=3 ORDER BY reservation_date desc';
             $sql = sprintf($sql, $id_users);
         }
         else {
-            $sql = 'SELECT id_reservation, reservation_date, id_users, start_time, id_field, duration, end_time, price FROM "public".v_actif_reservation f WHERE id_field = %s AND id_users = %s';
+            $sql = 'SELECT id_reservation, reservation_date, id_users, start_time, id_field, duration, end_time, price FROM "public".v_actif_reservation f WHERE id_field = %s AND id_users = %s AND state!=3 ORDER BY reservation_date desc';
             $sql = sprintf($sql, $id_field, $id_users);
         }
         $reservations_db = DB::select($sql);
@@ -156,6 +173,7 @@ class Reservation {
     }
     public function setReservationDate($values) {
         $this->reservation_date = $values;
+        if ($this->reservation_date < new DateTime()) $this->setIsPast(true);
     }
     public function getIdUsers() {
         return $this->id_users;
@@ -210,6 +228,12 @@ class Reservation {
     }
     public function setField($values) {
         $this->field = $values;
+    }
+    public function getIsPast() {
+        return $this->isPast;
+    }
+    public function setIsPast($values) {
+        $this->isPast = $values;
     }
 
     public static function settingDBResult($result) {
