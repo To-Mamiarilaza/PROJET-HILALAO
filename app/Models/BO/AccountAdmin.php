@@ -114,7 +114,6 @@ class AccountAdmin
     {
         $req = "SELECT * FROM account_admin WHERE mail = '%s' AND pwd = '%s'";
         $req = sprintf($req, $mail, $pwd);
-        
         $account = DB::select($req);
         if (count($account) > 0) {
             $result = $account[0];

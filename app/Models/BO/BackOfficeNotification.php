@@ -3,8 +3,8 @@
 namespace App\Models\BO;
 
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Date;
 use Carbon\Carbon;
+use DateTime;
 
 class BackOfficeNotification
 {
@@ -169,5 +169,62 @@ class BackOfficeNotification
         });
 
         return $result;
+    }
+
+    public static function insert_client_notification($id_client,$state){
+        try{
+            $req = "insert into client_notification (id_client, id_type_notification,date_notification,etat) values (%s,%s,'%s',0)";
+            
+            $date = new DateTime();
+            $req = sprintf($req,$id_client,$state,$date->format('Y-m-d h:i:s'));
+            DB::insert($req);
+        }catch(Exception $e){
+            $e->getMessage();
+        }
+    }
+    
+    public static function getLastClientNotification(){
+        try{
+            $req = "select * from client_notification order by id_client_notification desc";
+            $userNotifications = DB::select($req);
+            $notification = null;
+    
+            if ($userNotifications != null) {
+                $userNotification = new BackOfficeNotification(
+                    $userNotifications[0]->id_client_notification,
+                    $userNotifications[0]->id_type_notification,
+                    $userNotifications[0]->date_notification,
+                    $userNotifications[0]->etat
+                );
+                $userNotification->idClient = $userNotifications[0]->id_client;
+                $notification = $userNotification;
+            }
+    
+            return $notification;
+        }catch(Exception $e){
+            $e->getMessage();
+        }
+    }
+
+    public static function insert_client_validation($state){
+        try{
+            $id_client_notification = BackOfficeNotification::getLastClientNotification()->idAdminNotification;
+            $req = "insert into client_validation (id_client_notification, resultat) values (%s,%s)";
+            $req = sprintf($req,$id_client_notification,$state);
+            DB::insert($req);
+        }catch(Exception $e){
+            $e->getMessage();
+        }
+    }
+
+    public static function insert_field_validation($id_field,$state){
+        try{
+            $id_client_notification = BackOfficeNotification::getLastClientNotification()->idAdminNotification;
+            $req = "insert into field_validation (id_client_notification,id_field, resultat) values (%s,%s,%s)";
+            $req = sprintf($req,$id_client_notification,$id_field,$state);
+            DB::insert($req);
+        }catch(Exception $e){
+            $e->getMessage();
+        }
     }
 }

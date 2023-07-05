@@ -72,31 +72,33 @@ use App\Models\BO\Statistique;
     </section>
     <script src="{{ asset('css/BO/asset/bootstrap.bundle.min.js') }}"></script>
     <script>
-    function changeNotificationState(element) {
-        var container = element.closest('li');
-        container.remove();
+        function changeNotificationState(element) {
+            var container = element.closest('li');
+            container.remove();
 
-        var notifContainer = document.getElementById('notification-list');
-        var nombre = notifContainer.getElementsByTagName('li').length;
-        if (nombre == 0) {
-            document.getElementById('rond-rouge').remove();
-            notifContainer.classList.remove('dropdown-menu');
-        }
-
-        var notificationId = element.getAttribute('data-notification-id');
-
-        var xhr = new XMLHttpRequest();
-
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                // Traitement de la réponse ici
-                var response = xhr.responseText;
-                console.log(response);
+            var notifContainer = document.getElementById('notification-list');
+            var nombre = notifContainer.getElementsByTagName('li').length;
+            if (nombre == 0) {
+                document.getElementById('rond-rouge').remove();
+                notifContainer.classList.remove('dropdown-menu');
             }
-        };
 
-        xhr.open('GET', '/BackOfficeNotification/' + notificationId, true);
+            var notificationId = element.getAttribute('data-notification-id');
 
-        xhr.send();
-    }
+            var xhr = new XMLHttpRequest();
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    // Traitement de la réponse ici
+                    var response = xhr.responseText;
+                    console.log(response);
+
+                    // Redirection vers le lien
+                    window.location.href = element.getAttribute('href');
+                }
+            };
+
+            xhr.open('GET', '/BackOfficeNotification/' + notificationId, true);
+            xhr.send();
+        }
 </script>

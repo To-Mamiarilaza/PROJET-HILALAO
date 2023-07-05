@@ -30,8 +30,6 @@ class AbonnementController extends Controller
         $all = $model->getAllAbonnenent();
         $categories = $categoryModel->getAllCategory();
         
-        // return view('BO.abonnement', ['all' => $all, 'categories' => $categories]);
-        
         $selectedCategorie = $request->input('categorie');
         $selectedMonth = $request->input('mois');
         $selectedYear = $request->input('annee');

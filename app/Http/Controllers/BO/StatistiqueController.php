@@ -30,7 +30,7 @@ class StatistiqueController extends Controller
         $client = new DetailClient();
         $allCategories = $category->getAllCategory();
         $currentYear = date("Y");
-        $nbUsers = Statistique::getDataUsersYear($currentYear); 
+        $nbUsers = Statistique::getDataUsersYear($currentYear);
         $nbClients = Statistique::getDataClientsYear($currentYear); 
         $nbTerrains = Statistique::getDataTerrainsYear($currentYear, 0); 
         $clients = $client->getDetailClients();

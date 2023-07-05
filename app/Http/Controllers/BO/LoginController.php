@@ -4,7 +4,6 @@ namespace App\Http\Controllers\BO;
 use Exception;
 use App\Http\Controllers\Controller;
 use App\Models\BO\AccountAdmin;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
 
@@ -32,6 +31,7 @@ class LoginController extends Controller
             Session::put('account_admin', $account);
             Session::save();
             $statistiqueController = app(StatistiqueController::class);
+            echo "---------------";
             return $statistiqueController->statistique('statistique');
         } catch (Exception $e) {
             $errorMessage = $e->getMessage();

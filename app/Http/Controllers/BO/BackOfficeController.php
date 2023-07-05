@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers\FOC;
+namespace App\Http\Controllers\BO;
 
 use App\Http\Controllers\Controller;
 use App\Models\BO\BackOfficeNotification;
@@ -16,8 +16,7 @@ class BackOfficeController extends Controller
 	public function changeNotificationState($idNotif) 
 	{
 		BackOfficeNotification::updateState($idNotif);
-
-		echo "Changement d'état effectué";
+		
 	}
 }
 ?>
