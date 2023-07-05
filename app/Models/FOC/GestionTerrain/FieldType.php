@@ -33,7 +33,7 @@ class FieldType
     //Recuperer toutes les types de terrain
     public static function getAll()
     {
-        $results = DB::select('SELECT * FROM field_type');
+        $results = DB::select('SELECT * FROM field_type WHERE status=1');
         $datas = array();
         $i = 0;
         foreach ($results as $row) {

@@ -33,7 +33,7 @@ class Infrastructure
     //Recuperer toutes les infrastructures
     public static function getAll()
     {
-        $results = DB::select('SELECT * FROM infrastructure');
+        $results = DB::select('SELECT * FROM infrastructure WHERE status=1');
         $datas = array();
         $i = 0;
         foreach ($results as $row) {

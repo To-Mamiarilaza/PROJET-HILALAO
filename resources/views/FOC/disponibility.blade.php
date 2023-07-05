@@ -27,7 +27,7 @@
         @endforeach
     </div>
 
-    @include('FOC/header')
+    @include('FOC/headerNotification');
     <div class="container mt-4">
         <h1 class="dispo-titre">Disponibilité et prix</h1>
         <p class="dispo-p">Listes des paramètres grouper par heure début et fin par jour</p>
@@ -70,12 +70,10 @@
                         <input type="time" placeholder="Heure Fin" class="form-control end" value="07:00">
                     </div>
                 </div>
-                <p class="error"> <i class="fas fa-info-circle mx-3"></i> Ce paramètre existe déja</p>
                 @isset($errorInsert)
-                    <div class="error">
-                        <p style="color: red">{{ $errorInsert }}</p>
-                    </div>
+                <p class="error"> <i class="fas fa-info-circle mx-3"></i>{{ $errorInsert }}</p>
                 @endisset
+
                 <button class="btn btn-info ajout-button mt-3" onclick="addNewParameter()"> <i class="fas fa-plus"></i> Ajouter paramètre </button>
             </div>
         </div>

@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    @include('FOC/header');
+    @include('FOC/headerNotification');
 
     <section>
         <div class="container mt-5">
@@ -26,10 +26,10 @@
                         Vous pourrez parcourir rapidement et facilement l'ensemble de vos terrains.
                         Nous vous permettons de mieux gérer votre terrain. Commençons par voir tous vos terrains.
                     </p>
-                    <a href="{{ route('list-field') }}" class="btn btn-warning mt-3">Voir les terrains</a>
+                    <a href="{{ route('list-fieldFoc') }}" class="btn btn-warning mt-3">Voir les terrains</a>
                 </div>
                 <div class="col-md-6 image-place">
-                    <img src="{{ asset('image/home-client.jpg') }}" alt="Image d'accueil">
+                    <img src="{{ asset('imageDesign/home-client.jpg') }}" alt="Image d'accueil">
                 </div>
             </div>
             <div class="fonction-list">
@@ -39,7 +39,7 @@
                         <div class="col-md-4 service">
                             <div class="border p-4">
                                 <div class="image-service">
-                                    <img src="{{ asset('image/publicité.jpg') }}" alt="Image de publicité">
+                                    <img src="{{ asset('imageDesign/publicité.jpg') }}" alt="Image de publicité">
                                 </div>
                                 <h3 class="mt-2">Ameliorer la visibilité de votre terrain</h3>
                                 <p>
@@ -53,7 +53,7 @@
                         <div class="col-md-4 service">
                             <div class="border p-4">
                                 <div class="image-service">
-                                    <img src="{{ asset('image/gestion.jpg') }}" alt="Image de publicité">
+                                    <img src="{{ asset('imageDesign/gestion.jpg') }}" alt="Image de publicité">
                                 </div>
                                 <h3 class="mt-2">Meilleur gestion du réservation</h3>
                                 <p>
@@ -66,7 +66,7 @@
                         <div class="col-md-4 service">
                             <div class="border p-4">
                                 <div class="image-service">
-                                    <img src="{{ asset('image/meilleur_prix.jpg') }}" alt="Image de publicité">
+                                    <img src="{{ asset('imageDesign/meilleur_prix.jpg') }}" alt="Image de publicité">
                                 </div>
                                 <h3 class="mt-2">Abonnement abordable</h3>
                                 <p>

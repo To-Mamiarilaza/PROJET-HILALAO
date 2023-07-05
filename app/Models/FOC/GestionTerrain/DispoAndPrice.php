@@ -93,6 +93,20 @@ class DispoAndPrice
         return $datas;
     }
 
+    //Recuperer toutes les disponibilites et prix
+    public static function getAllDispoField($field)
+    {
+        $results = DB::select('SELECT * FROM dispo_and_price WHERE id_field='.$field->getIdField());
+        $datas = array();
+        $i = 0;
+        foreach ($results as $row) {
+            $datas[$i] = new DispoAndPrice($row->id_dispo_and_price, Day::findById($row->id_day),  DispoAndPrice::formatTime($row->start_time), DispoAndPrice::formatTime($row->end_time), Field::findbyId($row->id_field), $row->price);
+            $i++;
+        }
+         
+        return $datas;
+    }
+
     //Recuperer le disponibilite et prix correspondant au parametre id
     public static function findById($id)
     {

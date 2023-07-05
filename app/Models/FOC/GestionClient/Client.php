@@ -18,10 +18,10 @@ class Client
     private $pwd;
     private $status;
     private $sign_up_date;
-    private $cin;
+    private $cin = null;
     private $customer_picture;
 
-    public function __construct($id_client, $first_name, $last_name, $phone_number, $mail, $address, $birth_date, $pwd, $status, $sign_up_date,$cin ,$customer_picture)
+    public function __construct($id_client, $first_name, $last_name, $phone_number, $mail, $address, $birth_date, $pwd, $status, $sign_up_date, $cin ,$customer_picture)
     {
         $this->id_client = $id_client;
         $this->setFirstName($first_name);
@@ -32,7 +32,7 @@ class Client
         $this->setBirthDate($birth_date);
         $this->setPwd($pwd);
         $this->setStatus($status);
-        $this->sign_up_date = ($sign_up_date);
+        $this->sign_up_date = $sign_up_date;
         $this->cin = $cin;
         $this->setCustomerPicture($customer_picture);
     }
@@ -115,8 +115,8 @@ class Client
 
     public function setCin($Cin = null)
     {
-        $this->cin = $Cin;
         if ($Cin == null) throw new \Exception("Cin vide");
+        $this->cin = $Cin;
     }
 
     public function getBirthDate()
@@ -159,8 +159,8 @@ class Client
 
     public static function lastClientId()
     {
-        $result = DB::table('client')->orderBy('id_client', 'desc')->value('id_client');
-
+        $result = DB::table('client')->orderBy('id_client', 'desc')->first();
+    
         return $result ? $result : null;
     }
 
@@ -182,6 +182,7 @@ class Client
         $datas = array();
         $i = 0;
         foreach ($results as $row) {
+            
             $datas[$i] = new Client($row->id_client, $row->first_name, $row->last_name, $row->phone_number, $row->mail, $row->address, $row->birth_date, $row->pwd, Status::findById($row->id_status), $row->sign_up_date, Cin::findById($row->id_cin), $row->customer_picture);
             $i++;
         }
@@ -193,7 +194,7 @@ class Client
     public static function findByIdCin($idCin)
     {
         $results = DB::table('client')->where('id_cin', $idCin)->first();
-
+        
         return new Client($results->id_client, $results->first_name, $results->last_name, $results->phone_number, $results->mail, $results->address, $results->birth_date, $results->pwd, Status::findById($results->id_status), $results->sign_up_date, Cin::findById($results->id_cin), $results->customer_picture);
     }
 
@@ -203,14 +204,33 @@ class Client
         try {
             $birthDate = new DateTime($this->birth_date);
             $formattedBirthDate = $birthDate->format('Y-m-d');
-            $req = "INSERT INTO client VALUES (DEFAULT, '%s', '%s', '%s', '%s', '%s', '%s', '%s', %d, DEFAULT, %d, '%s')";
+            $req = "INSERT INTO client VALUES (DEFAULT, '%s', '%s', '%s', '%s', '%s', '%s', '%s', %d, DEFAULT,%d, '%s')";
             $req = sprintf($req, $this->first_name, $this->last_name, $this->phone_number, $this->mail, $this->address, $formattedBirthDate, $this->pwd, $this->status->getIdStatus(), $this->cin->getIdCin(), $this->getCustomerPicture());
+            $insertAdmin = "INSERT INTO admin_notification VALUEs (DEFAULT, 20, now(), 0)";
+
             DB::insert($req);
+            DB::insert($insertAdmin);
+            $idLastClientInsert = Client::lastClientId();
+            $lastAdminNotify = Client::getLastInsertAdminNotif();
+
+            $insertClientAdhesion = "INSERT INTO client_adhesion_notification VALUES(".$lastAdminNotify->id_admin_notification.", ".$idLastClientInsert->id_client.")";
+            echo "io";
+
+            DB::insert($insertClientAdhesion);
         } catch (\Exception $e) {
+            echo $e->getMessage();
             throw new \Exception("Erreur lors de la création du client : " . $e->getMessage());
         }
     }
 
+    //Avoir le dernier insertion dans admin_notification
+    public static function getLastInsertAdminNotif() {
+        $req = "SELECT * FROM admin_notification ORDER BY id_admin_notification DESC LIMIT 1";
+        $result = DB::select($req);
+        foreach ($result as $row) {
+            return $row;
+        }
+    }
     //Mettre a jour un client
     public function update()
     {
@@ -226,7 +246,7 @@ class Client
             'pwd' => $this->pwd,
             'id_status' => $this->status->getIdstatus(),
             'sign_up_date' => $this->sign_up_date,
-            'sign_up_date' => $this->cin->getIdin()
+            'id_cin' => $this->cin->getIdin()
         ]);
     }
 
@@ -247,14 +267,12 @@ class Client
             $i = 0;
             if($results) {
                 foreach ($results as $row) {
-                    echo "misy : ". $row->customer_picture;
                     return new Client($row->id_client, $row->first_name, $row->last_name, $row->phone_number, $row->mail, $row->address, $row->birth_date, $row->pwd, Status::findById($row->id_status), $row->sign_up_date, Cin::findById($row->id_cin), $row->customer_picture);
                 }
             }
             throw new Exception("Veuillez ressayer");
 
         } catch(Exception $e) {
-
         }
     }
 
@@ -262,6 +280,16 @@ class Client
     public static function findById($id)
     {
         $results = DB::table('client')->where('id_client', $id)->first();
-        return new Client($results->id_client, $results->first_name, $results->last_name, $results->phone_number, $results->mail, $results->address, $results->birth_date, $results->pwd, Status::findById($results->id_status), $results->sign_up_date, Cin::findById($results->id_cin), $results->customer_picture);
+    
+        return new Client($results->id_client, $results->first_name, $results->last_name, $results->phone_number, $results->mail, $results->address, $results->birth_date, $results->pwd, Status::findById($results->id_status), $results->sign_up_date, Cin::findById($results->id_cin),  $results->customer_picture);
+    }  
+
+    //Recuperer le status du client
+    public function isValidate() {
+        if($this->getStatus()->getIdStatus() == 1 ) {
+            return true;
+        }
+         
+        return false;
     }
 }

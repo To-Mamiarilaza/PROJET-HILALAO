@@ -7,7 +7,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Exceptions\ClientExceptionHandler;
-
+use App\Models\FOC\ClientNotification;
 
 class LoginController extends Controller
 {
@@ -24,10 +24,15 @@ class LoginController extends Controller
             $email = $request->input('email');
             $password = $request->input('password');
             $client = Client::login($password, $email);
-           // echo $client->getIdClient();
-           if($client != null) {
-                session()->put('clientConnected', $client);
-                return redirect()->to('/home-client');
+            if($client != null) {
+                if($client->isValidate()) {
+                    session()->put('clientConnected', $client);
+                    return redirect()->route('homeClient');
+                }
+                else {
+                    session()->put('clientConnected', $client);
+                    return redirect()->route('getClient');
+                }
             }
             else {
                 throw new Exception("Veuillez ressayer");
@@ -65,6 +70,15 @@ class LoginController extends Controller
         Session::forget($sessionId);
 
         return view('FOC/login');
+    }
+
+    public function homeClient() {
+        $clientConnected = session()->get('clientConnected');
+         $notifications = ClientNotification::getAllClientNotification($clientConnected->getIdClient()); 
+         
+         return view('FOC/home')->with([
+            'notifications' => $notifications,
+        ]);
     }
 }
 ?>

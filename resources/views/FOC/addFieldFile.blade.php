@@ -11,13 +11,13 @@
     <title>HILALAO | TERRAIN - UPLOAD FILE</title>
 </head>
 <body>
-    @include('FOC/header');
+@include('FOC/headerNotification');
 
     <section>
         <div class="container mt-5">
             <div class="row">
                 <div class="col-md-6 image-place">
-					<img src="{{ asset('image/documents.png') }}" alt="Upload file" srcset="">
+					<img src="{{ asset('imageDesign/documents.png') }}" alt="Upload file" srcset="">
                 </div>
                 <div class="col-md-6">
                     <div class="row">
@@ -34,7 +34,7 @@
                             <form enctype="multipart/form-data" action="{{ route('addFieldFile') }}" method="POST" class="col-md-12 form-content">
                                 @csrf
                                 <div class="row info-terrain">
-                                    <div class="col-md-6">
+                                    <div class="col-md-6">         
                                         <label for="dossierTerrain" class="control-label"><b>Dossier a fournir</b></label>
                                     </div>
                                     <div class="col-md-6">

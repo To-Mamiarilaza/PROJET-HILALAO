@@ -43,7 +43,7 @@
 
 				if (!isNaN(latitude) && !isNaN(longitude)) {
 					map.setView([latitude, longitude], 13);
-					marker = L.marker([latitude, longitude]).addTo(map).bindPopup('<b>Coordonnées:</b><br>Latitude: ' + latitude + '<br>Longitude: ' + longitude).openPopup();
+					marker = L.marker([latitude, longitude]).addTo(map).bindPopup('<b>Coordonnées:</b><br>Latitude: ' + latitude + '<br>Longitude: ' + longitude + '<br>').openPopup();
 					updateInfo(latitude, longitude);
 				} else {
 					info.innerHTML = 'Impossible de trouver la position pour l\'adresse saisie.';
@@ -65,7 +65,9 @@
 		})
 		.then(function(data) {
 		var address = data.display_name;
-		info.innerHTML = '<br>Adresse: ' + address;
+        document.getElementById("latitude").value = latitude;
+        document.getElementById("longitude").value = longitude;
+        document.getElementById("adresseResult").value = address;
 		})
 		.catch(function(error) {
 		console.log('Une erreur s\'est produite :', error);

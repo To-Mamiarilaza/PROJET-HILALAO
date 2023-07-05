@@ -3,41 +3,45 @@ CREATE SCHEMA IF NOT EXISTS "public";
 -- vue generale pour avoir le prix, le detail des terrains 
 CREATE OR REPLACE VIEW v_reservation_detailled_field AS
 SELECT 
-      rf.id_dispo_and_price,
-      rf.id_day,
+      rv.id_users,
       rf.id_client,
-       rf.start_time,
-       rf.end_time,
-       rf.id_field AS rf_id_field,
-       rf.price,
-       rf.field_id,
-       rf.field_name,
-       rf.field_category,
-       rf.subscribing_price,
-       rf.field_type,
-       rf.infrastructure,
-       rf.light,
-       rf.address,
-       rf.longitude,
-       rf.latitude,
-       rf.description,
-       rv.id_reservation,
-       rv.reservation_date,
-       rv.first_name,
-       rv.last_name,
-       rv.birth_date,
-       rv.phone_number,
-       rv.mail,
-       rv.start,
-       rv.duration,
-       rv.field_name AS rv_field_name,
-       rv.field_description,
-       rv.field_address
-FROM v_detailled_field rf
-JOIN v_detailled_reservation rv ON rf.field_id = rv.id_field;
+      rf.id_field AS rf_id_field,
+      rv.price,
+      rf.id_field,
+      rf.category as field_category,
+      rf.subscribing_price,
+      rf.field_type,
+      rf.infrastructure,
+      rf.light,
+      rf.address,
+      rf.longitude,
+      rf.latitude,
+      rf.description,
+      rv.id_reservation,
+      rv.reservation_date,
+      rv.first_name,
+      rv.last_name,
+      rv.birth_date,
+      rv.phone_number,
+      rv.mail,
+      rv.start,
+      rv.duration,
+      rv.field_name,
+      rv.field_description,
+      rv.field_address,
+      rv.state,
+      rv.reference
+FROM v_info_field rf
+JOIN v_detailled_reservation rv ON rf.id_field = rv.id_field;
+
+--requete pour avoir l'historique de reservation de chaque terrain
+create view v_historique_reservation as 
+select count(id_day) as nombreReservation,sum(price) as montant,id_day,first_name,last_name,reservation_date,start,duration,price,state,reference 
+  from v_reservation_detailled_field 
+  group by id_users, id_day, first_name,last_name,reservation_date,start,duration,price,state;
 
 CREATE OR REPLACE VIEW v_detailled_field AS
-SELECT 
+SELECT
       dap.id_dispo_and_price,
       dap.id_day,
        dap.start_time,
@@ -64,7 +68,7 @@ FROM v_detailled_reservation
 WHERE reservation_date >= CURRENT_DATE AND reservation_date < CURRENT_DATE + INTERVAL '7 days';
 
 CREATE OR REPLACE VIEW v_detailled_reservation AS
-SELECT r.id_reservation, r.reservation_date, r.start_time as start, r.duration,u.first_name, u.last_name, u.birth_date, u.phone_number, u.mail,f.id_field,
+SELECT r.id_users, r.id_reservation, r.reservation_date, r.start_time as start, r.duration,r.state,r.price,u.first_name, u.last_name, u.birth_date, u.phone_number, u.mail,f.id_field,r.reference,
        f.name AS field_name, f.description AS field_description, f.address AS field_address
 FROM reservation r
 JOIN users u ON r.id_users = u.id_users
