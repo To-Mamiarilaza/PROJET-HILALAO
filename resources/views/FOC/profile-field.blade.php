@@ -128,7 +128,7 @@
                     </div>
                     <div class="col-md-5 my-2">
                         <div class="border p-3">
-                            <a href="">
+                            <a href="/filtre">
                                 <i class="fas fa-chart-line mx-3"></i>
                                 Statistique
                             </a>
