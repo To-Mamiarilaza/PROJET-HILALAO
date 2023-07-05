@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    @include('FOC/headerNotification')
+    @include('FOC/header')
 
     <!-- Modal pour ajouter une nouvelle indisponibilité -->
     <form action="{{ route('insertIndispo') }}" class="form" method="POST">

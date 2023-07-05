@@ -5,6 +5,7 @@ use App\Models\FOC\GestionClient\Client;
 use App\Models\FOC\GestionClient\Cin;
 use App\Models\FOC\GestionClient\Status;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use App\Models\FOC\ClientNotification;
@@ -22,13 +23,17 @@ class InscriptionController extends Controller
 
         try {
             //echo $picRecto;
+            $cinNumber = $request->input('cinNumber');
+            $picRecto = $this->upload($request, 'recto', 'image/CIN');
+            $picVerso = $this->upload($request, 'verso', 'image/CIN');
+    
+            echo $picRecto;
 
             if ($picRecto && $picVerso) {
                 $cin = new Cin('default', $cinNumber, $picRecto, $picVerso);
                 $cin->create();
-
                 $lastCin = $cin->lastCinId();
-                $client = $request->session()->get('client');
+                $client = $request->session()->get('clientConnected');
                 $client->setCin($lastCin);
 
                 $client->create();
@@ -36,6 +41,7 @@ class InscriptionController extends Controller
                 $request->session()->put('cin', $lastCin);
 
                 return redirect('/getClient');
+
                 
             } else {
                 // Gérer l'erreur de téléchargement des fichiers ici
@@ -50,18 +56,15 @@ class InscriptionController extends Controller
     public function getClient(Request $request){
         $clientConnected = session()->get('clientConnected');
         $notifications = ClientNotification::getAllClientNotification($clientConnected->getIdClient());
-   
-        $client = $request->session()->get('client');
+
         $cin = $request->session()->get('cin');
-        $idclient = $client->lastClientId();
-        $clients = $client->findById($idclient->id_client);
-        $request->session()->put('clientConnected', $clients);
+        $clients = $clientConnected->findById($clientConnected->getIdClient());
         
 
-        return view('FOC/compteClient', ['client' => $client, 
-        'cin' => $cin,
-        'notifications' => $notifications,
-    ]);
+        return view('FOC/compteClient', ['client' => $clients, 
+            'cin' => $cin,
+            'notifications' => $notifications,
+        ]);
     }
     
     //Uploaedr un fichier
