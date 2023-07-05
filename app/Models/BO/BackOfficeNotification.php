@@ -174,7 +174,7 @@ class BackOfficeNotification
     public static function insert_client_notification($id_client,$state){
         try{
             $req = "insert into client_notification (id_client, id_type_notification,date_notification,etat) values (%s,%s,'%s',0)";
-            echo $req;
+            
             $date = new DateTime();
             $req = sprintf($req,$id_client,$state,$date->format('Y-m-d h:i:s'));
             DB::insert($req);
