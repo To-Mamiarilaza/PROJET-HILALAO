@@ -1,0 +1,64 @@
+.title {
+  color: #33658A;
+}
+
+.histo-title {
+  color: #E17B36;
+  font-size: 18px;
+  letter-spacing: 3px;
+  text-align: center;
+  padding-bottom: 8px;
+  border-bottom: solid 1px #E17B36;
+}
+
+.date-rappel {
+  font-weight: 600;
+}
+
+.calendrier div div {
+  text-align: center;
+  padding: 12px 15px;
+  font-weight: 600;
+}
+.calendrier div .normal {
+  background-color: #faef5d;
+}
+.calendrier div .paye {
+  background-color: rgb(56, 233, 56);
+}
+.calendrier div .non-paye {
+  background-color: rgb(255, 4, 4);
+  color: white;
+}
+
+.erreur {
+  color: rgb(247, 107, 107);
+  font-size: 13px;
+}
+
+.regle .regle-title {
+  color: #33658A;
+  font-size: 14px;
+}
+.regle ul {
+  font-size: 12px;
+}
+
+.indication {
+  width: 60%;
+}
+.indication div div {
+  font-size: 10px;
+  text-align: center;
+  padding: 8px;
+}
+.indication div .non-paye {
+  background-color: rgb(255, 4, 4);
+  color: white;
+}
+.indication div .paye {
+  background-color: rgb(56, 233, 56);
+}
+.indication div .normal {
+  background-color: #faef5d;
+}/*# sourceMappingURL=subscription.css.map */

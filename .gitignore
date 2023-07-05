@@ -20,3 +20,5 @@ yarn-error.log
 .env
 .env
 .env
+routes/front_office_client_route.php
+resources/views/FOC/header.blade.php

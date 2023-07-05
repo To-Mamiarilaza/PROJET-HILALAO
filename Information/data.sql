@@ -160,6 +160,7 @@ CREATE  TABLE "public".field (
 	longitude            double precision  NOT NULL  ,
 	insert_date          date DEFAULT CURRENT_DATE   ,
 	field_files          varchar(100)  NOT NULL  ,
+	state   			 integer NOT NULL,
 	CONSTRAINT pk_field PRIMARY KEY ( id_field ),
 	CONSTRAINT fk_field_category FOREIGN KEY ( id_category ) REFERENCES "public".category( id_category )   ,
 	CONSTRAINT fk_field_client FOREIGN KEY ( id_client ) REFERENCES "public".client( id_client )   ,

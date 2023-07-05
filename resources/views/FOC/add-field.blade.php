@@ -13,13 +13,13 @@
 	<title>HILALAO | CLIENT - TERRAIN</title>
 </head>
 <body>
-	@include('FOC/header');
+@include('FOC/headerNotification');
 
 	<section>
 		<div class="container mt-5">
 			<div class="row">
 				<div class="col-md-6 image-place">
-					<img src="{{ asset('image/add-terrain.png') }}" alt="Image terrain" srcset="">
+					<img src="{{ asset('imageDesign/add-terrain.png') }}" alt="Image terrain" srcset="">
 				</div>
 				<div class="col-md-6">
 					<h1>Ajouter vos terrains dans la liste</h1>
@@ -27,7 +27,6 @@
 						Vous pouvez bien sûr ajouter votre terrain ainsi que d'autres informations nécessaires 
 						afin que les utilisateurs puissent mieux voir les merveilles sur le terrain où ils jouent.
 					</p>
-					<a href="" class="btn btn-warning mt-3">Voir les statisitques</a>
 				</div>
 			</div><br>
 			<div class="row justify-content-center fonction-list">
@@ -139,68 +138,7 @@
 		</div>
 	</section>
 
-	<script>
-		var map = L.map('map').setView([-18.986092 , 47.532949], 13);
-		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-		attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
-		maxZoom: 18
-		}).addTo(map);
-
-		var marker;
-		var info = document.getElementById("info");
-
-		document.getElementById("formMap").addEventListener("submit", function(event) {
-		event.preventDefault(); // Empêche le rechargement de la page lors de la soumission du formulaire
-
-		var positionInput = document.getElementById("adresse").value;
-
-		// Supprimer le marqueur précédent s'il existe
-		if (marker) {
-			marker.remove();
-		}
-
-		fetch('https://nominatim.openstreetmap.org/search?format=json&q=' + positionInput)
-			.then(function(response) {
-			return response.json();
-			})
-			.then(function(data) {
-			if (data.length > 0) {
-				var latitude = parseFloat(data[0].lat);
-				var longitude = parseFloat(data[0].lon);
-
-				if (!isNaN(latitude) && !isNaN(longitude)) {
-				map.setView([latitude, longitude], 13);
-				marker = L.marker([latitude, longitude]).addTo(map);
-				updateInfo(latitude, longitude);
-				} else {
-				info.innerHTML = 'Impossible de trouver la position pour l\'adresse saisie.';
-				}
-			} else {
-				info.innerHTML = 'Aucun résultat trouvé pour l\'adresse saisie.';
-			}
-			})
-			.catch(function(error) {
-			console.log('Une erreur s\'est produite :', error);
-			});
-		});
-
-		function updateInfo(latitude, longitude) {
-    fetch('https://nominatim.openstreetmap.org/reverse?format=json&lat=' + latitude + '&lon=' + longitude)
-        .then(function(response) {
-            return response.json();
-        })
-        .then(function(data) {
-            var address = data.display_name;
-            document.getElementById("latitude").value = latitude;
-            document.getElementById("longitude").value = longitude;
-            document.getElementById("adresseResult").value = address;
-            info.innerHTML = 'Latitude: ' + latitude + '<br>Longitude: ' + longitude + '<br>Adresse: ' + address;
-        })
-        .catch(function(error) {
-            console.log('Une erreur s\'est produite :', error);
-        });
-	}
-	</script>
+    @include('FOC/scriptMap');
 
 <script src="{{ asset('css/FOU/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 </body>

@@ -22,7 +22,7 @@
 			</div><br>
 			<div class="row">
 				<div class="col-md-3 client-picture profil">
-					<h5 class="card-title">Picture Profil</h5>
+					<h5 class="card-title">Photo de profil</h5>
 					<div class="image-place">
 						<img src="{{ asset('image/Client/'.$client->getCustomerPicture()) }}" alt="Upload image">
 						<input type="file" id="image-upload" style="display: none;">
@@ -78,5 +78,6 @@
 			</div>
 		</div>
 	</section>
+	@include('FOC/scriptPicture');
 </body>
 </html>

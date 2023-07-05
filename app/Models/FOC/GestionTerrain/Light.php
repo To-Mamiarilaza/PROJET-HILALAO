@@ -29,7 +29,7 @@ class Light
     //Recuperer toutes les lumieres
     public static function getAll()
     {
-        $results = DB::select('SELECT * FROM light');
+        $results = DB::select('SELECT * FROM light WHERE status=1');
         $datas = array();
         $i = 0;
         foreach ($results as $row) {

@@ -15,7 +15,7 @@ $other-color-1: #33658A;
             margin-right: 20px;
             font-weight: 600;
 
-            a:hover {
+            .nav-link:hover {
                 color: $principal-color !important;
             }
         }
@@ -27,4 +27,38 @@ $other-color-1: #33658A;
     font-weight: 700;
     letter-spacing: 5px;
     color: #E17B36 !important;
-  }
+}
+
+.dropdown-list {
+    position: absolute !important;
+    left: -500px !important;
+    min-width: 550px;
+    font-size: 14px;
+
+    a {
+        border-radius: 5px;
+
+        &:hover {
+            color: #000 !important;
+        }
+
+        &:active {
+            background-color: transparent;
+            color: #000;
+        }
+
+        .fieldName {
+            color: #33658A;
+            font-weight: 500;
+        }
+
+        .time-prevision {
+            color: rgb(60, 153, 60);
+        }
+
+        .time-last {
+            color: rgb(214, 48, 42);
+        }
+    }
+
+}
