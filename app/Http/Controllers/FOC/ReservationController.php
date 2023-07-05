@@ -22,6 +22,9 @@ class ReservationController extends Controller
     }
 
     public function filtreBoard(Request $request){
+        $clientConnected = session()->get('clientConnected');
+        $notifications = ClientNotification::getAllClientNotification($clientConnected->getIdClient());
+       
         $board = new BoardReservation("","","");
 
         $client = Session::get('clientConnected');
@@ -75,11 +78,15 @@ class ReservationController extends Controller
             'nombreTerrain' => $nbrField,
             'prices' => $prices,
             'proportion' => $proportionFields,
-            'nomTerrain' => $NomFields
+            'nomTerrain' => $NomFields,
+            'notifications' => $notifications,
         ]);
     }
     public function filtre(Request $request)
     {
+        $clientConnected = session()->get('clientConnected');
+        $notifications = ClientNotification::getAllClientNotification($clientConnected->getIdClient());
+       
         $data = Session::get('field');
         $mois = $request->input('mois');
         $annee = $request->input('annee');
@@ -94,7 +101,8 @@ class ReservationController extends Controller
 
         return view('FOC/statistic-field', [
             'historiques' => $filtre, 
-            'prices' => $prices
+            'prices' => $prices,
+            'notifications' => $notifications,
         ]);
     }
 
@@ -185,6 +193,9 @@ class ReservationController extends Controller
 
     public function getReservationNearBy()
     {
+        $clientConnected = session()->get('clientConnected');
+        $notifications = ClientNotification::getAllClientNotification($clientConnected->getIdClient());
+       
         $data = Session::get('field');
         $rf_id_field = 1;
         $price = 10000;
@@ -241,7 +252,9 @@ class ReservationController extends Controller
 
         $reservationFields = $reservationField->getReservationNearBy($data->getIdField());
 
-        return view('FOC/reservation', ['reservationFields' => $reservationFields]);
+        return view('FOC/reservation', ['reservationFields' => $reservationFields,
+        'notifications' => $notifications,
+        ]);
     }
 
     public function getAllReservation()

@@ -17,7 +17,7 @@
         <div class="container mt-5">
             <div class="row">
                 <div class="col-md-6 image-place">
-					<img src="{{ asset('image/documents.png') }}" alt="Upload file" srcset="">
+					<img src="{{ asset('imageDesign/documents.png') }}" alt="Upload file" srcset="">
                 </div>
                 <div class="col-md-6">
                     <div class="row">

@@ -74,7 +74,7 @@
                     <div class="col-md-4">
                         <div class="p-3 border">
                             <span class="div__ul__li__span div__ul__li__span--titre">Nombre de terrain : </span>
-                            <span class="div__ul_li_span div__ul__li__span--argent">{{ count($nombreTerrain) }}</span>
+                            <span class="div__ul_li_span div__ul__li__span--argent"> 3 </span>
                         </div>
                     </div>
                 </div>
@@ -114,11 +114,11 @@
                 return parseInt(price.replace(/ /g, ''));
             });
     
-            const labels = nomField;
+            const labels = ['Basket Betongolo','Pompier Tanjombato','Tiavina Terrain'];
             const data = {
                 labels: labels,
                 datasets: [{
-                    data: proportionArray,
+                    data: [50,25,25],
                     backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0"]
                 }]
             };

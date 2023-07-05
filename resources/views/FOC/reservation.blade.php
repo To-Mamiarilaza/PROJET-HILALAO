@@ -28,7 +28,7 @@
                     @foreach ($reservationFields as $reservation)
                     <div class="row reservation-element my-4">
                             <div class="col-md-3">
-                                <img class="user-picture" src="{{ asset('image/user.jpg') }}" alt="Image de l'utilisateur">
+                                <img class="user-picture" src="{{ asset('image/client/user.jpg') }}" alt="Image de l'utilisateur">
                             </div>
                             <!-- 0.5 veut dire 50% -->
                             <div class="col-md-8 reservation-detail">

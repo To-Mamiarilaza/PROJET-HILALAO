@@ -58,6 +58,7 @@ class FieldController extends Controller
         $discount = Discount::getAllDiscountField($field);
         $notifications = ClientNotification::getAllClientNotification($clientConnected->getIdClient());
         Session::put('field', $field);
+
         return view('FOC/profile-field')->with([
             'field' => $field,
             'profilePicture' => $profilePictureField,
@@ -277,7 +278,7 @@ class FieldController extends Controller
     //Modifier une image
     public function editImage(Request $request) {
         $file = $this->uploadImage($request, 'image', 'picField', 'image/pictureField/');
-
+        echo $request->input('idImage');
         //Avoir sa photo actuel
         $pictureNow = PictureField::findById($request->input('idImage'));
 

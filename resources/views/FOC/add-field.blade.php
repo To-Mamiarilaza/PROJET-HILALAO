@@ -19,7 +19,7 @@
 		<div class="container mt-5">
 			<div class="row">
 				<div class="col-md-6 image-place">
-					<img src="{{ asset('image/add-terrain.png') }}" alt="Image terrain" srcset="">
+					<img src="{{ asset('imageDesign/add-terrain.png') }}" alt="Image terrain" srcset="">
 				</div>
 				<div class="col-md-6">
 					<h1>Ajouter vos terrains dans la liste</h1>
@@ -27,7 +27,6 @@
 						Vous pouvez bien sûr ajouter votre terrain ainsi que d'autres informations nécessaires 
 						afin que les utilisateurs puissent mieux voir les merveilles sur le terrain où ils jouent.
 					</p>
-					<a href="" class="btn btn-warning mt-3">Voir les statisitques</a>
 				</div>
 			</div><br>
 			<div class="row justify-content-center fonction-list">
