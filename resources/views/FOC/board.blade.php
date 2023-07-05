@@ -101,6 +101,7 @@
         var dataProp = [];
         @foreach ($proportion as $p)
             dataProp.push('{{ $p }}');
+            echo $p;
         @endforeach
         var dataNom = [];
         @foreach ($nomTerrain as $n)
@@ -126,7 +127,7 @@
             // Configuration du graphique
             const config = {
                 type: "pie",
-                data: data,
+                data: [20,40,20,20],
                 options: {
                     responsive: true,
                     maintainAspectRatio: false

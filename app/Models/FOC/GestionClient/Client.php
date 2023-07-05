@@ -182,6 +182,7 @@ class Client
         $datas = array();
         $i = 0;
         foreach ($results as $row) {
+            
             $datas[$i] = new Client($row->id_client, $row->first_name, $row->last_name, $row->phone_number, $row->mail, $row->address, $row->birth_date, $row->pwd, Status::findById($row->id_status), $row->sign_up_date, Cin::findById($row->id_cin), $row->customer_picture);
             $i++;
         }
