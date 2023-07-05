@@ -18,7 +18,7 @@ class Client
     private $pwd;
     private $status;
     private $sign_up_date;
-    private $cin;
+    private $cin = null;
     private $customer_picture;
 
     public function __construct($id_client, $first_name, $last_name, $phone_number, $mail, $address, $birth_date, $pwd, $status, $sign_up_date, $cin ,$customer_picture)
@@ -33,7 +33,7 @@ class Client
         $this->setPwd($pwd);
         $this->setStatus($status);
         $this->sign_up_date = $sign_up_date;
-        $this->$cin = $cin;
+        $this->cin = $cin->getIdCin();
         $this->setCustomerPicture($customer_picture);
     }
 
