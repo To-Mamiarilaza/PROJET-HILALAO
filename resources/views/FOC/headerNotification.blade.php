@@ -7,38 +7,39 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse navbar-links" id="navbarSupportedContent">
+
                 @if(Session::get('clientConnected')->getStatus()->getIdStatus() != 1 )
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/home" onclick="return false;">Accueil</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/filtreBoard" onclick="return false;">Tableau de Bord</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('list-fieldFOC') }}" onclick="return false;">Mes Terrains</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/getClient" onclick="return false;">Mon compte</a>
-                        </li>
-                    </ul>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/home" onclick="return false;">Accueil </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/filtreBoard" onclick="return false;">Tableau de Bord</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('list-fieldFoc') }}" onclick="return false;">Mes Terrains</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/getClient" onclick="return false;">Mon compte</a>
+                    </li>
+                </ul>
                 @endif
                 @if(Session::get('clientConnected')->getStatus()->getIdStatus() == 1 )
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/home">Accueil</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/filtreBoard">Tableau de Bord</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('list-fieldFOC') }}">Mes Terrains</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/getClient">Mon compte</a>
-                        </li>
-                    </ul>
-                @endif
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/home">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/filtreBoard">Tableau de Bord</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('list-fieldFoc') }}">Mes Terrains</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/getClient">Mon compte</a>
+                    </li>
+                </ul>
+                @endif  
                 <div class="option-block d-flex mx-5">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
@@ -66,7 +67,7 @@
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><i class="fas fa-power-off"></i></a>
+                            <a class="nav-link" href="{{ route('deconnect') }}"><i class="fas fa-power-off"></i></a>
                         </li>
                     </ul>
                 </div>
